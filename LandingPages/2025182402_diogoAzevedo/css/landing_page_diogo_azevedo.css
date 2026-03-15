@@ -1,0 +1,200 @@
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    background-color: #FEFAE0;
+}
+
+.parte-principal {
+    text-align: center;
+}
+
+.parte-principal h1 {
+    margin-top: 0;
+    margin-right: 0;
+    margin-bottom: 5px;
+    margin-left: 0;
+}
+
+form {
+    background: #DDA15E;
+    padding-bottom: 10px;
+    text-align: center;
+    border-radius: 25px;
+    margin-left: 550px;
+    margin-right: 550px;
+}
+
+.campo {
+    padding-top: 10px;
+    padding-bottom: 10px;
+}
+
+.campo input {
+    border: solid 0;
+    border-radius: 25px;
+}
+
+.botao-enviar {
+    font-weight: bold;
+    background: #606C38;
+    color: white;
+    border: solid 0;
+    border-radius: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.botao-enviar:hover {
+    background: #283618;
+}
+
+#feedback {
+    margin-top: 15px;
+    font-weight: bold;
+    color: #606C38;
+}
+
+.title-beneficios {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.caiixa-beneficios h2 {
+    text-align: left;
+}
+
+.container-beneficios {
+    display: flex;
+    gap: 20px;
+    justify-content: center;
+}
+
+.caixa-beneficios {
+    background: #DDA15E;
+    align-items: center;
+    height: auto;
+    max-width: 180px;
+    display: flex;
+    flex-direction: column;
+    text-align: left;
+    padding-top: 10px;
+    padding-right: 20px;
+    padding-bottom: 10px;
+    padding-left: 20px;
+    border-radius: 25px;
+}
+
+.caixa-beneficios img {
+    max-width: 100%;
+    height: auto;
+}
+
+.caixa-beneficios h2 {
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.caixa-beneficios p {
+    margin-top: 0;
+}
+
+.lista_de_beneficios li {
+    padding-bottom: 10px;
+}
+
+.container-testemunhos {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding-bottom: 20px;
+    justify-content: center;
+}
+
+.title-testemunhos {
+    text-align: center;
+    padding-top: 20px;
+}
+
+.ciaxa-testemunhos {
+    display: flex;
+    background: #DDA15E;
+    align-items: center;
+    max-width: 800px;
+    text-align: left;
+    padding-top: 10px;
+    padding-right: 10px;
+    padding-bottom: 10px;
+    padding-left: 10px;
+    border-radius: 25px;
+}
+
+.ciaxa-testemunhos img {
+    width: auto;
+    height: 50px;
+    display: block;
+    padding-right: 20px;
+}
+
+.argumentofinal {
+    text-align: center;
+}
+
+.botao-inscreveragora {
+    font-weight: bold;
+    background: #606C38;
+    color: white;
+    border: solid 0;
+    border-radius: 25px;
+    padding-top: 10px;
+    padding-bottom: 10px;
+    padding-right: 10px;
+    padding-left: 10px;
+    cursor: pointer;
+}
+
+.botao-inscreveragora:hover {
+    background: #283618;
+}
+
+@media (max-width: 768px) {
+    form{
+        margin-left: 20px;
+        margin-right: 20px;
+        padding: 20px;
+    }
+
+    .container-beneficios{
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .caiixa-beneficios{
+        max-width: 90%;
+        text-align: left;
+    }
+
+    .ciaxa-testemunhos{
+        flex-direction: column;
+        margin-top: 0;
+        margin-right: 20px;
+        padding: 20px;
+    }
+
+    .ciaxa-testemunhos img{
+        padding-right: 0;
+        margin-bottom: 15px;
+        height: 80px;
+    }
+
+    .argumentofinal{
+        padding: 20px;
+    }
+}
