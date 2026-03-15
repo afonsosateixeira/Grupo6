@@ -1,0 +1,135 @@
+body{
+    margin: 0;
+    padding: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.container{
+    width: 100%;
+    max-width: 1200px; 
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.headline{
+    text-align: center;
+}
+
+.banner{
+    position: relative;
+}
+
+.banner img{
+    width: 100%;
+}
+
+.forms_animal{
+    position: absolute;
+    width: 450px;
+    height: 366px;
+    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
+    border-radius: 35px;
+    top: 150px;
+    right: 100px;
+    text-align: center;
+    background-color: white;
+}
+
+.forms_animal_input{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    justify-content: center;
+    align-items: center;
+}
+
+.forms_animal input{
+    width: 350px;
+    height: 30px;
+    border-color: #f6f6f6;
+    border-radius: 5px;
+}
+
+.btn_cta{
+    background-color: #FF6B02;
+    color: white;
+    width: 360px;
+    height: 35px;
+    border: none;
+    border-radius: 5px;
+}
+
+.sectionBenefic{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 50px;
+}
+
+.benefics{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 150px;
+}
+
+.benefics-list{
+    text-align: center;
+    width: 500px;
+}
+
+.benefics-list ul{
+    padding: 0px;
+}
+
+.benefics-list ul li{
+    list-style: none;
+    text-align: justify;
+}
+
+.icons{
+    color: green;
+    font-size: 70px;
+}
+
+.stories{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-top: 50px;
+}
+
+.dogs{
+    display: flex;
+    flex-direction: row;
+    gap: 150px;
+    justify-content: center;
+}
+
+.cardDog{
+    width: 275px;
+    height: 300px;
+}
+
+.cardDog img{
+    width: 100% ;
+    height: 225px;
+    object-fit: cover;
+    border-radius: 15px;
+}
+
+.cta{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-top: 50px;
+}
+
+@media (max-width: 768px){
+    .forms_animal{
+        max-width: 100%;
+        height: auto;
+}
+
+}
