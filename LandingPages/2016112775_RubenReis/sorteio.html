@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Cantinho do Stootchy - Sorteio</title>
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="css/sorteio.css">
+        <script src="js/sorteio.js" defer></script>
+    </head>
+    <body>
+        <div class="container">
+            <div id="banner">
+                <div>
+                    <h1>Sorteio de ração</h1>
+                    <p>Ganhe um mês de desconto em rações animais</p>
+                </div>
+            </div>
+            <div id="main">
+                <div class="center">
+                    <h2>Vencedores de sorteios anteriores</h2>
+                    <div id="winners">
+                        <div>
+                            <img src="img/Banner_landingPage.png" alt="Logo">
+                            <p class="highlight">Sofia</p>
+                            <p>Venceu em: <span class="date">09/2024</span></p>
+                            <p class="toggleWinner">Ver comentário</p>
+                            <div class="winnerDescription">
+                                <p>Com este concurso pude dar ao meu gato a melhor comida e deu para ver que ficou mais feliz</p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="img/Banner_landingPage.png" alt="Logo">
+                            <p class="highlight">Carlos</p>
+                            <p>Venceu em: <span class="date">12/2024</span></p>
+                            <p class="toggleWinner"></p>
+                            <div class="winnerDescription">
+                                <p></p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="img/Banner_landingPage.png" alt="Logo">
+                            <p class="highlight">Artur</p>
+                            <p>Venceu em: <span class="date">03/2025</span></p>
+                            <p class="toggleWinner"></p>
+                            <div class="winnerDescription">
+                                <p>Estava com dificuldades neste mẽs e graças ao sorteio consegui manter a qualidade da ração sem me preocupar</p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="img/Banner_landingPage.png" alt="Logo">
+                            <p class="highlight">Marta</p>
+                            <p>Venceu em: <span class="date">06/2025</span></p>
+                            <p class="toggleWinner"></p>
+                            <div class="winnerDescription">
+                                <p></p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="img/Banner_landingPage.png" alt="Logo">
+                            <p class="highlight">Marina</p>
+                            <p>Venceu em: <span class="date">09/2025</span></p>
+                            <p class="toggleWinner"></p>
+                            <div class="winnerDescription">
+                                <p>A minha filha insistiu para eu participar embora eu não tivesse esperança mas graças a ela poupei o mês inteiro</p>
+                            </div>
+                        </div>
+                        <div>
+                            <img src="img/Banner_landingPage.png" alt="Logo">
+                            <p class="highlight">Afonso</p>
+                            <p>Venceu em: <span class="date">12/2025</span></p>
+                            <p class="toggleWinner"></p>
+                            <div class="winnerDescription">
+                                <p></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <form action="post" id="raffle" class="center widthMobile box">
+                    <h2>Preencha o formulário para ganhar</h2>
+                    <div class="hFlex">
+                        <div class="vFlex">
+                            <label for="fName">Primeiro Nome:</label>
+                            <input type="text" id="fName" name="fName" placeholder="Nome">
+                        </div>
+                        <div class="vFlex">
+                            <label for="lName">Apelido:</label>
+                            <input type="text" id="lName" name="lName" placeholder="Apelido Inteiro">
+                        </div>
+                    </div>
+                    <div class="vFlex">
+                        <label for="email">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="nome@exemplo.com">
+                    </div>
+                    <div class="hFlex">
+                        <div>
+                            <p>Que animais têm?</p>
+                            <input type="checkbox" id="cats">
+                            <label for="cats">Gato</label>
+                            <input type="checkbox" id="dogs">
+                            <label for="dogs">Cão</label>
+                        </div>
+                        <input type="submit">
+                    </div>
+                </form>
+                <div id="raffleRules" class="center widthMobile box">
+                    <h2>Regras</h2>
+                    <ul>
+                        <li>Este sorteio requer o seu nome, email e que tenha pelo menos um animal;</li>
+                        <li>Até 20 participantes iram ganhar um desconto de 30% em ração por 1 mês;</li>
+                        <li>Os vencedores iram ser notificados até dia 30/03/2026;</li>
+                        <li>Duração do desconto: Desde o dia 01/04/2026 até 31/04/2026;</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

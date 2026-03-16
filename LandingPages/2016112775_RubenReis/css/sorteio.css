@@ -1,0 +1,217 @@
+*, *::before, *::after{
+    box-sizing: border-box;
+}
+
+html{
+    scroll-behavior: smooth;
+    font-size: 16px;
+}
+
+*{
+    margin: 0;
+}
+
+body{
+    font-family: Arial, sans-serif;
+    color: #283618;
+}
+
+.container{
+    max-width: 1440px;
+    margin: auto;
+}
+
+.center{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    margin: 0 auto;
+    max-width: min(100%);
+}
+
+.center h2{
+    text-align: center;
+}
+
+.widthMobile{
+    max-width: min(450px, 100% - 50px);
+}
+
+.box{
+    display: flex;
+    gap: 15px;
+    border: 2px solid #cea77e;
+    border-radius: 15px;
+    background-color: rgba( 220, 192, 163, 0.85);
+    padding: 15px
+}
+
+h2{
+    font-size: 1.5rem;
+}
+
+.hFlex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.vFlex{
+    display: flex;
+    flex-direction: column;
+}
+
+#banner{
+    background-color: #e3cdb5;
+    background-image: url("../img/Banner_landingPage.png");
+    background-size: 65% 100%;
+    background-repeat: no-repeat;
+    background-position: center;
+    height: 700px;
+    position: relative;
+}
+
+#banner div{
+    position: absolute;
+    left: calc(17.5% + 25px);
+    top: 25px;
+}
+
+#banner h1{
+    margin: 0 0 15px 0;
+    font-size: 72px;
+    font-weight: 700;
+}
+
+#banner p{
+    width: 250px;
+}
+
+#main{
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin: 25px 0;
+}
+
+#main > *{
+    position: relative;
+    overflow: visible;
+}
+
+#main > :nth-child(1)::before, #main > :nth-child(2)::before, #main > :nth-child(3)::before{
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    z-index: -1;
+}
+
+#main > :nth-child(1)::before {
+    width: 300px;
+    height: 300px;
+    background-image: url("../img/parrot.webp");
+    bottom: clamp(0px, calc(115px * ((100vw - 500px) / 940px)), 115px);
+    left: clamp(-250px, calc(-250px * ((100vw - 500px) / 940px)), 150px);
+}
+
+#main > :nth-child(3)::before {
+    width: 300px;
+    height: 300px;
+    background-image: url("../img/cat.webp");
+    bottom: -75px;
+    right: clamp(-450px, calc(-450px * ((100vw - 500px) / 940px)), 0px);
+}
+
+#winners{
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    gap: 15px;
+    justify-content: center;
+    margin: 0 auto;
+    max-width: 844px;
+    text-align: center;
+    align-items: flex-start;
+}
+
+#winners div{
+    padding: 25px;
+    max-width: 200px;
+    transition: 350ms ease-in;
+    background-color: rgba( 220, 192, 163, 0.85);
+    border-radius: 25px;
+}
+
+#winners div:hover{
+    scale: 1.1;
+}
+
+#winners img{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    border: 2px solid #cea77e;
+}
+
+.toggleWinner{
+    color: #815b31;
+    cursor: pointer;
+}
+
+.winnerDescription{
+    display: none;
+}
+
+.highlight{
+    font-weight: 400;
+    font-size: 1.25rem;
+}
+
+.date{
+    color: #484c43;
+}
+
+form label, form p, .center li{
+    padding-bottom: 5px;
+}
+
+#raffle input{
+    border: 2px solid #cea77e;
+    border-radius: 6px;
+}
+
+#raffle input{
+    transition: 100ms ease-in-out;
+}
+
+#raffle input[type="text"]{
+    width: 90%;
+}
+
+#raffle input[type="text"]:active, #raffle input[type="email"]:active, #raffle input[type="submit"]:active{
+    scale: 1.05;
+}
+
+#raffle input[type="checkbox"]:active{
+    scale: 1.25;
+}
+
+#raffle input[type="text"]:focus, #raffle input[type="email"]:focus{
+    box-shadow: 0 0 0 3px #cea77e;
+    outline: none;
+}
+
+@media(max-width: 500px){
+    #main > div{
+        order: 3;
+    }
+
+    #main #raffle{
+        order: 1;
+    }
+
+    #main #raffleRules{
+        order: 2;
+    }
+}
