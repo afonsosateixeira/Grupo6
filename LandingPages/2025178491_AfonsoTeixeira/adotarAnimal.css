@@ -207,14 +207,10 @@ body {
 }
 
 @media (max-width: 768px) {
-    .headline h1 { font-size: 1.8rem; }
-    
-    .banner {
-        flex-direction: column;
-    }
+    .headline h1 { font-size: 1.8rem; }    
 
     .banner img {
-        height: 300px;
+        display: none;
     }
 
     .forms_animal {
@@ -222,8 +218,6 @@ body {
         top: 0;
         right: 0;
         transform: none;
-        margin: -40px auto 20px;
-        width: 90%;
         box-shadow: 0 5px 20px rgba(0,0,0,0.1);
     }
 
