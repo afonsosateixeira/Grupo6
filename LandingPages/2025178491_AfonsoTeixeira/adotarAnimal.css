@@ -1,135 +1,237 @@
-body{
+/*GERAL*/
+body {
     margin: 0;
     padding: 0;
-    font-family: Arial, Helvetica, sans-serif;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
 }
 
-.container{
+.container {
     width: 100%;
     max-width: 1200px; 
-    margin-right: auto;
-    margin-left: auto;
-}
+    margin: 0 auto;
+    padding: 0 20px;
+    box-sizing: border-box;
+}   
 
-.headline{
+/*HEADLINE*/
+.headline {
     text-align: center;
+    padding: 40px 0;
 }
 
-.banner{
+.headline h1 {
+    color: #FF6B02;
+    font-size: 2.5rem;
+}
+
+.headline h2 {
+    font-weight: 400;
+    color: #666;
+    font-size: 1.2rem;
+}
+
+/*BANNER*/
+.banner {
     position: relative;
-}
-
-.banner img{
     width: 100%;
+    display: flex;
+    justify-content: center;
 }
 
-.forms_animal{
+.banner img {
+    width: 100%;
+    max-height: 600px;
+    object-fit: cover;
+    display: block;
+}
+
+/*FORMS*/
+.forms_animal {
     position: absolute;
-    width: 450px;
-    height: 366px;
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    border-radius: 35px;
-    top: 150px;
-    right: 100px;
-    text-align: center;
+    width: 100%;
+    max-width: 400px;
+    padding: 30px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    border-radius: 25px;
+    top: 50%;
+    right: 10%;
+    transform: translateY(-50%);
     background-color: white;
+    box-sizing: border-box;
 }
 
-.forms_animal_input{
+.forms_animal h2 {
+    margin-top: 0;
+}
+
+.forms_animal_input {
     display: flex;
     flex-direction: column;
-    gap: 25px;
-    justify-content: center;
-    align-items: center;
+    gap: 15px;
 }
 
-.forms_animal input{
-    width: 350px;
-    height: 30px;
-    border-color: #f6f6f6;
-    border-radius: 5px;
+.forms_animal input {
+    width: 100%;
+    padding: 12px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    font-size: 1rem;
+    box-sizing: border-box;
+    transition: border-color 0.3s;
 }
 
-.btn_cta{
+.forms_animal input:focus {
+    border-color: #FF6B02;
+    outline: none;
+}
+
+/*BOTÕES(CTA)*/
+.btn_cta {
     background-color: #FF6B02;
     color: white;
-    width: 360px;
-    height: 35px;
+    width: 100%;
+    padding: 15px;
     border: none;
-    border-radius: 5px;
+    border-radius: 8px;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background 0.3s, transform 0.2s;
 }
 
-.sectionBenefic{
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    margin-top: 50px;
+.btn_cta:hover {
+    background-color: #e65a00;
+    transform: translateY(-2px);
 }
 
-.benefics{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    gap: 150px;
-}
-
-.benefics-list{
+/*BENEFÍCIOS*/
+.sectionBenefic {
+    padding: 50px 0;
     text-align: center;
-    width: 500px;
 }
 
-.benefics-list ul{
-    padding: 0px;
-}
-
-.benefics-list ul li{
-    list-style: none;
-    text-align: justify;
-}
-
-.icons{
-    color: green;
-    font-size: 70px;
-}
-
-.stories{
+.benefics {
     display: flex;
-    flex-direction: column;
-    gap: 25px;
-    margin-top: 50px;
-}
-
-.dogs{
-    display: flex;
-    flex-direction: row;
-    gap: 150px;
+    flex-wrap: wrap;
     justify-content: center;
+    gap: 40px;
+    margin-top: 30px;
 }
 
-.cardDog{
-    width: 275px;
-    height: 300px;
-}
-
-.cardDog img{
-    width: 100% ;
-    height: 225px;
-    object-fit: cover;
+.benefics-list {
+    flex: 1;
+    min-width: 250px;
+    max-width: 320px;
+    padding: 20px;
+    background: #f9f9f9;
     border-radius: 15px;
+    transition: transform 0.3s;
 }
 
-.cta{
+.benefics-list:hover {
+    transform: translateY(-5px);
+}
+
+.benefics-list ul {
+    padding: 0;
+    list-style: none;
+}
+
+.benefics-list li {
+    margin: 8px 0;
+    color: #555;
+}
+
+.icons {
+    color: #28a745;
+    font-size: 3rem;
+    margin-bottom: 15px;
+}
+
+/*HISTÓRIAS*/
+.stories {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.dogs {
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    gap: 30px;
     justify-content: center;
-    align-items: center;
-    margin-top: 50px;
+    margin-top: 30px;
 }
 
-@media (max-width: 768px){
-    .forms_animal{
+.cardDog {
+    width: 300px;
+    background: white;
+    border-radius: 20px;
+    overflow: hidden;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+    transition: box-shadow 0.3s;
+}
+
+.cardDog:hover {
+    box-shadow: 0 8px 25px rgba(0,0,0,0.15);
+}
+
+.cardDog img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+}
+
+.cardDog p {
+    padding: 0 15px 20px;
+    color: #777;
+    font-size: 0.95rem;
+}
+
+/*CTA*/
+.cta {
+    padding: 60px 0;
+    text-align: center;
+}
+
+.cta .btn_cta {
+    max-width: 350px;
+}
+
+
+@media (max-width: 992px) {
+    .forms_animal {
+        right: 5%;
+        max-width: 350px;
+    }
+}
+
+@media (max-width: 768px) {
+    .headline h1 { font-size: 1.8rem; }
+    
+    .banner {
+        flex-direction: column;
+    }
+
+    .banner img {
+        height: 300px;
+    }
+
+    .forms_animal {
+        position: relative;
+        top: 0;
+        right: 0;
+        transform: none;
+        margin: -40px auto 20px;
+        width: 90%;
+        box-shadow: 0 5px 20px rgba(0,0,0,0.1);
+    }
+
+    .benefics, .dogs {
+        gap: 20px;
+    }
+    
+    .benefics-list {
         max-width: 100%;
-        height: auto;
-}
-
+    }
 }
