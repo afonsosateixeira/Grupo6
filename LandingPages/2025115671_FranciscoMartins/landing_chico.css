@@ -1,0 +1,568 @@
+* {
+    margin: 0;
+    font-family: Arial, Helvetica, sans-serif;
+}
+
+.banner_hero {
+    width: 100%;
+}
+
+.text {
+    margin-top: -546px;
+    margin-left: 308px;
+}
+
+.text h1 {
+    color: white;
+    font-size: 28px;
+}
+
+.text p {
+    color: white;
+    font-size: 24px;
+    opacity: 50%;
+    margin-top: 20px;
+}
+
+.but_hero {
+    background-color: white;
+    margin-top: 15px;
+    margin-left: 308px;
+    width: 300px;
+    height: 50px;
+    border-radius: 12px;
+    color: black;
+    font-size: 20px;
+}
+
+.but_hero:hover {
+    transform: scale(1.05);
+}
+
+.vet_img {
+    position: absolute;
+    height: 370px;
+    margin-top: 135px;
+    margin-left: 722px;
+}
+
+.form_area {
+    display: flex;
+    margin-top: 290px;
+    margin-bottom: 50px;
+    justify-content: center;
+}
+
+.form_text {
+    margin-left: 50px;
+    margin-top: 25px;
+}
+
+.form_text h1 {
+    color: #283618;
+    font-size: 28px;
+}
+
+.border_form {
+    border-radius: 50px;
+    width: 1014px;
+    height: 537px;
+    box-shadow: 2px -2px 4px;
+}
+
+.form {
+    margin-top: 25px;
+    display: flex;
+    flex-direction: column;
+}
+
+.form_input {
+    border-radius: 12px;
+    font-size: 20px;
+    padding: 0;
+    padding-left: 20px;
+    margin: 0;
+    height: 88px;
+    width: 871px;
+}
+
+.but_form {
+    border-radius: 12px;
+    color: white;
+    background-color: #283618;
+    font-size: 24px;
+    padding: 0;
+    padding-left: 20px;
+    margin: 0;
+    height: 88px;
+    width: 894px;
+}
+
+.but_form:hover {
+    transform: scale(1.05);
+}
+
+#feedback {
+    text-align: center;
+    font-size: 20px;
+    color: #283618;
+    margin-top: 10px;
+}
+
+.ben_text {
+    font-size: 28px;
+    color: #283618;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: 215px;
+}
+
+.cards {
+    display: flex;
+    margin: 50px 0;
+    justify-content: center;
+    gap: 50px;
+}
+
+.cards h1 {
+    font-size: 28px;
+    color: #283618;
+}
+
+.cards p {
+    font-size: 20px;
+    color: #283618;
+}
+
+.card_box {
+    padding: 0px 30px;
+    border-radius: 50px;
+    width: 270px;
+    height: 435px;
+    box-shadow: 2px -2px 4px;
+    text-align: center;
+}
+
+.card_box h1 {
+    margin-bottom: 15px;
+}
+
+.check {
+    height: 259px;
+}
+
+.plano {
+    height: 259px;
+}
+
+.ambiente {
+    height: 259px;
+}
+
+.feed_text {
+    font-size: 28px;
+    color: #283618;
+    margin-top: 25px;
+    margin-bottom: 25px;
+    margin-left: 215px;
+}
+
+.card_box_feed {
+    overflow: hidden;
+    border-radius: 50px;
+    width: 320px;
+    height: 470px;
+    box-shadow: 2px -2px 4px;
+    text-align: center;
+}
+
+.mariana {
+    height: 321px;
+}
+
+.mariana_text {
+    padding: 0px 30px;
+    padding-top: 15px;
+}
+
+.mariana_text p {
+    padding-top: 15px;
+}
+
+.joao {
+    height: 321px;
+}
+
+.joao_text {
+    padding: 0px 30px;
+    padding-top: 15px;
+}
+
+.joao_text p {
+    padding-top: 15px;
+}
+
+.carla {
+    height: 321px;
+}
+
+.carla_text {
+    padding: 0px 30px;
+    padding-top: 15px;
+}
+
+.carla_text p {
+    padding-top: 15px;
+}
+
+.final {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 30px;
+}
+
+.final h1 {
+    text-align: center;
+    font-size: 28px;
+    color: #283618;
+}
+
+.final_but {
+    border-radius: 12px;
+    color: white;
+    background-color: #283618;
+    font-size: 24px;
+    padding: 0;
+    padding-left: 20px;
+    margin: 0;
+    height: 58px;
+    width: 433px;
+    margin-bottom: 50px;
+}
+
+.final_but:hover {
+    transform: scale(1.05);
+}
+
+
+
+@media (max-width:1025px) {
+    .text {
+        margin-top: -406px;
+        margin-left: 208px;
+    }
+
+    .but_hero {
+        margin-left: 210px;
+        width: 255px;
+    }
+
+    .vet_img {
+        height: 264px;
+        margin-left: 537px;
+        margin-top: 80px;
+    }
+
+    .form_area {
+        margin-top: 145px;
+    }
+
+    .border_form {
+        width: 925px;
+    }
+
+    .form_text {
+        margin: 0 50px;
+        margin-top: 25px;
+    }
+
+    .form_input {
+        width: 798px;
+    }
+
+    .but_form {
+        width: 824px;
+    }
+
+    .ben_text {
+        margin-left: 57px;
+    }
+
+    .cards {
+        gap: 35px;
+    }
+
+    .card_box {
+        width: 227px;
+        height: 430px;
+    }
+
+    .check {
+        margin-left: -14px;
+    }
+
+    .feed_text {
+        margin-left: 57px;
+    }
+
+    .card_box_feed {
+        width: 280px;
+        height: 453px;
+    }
+
+    .mariana {
+        margin-left: -21px;
+    }
+
+    .joao {
+        margin-left: -21px;
+    }
+
+    .carla {
+        margin-left: -21px;
+    }
+}
+
+@media (max-width:769px) {
+
+    .text {
+        margin-top: -308px;
+        margin-left: 158px;
+    }
+
+    .text h1 {
+        font-size: 24px;
+    }
+
+    .text p {
+        font-size: 18px;
+    }
+
+    .vet_img {
+        height: 215px;
+        margin-left: 405px;
+        margin-top: 62px;
+    }
+
+    .but_hero {
+        margin-left: 191px;
+        width: 176px;
+        height: auto;
+    }
+
+    .but_text {
+        font-size: 16px;
+    }
+
+    .form_area {
+        margin-top: 100px;
+    }
+
+    .border_form {
+        width: 734px;
+    }
+
+    .form_text h1 {
+        color: #283618;
+        font-size: 24px;
+    }
+
+    .form_input {
+        font-size: 16px;
+        width: 615px;
+    }
+
+    .but_form {
+        font-size: 20px;
+        width: 642px;
+    }
+
+    .ben_text {
+        font-size: 24px;
+        margin-left: 241px;
+    }
+
+    .cards {
+        display: flex;
+        margin: 50px 0;
+        gap: 50px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .card_box h1 {
+        font-size: 24px;
+    }
+
+    .cards p {
+        font-size: 18px;
+    }
+
+    .feed_text {
+        margin-left: 91px;
+    }
+
+    .cards h1 {
+        font-size: 24px;
+    }
+
+    .final h1 {
+        font-size: 24px;
+    }
+
+    .final_but {
+        font-size: 20px;
+        height: 42px;
+        width: 346px;
+    }
+}
+
+@media (max-width:426px) {
+    .banner_hero {
+        margin-left: -441px;
+        width: 1550px;
+    }
+
+    .border {
+        width: 426px;
+        height: 731px;
+        overflow: hidden;
+    }
+
+    .vet_img {
+        height: 390px;
+        margin-left: 20px;
+        margin-top: -16px;
+    }
+
+    .text {
+        margin-top: -327px;
+        margin-left: 0;
+        text-align: center;
+    }
+
+    .but_hero {
+        margin-left: 122px;
+        width: 176px;
+        height: auto;
+    }
+
+    .form_area {
+        margin-top: 19px;
+    }
+
+    .form_text h1 {
+        text-align: center;
+    }
+
+    .border_form {
+        width: 372px;
+        height: auto;
+    }
+
+    .form_input {
+        width: 260px;
+        height: 50px;
+    }
+
+    .but_form {
+        width: 288px;
+        height: 56px;
+    }
+
+    .ben_text {
+        margin-left: 0px;
+        font-size: 24px;
+        text-align: center;
+    }
+
+    .feed_text {
+        text-align: center;
+        margin-left: 0px;
+    }
+
+}
+
+@media (max-width:376px) {
+    .border {
+        width: 375px;
+        height: 731px;
+        overflow: hidden;
+    }
+
+    .vet_img {
+        margin-left: -16px;
+    }
+
+    .border_form {
+        width: 330px;
+        height: auto;
+    }
+
+    .form_input {
+        width: 220px;
+        height: 50px;
+    }
+
+    .but_hero {
+        margin-left: 122px;
+        width: 176px;
+        height: auto;
+    }
+
+    .but_form {
+        width: 243px;
+        height: 56px;
+    }
+
+    .final h1 {
+        width: 333px;
+    }
+
+    .final_but {
+        font-size: 20px;
+        height: 42px;
+        width: 300px;
+    }
+}
+
+
+@media (max-width:321px) {
+
+    .vet_img {
+        height: 357px;
+        margin-left: -31px;
+    }
+
+    .border {
+        width: 326px;
+    }
+
+    .but_hero {
+        margin-left: 80px;
+        width: 176px;
+        height: auto;
+    }
+
+    .border_form {
+        width: 286px;
+        height: auto;
+    }
+
+    .form_input {
+        width: 179px;
+    }
+
+    .but_form {
+        width: 204px;
+    }
+
+    .final h1 {
+        width: 310px;
+    }
+
+    .final_but {
+        width: 273px;
+    }
+}
