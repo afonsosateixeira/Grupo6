@@ -10,87 +10,95 @@
     </head>
     <body>
         <div class="container">
-            <div id="banner">
-                <div>
-                    <h1>Sorteio de ração</h1>
-                    <p>Ganhe um mês de desconto em rações animais</p>
+            <a href='#raffle'>
+                <div id="banner">
+                    <div id="bannerTitle">
+                        <h1>Sorteio limitado</h1>
+                    </div>
+                    <div id="bannerLogo"></div>
                 </div>
-            </div>
+            </a>
             <div id="main">
-                <div class="center">
+                <div id="winnersMain" class="center">
                     <h2>Vencedores de sorteios anteriores</h2>
                     <div id="winners">
-                        <div>
-                            <img src="img/Banner_landingPage.png" alt="Logo">
+                        <div class="winnerCard">
+                            <img src="img/winner1.png" alt="Vencedor 09/2024">
                             <p class="highlight">Sofia</p>
                             <p>Venceu em: <span class="date">09/2024</span></p>
-                            <p class="toggleWinner">Ver comentário</p>
+                            <p class="toggleWinner"></p>
                             <div class="winnerDescription">
                                 <p>Com este concurso pude dar ao meu gato a melhor comida e deu para ver que ficou mais feliz</p>
+                                <button class="return">Voltar</button>
                             </div>
                         </div>
-                        <div>
-                            <img src="img/Banner_landingPage.png" alt="Logo">
+                        <div class="winnerCard">
+                            <img src="img/winner2.png" alt="Vencedor 12/2024">
                             <p class="highlight">Carlos</p>
                             <p>Venceu em: <span class="date">12/2024</span></p>
                             <p class="toggleWinner"></p>
                             <div class="winnerDescription">
                                 <p></p>
+                                <button class="return">Voltar</button>
                             </div>
                         </div>
-                        <div>
-                            <img src="img/Banner_landingPage.png" alt="Logo">
+                        <div class="winnerCard">
+                            <img src="img/winner3.png" alt="Vencedor 03/2025">
                             <p class="highlight">Artur</p>
                             <p>Venceu em: <span class="date">03/2025</span></p>
                             <p class="toggleWinner"></p>
                             <div class="winnerDescription">
                                 <p>Estava com dificuldades neste mẽs e graças ao sorteio consegui manter a qualidade da ração sem me preocupar</p>
+                                <button class="return">Voltar</button>
                             </div>
                         </div>
-                        <div>
-                            <img src="img/Banner_landingPage.png" alt="Logo">
+                        <div class="winnerCard">
+                            <img src="img/winner4.png" alt="Vencedor 06/2025">
                             <p class="highlight">Marta</p>
                             <p>Venceu em: <span class="date">06/2025</span></p>
                             <p class="toggleWinner"></p>
                             <div class="winnerDescription">
                                 <p></p>
+                                <button class="return">Voltar</button>
                             </div>
                         </div>
-                        <div>
-                            <img src="img/Banner_landingPage.png" alt="Logo">
+                        <div class="winnerCard">
+                            <img src="img/winner5.png" alt="Vencedor 09/2025">
                             <p class="highlight">Marina</p>
                             <p>Venceu em: <span class="date">09/2025</span></p>
                             <p class="toggleWinner"></p>
                             <div class="winnerDescription">
                                 <p>A minha filha insistiu para eu participar embora eu não tivesse esperança mas graças a ela poupei o mês inteiro</p>
+                                <button class="return">Voltar</button>
                             </div>
                         </div>
-                        <div>
-                            <img src="img/Banner_landingPage.png" alt="Logo">
+                        <div class="winnerCard">
+                            <img src="img/winner6.png" alt="Vencedor 12/2025">
                             <p class="highlight">Afonso</p>
                             <p>Venceu em: <span class="date">12/2025</span></p>
                             <p class="toggleWinner"></p>
                             <div class="winnerDescription">
                                 <p></p>
+                                <button class="return">Voltar</button>
                             </div>
                         </div>
                     </div>
                 </div>
-                <form action="post" id="raffle" class="center widthMobile box">
-                    <h2>Preencha o formulário para ganhar</h2>
+                <form action="#" id="raffle" class="center widthMobile box">
+                    <h2>Preencha o formulário para ganhar já!!!</h2>
                     <div class="hFlex">
                         <div class="vFlex">
-                            <label for="fName">Primeiro Nome:</label>
-                            <input type="text" id="fName" name="fName" placeholder="Nome">
+                            <label for="fName">Nome:</label>
+                            <input type="text" id="fName" name="fName" required>
                         </div>
                         <div class="vFlex">
                             <label for="lName">Apelido:</label>
-                            <input type="text" id="lName" name="lName" placeholder="Apelido Inteiro">
+                            <input type="text" id="lName" name="lName" required>
                         </div>
                     </div>
                     <div class="vFlex">
                         <label for="email">Email:</label>
-                        <input type="email" id="email" name="email" placeholder="nome@exemplo.com">
+                        <input type="email" id="email" name="email" placeholder="nome@exemplo.com" required>
                     </div>
                     <div class="hFlex">
                         <div>

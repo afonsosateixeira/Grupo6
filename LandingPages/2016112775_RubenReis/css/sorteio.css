@@ -43,7 +43,7 @@ body{
     border: 2px solid #cea77e;
     border-radius: 15px;
     background-color: rgba( 220, 192, 163, 0.85);
-    padding: 15px
+    padding: 25px;
 }
 
 h2{
@@ -62,19 +62,49 @@ h2{
 }
 
 #banner{
+    position: relative;
     background-color: #e3cdb5;
     background-image: url("../img/Banner_landingPage.png");
-    background-size: 65% 100%;
+    background-size: 300px 300px;
     background-repeat: no-repeat;
-    background-position: center;
+    background-position: 80% 100%;
     height: 700px;
     position: relative;
 }
 
-#banner div{
+#banner::before{
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 600px;
+    height: 450px;
+    background-image: url("../img/ticket.png");
+    top: 100px;
+    cursor: pointer;
+    right: clamp(325px, calc(425px * (100vw / 1440px)), 425px);
+    transform: rotateZ(-5deg);
+}
+
+a #banner{
+    color: #283618;
+}
+
+#bannerTitle{
     position: absolute;
     left: calc(17.5% + 25px);
     top: 25px;
+}
+
+#bannerLogo{
+    position: absolute;
+    background-image: url("../img/logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 250px;
+    height: 120px;
+    left: 25px;
+    bottom: 25px;
 }
 
 #banner h1{
@@ -99,7 +129,7 @@ h2{
     overflow: visible;
 }
 
-#main > :nth-child(1)::before, #main > :nth-child(2)::before, #main > :nth-child(3)::before{
+#main > :nth-child(1)::before, #main > :nth-child(3)::before{
     content: "";
     position: absolute;
     background-size: contain;
@@ -110,17 +140,21 @@ h2{
 #main > :nth-child(1)::before {
     width: 300px;
     height: 300px;
-    background-image: url("../img/parrot.webp");
+    background-image: url("../img/parrot.png");
     bottom: clamp(0px, calc(115px * ((100vw - 500px) / 940px)), 115px);
-    left: clamp(-250px, calc(-250px * ((100vw - 500px) / 940px)), 150px);
+    left: clamp(25px, calc(25px * ((100vw - 500px) / 705px)), 425px);
 }
 
 #main > :nth-child(3)::before {
     width: 300px;
     height: 300px;
-    background-image: url("../img/cat.webp");
+    background-image: url("../img/cat.png");
     bottom: -75px;
     right: clamp(-450px, calc(-450px * ((100vw - 500px) / 940px)), 0px);
+}
+
+#winnersMain{
+    margin: 0 25px;
 }
 
 #winners{
@@ -135,9 +169,10 @@ h2{
     align-items: flex-start;
 }
 
-#winners div{
+.winnerCard{
     padding: 25px;
     max-width: 200px;
+    min-height: 282px;
     transition: 350ms ease-in;
     background-color: rgba( 220, 192, 163, 0.85);
     border-radius: 25px;
@@ -163,8 +198,12 @@ h2{
     display: none;
 }
 
+.winnerDescription p{
+    padding-bottom: 15px;
+}
+
 .highlight{
-    font-weight: 400;
+    font-weight: 700;
     font-size: 1.25rem;
 }
 
@@ -183,6 +222,8 @@ form label, form p, .center li{
 
 #raffle input{
     transition: 100ms ease-in-out;
+    background-color: #f1e6da;
+    color: #283618;
 }
 
 #raffle input[type="text"]{
@@ -200,6 +241,44 @@ form label, form p, .center li{
 #raffle input[type="text"]:focus, #raffle input[type="email"]:focus{
     box-shadow: 0 0 0 3px #cea77e;
     outline: none;
+}
+
+@media(max-width: 930px){
+    #banner::before{
+        content: none;
+    }
+
+    #bannerTitle{
+        left: calc(50% - 160px);
+        max-width: 320px;
+        text-align: center;
+    }
+}
+
+@media(max-width: 650px){
+    #banner{
+        background-position: 50% 70%;
+    }
+
+    #banner h1{
+        font-size: 52px;
+    }
+
+    #bannerLogo{
+        bottom: 0;
+        left: 0;
+    }
+
+    h1 span{
+        display: initial;
+    }
+
+    #main > :nth-child(1)::before {
+        width: 250px;
+        height: 250px;
+        bottom: initial;
+        top: 250px;
+    }
 }
 
 @media(max-width: 500px){
