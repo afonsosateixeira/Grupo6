@@ -21,7 +21,7 @@ body {
 }
 
 .headline h1 {
-    color: #FF6B02;
+    color: #139143;
     font-size: 2.5rem;
 }
 
@@ -82,13 +82,13 @@ body {
 }
 
 .forms_animal input:focus {
-    border-color: #FF6B02;
+    border-color: #139143;
     outline: none;
 }
 
 /*BOTÕES(CTA)*/
 .btn_cta {
-    background-color: #FF6B02;
+    background-color: #139143;
     color: white;
     width: 100%;
     padding: 15px;
@@ -101,7 +101,7 @@ body {
 }
 
 .btn_cta:hover {
-    background-color: #e65a00;
+    background-color: #2e6b16;
     transform: translateY(-2px);
 }
 
@@ -144,7 +144,7 @@ body {
 }
 
 .icons {
-    color: #28a745;
+    color: #76a728;
     font-size: 3rem;
     margin-bottom: 15px;
 }
