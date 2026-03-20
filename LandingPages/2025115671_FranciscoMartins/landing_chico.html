@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Landing_vet</title>
+    <link rel="stylesheet" href="landing_chico.css">
+</head>
+
+<body>
+    <header></header>
+    <section>
+        <img src="img/vet.png" alt="veterinária" class="vet_img">
+        <div class="border">
+            <img src="img/banner.png" alt="banner" class="banner_hero">
+            <div>
+                <div class="text">
+                    <h1>Ganhe um cupão <br> de 50% de desconto <br> numa primeira <br> consulta</h1>
+                    <p>Garanta uma avaliação completa da <br> saúde para o seu animal com <br> veterinários
+                        profissionais.</p>
+                </div>
+                <button class="but_hero" onclick="irParaFormulario()">
+                    Marcar consulta agora
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <section class="form_area" id="tp">
+        <div class="border_form">
+            <div class="form_text">
+                <h1>Agenda a sua consulta com desconto</h1>
+                <form class="form" id="formulario">
+                    <input type="text" id="name" placeholder="Nome completo" class="form_input" required minlength="3"><br>
+                    <input type="email" id="email" placeholder="Email" class="form_input" required><br>
+                    <input type="tel" id="number" placeholder="Telemóvel" class="form_input" required minlength="9"><br>
+                    <button type="submit" class="but_form">Quero o meu cupão</button>
+                    <div id="feedback"></div>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h1 class="ben_text">Quais são os benefícios</h1>
+        <div class="cards">
+            <div class="card_box">
+                <div>
+                    <img src="img/checkup.png" alt="check" class="check">
+                    <div>
+                        <h1>Checkup Preventivo</h1>
+                        <p>Avaliação completa para garantir que o seu pet está saudável.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card_box">
+                <div><img src="img/plano.png" alt="plano" class="plano">
+                    <h1>Plano de Saúde Personalizado</h1>
+                    <p>Dicas de nutrição e cuidados específicos para a idade e raça.</p>
+                </div>
+            </div>
+            <div class="card_box">
+                <div><img src="img/ambiente.png" alt="ambiente" class="ambiente">
+                    <h1>Ambiente Low-Stress</h1>
+                    <p>Consultório preparado para que o seu animal se sinta calmo e seguro.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <h1 class="feed_text">Feedback de quem já aproveitou o desconto</h1>
+        <div class="cards">
+            <div class="card_box_feed">
+                <div>
+                    <img src="img/Mariana.png" alt="mariana" class="mariana">
+                    <div class="mariana_text">
+                        <h1>Mariana Silva </h1>
+                        <p>A atenção que deram ao meu gato foi incrível! </p>
+                    </div>
+                </div>
+            </div>
+            <div class="card_box_feed">
+                <div>
+                    <img src="img/joao.png" alt="joao" class="joao">
+                    <div class="joao_text">
+                        <h1>João Pereira</h1>
+                        <p>Profissionais incríveis e dicas muito valiosas.</p>
+                    </div>
+                </div>
+            </div>
+            <div class="card_box_feed">
+                <div>
+                    <img src="img/carla.png" alt="carla" class="carla">
+                    <div class="carla_text">
+                        <h1>Carla Santos</h1>
+                        <p>O melhor cuidado ao melhor preço.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section>
+        <div class="final">
+            <h1>Não deixe a saúde do seu animal para depois. <br>
+                A prevenção é o melhor remédio</h1>
+            <button class="final_but" onclick="irParaFormulario()">Marcar consulta agora
+            </button>
+        </div>
+    </section>
+    <script src="landing_cjico.js"></script>
+</body>
+
+</html>
