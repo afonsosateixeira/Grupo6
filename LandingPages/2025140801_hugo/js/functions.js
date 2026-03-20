@@ -21,3 +21,10 @@
         s[index].style.display = "block";
     }
 })();
+
+function scrollToSection() {
+  const element = document.getElementById("target-destination");
+  element.scrollIntoView({ 
+    behavior: "smooth",
+  });
+}
