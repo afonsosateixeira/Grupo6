@@ -1,19 +1,4 @@
-<?php require_once('config.php');?>
-<!DOCTYPE html>
-<html lang="pt">
-
-<head>
-    <?php
-        $metaTitle = "Guia de Adoção";
-        $metaDescription = "";
-        require_once("components/head.php");
-    ?>
-</head>
-
-<body>
-    <?php require_once("components/header.php");?>
-
-    <main class="container my-5">
+<section class="container my-5">
         <section class="hero-section bg-primary text-white rounded-4 p-5 mb-5 shadow-lg">
             <div class="text-center">
                 <h1 class="fw-bold mb-3"><i class="fa-solid fa-paw me-3"></i>Como Adotar</h1>
@@ -126,9 +111,4 @@
             </div>
         </section>
 
-    </main>
-
-    <?php require_once("components/footer.php");?>
-</body>
-
-</html>
+    </section>

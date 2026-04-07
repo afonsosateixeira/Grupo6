@@ -1,20 +1,116 @@
-<!-- require once config.php quando tivermos a usar a base de bados por completo -->
+<?php
+$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+$basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
+
+if ($basePath !== '' && $basePath !== '/' && str_starts_with($path, $basePath)) {
+	$path = substr($path, strlen($basePath));
+}
+
+$route = trim($path, '/');
+
+if ($route === '' || $route === 'index.php') {
+	$route = 'home';
+}
+
+if (str_ends_with($route, '.php')) {
+	$route = pathinfo($route, PATHINFO_FILENAME);
+}
+
+$metaTitle = '';
+$metaDescription = '';
+$currentPage = '';
+
+switch ($route) {
+	case 'home':
+		$metaTitle = 'Início';
+		$metaDescription = 'Página inicial da Poppy and Max';
+		$currentPage = 'index';
+		break;
+
+	case 'animalCatalog':
+		$metaTitle = 'Catálogo de Animais';
+		$metaDescription = 'Animais disponíveis para adoção';
+		$currentPage = 'animalCatalog';
+		break;
+
+	case 'adoptionGuide':
+		$metaTitle = 'Guia de Adoção';
+		$metaDescription = 'Guia passo a passo para adoção responsável';
+		$currentPage = 'adoptionGuide';
+		break;
+
+	case 'login':
+		$metaTitle = 'Entrar';
+		$metaDescription = 'Acesso à conta';
+		$currentPage = 'login';
+		break;
+
+	case 'regist':
+		$metaTitle = 'Registar';
+		$metaDescription = 'Criar nova conta';
+		$currentPage = 'regist';
+		break;
+
+	default:
+		$metaTitle = 'Página não encontrada';
+		$metaDescription = 'A página que procura não existe';
+		$currentPage = 'index';
+		break;
+}
+?>
 <!DOCTYPE html>
 <html lang="pt">
-	<head>
+<head>
+	<?php require_once 'components/head.php'; ?>
+</head>
+<body>
+	<?php require_once 'components/header.html'; ?>
+	<main>
 		<?php
-			$metaTitle = ""; //Nesta variável insiram o título da página, exemplo "Guia de Adoção" resultando em "Poppy & Max | Guia de Adoção"
-			$metaDescription = "Descrição da página web"; // Nesta variável insiram a descrição do site por exemplo "Guia que demonstra o nosso processo de adoção na Poppy & Max"
-			require_once "components/head.php";
-			//Se tiverem css extra ou javascript da página adicionem aqui (apenas para funções extra)
+		switch ($route) {
+			case 'home':
+				?>
+				<section class="container my-5">
+					<div class="p-5 rounded-4 bg-light border">
+						<h1 class="mb-3">Poppy and Max</h1>
+						<p class="mb-4">Bem-vindo ao nosso site de adoção. Aqui pode conhecer animais disponíveis e seguir o guia de adoção.</p>
+						<div class="d-flex gap-2 flex-wrap">
+							<a href="./animalCatalog" class="btn btn-primary">Ver Catálogo</a>
+							<a href="./adoptionGuide" class="btn btn-outline-primary">Ler Guia de Adoção</a>
+						</div>
+					</div>
+				</section>
+				<?php
+				break;
+
+			case 'animalCatalog':
+				require_once 'animalCatalog.php';
+				break;
+
+			case 'adoptionGuide':
+				require_once 'adoptionGuide.php';
+				break;
+
+			case 'login':
+				require_once 'login.php';
+				break;
+
+			case 'regist':
+				require_once 'regist.php';
+				break;
+
+			default:
+				http_response_code(404);
+				?>
+				<section class="container my-5">
+					<h1>404</h1>
+					<p>Página não encontrada.</p>
+				</section>
+				<?php
+				break;
+		}
 		?>
-	</head>
-	<body>
-		<?php require_once "components/header.html";?>
-		<!-- Se vocês quizerem usarem banner full width começem o banner aqui e metam o resto do conteúdo da página em baixo -->
-		<main class="container">
-			<!-- Conteúdo da página, e banner se não quizerem full width -->
-		</main>
-		<?php require_once "components/footer.html";?>
-	</body>
+	</main>
+	<?php require_once 'components/footer.html'; ?>
+</body>
 </html>

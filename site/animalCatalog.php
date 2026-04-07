@@ -5,20 +5,6 @@
     $lista = $config->query($sql);
 ?>
 
-<!DOCTYPE html>
-<html lang="pt">
-
-<head>
-    <?php
-        $metaTitle = "Catálogo de Animais";
-        $metaDescription = "";
-        require_once "components/head.php";
-    ?>
-</head>
-
-<body>
-    <?php require_once("components/header.php");?>
-
     <div class="modal fade" id="formModal">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
@@ -28,7 +14,7 @@
                         Estou Interessado
                     </h5>
                 </div>
-                <form action="action_interest.php" method="post">
+                <form action="backoffice/action_interest.php" method="post">
                     <div class="modal-body">
                         <input type="hidden" name="animal_id" id="modal_animal_id">
                         <div class="mb-3">
@@ -45,7 +31,7 @@
                         </div>
                     </div>
                     <div class="modal-footer bg-light">
-                        <a href="animalCatalog.php" class="btn btn-secondary">Cancelar</a>
+                        <a href="./animalCatalog" class="btn btn-secondary">Cancelar</a>
                         <button type="submit" name="btnEnviar" class="btn btn-primary px-4">Enviar</button>
                     </div>
                 </form>
@@ -80,8 +66,4 @@
         endif;
         ?>
     </div>
-    <?php require_once("components/footer.php");?>
     <script src="assets/js/modalForm.js"></script>
-</body>
-
-</html>

@@ -1,5 +1,5 @@
 <?php
-	$currentPage = pathinfo($_SERVER['REQUEST_URI'], PATHINFO_FILENAME);
+	$currentPage = $currentPage ?? pathinfo($_SERVER['REQUEST_URI'], PATHINFO_FILENAME);
 	$backOffice = $backOffice ?? false;
 	$metaTitle = $metaTitle ?? "";
 	$metaDescription = $metaDescription ?? "";
