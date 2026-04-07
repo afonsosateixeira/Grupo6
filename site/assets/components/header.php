@@ -19,7 +19,7 @@ require_once('config.php');
     <header>
         <nav class="navbar navbar-expand-lg bg-nav navbar-color">
             <div class="container-fluid">
-                <a class="navbar-brand" href="index.php"><i class="fa-solid fa-paw"></i></a>
+                <a class="navbar-brand" href="index.php"><img src="assets/img/logo.png" alt="Logo PAM" style="width: 60px;"></a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
                     data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent"
                     aria-expanded="false" aria-label="Toggle navigation">
