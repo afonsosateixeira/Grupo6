@@ -1,0 +1,1 @@
+//Scripts for the page index.php if used
