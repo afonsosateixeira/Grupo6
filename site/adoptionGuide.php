@@ -12,7 +12,7 @@ require_once('config.php');
 </head>
 
 <body>
-    <?php include('assets/components/header.php'); ?>
+    <?php include('components/header.php'); ?>
 
     <main class="container my-5">
         <section class="hero-section bg-primary text-white rounded-4 p-5 mb-5 shadow-lg">
@@ -129,7 +129,7 @@ require_once('config.php');
 
     </main>
 
-    <?php include('assets/components/footer.php'); ?>
+    <?php include('components/footer.php'); ?>
 </body>
 
 </html>

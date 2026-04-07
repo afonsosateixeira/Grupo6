@@ -84,7 +84,7 @@ require_once('config.php');
                         </li>
                     </ul>
                     <button class="btn-login" type="submit">Registar</button>  
-                    <a href="dashboard.php"><button class="btn-login btn-regist" type="submit">Entrar</button></a>
+                    <a href="backoffice/dashboard.php"><button class="btn-login btn-regist" type="submit">Entrar</button></a>
                     
                 </div>
             </div>

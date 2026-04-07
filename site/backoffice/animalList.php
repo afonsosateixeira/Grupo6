@@ -51,6 +51,24 @@ $lista = $config->query("SELECT * FROM animals ORDER BY id ASC");
                             <label class="form-label fw-bold">Fotografia</label>
                             <input type="file" name="image" class="form-control" accept="image/*" <?php echo $animalParaEditar ? '' : 'required'; ?>>
                         </div>
+
+                        <div class="mb-3">
+                            <label>Escolha a Raça:</label>
+                            <select name="breed_id" class="form-select" required>
+                                <option value="">Selecione uma Raça</option>
+
+                                <?php
+                             
+                                $sql = "SELECT id, name FROM breeds";
+                                $executar = $config->query($sql);
+
+                                
+                                while ($row = $executar->fetch_assoc()) {
+                                    echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
+                                }
+                                ?>
+                            </select>
+                        </div>         
                     </div>
 
                     <div class="modal-footer bg-light">

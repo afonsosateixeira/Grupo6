@@ -1,5 +1,5 @@
 <?php
-require_once('config.php');
+require_once('../config.php');
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -9,7 +9,7 @@ require_once('config.php');
     <title>Document</title>
 </head>
 <body>
-    <?php include('assets/components/sidebar.php'); ?>
+    <?php include('../components/sidebar.php'); ?>
     
 </body>
 </html>

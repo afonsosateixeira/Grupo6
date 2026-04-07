@@ -5,10 +5,11 @@ if (isset($_POST['btnCriar'])) {
     $nome = $config->real_escape_string($_POST['nome_animal']);
     $arquivo = $_FILES['image'];
     $nomeArquivo = $arquivo['name'];
+    $breedID = (int) $_POST['breed_id'];
     $caminhoDestino = "assets/img/animals/" . $nomeArquivo;
 
     if (move_uploaded_file($arquivo['tmp_name'], $caminhoDestino)) {
-        $sql = "INSERT INTO animals (name, image) VALUES ('$nome', '$nomeArquivo')";
+        $sql = "INSERT INTO animals (name, image, breed_id) VALUES ('$nome', '$nomeArquivo', $breedID)";
         $config->query($sql);
         header("Location: animalList.php?status=criado");
     } else {

@@ -16,7 +16,7 @@ $lista = $config->query($sql);
 </head>
 
 <body>
-    <?php include('assets/components/header.php'); ?>
+    <?php include('components/header.php'); ?>
 
     <div class="modal fade" id="formModal">
         <div class="modal-dialog modal-dialog-centered">
@@ -79,7 +79,7 @@ $lista = $config->query($sql);
         endif;
         ?>
     </div>
-    <?php include('assets/components/footer.php'); ?>
+    <?php include('components/footer.php'); ?>
     <script src="assets/js/modalForm.js"></script>
 </body>
 

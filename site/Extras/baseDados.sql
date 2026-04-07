@@ -43,8 +43,8 @@ CREATE TABLE adopters(
     )engine=InnoDB;
 
 drop table if exists adoption_processes;
-CREATE table adoption_processes( 
-    id INT auto_increment primary key,    
+CREATE table adoption_processes(
+    id INT NOT NULL auto_increment primary key,    
     adopter_id INT not null,    
     animal_id INT not null,    
     status ENUM('pendente', 'aprovado', 'rejeitado') default 'pendente',    

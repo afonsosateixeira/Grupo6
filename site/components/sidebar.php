@@ -1,5 +1,5 @@
 <?php 
-require_once('config.php');
+require_once('../config.php');
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -52,7 +52,7 @@ require_once('config.php');
                 <li>
                 <hr class="dropdown-divider">
                 </li>
-                <li><a class="dropdown-item" href="index.php">Sair</a></li>
+                <li><a class="dropdown-item" href="../index.php">Sair</a></li>
             </ul>
         </div>
     </div>
