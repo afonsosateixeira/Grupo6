@@ -9,7 +9,7 @@ if ($basePath !== '' && $basePath !== '/' && str_starts_with($path, $basePath)) 
 $route = trim($path, '/');
 
 if ($route === '' || $route === 'index.php') {
-	$route = 'home';
+	$route = 'index';
 }
 
 if (str_ends_with($route, '.php')) {
@@ -21,7 +21,7 @@ $metaDescription = '';
 $currentPage = '';
 
 switch ($route) {
-	case 'home':
+	case 'index':
 		$metaTitle = 'Início';
 		$metaDescription = 'Página inicial da Poppy and Max';
 		$currentPage = 'index';
@@ -68,7 +68,7 @@ switch ($route) {
 	<main>
 		<?php
 		switch ($route) {
-			case 'home':
+			case 'index':
 				?>
 				<section class="container my-5">
 					<div class="p-5 rounded-4 bg-light border">
