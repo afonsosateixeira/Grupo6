@@ -22,7 +22,7 @@ $currentPage = '';
 
 switch ($route) {
 	case 'index':
-		$metaTitle = 'Início';
+		$metaTitle = '';
 		$metaDescription = 'Página inicial da Poppy and Max';
 		$currentPage = 'index';
 		break;
