@@ -9,4 +9,3 @@
     if($config -> connect_error){
         echo "Erro na conexão" . $config->connect_error;
     }
-?>

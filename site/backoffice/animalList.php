@@ -15,13 +15,11 @@ $lista = $config->query("SELECT * FROM animals ORDER BY id ASC");
 
 <head>
     <?php
-        $metaTitle = "Lista de Animais";
+        $metaTitle = "Gestão de Animais";
         $metaDescription = "";
         $backOffice = true;
-        require_once "components/head.php";
+        require_once "../components/head.php";
     ?>
-    <meta charset="UTF-8">
-    <title>Gestão de Animais</title>
     <link rel="stylesheet" href="assets/css/modalForm.css">
 </head>
 
