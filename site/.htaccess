@@ -1,7 +1,21 @@
+# Desativa a funcionalidade MultiViews do Apache, que tentaria adivinhar
+# qual ficheiro servir quando a URL não corresponde exatamente a um ficheiro existente.
+# Sem esta linha, /adoptionGuide abriria diretamente adoptionGuide.php em vez de passar pelo index.php.
 Options -MultiViews
 
+# Ativa o motor de reescrita de URLs do Apache (mod_rewrite).
+# Obrigatório para que as regras RewriteCond e RewriteRule abaixo funcionem.
 RewriteEngine On
 
+# Condição: só aplica a reescrita se o caminho pedido NÃO for um ficheiro existente.
+# Assim, pedidos a ficheiros reais (ex: assets/css/styles.css) não são redirecionados.
 RewriteCond %{REQUEST_FILENAME} !-f
+
+# Condição: só aplica a reescrita se o caminho pedido NÃO for uma pasta existente.
+# Assim, pedidos a pastas reais (ex: assets/) também não são redirecionados.
 RewriteCond %{REQUEST_FILENAME} !-d
+
+# Regra: se as duas condições acima forem verdadeiras, redireciona internamente
+# qualquer URL (^) para o index.php, que funciona como front controller da aplicação.
+# [L] = última regra a aplicar; [QSA] = mantém os parâmetros GET da URL original.
 RewriteRule ^ index.php [L,QSA]
