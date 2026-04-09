@@ -12,7 +12,17 @@ body {
     margin: 0 auto;
     padding: 0 20px;
     box-sizing: border-box;
-}   
+}
+
+.navbar{
+    height: 70px;
+}
+
+.navbar img{
+    width: 70px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
 
 /*HEADLINE*/
 .headline {
