@@ -59,7 +59,7 @@
 }
 
 .form_text h1 {
-    color: #283618;
+    color: #08284b;
     font-size: 28px;
 }
 
@@ -89,7 +89,7 @@
 .but_form {
     border-radius: 12px;
     color: white;
-    background-color: #283618;
+    background-color: #08284b;
     font-size: 24px;
     padding: 0;
     padding-left: 20px;
@@ -100,18 +100,20 @@
 
 .but_form:hover {
     transform: scale(1.05);
+    background-color: #1157a2;
+    border: 1px solid #08284b;
 }
 
 #feedback {
     text-align: center;
     font-size: 20px;
-    color: #283618;
+    color: #08284b;
     margin-top: 10px;
 }
 
 .ben_text {
     font-size: 28px;
-    color: #283618;
+    color: #08284b;
     margin-top: 25px;
     margin-bottom: 25px;
     margin-left: 215px;
@@ -126,12 +128,12 @@
 
 .cards h1 {
     font-size: 28px;
-    color: #283618;
+    color: #08284b;
 }
 
 .cards p {
     font-size: 20px;
-    color: #283618;
+    color: #000000;
 }
 
 .card_box {
@@ -161,7 +163,7 @@
 
 .feed_text {
     font-size: 28px;
-    color: #283618;
+    color: #08284b;
     margin-top: 25px;
     margin-bottom: 25px;
     margin-left: 215px;
@@ -225,13 +227,13 @@
 .final h1 {
     text-align: center;
     font-size: 28px;
-    color: #283618;
+    color: #08284b;
 }
 
 .final_but {
     border-radius: 12px;
     color: white;
-    background-color: #283618;
+    background-color: #08284b;
     font-size: 24px;
     padding: 0;
     padding-left: 20px;
@@ -243,6 +245,8 @@
 
 .final_but:hover {
     transform: scale(1.05);
+    background-color: #1157a2;
+    border: 1px solid #08284b;
 }
 
 
@@ -364,7 +368,7 @@
     }
 
     .form_text h1 {
-        color: #283618;
+        color: #08284b;
         font-size: 24px;
     }
 
