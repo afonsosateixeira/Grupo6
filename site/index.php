@@ -19,6 +19,11 @@
 			$metaDescription = 'Página inicial da Poppy and Max';
 			break;
 
+		case 'cookies':
+			$metaTitle = 'Política de Cookies';
+			$metaDescription = 'Políticas de Cookies de Poppy and Max';
+			break;
+
 		case 'animalCatalog':
 			$metaTitle = 'Catálogo de Animais';
 			$metaDescription = 'Animais disponíveis para adoção';
@@ -69,6 +74,10 @@
 						</div>
 					</section>
 					<?php
+					break;
+
+				case 'cookies':
+					require_once 'cookies.html';
 					break;
 
 				case 'animalCatalog':
