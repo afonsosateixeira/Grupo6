@@ -1,7 +1,7 @@
 //Global Scripts
 const currentPage = window.location.pathname.split("/").pop();
 
-document.querySeletorAll(".nav-link, .footer-link").forEach(link => {
+document.querySelectorAll(".nav-link, .footer-link").forEach(link => {
 	if(link.getAttribute("href") === currentPage){
 		link.classList.add("active");
 		link.setAttribute("aria-current", "page");

@@ -1,1 +1,1 @@
-//Scripts for the page index.php if used
+//Scripts para a página index.php se usados
