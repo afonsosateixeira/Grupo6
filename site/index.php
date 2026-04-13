@@ -21,7 +21,7 @@
 
 		case 'cookies':
 			$metaTitle = 'Política de Cookies';
-			$metaDescription = 'Políticas de Cookies de Poppy and Max';
+			$metaDescription = 'Política de Cookies de Poppy and Max';
 			break;
 
 		case 'animalCatalog':

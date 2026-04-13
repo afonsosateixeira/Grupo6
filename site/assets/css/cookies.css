@@ -3,12 +3,16 @@ body{
 }
 
 #banner{
-	background: var(--blue-color);
+	background: linear-gradient(to right, var(--blue-color), #135EB1);
 	height: 300px;
 }
 
 .custom-blue{
-	color: var(--blue-color);
+	color: #135EB1;
+}
+
+.marker-blue li::marker{
+	color: #135EB1;
 }
 
 h1{
@@ -17,28 +21,12 @@ h1{
 
 h2{
 	color: var(--blue-color);
-	margin: 15px 0;
+	margin: 25px 0 15px 0;
 	font-weight: 700;
 }
 
 p, ul{
 	margin: 0;
-}
-
-article{
-	position: relative;
-}
-
-article:nth-child(even)::before{
-	content: "";
-	position: absolute;
-	top: 0;
-	left: 50%;
-	width: 100vw;
-	height: 100%;
-	transform: translateX(-50%);
-	z-index: -1;
-	background-color: rgb(255 165 0 / 0.2);
 }
 
 @media(max-width: 425px){
