@@ -2,16 +2,20 @@ body{
 	font-size: initial;
 }
 
+.custom-bg-primary{
+	background-color: var(--blue-color);
+}
+
 .ban{
 	position: relative;
 	height: 400px;
-    background: url(../img/animal_care_banner.png) #123456 right / 800px 400px no-repeat;
+    background: url(../img/animal_care_banner.png) #08284b right / 800px 400px no-repeat;
 }
 
-.ban div{
-	position: absolute;
-	top: 187px;
-	left: 168px;
+.ban div {
+    position: absolute;
+    top: 187px;
+    left: 55px;
 }
 
 .ban p{
@@ -21,7 +25,7 @@ body{
 h2{
 	font-size: 28px;
 	font-weight: 700;
-	color: var(--primary-color);
+	color: var(--blue-color);
 }
 
 
@@ -31,7 +35,7 @@ h2{
 }
 
 .calendarTable{
-	border: 1px var(--primary-color) solid;
+	border: 1px var(--blue-color) solid;
 	box-shadow: 2px -2px 5px #999;
 }
 
@@ -41,11 +45,12 @@ h2{
 
 .calendarTable td + td,
 .calendarTable th + th{
-	border-left: 1px var(--primary-color) solid;
+	border-left: 1px var(--blue-color) solid;
 }
 
 .sabiaCard{
 	width: 300px;
+    height: 335px;
 	box-shadow: 2px -2px 5px #000;
 	background-color: #08284b;
 }
@@ -68,18 +73,30 @@ h2{
 }
 
 .accordion-item .accordion-button:not(.collapsed){
-	background-color: var(--primary-color-light);
+	background-color: var(--blue-color);
 }
 
 .accordion-button:focus{
 	box-shadow: none;
 }
 
-@media(max-width: 525px){
+@media(max-width: 769px){
 
-	#banner div{
+	.ban div{
 		width: 250px;
 		top: 122px;
 		left: 20px;
 	}
+}
+
+@media (max-width: 426px) {
+    .ban {
+        background: url(../img/animal_care_bannerMobile.png) #08284b top / 100vw 248px no-repeat;
+		height: 450px;
+
+    }
+    .ban div {
+        top: 251px;
+        left: 55px;
+    }
 }
