@@ -3,8 +3,8 @@ html {
 }
 
 body {
-    font-family: Arial, Helvetica, sans-serif;
-    background-color: #FEFAE0;
+    font-family: 'Poppins', sans-serif;
+    background-color: #F1F1F1;
 }
 
 .parte-principal {
@@ -19,12 +19,13 @@ body {
 }
 
 form {
-    background: #DDA15E;
+    background: #08284B;
     padding-bottom: 10px;
     text-align: center;
     border-radius: 25px;
     margin-left: 550px;
     margin-right: 550px;
+    color: white;
 }
 
 .campo {
@@ -39,8 +40,8 @@ form {
 
 .botao-enviar {
     font-weight: bold;
-    background: #606C38;
-    color: white;
+    background: #FFA500;
+    color: black;
     border: solid 0;
     border-radius: 25px;
     padding-top: 10px;
@@ -48,16 +49,6 @@ form {
     padding-right: 10px;
     padding-left: 10px;
     cursor: pointer;
-}
-
-.botao-enviar:hover {
-    background: #283618;
-}
-
-#feedback {
-    margin-top: 15px;
-    font-weight: bold;
-    color: #606C38;
 }
 
 .title-beneficios {
@@ -73,10 +64,11 @@ form {
     display: flex;
     gap: 20px;
     justify-content: center;
+    color: white;
 }
 
 .caixa-beneficios {
-    background: #DDA15E;
+    background: #08284B;
     align-items: center;
     height: auto;
     max-width: 180px;
@@ -106,7 +98,7 @@ form {
 }
 
 .caixa-beneficios1 {
-    background: #DDA15E;
+    background: #08284B;
     align-items: center;
     height: auto;
     max-width: 180px;
@@ -146,6 +138,7 @@ form {
     gap: 20px;
     padding-bottom: 20px;
     justify-content: center;
+    color: white;
 }
 
 .title-testemunhos {
@@ -155,7 +148,7 @@ form {
 
 .ciaxa-testemunhos {
     display: flex;
-    background: #DDA15E;
+    background: #08284B;
     align-items: center;
     max-width: 800px;
     text-align: left;
@@ -179,8 +172,8 @@ form {
 
 .botao-inscreveragora {
     font-weight: bold;
-    background: #606C38;
-    color: white;
+    background: #FFA500;
+    color: black;
     border: solid 0;
     border-radius: 25px;
     padding-top: 10px;
@@ -188,10 +181,6 @@ form {
     padding-right: 10px;
     padding-left: 10px;
     cursor: pointer;
-}
-
-.botao-inscreveragora:hover {
-    background: #283618;
 }
 
 @media (max-width: 768px) {
