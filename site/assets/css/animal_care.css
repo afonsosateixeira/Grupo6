@@ -1,0 +1,85 @@
+body{
+	font-size: initial;
+}
+
+.ban{
+	position: relative;
+	height: 400px;
+    background: url(../img/animal_care_banner.png) #123456 right / 800px 400px no-repeat;
+}
+
+.ban div{
+	position: absolute;
+	top: 187px;
+	left: 168px;
+}
+
+.ban p{
+	opacity: 50%;
+}
+
+h2{
+	font-size: 28px;
+	font-weight: 700;
+	color: var(--primary-color);
+}
+
+
+.calenderImg{
+	width: 122px;
+	filter: drop-shadow(2px -2px 2px #000);
+}
+
+.calendarTable{
+	border: 1px var(--primary-color) solid;
+	box-shadow: 2px -2px 5px #999;
+}
+
+.calendarTable td{
+	width: 196px;
+}
+
+.calendarTable td + td,
+.calendarTable th + th{
+	border-left: 1px var(--primary-color) solid;
+}
+
+.sabiaCard{
+	width: 300px;
+	box-shadow: 2px -2px 5px #000;
+	background-color: #08284b;
+}
+
+.sabiaCard2{
+	background-color: #ffa500;
+}
+
+.sabiaCard img{
+	width: 163px;
+	height: 176px;
+}
+
+.accordion{
+	max-width: 376px;
+}
+
+.accordion-button::after{
+	filter: invert(1);
+}
+
+.accordion-item .accordion-button:not(.collapsed){
+	background-color: var(--primary-color-light);
+}
+
+.accordion-button:focus{
+	box-shadow: none;
+}
+
+@media(max-width: 525px){
+
+	#banner div{
+		width: 250px;
+		top: 122px;
+		left: 20px;
+	}
+}
