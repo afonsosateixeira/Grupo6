@@ -8,7 +8,7 @@
 
 <section class="px-5 py-3">
 	<h2 class="mb-3">O porquê de vacinar o seu animal ser tão importante!</h2>
-	<p class="fs-5 fw-bold">A vacinação é o início de uma amizade para a vida garantindo os cuidados básicos de saúde do seu animal.<br>
+	<p class="fs-6">A vacinação é o início de uma amizade para a vida garantindo os cuidados básicos de saúde do seu animal.<br>
 		A medicina preventiva é o que permite ao seu novo amigo viver sem medos.</p>
 </section>
 
@@ -68,7 +68,7 @@
 			<div class="col-12 col-md-auto p-0">
 				<div class="card sabiaCard rounded-4 mx-auto">
 					<img src="assets/img/animal_care_rabies.png" class="card-img-top vacina mx-auto mt-4" alt="Vacina Raiva">
-					<div class="card-body text-light p-4">
+					<div class="card-body text-center p-4">
 						<p class="mb-0">Em Portugal, a vacina contra a Raiva é obrigatória por lei para todos os cães. Ter o boletim em dia é ser um dono responsável!</p>
 					</div>
 				</div>
@@ -76,7 +76,7 @@
 			<div class="col-12 col-md-auto p-0">
 				<div class="card sabiaCard sabiaCard2 rounded-4 mx-auto">
 					<img src="assets/img/animal_care_bacteria.png" class="card-img-top mx-auto mt-4" alt="Bactérias">
-					<div class="card-body text-light p-4">
+					<div class="card-body text-center p-4">
 						<p class="mb-0">Os humanos, podem carregar vírus e bactérias para dentro de casa através da sola dos sapatos ou da roupa.</p>
 					</div>
 				</div>
@@ -84,7 +84,7 @@
 			<div class="col-12 col-md-auto p-0">
 				<div class="card sabiaCard rounded-4 mx-auto">
 					<img src="assets/img/animal_care_costs.png" class="card-img-top mx-auto mt-4" alt="Custos">
-					<div class="card-body text-light p-4">
+					<div class="card-body text-center p-4">
 						<p class="mb-0">O custo de uma vacinação é 10 vezes menor do que o tratamento de uma única doença infecciosa grave.</p>
 					</div>
 				</div>
