@@ -39,6 +39,11 @@
 			$metaDescription = 'Criar nova conta';
 			break;
 
+		case 'privacy':
+			$metaTile = 'Politicas de Privacidade';
+			$metaDescription = 'Politcas de Privacidade';
+			break;	
+
 		default:
 			http_response_code(404);
 			$metaTitle = 'Página não encontrada';
@@ -85,6 +90,10 @@
 
 				case 'regist':
 					require_once 'regist.php';
+					break;
+
+				case 'privacy':
+					require_once 'privacy.html';
 					break;
 
 				default:
