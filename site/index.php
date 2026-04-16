@@ -29,6 +29,11 @@
 			$metaDescription = 'Guia passo a passo para adoção responsável';
 			break;
 
+		case 'animalDetails':
+			$metaTitle = 'Detalhes';
+			$metaDescription = 'Todas as informações do animal';
+			break;
+
 		case 'login':
 			$metaTitle = 'Entrar';
 			$metaDescription = 'Acesso à conta';
@@ -77,6 +82,10 @@
 
 				case 'adoptionGuide':
 					require_once 'adoptionGuide.php';
+					break;
+
+				case 'animalDetails':
+					require_once 'animalDetails.php';
 					break;
 
 				case 'login':
