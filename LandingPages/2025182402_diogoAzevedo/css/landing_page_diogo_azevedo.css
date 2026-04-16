@@ -7,8 +7,17 @@ body {
     background-color: #F1F1F1;
 }
 
+.logo{
+    position: fixed;
+}
+
+.logo img{
+    height: 60px;
+}
+
 .parte-principal {
     text-align: center;
+    padding-top: 50px;
 }
 
 .parte-principal h1 {
