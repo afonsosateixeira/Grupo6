@@ -29,6 +29,11 @@
 			$metaDescription = 'Guia passo a passo para adoção responsável';
 			break;
 
+		case 'contactos':
+			$metaTitle = 'Contactos';
+			$metaDescription = 'Contactos da Poppy and Max';
+			break;
+
 		case 'login':
 			$metaTitle = 'Entrar';
 			$metaDescription = 'Acesso à conta';
@@ -77,6 +82,10 @@
 
 				case 'adoptionGuide':
 					require_once 'adoptionGuide.php';
+					break;
+
+				case 'contactos':
+					require_once 'contactos.html';
 					break;
 
 				case 'login':
