@@ -8,7 +8,7 @@ body {
 }
 
 .logo{
-    position: fixed;
+    position: relative;
 }
 
 .logo img{
