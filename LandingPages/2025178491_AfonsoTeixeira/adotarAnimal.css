@@ -2,7 +2,7 @@
 body {
     margin: 0;
     padding: 0;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    font-family: 'Poppins', sans-serif;
     color: #333;
 }
 
@@ -12,7 +12,17 @@ body {
     margin: 0 auto;
     padding: 0 20px;
     box-sizing: border-box;
-}   
+}
+
+.navbar{
+    height: 70px;
+}
+
+.navbar img{
+    width: 70px;
+    margin-left: 20px;
+    margin-top: 20px;
+}
 
 /*HEADLINE*/
 .headline {
@@ -21,7 +31,7 @@ body {
 }
 
 .headline h1 {
-    color: #139143;
+    color: #08284b;
     font-size: 2.5rem;
 }
 
@@ -82,13 +92,13 @@ body {
 }
 
 .forms_animal input:focus {
-    border-color: #139143;
+    border-color: #ffa500;
     outline: none;
 }
 
 /*BOTÕES(CTA)*/
 .btn_cta {
-    background-color: #139143;
+    background-color: #ffa500;
     color: white;
     width: 100%;
     padding: 15px;
@@ -101,7 +111,6 @@ body {
 }
 
 .btn_cta:hover {
-    background-color: #2e6b16;
     transform: translateY(-2px);
 }
 
@@ -144,7 +153,7 @@ body {
 }
 
 .icons {
-    color: #76a728;
+    
     font-size: 3rem;
     margin-bottom: 15px;
 }
@@ -192,6 +201,10 @@ body {
 .cta {
     padding: 60px 0;
     text-align: center;
+}
+
+.cta h2{
+    font-size: 2.5rem;
 }
 
 .cta .btn_cta {

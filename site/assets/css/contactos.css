@@ -1,0 +1,29 @@
+:root {
+  --primary-light: #135eb1;
+  --primary: #10294b;
+  --secondary: #faa51c;
+  --secondary-light: #fbba50;
+}
+
+.contactos-page .contactos-panel {
+  background-color: var(--primary);
+}
+
+.contactos-page .contactos-highlight {
+  color: var(--secondary-light);
+}
+
+.contactos-page .contactos-submit {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.contactos-badge {
+  background-color: var(--secondary);
+  font-weight: 600 !important;
+}
+
+.contactos-btn {
+  background-color: var(--secondary);
+  color: white !important;
+}
