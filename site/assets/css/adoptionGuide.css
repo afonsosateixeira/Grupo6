@@ -1,26 +1,28 @@
 .hero-section {
-    background: linear-gradient(135deg, var(--blue-color), var(--orange-color));
-    position: relative;
-    overflow: hidden;
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  position: relative;
+  overflow: hidden;
 }
 
 .adoption-card {
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
 }
 
 .adoption-card:hover {
-    transform: translateY(-8px);
+  transform: translateY(-8px);
 }
 
 .responsibility-card {
-    border-left: 4px solid var(--orange-color);
+  border-left: 4px solid var(--secondary);
 }
 
 .responsibility-card .card-header {
-    background-color: var(--blue-color);
-    color: var(--white-color);
+  background-color: var(--primary);
+  color: #ffffff;
 }
 
 .responsibility-card .text-blue {
-    color: var(--blue-color);
+  color: var(--primary);
 }

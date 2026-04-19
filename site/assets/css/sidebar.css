@@ -1,14 +1,14 @@
- body {
-     margin-left: 300px !important;
-     margin-top: 15px;
- }
+body {
+  margin-left: 300px !important;
+  margin-top: 15px;
+}
 
- .submenu .nav-link {
-     padding-left: 2.5rem !important;
-     font-size: 0.85rem !important;
-     color: rgba(255, 255, 255, 0.7) !important;
- }
+.submenu .nav-link {
+  padding-left: 2.5rem !important;
+  font-size: 0.85rem !important;
+  color: rgba(255, 255, 255, 0.7) !important;
+}
 
- .submenu .nav-link:hover {
-     color: #fff !important;
- }
+.submenu .nav-link:hover {
+  color: #ffffff !important;
+}

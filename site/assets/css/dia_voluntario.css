@@ -3,11 +3,11 @@ body {
   font-size: initial;
 }
 
-p{
+p {
   text-align: left;
 }
 
-.text-center{
+.text-center {
   padding-top: 20px;
 }
 
@@ -15,17 +15,17 @@ p{
   display: flex;
   justify-content: center;
   height: 500px;
-  background-image: url('../img/dia_voluntario_banner1.png');
+  background-image: url("../img/dia_voluntario_banner1.png");
 }
 
 .accordion-button:not(.collapsed) {
   background-color: transparent;
-  color: black;
+  color: #000000;
 }
 
 .accordion-button:focus {
   box-shadow: none !important;
-  border-color: rgba(0, 0, 0, .125);
+  border-color: rgba(0, 0, 0, 0.125);
 }
 
 .col {
@@ -33,18 +33,18 @@ p{
 }
 
 .col:hover {
-  transform: translateY(-8px)
+  transform: translateY(-8px);
 }
 
 .card {
-  color: white;
-  background-color: #08284b;
+  color: #ffffff;
+  background-color: var(--primary);
   border-radius: 10px;
 }
 
 .card2 {
-  color: black;
-  background-color: #ffa500;
+  color: #000000;
+  background-color: var(--secondary);
   border-radius: 10px;
 }
 
@@ -53,42 +53,40 @@ p{
 }
 
 button {
-  background: #ffa500;
+  background: var(--secondary);
   border-radius: 25px;
   border: solid 0;
   padding: 10px;
 }
 
-.text_rotina{
+.text_rotina {
   max-width: 800px;
 }
 
-.text_topic p{
+.text_topic p {
   margin-bottom: 0;
 }
 
-.FAQ{
+.FAQ {
   margin-bottom: 50px;
 }
-
-
 
 @media (max-width: 768px) {
   .row {
     flex-direction: column;
-    gap: 20px
+    gap: 20px;
   }
 
   h2 {
     text-align: center;
   }
 
-  .banner{
+  .banner {
     width: auto;
     height: auto;
   }
 
-  .banner img{
+  .banner img {
     max-width: auto;
     height: auto;
   }

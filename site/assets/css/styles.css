@@ -1,142 +1,142 @@
-:root{
-    --blue-color:#08284b ;
-    --orange-color:#ffa500;
-    --gray-color:#f1f1f1;
-    --white-color:#ffffff;
+:root {
+  --primary: #08284b;
+  --primary-light: #135eb1;
+  --secondary: #ffa500;
+  --secondary-light: #fbba50;
 }
 
-html, body {
-    height: 100%;
+html,
+body {
+  height: 100%;
 }
 
-body{
-    display: flex;
-    flex-direction: column;
-    margin: 0 auto;
-    font-family: 'Poppins', sans-serif;
-    font-size: 20px;
-    background-color: var(--gray-color);
+body {
+  display: flex;
+  flex-direction: column;
+  margin: 0 auto;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  background-color: #f1f1f1;
 }
-
 
 /*NAVBAR*/
 .bg-nav {
-    background-color: var(--gray-color) !important;
-    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05); 
-    padding: 12px 0;
-    transition: all 0.3s ease;
+  background-color: #f1f1f1 !important;
+  box-shadow: 0 4px 15px rgba(0, 0, 0, 0.05);
+  padding: 12px 0;
+  transition: all 0.3s ease;
 }
 
 .navbar-brand i {
-    color: var(--orange-color)  ; 
-    font-size: 2.0rem;
-    margin-right: 10px;
+  color: var(--secondary);
+  font-size: 2rem;
+  margin-right: 10px;
 }
 
 .navbar-color .nav-link {
-    color: var(--blue-color) !important; 
-    font-weight: 600;
-    font-size: 0.95rem;
-    margin: 0 10px;
-    transition: 0.3s;
+  color: var(--primary) !important;
+  font-weight: 600;
+  font-size: 0.95rem;
+  margin: 0 10px;
+  transition: 0.3s;
 }
 
 .navbar-color .nav-link:hover {
-    color: var(--orange-color) !important; 
+  color: var(--secondary) !important;
 }
 
 .btn-login {
-    background-color: var(--blue-color);
-    border: none;
-    color: var(--white-color);
-    font-weight: 600;
-    font-size: 0.9rem;
-    border-radius: 50px; 
-    padding: 8px 25px;
-    margin-left:15px ;
-    transition: all 0.3s ease;
+  background-color: var(--primary);
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  border-radius: 50px;
+  padding: 8px 25px;
+  margin-left: 15px;
+  transition: all 0.3s ease;
 }
 
 .btn-regist {
-    background-color: var(--orange-color);
-    border-radius: 5px; 
+  background-color: var(--secondary);
+  border-radius: 5px;
 }
 
 .btn-login:hover {
-    background-color: var(--orange-color);
-    transform: scale(1.1); 
-    box-shadow: 0 6px 15px rgba(73, 123, 173, 0.3);
+  background-color: var(--secondary);
+  transform: scale(1.1);
+  box-shadow: 0 6px 15px rgba(73, 123, 173, 0.3);
 }
 
 .dropdown-menu {
-    border: none;
-    box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    border-radius: 12px;
-    padding: 10px;
+  border: none;
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  padding: 10px;
 }
 
 .dropdown-item {
-    font-size: 0.9rem;
-    color: #555;
-    border-radius: 8px;
-    padding: 8px 15px;
+  font-size: 0.9rem;
+  color: #555555;
+  border-radius: 8px;
+  padding: 8px 15px;
 }
 
 .dropdown-item:hover {
-    background-color: #f8f9fa;
-    color: var(--blue-color);
+  background-color: #f8f9fa;
+  color: var(--primary);
 }
 
 /*FOOTER*/
 .content-wrapper {
-    flex: 1 0 auto; 
+  flex: 1 0 auto;
 }
 
 .footer-adocao {
-    flex-shrink: 0; 
-    background-color: #08284b !important; 
-    color: var(--white-color) !important; 
-    padding-top: 20px;
+  flex-shrink: 0;
+  background-color: var(--primary) !important;
+  color: #ffffff !important;
+  padding-top: 20px;
 }
 
 .footer-brand {
-    text-decoration: none;
-    color: var(--white-color);
-    font-size: 1.5rem;
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1.5rem;
 }
 .footer-brand i {
-    color: var(--orange-color); 
-    font-size: 2.2rem;
+  color: var(--secondary);
+  font-size: 2.2rem;
 }
 
 .footer-adocao h5 {
-    color: var(--white-color) !important; 
-    font-weight: 800;
-    font-size: 0.9rem;
-    text-transform: uppercase;
+  color: #ffffff !important;
+  font-weight: 800;
+  font-size: 0.9rem;
+  text-transform: uppercase;
 }
 
 .footer-adocao .nav-link {
-    color: var(--gray-color) !important;
-    font-size: 0.85rem;
-    transition: 0.3s;
+  color: #f1f1f1 !important;
+  font-size: 0.85rem;
+  transition: 0.3s;
 }
 
 .footer-adocao .nav-link:hover {
-    color: var(--orange-color) !important;
-    padding-left: 5px;
+  color: var(--secondary) !important;
+  padding-left: 5px;
 }
 
 .social-icons a {
-    color: var(--white-color); 
-    font-size: 1.2rem;
+  color: #ffffff;
+  font-size: 1.2rem;
 }
 
 .social-icons a:hover {
-    color: var(--orange-color);
+  color: var(--secondary);
 }
 
 .footer-adocao p {
-    color: var(--white-color);
-    font-size: 0.8rem;
+  color: #ffffff;
+  font-size: 0.8rem;
 }
