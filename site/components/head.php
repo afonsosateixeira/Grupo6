@@ -5,7 +5,7 @@
 	echo	'<meta charset="UTF-8">
 			<meta name="description" content="'.$metaDescription.'">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title>'.($backOffice ? 'Admin' : 'Poppy & Max').(!empty($metaTitle) ? ' | '.$metaTitle : '').'</title>
+			<title>'.($backOffice ? 'Admin' : 'Poppy and Max').(!empty($metaTitle) ? ' | '.$metaTitle : '').'</title>
 			<link rel="icon" type="image/png" href="'.$basePath.'/assets/img/icon.png">
 			<link rel="stylesheet" href="'.$basePath.'/assets/css/normalize.css">
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">

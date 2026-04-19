@@ -1,53 +1,102 @@
 *, *::before, *::after{
     box-sizing: border-box;
+    margin: 0;
 }
 
 html{
     scroll-behavior: smooth;
     font-size: 16px;
-}
-
-*{
-    margin: 0;
+    overflow-x: hidden;
 }
 
 body{
-    font-family: Arial, sans-serif;
-    color: #283618;
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    overflow-x: hidden;
 }
 
 .container{
-    max-width: 1440px;
-    margin: auto;
-}
-
-.center{
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
+    max-width: 1320px;
     margin: 0 auto;
-    max-width: min(100%);
 }
 
-.center h2{
+#banner{
+    display: flex;
+    flex-direction: row;
+    height: 700px;
+    width: 100vw;
+    background: url(../img/ticket.png) center / 550px 300px no-repeat, linear-gradient(to right, #08284B, #135EB1);
+}
+
+.imgContainer{
+    margin-top: auto;
+    width: calc(50vw - 350px);
+}
+
+#banner img{
+    width: 335px;
+    height: 74px;
+}
+
+.bannerContainer{
+    max-width: 700px;
+    height: 100%;
+    background: url(../img/Banner_landingPage.png) bottom right / 250px 220px no-repeat;
+}
+
+h1{
+    color: #FFA500;
+    font-weight: 700;
+    font-size: 72px;
     text-align: center;
+    margin: 25px 0 0 0;
 }
 
-.widthMobile{
-    max-width: min(450px, 100% - 50px);
+h2{
+    margin: 25px auto 15px;
+    color: #08284b;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    max-width: 410px;
+}
+
+form{
+    position: relative;
+}
+
+form::before{
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 300px;
+    background-image: url("../img/cat.png");
+    left: 100%;
+    margin-left: 10px;
+}
+
+.textF{
+    font-size: 18px;
+    font-weight: 500;
 }
 
 .box{
     display: flex;
+    flex-direction: column;
     gap: 15px;
-    border: 2px solid #cea77e;
     border-radius: 15px;
-    background-color: rgba( 220, 192, 163, 0.85);
+    margin: 0 auto;
     padding: 25px;
+    background: linear-gradient(to top, #08284B, #135EB1);
+    max-width: 410px;
 }
 
-h2{
-    font-size: 1.5rem;
+.vFlex{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
 }
 
 .hFlex{
@@ -56,241 +105,131 @@ h2{
     justify-content: space-between;
 }
 
-.vFlex{
+.winners{
+    position: relative;
     display: flex;
-    flex-direction: column;
+    flex-wrap: wrap;
+    flex-direction: row;
+    max-width: 630px;
+    gap: 15px;
+    margin: 0 auto;
+    justify-content: center;
+    margin-bottom: 25px;
 }
 
-#banner{
-    position: relative;
-    background-color: #e3cdb5;
-    background-image: url("../img/Banner_landingPage.png");
-    background-size: 300px 300px;
-    background-repeat: no-repeat;
-    background-position: 80% 100%;
-    height: 700px;
-    position: relative;
-}
-
-#banner::before{
+.winners::before{
     content: "";
     position: absolute;
     background-size: contain;
     background-repeat: no-repeat;
-    width: 600px;
-    height: 450px;
-    background-image: url("../img/ticket.png");
-    top: 100px;
-    cursor: pointer;
-    right: clamp(325px, calc(425px * (100vw / 1440px)), 425px);
-    transform: rotateZ(-5deg);
-}
-
-a #banner{
-    color: #283618;
-}
-
-#bannerTitle{
-    position: absolute;
-    left: calc(17.5% + 25px);
-    top: 25px;
-}
-
-#bannerLogo{
-    position: absolute;
-    background-image: url("../img/logo.png");
-    background-size: contain;
-    background-repeat: no-repeat;
-    width: 250px;
-    height: 120px;
-    left: 25px;
-    bottom: 25px;
-}
-
-#banner h1{
-    margin: 0 0 15px 0;
-    font-size: 72px;
-    font-weight: 700;
-}
-
-#banner p{
-    width: 250px;
-}
-
-#main{
-    display: flex;
-    flex-direction: column;
-    gap: 25px;
-    margin: 25px 0;
-}
-
-#main > *{
-    position: relative;
-    overflow: visible;
-}
-
-#main > :nth-child(1)::before, #main > :nth-child(3)::before{
-    content: "";
-    position: absolute;
-    background-size: contain;
-    background-repeat: no-repeat;
-    z-index: -1;
-}
-
-#main > :nth-child(1)::before {
     width: 300px;
     height: 300px;
     background-image: url("../img/parrot.png");
-    bottom: clamp(0px, calc(115px * ((100vw - 500px) / 940px)), 115px);
-    left: clamp(25px, calc(25px * ((100vw - 500px) / 705px)), 425px);
+    right: 75%;
+    bottom: 70%;
+    z-index: -1;
 }
 
-#main > :nth-child(3)::before {
-    width: 300px;
-    height: 300px;
-    background-image: url("../img/cat.png");
-    bottom: -75px;
-    right: clamp(-450px, calc(-450px * ((100vw - 500px) / 940px)), 0px);
+.winners .box{
+    margin: initial;
 }
 
-#winnersMain{
-    margin: 0 25px;
-}
-
-#winners{
+.front{
     display: flex;
-    flex-direction: row;
-    flex-wrap: wrap;
-    gap: 15px;
-    justify-content: center;
-    margin: 0 auto;
-    max-width: 844px;
+    flex-direction: column;
     text-align: center;
-    align-items: flex-start;
+    gap: 5px;
 }
 
-.winnerCard{
-    padding: 25px;
-    max-width: 200px;
-    min-height: 282px;
-    transition: 350ms ease-in;
-    background-color: rgba( 220, 192, 163, 0.85);
-    border-radius: 25px;
-}
-
-#winners div:hover{
-    scale: 1.1;
-}
-
-#winners img{
+.front img{
     border-radius: 50%;
     width: 150px;
     height: 150px;
     border: 2px solid #cea77e;
+    margin-bottom: 10px;
 }
 
-.toggleWinner{
-    color: #815b31;
-    cursor: pointer;
+.front span{
+    display: block;
 }
 
-.winnerDescription{
+.back{
     display: none;
 }
 
-.winnerDescription p{
-    padding-bottom: 15px;
-}
-
 .highlight{
+    color: #FFA500;
     font-weight: 700;
-    font-size: 1.25rem;
+    font-size: 20px;
 }
 
 .date{
-    color: #484c43;
+    color: #CDCDCD;
 }
 
-form label, form p, .center li{
-    padding-bottom: 5px;
+input{
+    border-radius: 5px;
+    background-color: #135EB1;
+    border: 1px solid #08284B;
+    color: #FFFFFF;
 }
 
-#raffle input{
-    border: 2px solid #cea77e;
-    border-radius: 6px;
+input::placeholder{
+    color: #CCCCCC;
 }
 
-#raffle input{
-    transition: 100ms ease-in-out;
-    background-color: #f1e6da;
-    color: #283618;
+input[type=text]{
+    max-width: 170px;
 }
 
-#raffle input[type="text"]{
-    width: 90%;
-}
+@media(max-width: 768px){
+    .container{
+        padding: 0 25px;
+    } 
 
-#raffle input[type="text"]:active, #raffle input[type="email"]:active, #raffle input[type="submit"]:active{
-    scale: 1.05;
-}
-
-#raffle input[type="checkbox"]:active{
-    scale: 1.25;
-}
-
-#raffle input[type="text"]:focus, #raffle input[type="email"]:focus{
-    box-shadow: 0 0 0 3px #cea77e;
-    outline: none;
-}
-
-@media(max-width: 930px){
-    #banner::before{
-        content: none;
-    }
-
-    #bannerTitle{
-        left: calc(50% - 160px);
-        max-width: 320px;
-        text-align: center;
-    }
-}
-
-@media(max-width: 650px){
     #banner{
-        background-position: 50% 70%;
+        flex-direction: column;
+        background: linear-gradient(to right, #08284B, #135EB1);
     }
 
-    #banner h1{
-        font-size: 52px;
-    }
-
-    #bannerLogo{
-        bottom: 0;
-        left: 0;
-    }
-
-    h1 span{
-        display: initial;
-    }
-
-    #main > :nth-child(1)::before {
-        width: 250px;
-        height: 250px;
-        bottom: initial;
-        top: 250px;
-    }
-}
-
-@media(max-width: 500px){
-    #main > div{
-        order: 3;
-    }
-
-    #main #raffle{
+    .bannerContainer{
         order: 1;
+        background: url(../img/Banner_landingPage.png) bottom / 100vw 379px no-repeat;
     }
 
-    #main #raffleRules{
+    h1{
+        padding: 0 15px;
+    }
+
+    .imgContainer{
         order: 2;
+        max-width: 450px;
+        margin: 0 auto;
+        width: initial;
+        display: flex;
+        justify-content: center;
+    }
+
+    #banner img{
+        max-width: 100%;
+        width: initial;
+        height: initial;
+    }
+
+    form::before{
+        content: initial;
+    }
+
+    .winners::before{
+        content: initial;
+    }
+
+    form .hFlex:first-of-type{
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    input[type=text]{
+        max-width: initial;
     }
 }
