@@ -1,0 +1,33 @@
+#banner {
+  background: linear-gradient(to right, var(--primary), var(--primary-light));
+  height: 300px;
+}
+
+.custom-blue {
+  color: var(--primary-light);
+}
+
+.marker-blue li::marker {
+  color: var(--primary-light);
+}
+
+h1 {
+  font-size: 60px;
+}
+
+h2 {
+  color: var(--primary);
+  margin: 25px 0 15px 0;
+  font-weight: 700;
+}
+
+p,
+ul {
+  margin: 0;
+}
+
+@media (max-width: 425px) {
+  ul {
+    margin: 15px 0;
+  }
+}

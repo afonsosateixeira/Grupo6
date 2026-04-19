@@ -1,0 +1,30 @@
+.contactos-page .contactos-panel {
+  background-color: var(--primary);
+}
+
+.contactos-page .contactos-highlight {
+  color: var(--secondary-light);
+}
+
+.contactos-page .contactos-submit {
+  background-color: var(--primary);
+  border-color: var(--primary);
+}
+
+.contactos-submit:hover {
+  background-color: var(--primary-light);
+}
+
+.contactos-badge {
+  background-color: var(--secondary);
+  font-weight: 600 !important;
+}
+
+.contactos-btn {
+  background-color: var(--secondary);
+  color: #ffffff !important;
+}
+
+.contactos-btn:hover {
+  background-color: var(--secondary-light);
+}

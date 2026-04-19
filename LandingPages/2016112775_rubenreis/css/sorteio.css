@@ -1,0 +1,235 @@
+*, *::before, *::after{
+    box-sizing: border-box;
+    margin: 0;
+}
+
+html{
+    scroll-behavior: smooth;
+    font-size: 16px;
+    overflow-x: hidden;
+}
+
+body{
+    font-family: 'Poppins', sans-serif;
+    color: #FFFFFF;
+    overflow-x: hidden;
+}
+
+.container{
+    max-width: 1320px;
+    margin: 0 auto;
+}
+
+#banner{
+    display: flex;
+    flex-direction: row;
+    height: 700px;
+    width: 100vw;
+    background: url(../img/ticket.png) center / 550px 300px no-repeat, linear-gradient(to right, #08284B, #135EB1);
+}
+
+.imgContainer{
+    margin-top: auto;
+    width: calc(50vw - 350px);
+}
+
+#banner img{
+    width: 335px;
+    height: 74px;
+}
+
+.bannerContainer{
+    max-width: 700px;
+    height: 100%;
+    background: url(../img/Banner_landingPage.png) bottom right / 250px 220px no-repeat;
+}
+
+h1{
+    color: #FFA500;
+    font-weight: 700;
+    font-size: 72px;
+    text-align: center;
+    margin: 25px 0 0 0;
+}
+
+h2{
+    margin: 25px auto 15px;
+    color: #08284b;
+    font-size: 24px;
+    font-weight: 700;
+    text-align: center;
+    max-width: 410px;
+}
+
+form{
+    position: relative;
+}
+
+form::before{
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 300px;
+    background-image: url("../img/cat.png");
+    left: 100%;
+    margin-left: 10px;
+}
+
+.textF{
+    font-size: 18px;
+    font-weight: 500;
+}
+
+.box{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    border-radius: 15px;
+    margin: 0 auto;
+    padding: 25px;
+    background: linear-gradient(to top, #08284B, #135EB1);
+    max-width: 410px;
+}
+
+.vFlex{
+    display: flex;
+    flex-direction: column;
+    gap: 5px;
+}
+
+.hFlex{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.winners{
+    position: relative;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    max-width: 630px;
+    gap: 15px;
+    margin: 0 auto;
+    justify-content: center;
+    margin-bottom: 25px;
+}
+
+.winners::before{
+    content: "";
+    position: absolute;
+    background-size: contain;
+    background-repeat: no-repeat;
+    width: 300px;
+    height: 300px;
+    background-image: url("../img/parrot.png");
+    right: 75%;
+    bottom: 70%;
+    z-index: -1;
+}
+
+.winners .box{
+    margin: initial;
+}
+
+.front{
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+    gap: 5px;
+}
+
+.front img{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+    border: 2px solid #cea77e;
+    margin-bottom: 10px;
+}
+
+.front span{
+    display: block;
+}
+
+.back{
+    display: none;
+}
+
+.highlight{
+    color: #FFA500;
+    font-weight: 700;
+    font-size: 20px;
+}
+
+.date{
+    color: #CDCDCD;
+}
+
+input{
+    border-radius: 5px;
+    background-color: #135EB1;
+    border: 1px solid #08284B;
+    color: #FFFFFF;
+}
+
+input::placeholder{
+    color: #CCCCCC;
+}
+
+input[type=text]{
+    max-width: 170px;
+}
+
+@media(max-width: 768px){
+    .container{
+        padding: 0 25px;
+    } 
+
+    #banner{
+        flex-direction: column;
+        background: linear-gradient(to right, #08284B, #135EB1);
+    }
+
+    .bannerContainer{
+        order: 1;
+        background: url(../img/Banner_landingPage.png) bottom / 100vw 379px no-repeat;
+    }
+
+    h1{
+        padding: 0 15px;
+    }
+
+    .imgContainer{
+        order: 2;
+        max-width: 450px;
+        margin: 0 auto;
+        width: initial;
+        display: flex;
+        justify-content: center;
+    }
+
+    #banner img{
+        max-width: 100%;
+        width: initial;
+        height: initial;
+    }
+
+    form::before{
+        content: initial;
+    }
+
+    .winners::before{
+        content: initial;
+    }
+
+    form .hFlex:first-of-type{
+        flex-direction: column;
+        gap: 5px;
+    }
+
+    input[type=text]{
+        max-width: initial;
+    }
+}

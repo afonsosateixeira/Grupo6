@@ -1,0 +1,93 @@
+body {
+  background: #f1f1f1;
+  font-size: initial;
+}
+
+p {
+  text-align: left;
+}
+
+.text-center {
+  padding-top: 20px;
+}
+
+.banner {
+  display: flex;
+  justify-content: center;
+  height: 500px;
+  background-image: url("../img/dia_voluntario_banner1.png");
+}
+
+.accordion-button:not(.collapsed) {
+  background-color: transparent;
+  color: #000000;
+}
+
+.accordion-button:focus {
+  box-shadow: none !important;
+  border-color: rgba(0, 0, 0, 0.125);
+}
+
+.col {
+  transition: transform 0.3s ease;
+}
+
+.col:hover {
+  transform: translateY(-8px);
+}
+
+.card {
+  color: #ffffff;
+  background-color: var(--primary);
+  border-radius: 10px;
+}
+
+.card2 {
+  color: #000000;
+  background-color: var(--secondary);
+  border-radius: 10px;
+}
+
+#mensagem {
+  display: none;
+}
+
+button {
+  background: var(--secondary);
+  border-radius: 25px;
+  border: solid 0;
+  padding: 10px;
+}
+
+.text_rotina {
+  max-width: 800px;
+}
+
+.text_topic p {
+  margin-bottom: 0;
+}
+
+.FAQ {
+  margin-bottom: 50px;
+}
+
+@media (max-width: 768px) {
+  .row {
+    flex-direction: column;
+    gap: 20px;
+  }
+
+  h2 {
+    text-align: center;
+  }
+
+  .banner {
+    width: auto;
+    height: auto;
+  }
+
+  .banner img {
+    max-width: auto;
+    height: auto;
+  }
+}

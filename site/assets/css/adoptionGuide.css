@@ -1,0 +1,28 @@
+.hero-section {
+  background: linear-gradient(135deg, var(--primary), var(--secondary));
+  position: relative;
+  overflow: hidden;
+}
+
+.adoption-card {
+  transition:
+    transform 0.3s ease,
+    box-shadow 0.3s ease;
+}
+
+.adoption-card:hover {
+  transform: translateY(-8px);
+}
+
+.responsibility-card {
+  border-left: 4px solid var(--secondary);
+}
+
+.responsibility-card .card-header {
+  background-color: var(--primary);
+  color: #ffffff;
+}
+
+.responsibility-card .text-blue {
+  color: var(--primary);
+}
