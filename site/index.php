@@ -34,6 +34,21 @@
 			$metaDescription = 'Guia passo a passo para adoção responsável';
 			break;
 
+		case 'contactos':
+			$metaTitle = 'Contactos';
+			$metaDescription = 'Contactos da Poppy and Max';
+      break;
+
+		case 'animal_care':
+			$metaTitle = 'Cuidados animais';
+			$metaDescription = 'Informação de vacinas para saúde animal';
+      break;
+
+		case 'animalDetails':
+			$metaTitle = 'Detalhes';
+			$metaDescription = 'Todas as informações do animal';
+			break;
+
 		case 'login':
 			$metaTitle = 'Entrar';
 			$metaDescription = 'Acesso à conta';
@@ -42,6 +57,11 @@
 		case 'regist':
 			$metaTitle = 'Registar';
 			$metaDescription = 'Criar nova conta';
+			break;
+
+		case 'dia_voluntario':
+			$metaTitle = 'Dia no abrigo';
+			$metaDescription = 'Um dia como voluntário';
 			break;
 
 		default:
@@ -88,12 +108,28 @@
 					require_once 'adoptionGuide.php';
 					break;
 
+				case 'contactos':
+					require_once 'contactos.html';
+          break;
+
+				case 'animal_care':
+					require_once 'animal_care.php';
+          break;
+
+				case 'animalDetails':
+					require_once 'animalDetails.php';
+					break;
+
 				case 'login':
 					require_once 'login.php';
 					break;
 
 				case 'regist':
 					require_once 'regist.php';
+					break;
+
+				case 'dia_voluntario':
+					require_once 'dia_voluntario.html';
 					break;
 
 				default:
