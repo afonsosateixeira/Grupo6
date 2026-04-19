@@ -44,6 +44,11 @@
 			$metaDescription = 'Criar nova conta';
 			break;
 
+		case 'dia_voluntario':
+			$metaTitle = 'Dia no abrigo';
+			$metaDescription = 'Um dia como voluntário';
+			break;
+
 		default:
 			http_response_code(404);
 			$metaTitle = 'Página não encontrada';
@@ -94,6 +99,10 @@
 
 				case 'regist':
 					require_once 'regist.php';
+					break;
+
+				case 'dia_voluntario':
+					require_once 'dia_voluntario.html';
 					break;
 
 				default:
