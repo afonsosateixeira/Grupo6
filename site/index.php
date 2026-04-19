@@ -59,6 +59,11 @@
 			$metaDescription = 'Criar nova conta';
 			break;
 
+		case 'privacy':
+			$metaTile = 'Politicas de Privacidade';
+			$metaDescription = 'Politcas de Privacidade';
+			break;
+
 		case 'dia_voluntario':
 			$metaTitle = 'Dia no abrigo';
 			$metaDescription = 'Um dia como voluntário';
@@ -127,6 +132,10 @@
 				case 'regist':
 					require_once 'regist.php';
 					break;
+
+				case 'privacy':
+					require_once 'privacy.html';
+          break;
 
 				case 'dia_voluntario':
 					require_once 'dia_voluntario.html';
