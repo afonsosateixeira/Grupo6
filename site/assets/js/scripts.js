@@ -1,4 +1,3 @@
-//Global Scripts
 const currentPage = window.location.pathname.split("/").pop();
 
 document.querySelectorAll(".nav-link, .footer-link").forEach(link => {

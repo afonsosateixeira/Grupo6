@@ -1,4 +1,4 @@
-document.querySelectorAll(".winnerCard").forEach(card => {
+document.querySelectorAll(".front").forEach(card => {
 	const toggle = card.querySelector(".toggleWinner"),
 			revert = card.querySelector(".return"),
 			cardBack = card.querySelector(".winnerDescription"),

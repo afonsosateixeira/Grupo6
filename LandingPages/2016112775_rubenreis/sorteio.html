@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="pt">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Poppy & Max | Sorteio</title>
+        <link rel="stylesheet" href="css/normalize.css">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;800&display=swap">
+        <link rel="stylesheet" href="css/sorteio.css">
+        <script src="js/sorteio.js" defer></script>
+    </head>
+    <body>
+        <section id="banner">
+            <div class="imgContainer">
+                <img src="img/logo.png" alt="Logo">
+            </div>
+            <div class="bannerContainer">
+                <h1>Sorteio Limitado</h1>
+            </div>
+        </section>
+
+        <main class="container">
+            <section>
+                <h2>Preencha o formulário para ganhar já!!!</h2>
+                <form class="box" action="#" method="POST">
+                    <div class="hFlex">
+                        <div class="vFlex">
+                            <label for="fName" class="textF">Nome:</label>
+                            <input type="text" id="fName" name="fName" required>
+                        </div>
+                        <div class="vFlex">
+                            <label for="lName" class="textF">Apelido:</label>
+                            <input type="text" id="lName" name="lName" required>
+                        </div>
+                    </div>
+                    <div class="vFlex">
+                        <label for="email" class="textF">Email:</label>
+                        <input type="email" id="email" name="email" placeholder="nome@exemplo.com" required>
+                    </div>
+                    <div class="hFlex">
+                        <div class="vFlex">
+                            <p class="textF">Que animais têm?</p>
+                            <div>
+                                <input type="checkbox" id="cats">
+                                <label for="cats">Gato</label>
+                                <input type="checkbox" id="dogs">
+                                <label for="dogs">Cão</label>
+                            </div>
+                        </div>
+                        <input type="submit"  class="textF">
+                    </div>
+                </form>
+            </section>
+
+            <section>
+                <h2>Regras</h2>
+                <div class="box">
+                    <ul>
+                        <li>Este sorteio requer o seu nome, email e que tenha pelo menos um animal;</li>
+                        <li>Até 20 participantes iram ganhar um desconto de 30% em ração por 1 mês;</li>
+                        <li>Os vencedores iram ser notificados até dia 30/03/2026;</li>
+                        <li>Duração do desconto: Desde o dia 01/04/2026 até 31/04/2026;</li>
+                    </ul>
+                </div>
+            </section>
+
+            <section>
+                <h2>Vencedores de sorteios anteriores</h2>
+                <div class="winners">
+                    <div class="box">
+                        <div class="front">
+                            <img src="img/winner1.png" alt="Vencedor 09/2024">
+                            <p class="highlight">Sofia</p>
+                            <p>Venceu em: <span class="date">09/2024</span></p>
+                            <p class="toggleWinner"></p>
+                        </div>
+                        <div class="back">
+                            <p>Com este concurso pude dar ao meu gato a melhor comida e deu para ver que ficou mais feliz</p>
+                            <button class="return">Voltar</button>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="front">
+                            <img src="img/winner2.png" alt="Vencedor 12/2024">
+                            <p class="highlight">Carlos</p>
+                            <p>Venceu em: <span class="date">12/2024</span></p>
+                            <p class="toggleWinner"></p>
+                        </div>
+                        <div class="back">
+                            <p></p>
+                            <button class="return">Voltar</button>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="front">
+                            <img src="img/winner3.png" alt="Vencedor 03/2025">
+                            <p class="highlight">Artur</p>
+                            <p>Venceu em: <span class="date">03/2025</span></p>
+                            <p class="toggleWinner"></p>
+                        </div>
+                        <div class="back">
+                            <p>Estava com dificuldades neste mẽs e graças ao sorteio consegui manter a qualidade da ração sem me preocupar</p>
+                            <button class="return">Voltar</button>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="front">
+                            <img src="img/winner4.png" alt="Vencedor 06/2025">
+                            <p class="highlight">Marta</p>
+                            <p>Venceu em: <span class="date">06/2025</span></p>
+                            <p class="toggleWinner"></p>
+                        </div>
+                        <div class="back">
+                            <p></p>
+                            <button class="return">Voltar</button>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="front">
+                            <img src="img/winner5.png" alt="Vencedor 09/2025">
+                            <p class="highlight">Marina</p>
+                            <p>Venceu em: <span class="date">09/2025</span></p>
+                            <p class="toggleWinner"></p>
+                        </div>
+                        <div class="back">
+                            <p>A minha filha insistiu para eu participar embora eu não tivesse esperança mas graças a ela poupei o mês inteiro</p>
+                            <button class="return">Voltar</button>
+                        </div>
+                    </div>
+                    <div class="box">
+                        <div class="front">
+                            <img src="img/winner6.png" alt="Vencedor 12/2025">
+                            <p class="highlight">Afonso</p>
+                            <p>Venceu em: <span class="date">12/2025</span></p>
+                            <p class="toggleWinner"></p>
+                        </div>
+                        <div class="back">
+                            <p></p>
+                            <button class="return">Voltar</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </body>
+</html>
