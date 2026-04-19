@@ -1,6 +1,8 @@
 :root {
   --muted: #4d5b55;
-  --primary-dark: #205d46;
+  --primary-light: #135eb1;
+  --primary: #10294b;
+  --secondary: #faa51c;
 }
 
 * {
@@ -46,7 +48,7 @@ body {
   text-decoration: none;
 }
 
-.brand-dog {
+.logo {
   width: 28px;
   height: 28px;
   object-fit: contain;
@@ -103,10 +105,10 @@ body {
 }
 
 .eyebrow {
-  color: var(--primary-dark);
+  color: var(--primary-light);
   font-family: "Archivo", "Segoe UI", sans-serif;
-  font-size: 0.78rem;
-  font-weight: 700;
+  font-size: 0.9rem;
+  font-weight: 900;
   letter-spacing: 0.08em;
   text-transform: uppercase;
 }
@@ -142,7 +144,7 @@ h1 {
   display: inline-block;
   border: 0;
   border-radius: 999px;
-  background: #2e7d5f;
+  background: var(--secondary);
   color: #ffffff;
   font-family: "Archivo", "Segoe UI", sans-serif;
   font-size: 0.95rem;
@@ -156,7 +158,7 @@ h1 {
 }
 
 .btn:hover {
-  background: var(--primary-dark);
+  background: var(--primary-light);
   transform: translateY(-2px);
 }
 
@@ -166,7 +168,7 @@ h1 {
 
 .btn-outline {
   background: transparent;
-  color: var(--primary-dark);
+  color: var(--primary-light);
   border: 2px solid rgba(32, 93, 70, 0.32);
 }
 
@@ -229,7 +231,7 @@ main {
 }
 
 .info-box {
-  background: linear-gradient(160deg, #1d362c, #2a4e3f);
+  background: linear-gradient(180deg, var(--primary-light), var(--primary));
   color: #f5f7f0;
   border-radius: 16px;
   padding: 1.25rem;
@@ -283,7 +285,7 @@ main {
 }
 
 .final-cta {
-  background: linear-gradient(140deg, #205d46, #2e7d5f);
+  background: linear-gradient(180deg, var(--primary-light), var(--primary));
   color: #f5f7f0;
   text-align: center;
   border-radius: 20px;
