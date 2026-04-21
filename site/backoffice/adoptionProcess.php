@@ -52,12 +52,12 @@ $lista = $config->query($sql);
         <tbody>
             <?php while($linha=$lista->fetch_assoc()):?>
                 <tr>
-                    <td><?php echo $linha['id'];?></td>
-                    <td><?php echo $linha['full_name'];?></td>
-                    <td><?php echo $linha['name'];?></td>
-                    <td><?php echo $linha['status'];?></td>
-                    <td><?php echo $linha['start_date'];?></td>
-                    <td><?php echo $linha['notes'];?></td>
+                    <td><?= $linha['id'];?></td>
+                    <td><?= $linha['full_name'];?></td>
+                    <td><?= $linha['name'];?></td>
+                    <td><?= $linha['status'];?></td>
+                    <td><?= $linha['start_date'];?></td>
+                    <td><?= $linha['notes'];?></td>
                 </tr>
             <?php endwhile;?>
 

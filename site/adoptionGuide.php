@@ -1,5 +1,5 @@
 <section class="container my-5">
-    <section class="hero-section bg-primary text-white rounded-4 p-5 mb-5 shadow-lg">
+    <section class="hero-section bg-primary text-white rounded-3 p-5 mb-5 shadow-lg">
         <div class="text-center">
             <h1 class="fw-bold mb-3"><i class="fa-solid fa-paw me-3"></i>Como Adotar</h1>
             <p>Seu guia passo a passo para uma adoção responsável e feliz.</p>

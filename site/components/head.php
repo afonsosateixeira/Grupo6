@@ -2,6 +2,7 @@
 	$backOffice = $backOffice ?? false;
 	$metaTitle = $metaTitle ?? "";
 	$metaDescription = $metaDescription ?? "";
+
 	echo	'<meta charset="UTF-8">
 			<meta name="description" content="'.$metaDescription.'">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -20,3 +21,4 @@
 		echo '<link rel="stylesheet" href="'.$basePath.'/assets/css/'.$route.'.css">';
 	if(file_exists(__DIR__."/../assets/js/".$route.".js"))
 		echo '<script src="'.$basePath.'/assets/js/'.$route.'.js" defer></script>';
+	
