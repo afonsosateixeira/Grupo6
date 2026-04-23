@@ -1,9 +1,9 @@
 <header>
   <nav class="navbar navbar-expand-lg bg-nav navbar-color">
     <div class="container-fluid">
-      <a class="navbar-brand" href="./"
+      <a class="navbar-brand" href="<?= $basePath ?>/"
         ><img
-          src="assets/img/logo.png"
+          src="<?= $basePath?>/assets/img/logo.png"
           alt="Logo PAM"
           style="max-width: 120px; max-height: 50px; transform: translateX(-13px)"
       /></a>
@@ -26,8 +26,8 @@
               Adoção
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="./animalCatalog">Catálogo de Animais</a></li>
-              <li><a class="dropdown-item" href="./adoptionGuide">Guia de adoção</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/animalCatalog">Catálogo de Animais</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/adoptionGuide">Guia de adoção</a></li>
             </ul>
           </li>
 
@@ -57,7 +57,7 @@
                 <hr class="dropdown-divider" />
               </li>
               <li><a class="dropdown-item" href="#">Marcação de consultas</a></li>
-              <li><a class="dropdown-item" href="animal_care">Cuidados de saúde</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/animal_care">Cuidados de saúde</a></li>
             </ul>
           </li>
 
@@ -66,14 +66,14 @@
               Institucional
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="dia_voluntario">Um dia no abrigo</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/dia_voluntario">Um dia no abrigo</a></li>
               <li><a class="dropdown-item" href="#">Perfil de voluntário</a></li>
-              <li><a class="dropdown-item" href="./contactos">Contactos</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/contactos">Contactos</a></li>
             </ul>
           </li>
         </ul>
-        <a href="./regist"><button class="btn-login" type="button">Registar</button></a>
-        <a href="./login"><button class="btn-login btn-regist" type="button">Entrar</button></a>
+        <a href="<?= $basePath ?>/regist"><button class="btn-login" type="button">Registar</button></a>
+        <a href="<?= $basePath ?>/login"><button class="btn-login btn-regist" type="button">Entrar</button></a>
       </div>
     </div>
   </nav>

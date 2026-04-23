@@ -1,21 +1,4 @@
 <?php
-require_once("../config.php");
-
-//Route
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
-
-if ($basePath !== '' && $basePath !== '/' && str_starts_with($path, $basePath))
-    $path = substr($path, strlen($basePath));
-
-$route = trim($path, '/');
-
-if ($route === '')
-    $route = 'index';
-
-if (str_contains($route, '.'))
-    $route = pathinfo($route, PATHINFO_FILENAME);
-
 // Codigo
 $aniEdit = null;
 if (isset($_GET['btnEditar'])) {
@@ -26,23 +9,7 @@ if (isset($_GET['btnEditar'])) {
 
 $lista = $config->query("SELECT * FROM animals ORDER BY id ASC");
 ?>
-<!DOCTYPE html>
-<html lang="pt">
-
-<head>
-    <?php
-    $metaTitle = "Gestão de Animais";
-    $metaDescription = "";
-    $backOffice = true;
-    require_once "../components/head.php";
-    ?>
-    <link rel="stylesheet" href="../assets/css/sidebar.css">
-</head>
-
-<body>
-    <?php require_once("../components/sidebar.html"); ?>
-
-    <a href="animalList.php?add" class="btn btn-success">Adicionar Novo Animal</a>
+    <a href="animalList?add" class="btn btn-success">Adicionar Novo Animal</a>
 
     <!--Modal-->
     <div class="modal fade" id="formModal">
@@ -56,7 +23,7 @@ $lista = $config->query("SELECT * FROM animals ORDER BY id ASC");
                     </h5>
                 </div>
 
-                <form action="action_animal.php" method="POST" enctype="multipart/form-data">
+                <form action="action_animal" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <?php if ($aniEdit): ?>
                             <input type="hidden" name="id_animal" value="<?php echo $aniEdit['id']; ?>">
@@ -131,7 +98,7 @@ $lista = $config->query("SELECT * FROM animals ORDER BY id ASC");
                     </div>
 
                     <div class="modal-footer bg-light">
-                        <a href="animalList.php" class="btn btn-secondary">Cancelar</a>
+                        <a href="animalList" class="btn btn-secondary">Cancelar</a>
                         <button type="submit" name="<?php echo $aniEdit ? 'btnEditar' : 'btnCriar'; ?>"
                             class="btn btn-primary px-4">
                             <?php echo $aniEdit ? 'Guardar Alterações' : 'Adicionar Animal'; ?>
@@ -168,9 +135,9 @@ $lista = $config->query("SELECT * FROM animals ORDER BY id ASC");
                     <td><?php echo $linha['status']; ?></td>
 
                     <td>
-                        <a href="action_animal.php?btnEditar=<?php echo $linha['id']; ?>"><i
+                        <a href="action_animal?btnEditar=<?php echo $linha['id']; ?>"><i
                                 class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="action_animal.php?btnEliminar=<?php echo $linha['id']; ?>"
+                        <a href="action_animal?btnEliminar=<?php echo $linha['id']; ?>"
                             onclick="return confirm('Apagar este adotante?')"><i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
@@ -178,7 +145,6 @@ $lista = $config->query("SELECT * FROM animals ORDER BY id ASC");
         </tbody>
     </table>
 
-    <script src="assets/js/modalForm.js"></script>
     <script>
         window.onload = function () {
             <?php if ($aniEdit || isset($_GET['add'])): ?>
@@ -187,6 +153,3 @@ $lista = $config->query("SELECT * FROM animals ORDER BY id ASC");
             <?php endif; ?>
         };
     </script>
-</body>
-
-</html>

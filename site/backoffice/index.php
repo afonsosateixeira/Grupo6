@@ -1,31 +1,73 @@
 <?php
- require_once("../config.php");
-	$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-	$basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
+	require_once("../config.php");
 
-	if ($basePath !== '' && $basePath !== '/' && str_starts_with($path, $basePath))
-		$path = substr($path, strlen($basePath));
+	$path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') . '/';
+	$path = basename($path);
+	$path = pathinfo($path, PATHINFO_FILENAME);
 
-	$route = trim($path, '/');
+	$route = ($path === 'backoffice' || $path === 'index') ? 'dashboard' : $path;
 
-	if ($route === '')
-		$route = 'index';
+	switch ($route) {
+		case 'adoptionProcess':
+			$metaTitle = '';
+			$metaDescription = 'Guia passo a passo para adoção responsável';
+			break;
 
-	if (str_contains($route, '.'))
-		$route = pathinfo($route, PATHINFO_FILENAME);
+		case 'animalList':
+			$metaTitle = '';
+			$metaDescription = 'Guia passo a passo para adoção responsável';
+			break;
+
+		case 'dashboard':
+			$metaTitle = '';
+			$metaDescription = 'Guia passo a passo para adoção responsável';
+			break;
+
+		default:
+			http_response_code(404);
+			$metaTitle = 'Página não encontrada';
+			$metaDescription = 'A página que procura não existe';
+			break;
+	}
 ?>
 <!DOCTYPE html>
 <html lang="pt">
-<head>
-    <?php
-        $metaTitle = "";
-        $metaDescription = "";
-        $backOffice = true;
-        require_once "../components/head.php";
-    ?>
-    <link rel="stylesheet" href="../assets/css/sidebar.css">
-</head>
-<body>
-    <?php require_once("../components/sidebar.html");?>
-</body>
+	<head>
+		<?php
+			$backOffice = true;
+			require_once "../components/head.php";
+		?>
+		<link rel="stylesheet" href="../assets/css/sidebar.css">
+	</head>
+	<body>
+		<?php require_once("../components/sidebar.php");?>
+		<main>
+			<?php
+				switch ($route) {
+					case 'adoptionProcess':
+						require_once 'adoptionProcess.php';
+						break;
+
+					
+					case 'animalList':
+						require_once 'animalList.php'; 
+						break;
+
+					
+					case 'dashboard':
+						require_once 'dashboard.php';
+						break;
+
+					default:
+						?>
+						<main class="container my-5">
+							<h1>404</h1>
+							<p>Página não encontrada.</p>
+						</main>
+			<?php
+						break;
+				}
+			?>
+		</main>
+	</body>
 </html>

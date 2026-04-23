@@ -17,9 +17,8 @@
 
             <div class="collapse show" id="menuAnimais">
                 <ul class="nav flex-column submenu mt-1">
-                    <li><a href="animalList.php" class="nav-link">Lista Animais</a></li>
-                    <li><a href="adopterList.php" class="nav-link">Lista Adotantes</a></li>
-                    <li><a href="adoptionProcess.php" class="nav-link">Processo Adoção</a></li>
+                    <li><a href="<?= $basePath ?>/animalList" class="nav-link">Lista Animais</a></li>
+                    <li><a href="<?= $basePath ?>/adoptionProcess" class="nav-link">Processo Adoção</a></li>
                 </ul>
             </div>
         </li>
@@ -37,7 +36,7 @@
             <li>
             <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="../index.php">Sair</a></li>
+            <li><a class="dropdown-item" href="<?= $basePath ?>/../index">Sair</a></li>
         </ul>
     </div>
 </div>

@@ -1,18 +1,18 @@
 <?php
 require_once("../config.php");
-	$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-	$basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
+    $path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
+    $basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
 
-	if ($basePath !== '' && $basePath !== '/' && str_starts_with($path, $basePath))
-		$path = substr($path, strlen($basePath));
+    if ($basePath !== '' && $basePath !== '/' && str_starts_with($path, $basePath))
+        $path = substr($path, strlen($basePath));
 
-	$route = trim($path, '/');
+    $route = trim($path, '/');
 
-	if ($route === '')
-		$route = 'index';
+    if ($route === '')
+        $route = 'index';
 
-	if (str_contains($route, '.'))
-		$route = pathinfo($route, PATHINFO_FILENAME);
+    if (str_contains($route, '.'))
+        $route = pathinfo($route, PATHINFO_FILENAME);
 
 $sql = "SELECT adoption_processes.*, adopters.full_name, animals.name
 FROM adoption_processes

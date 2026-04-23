@@ -1,11 +1,19 @@
 <?php
-	$backOffice = $backOffice ?? false;
 	$metaTitle = $metaTitle ?? "";
 	$metaDescription = $metaDescription ?? "";
+	$basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
+
+	if(!empty($backOffice)){
+		$origin = $basePath;
+		$basePath= $basePath.'../';
+	} else {
+		$backOffice = false;
+	};
+
 	echo	'<meta charset="UTF-8">
 			<meta name="description" content="'.$metaDescription.'">
 			<meta name="viewport" content="width=device-width, initial-scale=1.0">
-			<title>'.($backOffice ? 'Admin' : 'Poppy and Max').(!empty($metaTitle) ? ' | '.$metaTitle : '').'</title>
+			<title>'.(!empty($metaTitle) ? $metaTitle.' | ' : '').($backOffice ? 'Admin' : 'Poppy and Max').'</title>
 			<link rel="icon" type="image/png" href="'.$basePath.'/assets/img/favicon.png">
 			<link rel="stylesheet" href="'.$basePath.'/assets/css/normalize.css">
 			<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
@@ -20,3 +28,5 @@
 		echo '<link rel="stylesheet" href="'.$basePath.'/assets/css/'.$route.'.css">';
 	if(file_exists(__DIR__."/../assets/js/".$route.".js"))
 		echo '<script src="'.$basePath.'/assets/js/'.$route.'.js" defer></script>';
+
+	if($backOffice) $basePath = $origin;

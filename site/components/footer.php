@@ -4,7 +4,7 @@
   <div class="container">
     <div class="row py-5">
       <div class="col-12 col-md-3 mb-4 mb-md-0 text-center text-md-start">
-        <a class="footer-brand" href="#">
+        <a class="footer-brand" href="<?= $basePath ?>/">
           <img src="assets/img/footer.png" alt="Logo PAM" style="max-width: 200px; max-height: 50px;" />
         </a>
         <p class="mt-2" style="font-size: 0.8rem">Encontra o teu melhor amigo hoje.</p>
@@ -15,8 +15,8 @@
           <div class="col-6 col-md-2 mb-3">
             <h5>Adoção</h5>
             <ul class="nav flex-column">
-              <li class="nav-item mb-2"><a href="./animalCatalog" class="nav-link p-0">Catálogo de Animais</a></li>
-              <li class="nav-item mb-2"><a href="./adoptionGuide" class="nav-link p-0">Guia de adoção</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/animalCatalog" class="nav-link p-0">Catálogo de Animais</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/adoptionGuide" class="nav-link p-0">Guia de adoção</a></li>
             </ul>
           </div>
           <div class="col-6 col-md-3 mb-3">
@@ -40,7 +40,7 @@
           <div class="col-6 col-md-3 mb-3">
             <h5>Institucional</h5>
             <ul class="nav flex-column">
-              <li class="nav-item mb-2"><a href="dia_voluntario" class="nav-link p-0">Um dia no abrigo</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/dia_voluntario" class="nav-link p-0">Um dia no abrigo</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Perfil de voluntário</a></li>
               <li class="nav-item mb-2"><a href="./contactos" class="nav-link p-0">Contactos</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Sobre nós</a></li>
@@ -49,8 +49,8 @@
           <div class="col-6 col-md-2 mb-3">
             <h5>Links Rápidos</h5>
             <ul class="nav flex-column">
-              <li class="nav-item mb-2"><a href="cookies" class="nav-link p-0">Política de cookies</a></li>
-              <li class="nav-item mb-2"><a href="privacy" class="nav-link p-0">Política de Privacidade</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/cookies" class="nav-link p-0">Política de cookies</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/privacy" class="nav-link p-0">Política de Privacidade</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Política de Acessibilidade</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Lítigios de consumo</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Termos e condições</a></li>

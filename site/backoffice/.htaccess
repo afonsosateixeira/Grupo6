@@ -1,11 +1,13 @@
-#Desativa o redirecionamento normal do Apache
+# Desativa o redirecionamento normal do Apache
 Options -MultiViews
-#Ativa o redirecionamento que estamos a usar neste ficheiro
+# Ativa o redirecionamento que estamos a usar neste ficheiro
 RewriteEngine On
 
-#Tudo o que não seja um ficheiro real
+# Talvez mudar para redirecionar os ficheiros da pasta e criar uma pasta para funções (action_)
+
+# Tudo o que não seja um ficheiro real
 RewriteCond %{REQUEST_FILENAME} !-f
-#E tudo o que não seja uma pata real
+# E tudo o que não seja uma pata real
 RewriteCond %{REQUEST_FILENAME} !-d
-#Será redirecionado para dashboard.php
+# Será redirecionado para dashboard.php
 RewriteRule ^ index.php [L,QSA]
