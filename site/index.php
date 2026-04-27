@@ -1,9 +1,9 @@
 <?php
-	$path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') . '/';
+	$path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/');
 	$path = basename($path);
 	$path = pathinfo($path, PATHINFO_FILENAME);
 
-	$route = ($path === 'site') ? 'index' : $path;
+	$route = ($path === 'site' || $path === '') ? 'index' : $path;
 
 	switch ($route) {
 		case 'adoptionGuide':
@@ -124,10 +124,10 @@
 
 						default:
 							?>
-							<main class="container my-5">
+							<section class="container my-5">
 								<h1>404</h1>
 								<p>Página não encontrada.</p>
-							</main>
+							</section>
 				<?php
 							break;
 					}

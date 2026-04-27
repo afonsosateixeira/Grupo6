@@ -60,10 +60,10 @@
 
 					default:
 						?>
-						<main class="container my-5">
+						<section class="container my-5">
 							<h1>404</h1>
 							<p>Página não encontrada.</p>
-						</main>
+						</section>
 			<?php
 						break;
 				}
