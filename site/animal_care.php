@@ -5,14 +5,12 @@
 		<p class="text-light">Guia essencial de vacinação para o seu novo melhor amigo.</p>
 	</div>
 </section>
-
-<section class="px-5 py-3">
-	<h2 class="mb-3">O porquê de vacinar o seu animal ser tão importante!</h2>
-	<p class="fs-6">A vacinação é o início de uma amizade para a vida garantindo os cuidados básicos de saúde do seu animal.<br>
-		A medicina preventiva é o que permite ao seu novo amigo viver sem medos.</p>
-</section>
-
 <div class="container">
+	<section class="px-5 py-3">
+		<h2 class="mb-3">O porquê de vacinar o seu animal ser tão importante!</h2>
+		<p class="fs-6">A vacinação é o início de uma amizade para a vida garantindo os cuidados básicos de saúde do seu animal.<br>
+			A medicina preventiva é o que permite ao seu novo amigo viver sem medos.</p>
+	</section>
 
 	<section>
 		<h2 class="text-center mb-4">O Calendário de Vacinação</h2>

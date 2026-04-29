@@ -69,6 +69,11 @@
 			$metaDescription = 'Um dia como voluntário';
 			break;
 
+		case 'termos':
+			$metaTitle = 'Termos e condições';
+			$metaDescription = 'Termos e condições da Poppy and Max';
+			break;	
+
 		default:
 			http_response_code(404);
 			$metaTitle = 'Página não encontrada';
@@ -139,6 +144,10 @@
 
 				case 'dia_voluntario':
 					require_once 'dia_voluntario.html';
+					break;
+
+				case 'termos':
+					require_once 'termos.html';
 					break;
 
 				default:
