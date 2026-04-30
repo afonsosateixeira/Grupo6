@@ -12,7 +12,7 @@ create table users (
     local varchar(50),
     street varchar(150),
     cp char(8),
-    role enum('admin', 'adotante', 'voluntario') not null,
+    role enum('admin', 'n') not null,
     constraint pk_users primary key (id),
     constraint uq_users_email unique (email)
 ) engine=innodb;
