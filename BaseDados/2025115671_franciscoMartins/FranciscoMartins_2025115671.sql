@@ -1,3 +1,7 @@
+DROP DATABASE IF EXISTS pam;
+CREATE DATABASE pam;
+USE pam;
+
 CREATE TABLE Users (
     id_user int unsigned auto_increment,
     name varchar(100) not null,
