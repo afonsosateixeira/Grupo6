@@ -49,6 +49,11 @@
 			$metaDescription = 'Todas as informações do animal';
 			break;
 
+		case 'appointment':
+			$metaTitle = 'Agendar Consulta';
+			$metaDescription = 'Agende uma consulta para o seu animal de estimação';
+			break;
+
 		case 'login':
 			$metaTitle = 'Entrar';
 			$metaDescription = 'Acesso à conta';
@@ -128,6 +133,10 @@
 
 				case 'animalDetails':
 					require_once 'animalDetails.php';
+					break;
+
+				case 'appointment':
+					require_once 'appointment.php';
 					break;
 
 				case 'login':
