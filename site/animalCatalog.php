@@ -5,6 +5,10 @@
     $res = $config->query($sql);
 ?>
 
+<div class="container">
+    <h1 class="text-center fw-bold mt-5 mb-5">Animais para adoção</h1>
+</div>
+
 <div class="container-cards">
     <?php
     if ($res->num_rows > 0):
@@ -17,8 +21,8 @@
                             alt="Foto de <?= htmlspecialchars($animal['name']) ?>">
                     </div>
                     <div class="card-info">
-                        <h3><?= htmlspecialchars($animal['name']) ?></h3>
-                        <p><?= htmlspecialchars($animal['id']) ?></p>
+                        <h3 class="fw-semibold"><?= htmlspecialchars($animal['name']) ?></h3>
+                        <p class="fw-semibold"><?= htmlspecialchars($animal['id']) ?></p>
                     </div>
                 </div>
             </a>
