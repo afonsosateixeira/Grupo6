@@ -38,8 +38,8 @@ CREATE TABLE addresses(
 		REFERENCES users(id)
 		ON DELETE CASCADE,
 
-	CONSTRAINT uq_addresses_address
-		UNIQUE (users_id, country, zip)
+	CONSTRAINT uq_addresses_user_address
+		UNIQUE (users_id, country, number, zip)
 ) ENGINE=InnoDB;
 
 CREATE TABLE phones(
@@ -56,7 +56,7 @@ CREATE TABLE phones(
 		REFERENCES users(id)
 		ON DELETE CASCADE,
 
-	CONSTRAINT uq_phones_phone
+	CONSTRAINT uq_phones_user_phone
 		UNIQUE (users_id, number)
 ) ENGINE=InnoDB;
 
@@ -74,7 +74,7 @@ CREATE TABLE partners(
 		REFERENCES users(id)
 		ON DELETE CASCADE,
 
-	CONSTRAINT uq_partners_id
+	CONSTRAINT uq_partners_partner
 		UNIQUE (users_id)
 ) ENGINE=InnoDB;
 
@@ -146,10 +146,10 @@ CREATE TABLE donations(
 
 	CONSTRAINT fk_donations_users_id
 		FOREIGN KEY (users_id)
-		REFERENCES users(id), /* I don't think a purchase or donation should be deleted on user deletion, specialy considering it's optional to provide a name */
+		REFERENCES users(id),
 
 	CONSTRAINT uq_donations_donation
-		UNIQUE (nif, amount, date) /* If someone donated in the same moment, it would be likely a mistake */
+		UNIQUE (nif, amount, date)
 ) ENGINE=InnoDB;
 
 CREATE TABLE applications(
@@ -185,6 +185,26 @@ CREATE TABLE events(
 		UNIQUE (name, date_start, date_end)
 ) ENGINE=InnoDB;
 
+CREATE TABLE shift_volunteers(
+	id INT UNSIGNED AUTO_INCREMENT,
+	volunteers_id INT UNSIGNED NOT NULL, -- NOT NULL _____________________________________________________________
+	date DATE NOT NULL,
+	hour_start TIME NOT NULL,
+	hour_end TIME NOT NULL,
+	notes VARCHAR(255),
+
+	CONSTRAINT pk_shift_volunteers_id
+		PRIMARY KEY (id),
+
+	CONSTRAINT fk_shift_volunteers_volunteers_id
+		FOREIGN KEY (volunteers_id)
+		REFERENCES volunteers(id)
+		ON DELETE CASCADE,
+
+	CONSTRAINT uq_shift_volunteers_volunteer_shift
+		UNIQUE (volunteers_id, date, hour_start)
+) ENGINE=InnoDB;
+
 CREATE TABLE shifts(
 	id INT UNSIGNED AUTO_INCREMENT,
 	hour_start TIME NOT NULL,
@@ -197,36 +217,27 @@ CREATE TABLE shifts(
 		UNIQUE (hour_start, hour_end)
 ) ENGINE=InnoDB;
 
-CREATE TABLE shifts_workers(
+CREATE TABLE shifts_veterinarians(
 	id INT UNSIGNED AUTO_INCREMENT,
 	date DATE NOT NULL,
 	shifts_id INT UNSIGNED NOT NULL,
-	volunteers_id INT UNSIGNED,
-	veterinarians_id INT UNSIGNED,
+	veterinarians_id INT UNSIGNED NOT NULL,
 	notes VARCHAR(255),
 
-	CONSTRAINT pk_shifts_workers_id
+	CONSTRAINT pk_shifts_veterinarians_id
 		PRIMARY KEY (id),
 
-	CONSTRAINT fk_shifts_workers_shifts_id
+	CONSTRAINT fk_shifts_veterinarians_shifts_id
 		FOREIGN KEY (shifts_id)
-		REFERENCES shifts(id), /* Unsure as this is works like a log the workers did */
+		REFERENCES shifts(id),
 
-	CONSTRAINT fk_shifts_workers_volunteers_id
-		FOREIGN KEY (volunteers_id)
-		REFERENCES volunteers(id)
-		ON DELETE CASCADE,
-
-	CONSTRAINT fk_shifts_workers_veterinarians_id
+	CONSTRAINT fk_shifts_veterinarians_veterinarians_id
 		FOREIGN KEY (veterinarians_id)
 		REFERENCES veterinarians(id)
 		ON DELETE CASCADE,
 
-	CONSTRAINT chk_shifts_workers_workers
-		CHECK(
-			(volunteers_id IS NOT NULL AND veterinarians_id IS NULL) OR
-			(volunteers_id IS NULL AND veterinarians_id IS NOT NULL)
-		)
+	CONSTRAINT uq_shifts_veterinarians_veterinarian_shift
+		UNIQUE (veterinarians_id, date, shifts_id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE events_volunteers(
@@ -285,9 +296,9 @@ CREATE TABLE animals(
 	species_id INT UNSIGNED NOT NULL,
 	breeds_id INT UNSIGNED,
 	name VARCHAR(100) NOT NULL,
-	birthday DATE NOT NULL, /* Not null but approximate is fine? It should be as correct as possible due to vaccines? */
-	gender ENUM('Male', 'Female') NOT NULL,
-	color VARCHAR(50) NOT NULL,
+	birthday DATE NOT NULL,
+	gender ENUM('Male', 'Female'),
+	color VARCHAR(50),
 	size ENUM('Small', 'Medium', 'Large'),
 	weight DECIMAL(5,2),
 	sterilized BOOLEAN DEFAULT FALSE NOT NULL,
@@ -302,11 +313,13 @@ CREATE TABLE animals(
 
 	CONSTRAINT fk_animals_species_id
 		FOREIGN KEY (species_id)
-		REFERENCES species(id), /* On delete cascade? Pro: If we stop dealing with, for example, "parrots" it makes sense to delete them from animals but the domino effect that it would cause... */
+		REFERENCES species(id)
+		ON DELETE RESTRICT,
 
 	CONSTRAINT fk_animals_breeds_name
 		FOREIGN KEY (breeds_id)
-		REFERENCES breeds(id),
+		REFERENCES breeds(id)
+		ON DELETE RESTRICT,
 
 	CONSTRAINT fk_animals_users_id
 		FOREIGN KEY (users_id)
@@ -317,7 +330,6 @@ CREATE TABLE participants(
 	id INT UNSIGNED AUTO_INCREMENT,
 	users_id INT UNSIGNED NOT NULL,
 	events_id INT UNSIGNED NOT NULL,
-	animals_id INT UNSIGNED,
 
 	CONSTRAINT pk_participants_id
 		PRIMARY KEY (id),
@@ -332,19 +344,37 @@ CREATE TABLE participants(
 		REFERENCES events(id)
 		ON DELETE CASCADE,
 
-	CONSTRAINT fk_participants_animals_id
-		FOREIGN KEY (animals_id)
-		REFERENCES animals(id), /* I guess removing the animal should not remove the row */
-
 	CONSTRAINT uq_participants_participation
 		UNIQUE (users_id, events_id)
+) ENGINE=InnoDB;
+
+CREATE TABLE participants_animals(
+	id INT UNSIGNED AUTO_INCREMENT,
+	participants_id INT UNSIGNED NOT NULL,
+	animals_id INT UNSIGNED NOT NULL,
+
+	CONSTRAINT pk_participants_animals_id
+		PRIMARY KEY (id),
+
+	CONSTRAINT fk_participants_animals_participants_id
+		FOREIGN KEY (participants_id)
+		REFERENCES participants(id)
+		ON DELETE CASCADE,
+
+	CONSTRAINT fk_participants_animals_animals_id
+		FOREIGN KEY (animals_id)
+		REFERENCES animals(id)
+		ON DELETE CASCADE,
+
+	CONSTRAINT uq_participants_animals_participant_animal
+		UNIQUE (participants_id, animals_id)
 ) ENGINE=InnoDB;
 
 CREATE TABLE checkups(
 	id INT UNSIGNED AUTO_INCREMENT,
 	veterinarians_id INT UNSIGNED NOT NULL,
 	animals_id INT UNSIGNED NOT NULL,
-	users_id INT UNSIGNED NOT NULL, /* When in the shelter itself, the veterinarian or admin schedule the checkups? */
+	users_id INT UNSIGNED NOT NULL,
 	type VARCHAR(50),
 	date TIMESTAMP NOT NULL,
 	status ENUM('Scheduled', 'Completed', 'Missed') DEFAULT 'Scheduled' NOT NULL,
@@ -355,11 +385,11 @@ CREATE TABLE checkups(
 
 	CONSTRAINT fk_checkups_veterinarians_id
 		FOREIGN KEY (veterinarians_id)
-		REFERENCES veterinarians(id), /* Animal still got those treatments */
+		REFERENCES veterinarians(id),
 
 	CONSTRAINT fk_checkups_users_id
 		FOREIGN KEY (users_id)
-		REFERENCES users(id), /* Animal still got those treatments */
+		REFERENCES users(id),
 
 	CONSTRAINT fk_checkups_animals_id
 		FOREIGN KEY (animals_id)
@@ -387,7 +417,8 @@ CREATE TABLE vaccinations(
 
 	CONSTRAINT fk_vaccinations_checkups_id
 		FOREIGN KEY (checkups_id)
-		REFERENCES checkups(id), /* Even if the checkup gets removed the vaccine stays unless the animal is removed OR is it better to remove IN CASE that checkup didn't happen/was a mistake? */
+		REFERENCES checkups(id)
+		ON DELETE CASCADE,
 
 	CONSTRAINT uq_vaccinations_vaccine
 		UNIQUE (animals_id, vaccine, date)
@@ -434,7 +465,7 @@ CREATE TABLE missing_animals(
 
 	CONSTRAINT fk_missing_animals_users_id
 		FOREIGN KEY (users_id)
-		REFERENCES users(id), /* Animal is still missing? */
+		REFERENCES users(id),
 
 	CONSTRAINT fk_missing_animals_animals_id
 		FOREIGN KEY (animals_id)
