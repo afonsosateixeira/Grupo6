@@ -24,6 +24,11 @@
 			$metaDescription = 'Política de Cookies de Poppy and Max';
 			break;
 
+		case 'accessibility':
+			$metaTitle = 'Acessibilidade';
+			$metaDescription = 'Informação sobre acessibilidade';
+			break;
+
 		case 'animalCatalog':
 			$metaTitle = 'Catálogo de Animais';
 			$metaDescription = 'Animais disponíveis para adoção';
@@ -49,6 +54,11 @@
 			$metaDescription = 'Todas as informações do animal';
 			break;
 
+		case 'appointment':
+			$metaTitle = 'Agendar Consulta';
+			$metaDescription = 'Agende uma consulta para o seu animal de estimação';
+			break;
+
 		case 'login':
 			$metaTitle = 'Entrar';
 			$metaDescription = 'Acesso à conta';
@@ -68,6 +78,11 @@
 			$metaTitle = 'Dia no abrigo';
 			$metaDescription = 'Um dia como voluntário';
 			break;
+
+		case 'termos':
+			$metaTitle = 'Termos e condições';
+			$metaDescription = 'Termos e condições da Poppy and Max';
+			break;	
 
 		default:
 			http_response_code(404);
@@ -105,12 +120,16 @@
 					require_once 'cookies.html';
 					break;
 
+				case 'accessibility':
+					require_once 'accessibility.html';
+					break;
+
 				case 'animalCatalog':
 					require_once 'animalCatalog.php';
 					break;
 
 				case 'adoptionGuide':
-					require_once 'adoptionGuide.php';
+					require_once 'adoptionGuide.html';
 					break;
 
 				case 'contactos':
@@ -123,6 +142,10 @@
 
 				case 'animalDetails':
 					require_once 'animalDetails.php';
+					break;
+
+				case 'appointment':
+					require_once 'appointment.php';
 					break;
 
 				case 'login':
@@ -139,6 +162,10 @@
 
 				case 'dia_voluntario':
 					require_once 'dia_voluntario.html';
+					break;
+
+				case 'termos':
+					require_once 'termos.html';
 					break;
 
 				default:
