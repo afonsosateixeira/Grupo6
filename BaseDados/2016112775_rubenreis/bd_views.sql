@@ -1,5 +1,6 @@
 CREATE OR REPLACE VIEW v_admins AS SELECT
 	u.name AS 'Admin',
+	IF(a.active, 'Yes', 'No') AS 'Active',
 	a.date AS 'Since',
 	p.number AS 'Phone'
 		FROM admins a
@@ -8,6 +9,7 @@ CREATE OR REPLACE VIEW v_admins AS SELECT
 
 CREATE OR REPLACE VIEW v_partners AS SELECT
 	u.name AS 'Partner',
+	IF(p.active, 'Yes', 'No') AS 'Active',
 	p.date AS 'Since',
 	ph.number AS 'Phone'
 		FROM partners p
@@ -16,6 +18,7 @@ CREATE OR REPLACE VIEW v_partners AS SELECT
 
 CREATE OR REPLACE VIEW v_veterinarians AS SELECT
 	u.name AS 'Veterinarian',
+	IF(v.active, 'Yes', 'No') AS 'Active',
 	v.date AS 'Since',
 	p.number AS 'Phone'
 		FROM veterinarians v
@@ -36,6 +39,7 @@ CREATE OR REPLACE VIEW v_veterinarian_schedules AS SELECT
 
 CREATE OR REPLACE VIEW v_volunteers AS SELECT
 	u.name AS 'Volunteer',
+	IF(v.active, 'Yes', 'No') AS 'Active',
 	v.date AS 'Since',
 	p.number AS 'Phone'
 		FROM volunteers v
