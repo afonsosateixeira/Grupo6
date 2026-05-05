@@ -49,6 +49,11 @@
 			$metaDescription = 'Todas as informações do animal';
 			break;
 
+		case 'appointment':
+			$metaTitle = 'Agendar Consulta';
+			$metaDescription = 'Agende uma consulta para o seu animal de estimação';
+			break;
+
 		case 'login':
 			$metaTitle = 'Entrar';
 			$metaDescription = 'Acesso à conta';
@@ -68,6 +73,11 @@
 			$metaTitle = 'Dia no abrigo';
 			$metaDescription = 'Um dia como voluntário';
 			break;
+
+		case 'termos':
+			$metaTitle = 'Termos e condições';
+			$metaDescription = 'Termos e condições da Poppy and Max';
+			break;	
 
 		default:
 			http_response_code(404);
@@ -125,6 +135,10 @@
 					require_once 'animalDetails.php';
 					break;
 
+				case 'appointment':
+					require_once 'appointment.php';
+					break;
+
 				case 'login':
 					require_once 'login.php';
 					break;
@@ -139,6 +153,10 @@
 
 				case 'dia_voluntario':
 					require_once 'dia_voluntario.html';
+					break;
+
+				case 'termos':
+					require_once 'termos.html';
 					break;
 
 				default:

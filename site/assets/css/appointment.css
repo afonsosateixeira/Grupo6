@@ -1,0 +1,49 @@
+body{
+	font-size: initial;
+}
+
+.custom-bg-primary{
+	background-color: var(--blue-color);
+}
+
+.ban{
+	position: relative;
+	height: 400px;
+    background: url(../img/appointment_banner.png) #001e4b right / 800px 400px no-repeat;
+}
+
+.ban div {
+    position: absolute;
+    top: 187px;
+    left: 55px;
+}
+
+.ban p{
+	opacity: 50%;
+}
+
+.ban button{
+	position: absolute;
+	top: 260px;
+	left: 55px;
+	border-radius: 15px;
+	height: 40px;
+}
+
+h2{
+	font-size: 28px;
+	font-weight: 700;
+	color: var(--blue-color);
+}
+
+.card{
+	width: 300px;
+    height: 335px;
+	box-shadow: 2px -2px 5px #000;
+}
+
+
+.card img{
+	width: 300px;
+	height: 150px;
+}
