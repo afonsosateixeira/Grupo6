@@ -24,6 +24,11 @@
 			$metaDescription = 'Política de Cookies de Poppy and Max';
 			break;
 
+		case 'accessibility':
+			$metaTitle = 'Acessibilidade';
+			$metaDescription = 'Informação sobre acessibilidade';
+			break;
+
 		case 'animalCatalog':
 			$metaTitle = 'Catálogo de Animais';
 			$metaDescription = 'Animais disponíveis para adoção';
@@ -115,12 +120,16 @@
 					require_once 'cookies.html';
 					break;
 
+				case 'accessibility':
+					require_once 'accessibility.html';
+					break;
+
 				case 'animalCatalog':
 					require_once 'animalCatalog.php';
 					break;
 
 				case 'adoptionGuide':
-					require_once 'adoptionGuide.php';
+					require_once 'adoptionGuide.html';
 					break;
 
 				case 'contactos':

@@ -1,0 +1,23 @@
+.card-animal{
+    max-width: 1000px;
+    padding: 30px; 
+    border-radius: 10px; 
+}
+
+.photo{
+    width: 100%;
+    max-width: 350px;
+    height: 350px; 
+    object-fit: cover; 
+    border-radius: 8px;
+}
+
+.btn-adopt{
+  background-color: #ffa500;
+  border-radius: 5px;
+  border: none;
+  color: #ffffff;
+  font-weight: 600;
+  font-size: 0.9rem;
+  padding: 8px 25px;
+}
