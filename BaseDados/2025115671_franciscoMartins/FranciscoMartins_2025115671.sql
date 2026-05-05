@@ -280,10 +280,6 @@ INSERT INTO Lost_animals (id_pet, city, date_lost, details, id_owner) VALUES
 (9, 'Lisboa', '2023-08-28', 'Chip ativo', 1),
 (10, 'Porto', '2023-08-30', 'Recompensa-se', 2);
 
--- ==========================================
--- 3. VISTAS (VIEWS)
--- ==========================================
-
 CREATE OR REPLACE VIEW v_detalhes_pets AS
 SELECT 
     p.id_pet,
