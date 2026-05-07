@@ -9,7 +9,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
     $nome    = $config->real_escape_string($_POST['nome_animal'] ?? '');
     $breedID = (int)($_POST['breed_id'] ?? 0);
-    $data    = $config->real_escape_string($_POST['data_nascimento'] ?? '');
+
+    $data_bruta= $_POST['data_nascimento'];
+    $data= empty($data_bruta) ? "NULL" : "'". $config->real_escape_string($data_bruta). "'";
+
     $genero  = $config->real_escape_string($_POST['gender'] ?? '');
     $descricao = $config->real_escape_string($_POST['description'] ?? '');
 
@@ -19,7 +22,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         if (move_uploaded_file($_FILES['image']['tmp_name'], $caminhoPasta . $nomeArquivo)) {
             $sql = "INSERT INTO animals (name, breed_id, birth_date, gender, description, image) 
-                    VALUES ('$nome', $breedID, '$data', '$genero', '$descricao', '$nomeArquivo')";
+                    VALUES ('$nome', $breedID, $data, '$genero', '$descricao', '$nomeArquivo')";
             $config->query($sql);
             header("Location: animalList.php?status=criado");
         } else {
@@ -35,7 +38,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $sql = "UPDATE animals SET 
                 name = '$nome', 
                 breed_id = $breedID, 
-                birth_date = '$data',
+                birth_date = $data,
                 gender = '$genero',
                 description = '$descricao'
                 ";

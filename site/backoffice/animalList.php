@@ -16,6 +16,11 @@ if ($route === '')
 if (str_contains($route, '.'))
     $route = pathinfo($route, PATHINFO_FILENAME);
 
+
+$stmt = $config->prepare("SELECT a.*, b.name AS breed_name FROM animals a LEFT JOIN breeds b ON a.breed_id=b.id ORDER BY a.id ASC");
+$stmt->execute();
+$group= $stmt->get_result();
+
 // Editar
 $aniEdit = null;
 if (isset($_GET['btnEditar'])) {
@@ -25,8 +30,8 @@ if (isset($_GET['btnEditar'])) {
     $aniEdit = $res->fetch_assoc();
 }
 
-$sql = "SELECT * FROM animals ORDER BY id ASC";
-$group = $config->query($sql);
+
+
 ?>
 <!DOCTYPE html>
 <html lang="pt">
@@ -39,13 +44,17 @@ $group = $config->query($sql);
     require_once "../components/head.php";
     ?>
     <link rel="stylesheet" href="../assets/css/sidebar.css">
+    <link rel="stylesheet" href="../assets/css/animalList.css">
 </head>
 
 <body>
     <?php require_once("../components/sidebar.html"); ?>
-    <?php require_once("../components/searchbar.php"); ?>
-    <a href="animalList.php?add" class="btn btn-success">Adicionar Novo Animal</a>
 
+    <h1 class="fw-bold fs-2">Lista de Animais</h1>
+    <div class="d-flex justify-content-end gap-2 mb-3">
+        <?php require_once("../components/searchbar.php"); ?>
+        <a href="animalList.php?add" class="btn btn-success">+ Criar</a>
+    </div>
     <!--Modal-->
     <div class="modal fade" id="formModal">
         <div class="modal-dialog modal-dialog-centered">
@@ -72,14 +81,12 @@ $group = $config->query($sql);
 
                         <div class="mb-3">
                             <label>Escolha a Espécie:</label>
-                            <select name="specie_id" class="form-select" required>
+                            <select name="specie_id" id="select-especie" class="form-select" required>
                                 <option value="">Selecione uma Espécie</option>
-
                                 <?php
-                                $executar = $config->query("SELECT id, name FROM species");
-
-                                while ($row = $executar->fetch_assoc()) {
-                                    echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
+                                $especie = $config->query("SELECT id, name FROM species");
+                                foreach ($especie as $esp) {
+                                    echo "<option value='{$esp['id']}'>{$esp['name']}</option>";
                                 }
                                 ?>
                             </select>
@@ -87,22 +94,15 @@ $group = $config->query($sql);
 
                         <div class="mb-3">
                             <label class="form-label fw-bold">Escolha a Raça:</label>
-                            <select name="breed_id" class="form-select" required>
-                                <option value="">Selecione uma Raça</option>
-                                <?php   
-                                $raca = $config->query("SELECT id, name FROM breeds");
-
-                                while ($rac = $raca->fetch_assoc()) { 
-                                    echo "<option value='" . $rac['id'] . "'>" . $rac['name'] . "</option>";
-                                }
-                                ?>
+                            <select name="breed_id" id="select-raca" class="form-select" required disabled>
+                                <option value="">Selecione primeiro a espécie</option>
                             </select>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label fw-bold">Data de Nascimento</label>
                             <input type="date" name="data_nascimento" class="form-control" 
-                                value="<?= $aniEdit ? $aniEdit['birth_date'] : ''; ?>" required>
+                                value="<?= $aniEdit ? $aniEdit['birth_date'] : ''; ?>">
                         </div>
 
                         <div class="mb-3">
@@ -114,12 +114,12 @@ $group = $config->query($sql);
                             <label class="form-label fw-bold">Género</label>
                             <div class="form-check">
                                 <input type="radio" name="gender" value="Macho" class="form-check-input" 
-                                    <?= ($aniEdit && $aniEdit['gender'] === 'Macho') ? 'checked' : ''; ?> required>
+                                    <?= ($aniEdit && $aniEdit['gender'] === 'Macho') ? 'checked' : ''; ?>>
                                 <label class="form-check-label">Macho</label>
                             </div>
                             <div class="form-check">
                                 <input type="radio" name="gender" value="Fêmea" class="form-check-input" 
-                                    <?= ($aniEdit && $aniEdit['gender'] === 'Fêmea') ? 'checked' : ''; ?> required>
+                                    <?= ($aniEdit && $aniEdit['gender'] === 'Fêmea') ? 'checked' : ''; ?>>
                                 <label class="form-check-label">Fêmea</label>
                             </div>
                         </div>
@@ -143,14 +143,16 @@ $group = $config->query($sql);
     </div>
     
     <!--Tabela-->
-    <table class="table">
+    <table class="table striped">
         <thead>
             <tr>
                 <th>ID</th>
+                <th>Foto</th>
                 <th>Nome</th>
                 <th>Raça</th>
-                <th>DataNasc</th>
-                <th>Género</th>
+                <th>Sexo</th>
+                <th>Idade</th>
+                <th>Porte</th>
                 <th>Descrição</th>
                 <th>Status</th>
                 <th>Ações</th>
@@ -160,13 +162,19 @@ $group = $config->query($sql);
             <?php foreach($group as $item): ?>
                 <tr>
                     <td><?= $item['id']; ?></td>
+                    <td>
+                        <?php 
+                            $caminhoImagem = !empty($item['image']) ? "../assets/img/animals/" . $item['image'] : "../assets/img/defaultAnimals.png"; 
+                        ?>
+                    <img class="rounded-circle img-thumbnail round-image" src="<?= $caminhoImagem ?>" alt="Foto do animal">
+                    </td>
                     <td><?= $item['name']; ?></td>
-                    <td><?= $item['breed_id']; ?></td>
-                    <td><?= $item['birth_date']; ?></td>
+                    <td><?= $item['breed_name']; ?></td>
                     <td><?= $item['gender']; ?></td>
+                    <td><?= $item['birth_date']; ?></td>
+                    <td><?= $item['size']; ?></td>
                     <td><?= $item['description']; ?></td>
                     <td><?= $item['status']; ?></td>
-
                     <td>
                         <a href="action_animal.php?btnEditar=<?= $item['id']; ?>"><i
                                 class="fa-solid fa-pen-to-square"></i></a>
@@ -177,8 +185,6 @@ $group = $config->query($sql);
             <?php endforeach; ?>
         </tbody>
     </table>
-
-    <script src="assets/js/modalForm.js"></script>
     <script>
         window.onload = function () {
             <?php if ($aniEdit || isset($_GET['add'])): ?>
@@ -187,6 +193,7 @@ $group = $config->query($sql);
             <?php endif; ?>
         };
     </script>
+    <script src="assets/js/animalList.js"></script>
 </body>
 
 </html>

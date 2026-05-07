@@ -2,7 +2,7 @@
     $hostname = "localhost";
     $username = "root";
     $password = "";
-    $dataBase = "adoption";
+    $dataBase = "pam";
 
     $config = new mysqli($hostname, $username, $password, $dataBase);
 

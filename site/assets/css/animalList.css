@@ -1,0 +1,9 @@
+.round-image{
+    width: 65px; 
+    height: 65px;
+    object-fit: cover;
+}
+
+.striped tbody tr:nth-child(3n) td {
+    background-color: #EAEBED!important; 
+}
