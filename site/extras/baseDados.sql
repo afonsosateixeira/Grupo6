@@ -37,16 +37,18 @@ drop table if exists animals;
 create table animals (
     id int auto_increment,
     name varchar(100) not null,
-    breed_id int not null,
-    gender enum('m', 'f'),
-    size enum('pequeno', 'médio', 'grande'),
+    specie_id int not null,
+    breed_id int null,
+    gender enum('Macho', 'Fêmea') not null,
+    size enum('Pequeno', 'Médio', 'Grande'),
     image varchar(255),
     birth_date date,
     description text,
-    status enum('disponível', 'adotado', 'em processo') not null,
+    status enum('Disponível', 'Adotado', 'Em processo') not null,
     created_at timestamp default current_timestamp,
     constraint pk_animals primary key (id),
-    constraint fk_animals_breeds foreign key (breed_id) references breeds(id)
+    constraint fk_animals_breeds foreign key (breed_id) references breeds(id),
+    constraint fk_animals_species foreign key (specie_id) references species(id)
 ) engine=innodb;
 
 drop table if exists adoption_processes;
@@ -54,7 +56,7 @@ create table adoption_processes (
     id int auto_increment,
     user_id int not null,
     animal_id int not null,
-    status enum('pendente', 'aprovado', 'rejeitado') default 'pendente',
+    status enum('Pendente', 'Aprovado', 'Rejeitado') default 'Pendente',
     start_date timestamp default current_timestamp,
     end_date timestamp null,
     notes text,
@@ -177,35 +179,34 @@ create table donations (
 
 insert into users (full_name, email, password, phone, local, role) values
 ('admin', 'admin@email.com', 'pass123', '910000001', 'porto', 'admin'),
-('maria silva', 'maria@email.com', 'pass123', '910000002', 'lisboa', 'adotante'),
-('joão pinto', 'joao@email.com', 'pass123', '910000003', 'braga', 'voluntario'),
-('ana costa', 'ana@email.com', 'pass123', '910000004', 'faro', 'adotante'),
-('pedro santos', 'pedro@email.com', 'pass123', '910000005', 'aveiro', 'voluntario'),
-('carla matos', 'carla@email.com', 'pass123', '910000006', 'porto', 'adotante'),
-('rui silva', 'rui@email.com', 'pass123', '910000007', 'coimbra', 'adotante'),
-('sofia bento', 'sofia@email.com', 'pass123', '910000008', 'viana', 'voluntario'),
-('tiago ferreira', 'tiago@email.com', 'pass123', '910000009', 'lisboa', 'adotante'),
-('marta luz', 'marta@email.com', 'pass123', '910000010', 'braga', 'adotante');
+('maria silva', 'maria@email.com', 'pass123', '910000002', 'lisboa', 'n'),
+('joão pinto', 'joao@email.com', 'pass123', '910000003', 'braga', 'n'),
+('ana costa', 'ana@email.com', 'pass123', '910000004', 'faro', 'n'),
+('pedro santos', 'pedro@email.com', 'pass123', '910000005', 'aveiro', 'n'),
+('carla matos', 'carla@email.com', 'pass123', '910000006', 'porto', 'n'),
+('rui silva', 'rui@email.com', 'pass123', '910000007', 'coimbra', 'n'),
+('sofia bento', 'sofia@email.com', 'pass123', '910000008', 'viana', 'n'),
+('tiago ferreira', 'tiago@email.com', 'pass123', '910000009', 'lisboa', 'n'),
+('marta luz', 'marta@email.com', 'pass123', '910000010', 'braga', 'n');
 
 insert into species (name) values 
-('cão'), ('gato'), ('coelho'), ('pássaro'), ('hamster'), 
-('réptil'), ('peixe'), ('furão'), ('porquinho da india'), ('tartaruga');
+('Cão'), ('Gato'), ('Coelho'), ('Pássaro'), ('Hamster'), 
+('Réptil'), ('Peixe'), ('Furão'), ('Porquinho da Índia'), ('Tartaruga');
 
 insert into breeds (specie_id, name) values 
-(1, 'labrador'), (1, 'poodle'), (2, 'siamês'), (2, 'persa'), (3, 'anão holandês'),
-(4, 'canário'), (5, 'sírio'), (8, 'standard'), (9, 'abissínio'), (10, 'corcunda de mississipi');
+(1, 'Labrador'), (1, 'Poodle'), (2, 'Siamês'), (2, 'Persa'), (3, 'Anão holandês'), (5, 'Sírio'), (6, 'Iguana-verde'), (8, 'Standard'), (9, 'Abissínio'), (10, 'Jabuti-piranga');
 
-insert into animals (name, breed_id, gender, size, status) values 
-('max', 1, 'm', 'grande', 'disponível'),
-('poppy', 3, 'f', 'pequeno', 'adotado'),
-('thor', 1, 'm', 'grande', 'em processo'),
-('luna', 4, 'f', 'médio', 'disponível'),
-('boby', 2, 'm', 'pequeno', 'disponível'),
-('nina', 2, 'f', 'pequeno', 'disponível'),
-('simba', 3, 'm', 'médio', 'adotado'),
-('mel', 5, 'f', 'pequeno', 'disponível'),
-('fred', 6, 'm', 'pequeno', 'disponível'),
-('tico', 7, 'm', 'pequeno', 'disponível');
+insert into animals (name, specie_id, breed_id, gender, size, image, birth_date, status) values 
+('Max', 1, 1, 'Macho', 'Grande', 'animal1.jpg', '2019-01-03', 'Disponível'),
+('Poppy', 1, 2, 'Fêmea', 'Médio', 'animal2.jpg', '2019-02-20', 'Adotado'),
+('Thor', 2, 3, 'Macho', 'Pequeno', 'animal3.jpg', '2023-03-26', 'Em processo'),
+('Belota', 2, 4, 'Fêmea', 'Pequeno', 'animal4.jpg', '2022-04-30', 'Disponível'),      
+('Lia', 3, 5, 'Fêmea', 'Pequeno', 'animal5.jpg', '2024-05-11', 'Disponível'),
+('Spike', 6, 7, 'Macho', 'Pequeno', 'animal6.jpg', '2022-06-24', 'Disponível'),
+('Fifi', 5, 6, 'Fêmea', 'Pequeno', 'animal7.jpg', '2025-07-01', 'Disponível'),
+('Mel', 8, 8, 'Fêmea', 'Pequeno', 'animal8.jpg', '2021-08-13', 'Disponível'),
+('Fred', 9, 9, 'Macho', 'Pequeno', 'animal9.jpg', '2023-09-02', 'Disponível'),
+('Tico', 10, 10, 'Macho', 'Médio', 'animal10.jpg', '2018-10-09', 'Disponível');
 
 insert into adoption_processes (user_id, animal_id, status, notes) values 
 (2, 1, 'pendente', 'casa com jardim'),

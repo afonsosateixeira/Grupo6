@@ -7,7 +7,7 @@ if(!$id || !is_numeric(($id))){
     header(("location:animalCatalog.php"));
     exit();
 }
-$stmt= $config->prepare("SELECT a.*, b.name AS breed_name from animals a LEFT JOIN breeds b ON a.breed_id= b.id where a.id= ?");
+$stmt= $config->prepare("SELECT a.*, b.name AS breed_name , s.name AS specie_name from animals a LEFT JOIN breeds b ON a.breed_id= b.id LEFT JOIN species s ON a.specie_id= s.id where a.id= ?");
 $stmt->bind_param("i", $id);
 $stmt->execute();
 $res= $stmt->get_result();
@@ -21,17 +21,21 @@ $animal = $res->fetch_assoc();
 <section class="mb-5 d-flex justify-content-center">
     <div class="row bg-white card-animal w-100">
         <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
-            <img class="photo img-fluid" src="assets/img/animals/<?= $animal['image']; ?>" alt="Foto de <?= htmlspecialchars($animal['name']) ?> ">
+            <?php
+                $caminhoImagem=!empty($animal['image']) ? "assets/img/animals/". $animal['image'] : "assets/img/defaultAnimals.png";
+            ?>
+            <img class="photo img-fluid" src="<?=$caminhoImagem?>" alt="Foto de <?= htmlspecialchars($animal['name']) ?> ">
         </div>
         <div class="col-12 col-md-6 d-flex flex-column justify-content-center ">
-
-            <h1 class="fw-bold"><?= htmlspecialchars($animal['name']) ?></h1>
-            <p><strong>Raça: </strong><?= htmlspecialchars($animal['breed_name']) ?></p>
-            <p><strong>Sexo: </strong><?= mostrarValor($animal['gender']) ?></p>
+            <div class="d-flex align-items-center gap-2 mb-2">
+                <h1 class="fw-bold"><?= htmlspecialchars($animal['name']) ?></h1>
+                <span class="badge bg-secondary"><?= htmlspecialchars($animal['specie_name']) ?></span>
+            </div>
+            <p><strong>Raça: </strong><?= mostrarValor($animal['breed_name']) ?></p>
+            <p><strong>Sexo: </strong><?= htmlspecialchars($animal['gender']) ?></p>
             <p><strong>Idade: </strong><?= mostrarIdade($animal['birth_date']) ?></p>
             <p><strong>Porte: </strong><?= mostrarValor($animal['size']) ?></p>
-            <p><strong>Estado: </strong><?= htmlspecialchars($animal['status']) ?></p>
-            <p><?php if(!empty($animal['description'])){
+            <p class="text-break mt-3"><?php if(!empty($animal['description'])){
                     echo htmlspecialchars($animal['description']);
                 }?>
             </p>

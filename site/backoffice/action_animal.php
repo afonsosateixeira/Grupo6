@@ -6,29 +6,40 @@ $caminhoPasta = "../assets/img/animals/";
 /* criar e guardar */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    
-    $nome    = $config->real_escape_string($_POST['nome_animal'] ?? '');
-    $breedID = (int)($_POST['breed_id'] ?? 0);
 
-    $data_bruta= $_POST['data_nascimento'];
-    $data= empty($data_bruta) ? "NULL" : "'". $config->real_escape_string($data_bruta). "'";
+    $nome = trim($_POST['nome_animal'] ?? '');
+    $specieID = (int)($_POST['specie_id'] ?? 0);
+    $breed_bruto = !empty($_POST['breed_id']) ? $_POST['breed_id'] : null;
+    $breed_seguro = ($breed_bruto === null) ? "NULL" : (int)$breed_bruto;
+    $data_bruta = $_POST['data_nascimento'] ?? '';
+    $genero = trim($_POST['gender'] ?? '');
+    $porte = trim($_POST['size'] ?? '');
+    $descricao = trim($_POST['description'] ?? '');
 
-    $genero  = $config->real_escape_string($_POST['gender'] ?? '');
-    $descricao = $config->real_escape_string($_POST['description'] ?? '');
+    $nome_seguro = $config->real_escape_string($nome);
+    $genero_seguro = $config->real_escape_string($genero);
+    $porte_seguro = $config->real_escape_string($porte);
+    $descricao_segura = $config->real_escape_string($descricao);
+    $data_segura = empty($data_bruta) ? "NULL" : "'" . $config->real_escape_string($data_bruta) . "'";
 
     // criar
     if (isset($_POST['btnCriar'])) {
-        $nomeArquivo = $_FILES['image']['name'];
-        
-        if (move_uploaded_file($_FILES['image']['tmp_name'], $caminhoPasta . $nomeArquivo)) {
-            $sql = "INSERT INTO animals (name, breed_id, birth_date, gender, description, image) 
-                    VALUES ('$nome', $breedID, $data, '$genero', '$descricao', '$nomeArquivo')";
+        $nomeArquivo = "";
+
+            if(!empty($_FILES['image']['name'])){
+                $nomeArquivo = $_FILES['image']['name'];
+
+                if (!move_uploaded_file($_FILES['image']['tmp_name'], $caminhoPasta . $nomeArquivo)) {
+                    header("Location: animalList.php?status=erro_imagem");
+                    exit();
+                }
+            }
+
+            $sql = "INSERT INTO animals (name, specie_id, breed_id, birth_date, gender, size, description, image) 
+                    VALUES ('$nome_seguro', $specieID, $breed_seguro, $data_segura, '$genero_seguro', '$porte_seguro', '$descricao_segura', '$nomeArquivo')";
             $config->query($sql);
             header("Location: animalList.php?status=criado");
-        } else {
-            echo "Erro ao carregar imagem de novo animal.";
-        }
-        exit();
+            exit(); 
     }
 
     // editar/guardar
@@ -36,11 +47,13 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = (int)$_POST['id_animal'];
         
         $sql = "UPDATE animals SET 
-                name = '$nome', 
-                breed_id = $breedID, 
-                birth_date = $data,
-                gender = '$genero',
-                description = '$descricao'
+                name = '$nome_seguro', 
+                specie_id = $specieID,
+                breed_id = $breed_seguro, 
+                birth_date = $data_segura,
+                gender = '$genero_seguro',
+                size = '$porte_seguro',
+                description = '$descricao_segura'
                 ";
 
         if (!empty($_FILES['image']['name'])) {
