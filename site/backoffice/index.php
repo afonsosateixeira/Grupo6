@@ -1,11 +1,38 @@
 <?php
-	require_once("../config.php");
+	# Inicia a sessão e faz ligação à base de dados 
+	require_once '../db.php';
 
+	# Vai buscar a última parte do url(a página atual)
 	$path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') . '/';
 	$path = basename($path);
 	$path = pathinfo($path, PATHINFO_FILENAME);
 
+	#Verifica se a página atual devia ficar como index ou como identificado anteriormente
 	$route = ($path === 'backoffice' || $path === 'index') ? 'dashboard' : $path;
+
+	# No caso de ser necessário usar uma mensagem
+	$response = $_GET['response'] ?? '';
+
+	if(empty($_SESSION['auth'])){
+		header('Location: ../forbidden?response=401');
+		exit();
+	} else {
+		$stmt = $conn->prepare('SELECT email, role FROM users WHERE email = ?');
+		$stmt->bind_param('s', $_SESSION['email']);
+		$stmt->execute();
+		$res = $stmt->get_result();
+
+		if($row = $res->fetch_assoc()){
+			if($row['role'] != 'admin'){
+				header('Location: ../forbidden?response=403');
+				exit();
+			}
+		} else {
+			session_destroy();
+			header('Location: ../forbidden?response=401');
+			exit();
+		}
+	}
 
 	switch ($route) {
 		case 'adoptionProcess':

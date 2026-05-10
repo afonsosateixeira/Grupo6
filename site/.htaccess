@@ -1,4 +1,4 @@
-# Desativa o redirecionamento normal do Apache (ex: privacy > privacy.html, nós vamos fazer com que privacy > index.php que vai mostrar o conteúdo de privacy.html)
+# Desativa o redirecionamento normal do Apache (ex: privacy iria abrir privacy.html, nós vamos fazer com que privacy abra index.php que vai mostrar o conteúdo de privacy.html)
 Options -MultiViews
 # Ativa o redirecionamento que estamos a usar neste ficheiro
 RewriteEngine On

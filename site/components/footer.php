@@ -5,7 +5,7 @@
     <div class="row py-5">
       <div class="col-12 col-md-3 mb-4 mb-md-0 text-center text-md-start">
         <a class="footer-brand" href="<?= $basePath ?>/">
-          <img src="assets/img/footer.png" alt="Logo PAM" style="max-width: 200px; max-height: 50px;" />
+          <img src="<?= $basePath ?>/assets/img/footer.png" alt="Logo PAM" style="max-width: 200px; max-height: 50px;" />
         </a>
         <p class="mt-2" style="font-size: 0.8rem">Encontra o teu melhor amigo hoje.</p>
       </div>

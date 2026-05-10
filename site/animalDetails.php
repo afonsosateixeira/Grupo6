@@ -1,8 +1,7 @@
 <?php
-require_once('config.php');
 $id = $_GET['id'] ?? null;
 
-$res = $config->query("select * from animals where id= $id");
+$res = $conn->query("select * from animals where id= $id");
 $animal = $res->fetch_assoc();
 ?>
 
