@@ -1,17 +1,16 @@
 <?php
-require_once('../config.php');
-
+require_once '../db.php';
 $caminhoPasta = "../assets/img/animals/";
 
 /* criar e guardar */
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     
-    $nome    = $config->real_escape_string($_POST['nome_animal'] ?? '');
+    $nome    = $conn->real_escape_string($_POST['nome_animal'] ?? '');
     $breedID = (int)($_POST['breed_id'] ?? 0);
-    $data    = $config->real_escape_string($_POST['data_nascimento'] ?? '');
-    $genero  = $config->real_escape_string($_POST['gender'] ?? '');
-    $descricao = $config->real_escape_string($_POST['description'] ?? '');
+    $data    = $conn->real_escape_string($_POST['data_nascimento'] ?? '');
+    $genero  = $conn->real_escape_string($_POST['gender'] ?? '');
+    $descricao = $conn->real_escape_string($_POST['description'] ?? '');
 
     // criar
     if (isset($_POST['btnCriar'])) {
@@ -20,7 +19,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         if (move_uploaded_file($_FILES['image']['tmp_name'], $caminhoPasta . $nomeArquivo)) {
             $sql = "INSERT INTO animals (name, breed_id, birth_date, gender, description, image) 
                     VALUES ('$nome', $breedID, '$data', '$genero', '$descricao', '$nomeArquivo')";
-            $config->query($sql);
+            $conn->query($sql);
             header("Location: animalList.php?status=criado");
         } else {
             echo "Erro ao carregar imagem de novo animal.";
@@ -49,7 +48,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         $sql .= " WHERE id = $id";
         
-        $config->query($sql);
+        $conn->query($sql);
         header("Location: animalList.php?status=editado");
         exit();
     }
@@ -60,7 +59,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 // ELIMINAR
 if (isset($_GET['btnEliminar'])) {
     $id = (int)$_GET['btnEliminar'];
-    $config->query("DELETE FROM animals WHERE id = $id");
+    $conn->query("DELETE FROM animals WHERE id = $id");
     header("Location: animalList.php?status=apagado");
     exit();
 }

@@ -1,8 +1,6 @@
 <?php
-    require_once('config.php');
-
     $sql = "SELECT * FROM animals ORDER BY id ASC";
-    $res = $config->query($sql);
+    $res = $conn->query($sql);
 ?>
 
 <div class="container">

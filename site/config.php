@@ -1,11 +1,7 @@
 <?php
-    $hostname = "localhost";
-    $username = "root";
-    $password = "";
-    $dataBase = "adoption";
+    session_start();
 
-    $config = new mysqli($hostname, $username, $password, $dataBase);
-
-    if($config -> connect_error){
-        echo "Erro na conexão" . $config->connect_error;
-    }
+    define('DB_HOST', 'localhost');
+    define('DB_USER', 'root');
+    define('DB_PASS', '');
+    define('DB_NAME', 'PAM');

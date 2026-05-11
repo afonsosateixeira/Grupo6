@@ -1,48 +1,17 @@
 <?php
-require_once("../config.php");
+    // Editar
+    $aniEdit = null;
+    if (isset($_GET['btnEditar'])) {
+        $id = (int) $_GET['btnEditar'];
+        $sqlEdit = "SELECT * FROM animals WHERE id = $id";
+        $res = $conn->query($sqlEdit);
+        $aniEdit = $res->fetch_assoc();
+    }
 
-//Route
-$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-$basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
-
-if ($basePath !== '' && $basePath !== '/' && str_starts_with($path, $basePath))
-    $path = substr($path, strlen($basePath));
-
-$route = trim($path, '/');
-
-if ($route === '')
-    $route = 'index';
-
-if (str_contains($route, '.'))
-    $route = pathinfo($route, PATHINFO_FILENAME);
-
-// Editar
-$aniEdit = null;
-if (isset($_GET['btnEditar'])) {
-    $id = (int) $_GET['btnEditar'];
-    $sqlEdit = "SELECT * FROM animals WHERE id = $id";
-    $res = $config->query($sqlEdit);
-    $aniEdit = $res->fetch_assoc();
-}
-
-$sql = "SELECT * FROM animals ORDER BY id ASC";
-$group = $config->query($sql);
+    $sql = "SELECT * FROM animals ORDER BY id ASC";
+    $group = $conn->query($sql);
 ?>
-<!DOCTYPE html>
-<html lang="pt">
 
-<head>
-    <?php
-    $metaTitle = "Gestão de Animais";
-    $metaDescription = "";
-    $backOffice = true;
-    require_once "../components/head.php";
-    ?>
-    <link rel="stylesheet" href="../assets/css/sidebar.css">
-</head>
-
-<body>
-    <?php require_once("../components/sidebar.html"); ?>
     <?php require_once("../components/searchbar.php"); ?>
     <a href="animalList.php?add" class="btn btn-success">Adicionar Novo Animal</a>
 
@@ -58,7 +27,7 @@ $group = $config->query($sql);
                     </h5>
                 </div>
 
-                <form action="action_animal.php" method="POST" enctype="multipart/form-data">
+                <form action="action_animal" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <?php if ($aniEdit): ?>
                             <input type="hidden" name="id_animal" value="<?= $aniEdit['id']; ?>">
@@ -76,7 +45,7 @@ $group = $config->query($sql);
                                 <option value="">Selecione uma Espécie</option>
 
                                 <?php
-                                $executar = $config->query("SELECT id, name FROM species");
+                                $executar = $conn->query("SELECT id, name FROM species");
 
                                 while ($row = $executar->fetch_assoc()) {
                                     echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
@@ -90,7 +59,7 @@ $group = $config->query($sql);
                             <select name="breed_id" class="form-select" required>
                                 <option value="">Selecione uma Raça</option>
                                 <?php   
-                                $raca = $config->query("SELECT id, name FROM breeds");
+                                $raca = $conn->query("SELECT id, name FROM breeds");
 
                                 while ($rac = $raca->fetch_assoc()) { 
                                     echo "<option value='" . $rac['id'] . "'>" . $rac['name'] . "</option>";
@@ -178,7 +147,6 @@ $group = $config->query($sql);
         </tbody>
     </table>
 
-    <script src="assets/js/modalForm.js"></script>
     <script>
         window.onload = function () {
             <?php if ($aniEdit || isset($_GET['add'])): ?>
@@ -187,6 +155,3 @@ $group = $config->query($sql);
             <?php endif; ?>
         };
     </script>
-</body>
-
-</html>

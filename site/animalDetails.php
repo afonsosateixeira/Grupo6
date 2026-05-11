@@ -1,16 +1,15 @@
 <?php
-require_once('config.php');
-$id = $_GET['id'] ?? null;
+    $id = $_GET['id'] ?? null;
 
-$sql = "select * from animals where id= $id";
-$res = $config->query($sql);
-
-$animal = $res->fetch_assoc();
+    $sql = "select * from animals where id= $id";
+    $res = $conn->query($sql);
+    $animal = $res->fetch_assoc();
 ?>
 
 <section class="container m-3">
     <a href="animalCatalog" class="btn btn-secondary w-5"><i class="fa-solid fa-angle-left"></i></a>
 </section>
+
 <section class="mb-5 mt-5 d-flex justify-content-center">
     <div class="row bg-white card-animal w-100">
         <div class="col-12 col-md-6 d-flex justify-content-center align-items-center">
