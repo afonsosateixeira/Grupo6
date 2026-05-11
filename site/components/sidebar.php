@@ -36,7 +36,7 @@
             <li>
             <hr class="dropdown-divider">
             </li>
-            <li><a class="dropdown-item" href="<?= $basePath ?>/../index">Sair</a></li>
+            <li><a class="dropdown-item" href="<?= $basePath ?>/../logout">Sair</a></li>
         </ul>
     </div>
 </div>
