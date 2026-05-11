@@ -11,23 +11,25 @@
     $limite=12;
     $inicio= ($pagina * $limite) - $limite;
 
-    $registros= $config->query("SELECT COUNT(name) as ult FROM animals")->fetch_assoc()['ult'];
+    $registros= $config->query("SELECT COUNT(*) as ult FROM animals WHERE status='Disponível' OR status='Em processo'")->fetch_assoc()['ult'];
     $paginas= ceil($registros / $limite);
 
-    $sql = "SELECT * FROM animals ORDER BY id ASC LIMIT $inicio, $limite";
+    $sql = "SELECT * FROM animals WHERE status='Disponível' OR status='Em processo' ORDER BY id ASC LIMIT $inicio, $limite";
     $res = $config->query($sql);
 ?>
 
 <div class="container">
-    <h1 class="text-center fw-bold mt-4 mb-5">Animais para adoção</h1>
+    <h1 class="text-center fw-bold mt-4 mb-4">Animais para adoção</h1>
 </div>
 
+<div class="container d-flex justify-content-center mb-4">
+  <?php include('components/searchbar.php'); ?>
+</div>
 <div class="container mb-4">
     <div class="row g-4 justify-content-center">
     <?php
     if ($res->num_rows > 0):
         foreach ($res as $animal):
-            if ($animal['status'] == 'Disponível' || $animal['status'] == 'Em processo'):
                 ?>
         <div class="col-12 col-md-6 col-lg-3 d-flex justify-content-center">
             <a href="animalDetails?id=<?= htmlspecialchars($animal['id']) ?>" class="card-link ">
@@ -46,8 +48,7 @@
                 </div>
             </a>
         </div>
-        <?php endif;
-        endforeach;
+        <?php endforeach;
         else:
             echo "<p>Ainda não temos animais para adoção.</p>";
         endif; ?>

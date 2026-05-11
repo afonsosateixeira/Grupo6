@@ -1,16 +1,26 @@
 .search{
-    width: 250px;
+    width: 300px;
     height: 40px;
-    padding: 15px;
-    border: 1px solid #888888;
+    border: 2px solid #888888;
     border-radius: 5px;
-    color: #888888;
-    padding-left: 50px;
+    padding: 0 50px;
 }
 
-.lupa{
+.search1{
+    color: #888888;
     position: absolute;
-    top: 36%;
-    left: 20px;
+    left: 10px;
+    top: 50%;
+    transform: translateY(-50%);
     width: 6px;
 }
+
+.filter1{
+    color: #888888;
+    position: absolute;
+    right: 25px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 6px;
+}
+
