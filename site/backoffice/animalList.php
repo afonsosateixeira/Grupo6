@@ -43,6 +43,7 @@ if (isset($_GET['btnEditar'])) {
     ?>
     <link rel="stylesheet" href="../assets/css/sidebar.css">
     <link rel="stylesheet" href="../assets/css/animalList.css">
+    <link rel="stylesheet" href="//cdn.datatables.net/2.3.8/css/dataTables.dataTables.min.css">
 </head>
 
 <body>
@@ -50,7 +51,6 @@ if (isset($_GET['btnEditar'])) {
 
     <h1 class="fw-bold fs-2">Lista de Animais</h1>
     <div class="d-flex justify-content-end gap-2 mb-3">
-        <?php require_once("../components/searchbar.php"); ?>
         <a href="animalList.php?add" class="btn btn-success">+ Criar</a>
     </div>
 
@@ -168,7 +168,7 @@ if (isset($_GET['btnEditar'])) {
     </div>
     
     <!--Tabela-->
-    <table class="table striped">
+    <table class="table striped" id="animalTable">
         <thead>
             <tr>
                 <th>ID</th>
@@ -197,7 +197,7 @@ if (isset($_GET['btnEditar'])) {
                     <td><?= mostrarValor2($item['breed_name']); ?></td>
                     <td><?= mostrarIdade($item['birth_date']); ?></td>
                     <td><?= mostrarValor2($item['size']); ?></td>
-                    <td class="text-truncate" style="max-width: 250px;" title="<?= $item['description']; ?>"><?= $item['description']; ?></td>
+                    <td style="text-wrap: pretty"><?= $item['description']; ?></td>
                     <td class="fw-bold" style="color:<?= corStatus($item['status'])?>;"><?= $item['status']; ?></td>
                     <td>
                         <a href="action_animal.php?btnEditar=<?= $item['id']; ?>"><i
@@ -218,6 +218,19 @@ if (isset($_GET['btnEditar'])) {
         };
     </script>
     <script src="assets/js/animalList.js"></script>
+    <script src="https://code.jquery.com/jquery-4.0.0.min.js"></script>
+    <script src="https://cdn.datatables.net/2.3.8/js/dataTables.min.js"></script>
+    <script>
+        let table = new DataTable('#animalTable', {
+            language: {
+                url: '../assets/js/pt_PT.json',
+            },
+            pageLength: 10,
+            lengthMenu: [5, 10, 25, 50],   
+            columns: [null,{ orderable: false,width: '100px' }, null, null, null, null,{ width: '600px' }, null, {orderable: false}] 
+            
+        });
+    </script>
 </body>
 
 </html>
