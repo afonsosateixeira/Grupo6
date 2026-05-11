@@ -37,23 +37,10 @@ create table animals(
     constraint fk_breeds foreign key(breed_id) references breeds(id) on delete cascade
     ) engine=InnoDB;
 
-drop table if exists adopters;
-create table adopters( 
-    id INT NOT NULL auto_increment, 
-    full_name VARCHAR(150) NOT NULL,  
-    email VARCHAR(100) NOT NULL,  
-    phone VARCHAR(20) NOT NULL,
-    status BOOLEAN DEFAULT TRUE,
-    created_at TIMESTAMP default current_timestamp,
-    
-    UNIQUE INDEX `email_UNIQUE` (`email` ASC) VISIBLE,
-    constraint pk_adopters_id primary key (id)
-    )engine=InnoDB;
-
 drop table if exists adoption_processes;
 create table adoption_processes(
     id INT NOT NULL auto_increment,    
-    adopter_id INT not null,    
+    user_id INT not null,    
     animal_id INT not null,    
     status ENUM('pendente', 'aprovado', 'rejeitado') default 'pendente',    
     start_date timestamp default current_timestamp,    
@@ -61,7 +48,7 @@ create table adoption_processes(
     notes text null,
 
     constraint pk_adoption_processes_id primary key (id), 
-    constraint fk_adopters foreign key(adopter_id) references adopters(id) on delete cascade,    
+    constraint fk_users foreign key(user_id) references user(id) on delete cascade,    
     constraint fk_animals foreign key(animal_id) references animals(id) on delete cascade
     ) engine=InnoDB;
 

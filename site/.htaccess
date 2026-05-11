@@ -3,7 +3,7 @@ Options -MultiViews
 # Ativa o redirecionamento que estamos a usar neste ficheiro
 RewriteEngine On
 
-# Não redireciona nada dentro de /backoffice/
+# Não redireciona nada dentro de /backoffice/, pois essa pasta vai ter outro redirecionamento dentro dela
 RewriteRule ^backoffice/ - [L]
 
 # Se for um ficheiro real

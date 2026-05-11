@@ -21,6 +21,11 @@
 
 	# Switch case para definir o título e a descrição(google/etc) das páginas
 	switch ($route) {
+		case 'accessibility':
+			$metaTitle = 'Acessibilidade';
+			$metaDescription = 'Informações sobre acessibilidade';
+			break;
+
 		case 'adoptionGuide':
 			$metaTitle = 'Guia de Adoção';
 			$metaDescription = 'Guia passo a passo para adoção responsável';
@@ -41,6 +46,11 @@
 			$metaDescription = 'Todas as informações do animal';
 			break;
 
+		case 'appointment':
+			$metaTitle = 'Agendar Consulta';
+			$metaDescription = 'Agende uma consulta para o seu animal de estimação';
+			break;
+
 		case 'contactos':
 			$metaTitle = 'Contactos';
 			$metaDescription = 'Contactos da Poppy and Max';
@@ -57,11 +67,17 @@
 			break;
 
 		case 'forbidden':
-			# Se a resposta que vem do backoffice for um desses erros executa o código de erro
-			if($response == 401 || $response == 403)
+			# Se a resposta que vem do backoffice for um desses erros executa o código de erro correspondente
+			if($response == 401 || $response == 403){
 				http_response_code($response);
-			$metaTitle = 'Acesso negado';
-			$metaDescription = 'Não têm permição para aceder à página pretendida';
+				$metaTitle = 'Acesso negado';
+				$metaDescription = 'Não têm permição para aceder à página pretendida';
+				break;
+			}
+			# Caso contrário declara que a página não foi encontrada para evitar esta página a menos que seja por falta de autorizações
+			http_response_code(404);
+			$metaTitle = 'Página não encontrada';
+			$metaDescription = 'A página que procura não existe';
 			break;
 
 		case 'index':
@@ -75,7 +91,7 @@
 				$email = trim($_POST['email']);
 				$pass = hash('sha512', trim($_POST['pass']));
 
-				# Verifica se falta algum campo ser preenchido mandando um aviso se faltar, caso todos estarem preenchidos verifica se existe algum resultado de um utilizador com o email inserido
+				# Verifica se falta algum campo ser preenchido mandando um aviso se faltar, caso todos estiverem preenchidos verifica se existe algum resultado de um utilizador com o email inserido
 				if(!empty($email) && !empty($pass)){
 					$stmt = $conn->prepare('SELECT full_name, email, password FROM users WHERE email = ?');
 					$stmt->bind_param('s', $email);
@@ -170,8 +186,13 @@
 			}
 
 			$metaTitle = 'Registar';
-			$metaDescription = 'Criar conta';
+			$metaDescription = 'Crie a sua conta';
 			break;
+
+		case 'termos':
+			$metaTitle = 'Termos e condições';
+			$metaDescription = 'Termos e condições da Poppy and Max';
+			break;	
 
 		default:
 			http_response_code(404);
@@ -180,11 +201,12 @@
 			break;
 	}
 ?>
+
 <!DOCTYPE html>
 <html lang="pt">
 	<head>
 		<?php
-			# Vai buscar o código todo que útilizamos para o head como chamar o css e javascript 
+			# Vai buscar o código todo que útilizamos para o head como chamar o css e javascript
 			require_once 'components/head.php';
 		?>
 	</head>
@@ -193,77 +215,82 @@
 			# Vai buscar o nosso header/navbar
 			require_once 'components/header.php';
 		?>
-			<main>
-				<?php
-					# Switch case para decidir a página que é apresentada no nosso site
-					switch ($route) {
-						case 'adoptionGuide':
-							require_once 'adoptionGuide.php';
-							break;
+		<main>
+			<?php
+				# Switch case para decidir a página que é apresentada no nosso site
+				switch ($route) {
+					case 'accessibility':
+						require_once 'accessibility.html';
+						break;
 
-						case 'animal_care':
-							require_once 'animal_care.php';
-							break;
+					case 'adoptionGuide':
+						require_once 'adoptionGuide.html';
+						break;
 
-						case 'animalCatalog':
-							require_once 'animalCatalog.php';
-							break;
+					case 'animal_care':
+						require_once 'animal_care.php';
+						break;
 
-						case 'animalDetails':
-							require_once 'animalDetails.php';
-							break;
+					case 'animalCatalog':
+						require_once 'animalCatalog.php';
+						break;
 
-						case 'contactos':
-							require_once 'contactos.html';
-							break;
+					case 'animalDetails':
+						require_once 'animalDetails.php';
+						break;
 
-						case 'cookies':
-							require_once 'cookies.html';
-							break;
+					case 'appointment':
+						require_once 'appointment.php';
+						break;
 
-						case 'dia_voluntario':
-							require_once 'dia_voluntario.html';
-							break;
+					case 'contactos':
+						require_once 'contactos.html';
+						break;
 
-						case 'forbidden':
-							?>
-							<section class="container my-5">
-								<h1>Accesso negado</h1>
-								<p><?= $response == 401 ? "Inicie a sua conta antes de tentar aceder a esta página" : "Não têm permições para aceder a esta página" ?></p>
-							</section>
-				<?php
-							break;
+					case 'cookies':
+						require_once 'cookies.html';
+						break;
 
-						case 'index':
-							require_once 'home.php';
-							break;
+					case 'dia_voluntario':
+						require_once 'dia_voluntario.html';
+						break;
 
-							case 'login':
-							require_once 'login.php';
-							break;
+					case 'forbidden':
+						if($response == 401 || $response == 403)
+							require_once 'forbidden.php';
+						else
+							require_once '404.html';
+						break;
 
-						case 'privacy':
-							require_once 'privacy.html';
-							break;
+					case 'index':
+						require_once 'home.php';
+						break;
 
-						case 'regist':
-							require_once 'regist.php';
-							break;
+					case 'login':
+						require_once 'login.php';
+						break;
 
-						default:
-							?>
-							<section class="container my-5">
-								<h1>404</h1>
-								<p>Página não encontrada.</p>
-							</section>
-				<?php
-							break;
-					}
-				?>
-			</main>
-		<?php
-			# Vai buscar o nosso footer
-			require_once 'components/footer.php';
-		?>
+					case 'privacy':
+						require_once 'privacy.html';
+						break;
+
+					case 'regist':
+						require_once 'regist.php';
+						break;
+
+					case 'termos':
+						require_once 'termos.html';
+						break;
+
+					default:
+						require_once '404.html';
+						break;
+				}
+			?>
+		</main>
+	<?php
+		# Vai buscar o nosso footer
+		require_once 'components/footer.php';
+	?>
 	</body>
 </html>

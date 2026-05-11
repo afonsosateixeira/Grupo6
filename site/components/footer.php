@@ -51,9 +51,9 @@
             <ul class="nav flex-column">
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/cookies" class="nav-link p-0">Política de cookies</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/privacy" class="nav-link p-0">Política de Privacidade</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Política de Acessibilidade</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/accessibility" class="nav-link p-0">Política de Acessibilidade</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Lítigios de consumo</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Termos e condições</a></li>
+              <li class="nav-item mb-2"><a href="termos" class="nav-link p-0">Termos e condições</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">FAQ</a></li>
             </ul>
           </div>

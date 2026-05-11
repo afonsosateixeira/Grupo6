@@ -1,0 +1,16 @@
+.search{
+    width: 250px;
+    height: 50px;
+    padding: 15px;
+    border: 1px solid #888888;
+    border-radius: 5px;
+    color: #888888;
+    padding-left: 50px;
+}
+
+.lupa{
+    position: absolute;
+    top: 36%;
+    left: 20px;
+    width: 6px;
+}

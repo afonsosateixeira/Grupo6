@@ -1,15 +1,19 @@
 <?php
-// Codigo
-$aniEdit = null;
-if (isset($_GET['btnEditar'])) {
-    $id = (int) $_GET['btnEditar'];
-    $res = $config->query("SELECT * FROM animals WHERE id = $id");
-    $aniEdit = $res->fetch_assoc();
-}
+    // Editar
+    $aniEdit = null;
+    if (isset($_GET['btnEditar'])) {
+        $id = (int) $_GET['btnEditar'];
+        $sqlEdit = "SELECT * FROM animals WHERE id = $id";
+        $res = $conn->query($sqlEdit);
+        $aniEdit = $res->fetch_assoc();
+    }
 
-$lista = $config->query("SELECT * FROM animals ORDER BY id ASC");
+    $sql = "SELECT * FROM animals ORDER BY id ASC";
+    $group = $conn->query($sql);
 ?>
-    <a href="animalList?add" class="btn btn-success">Adicionar Novo Animal</a>
+
+    <?php require_once("../components/searchbar.php"); ?>
+    <a href="animalList.php?add" class="btn btn-success">Adicionar Novo Animal</a>
 
     <!--Modal-->
     <div class="modal fade" id="formModal">
@@ -19,20 +23,20 @@ $lista = $config->query("SELECT * FROM animals ORDER BY id ASC");
                 <div class="modal-header">
                     <h5 class="modal-title">
                         <i class="fa-solid fa-paw me-2"></i>
-                        <?php echo $aniEdit ? "Editar: " . $aniEdit['name'] : "Novo Animal"; ?>
+                        <?= $aniEdit ? "Editar: " . $aniEdit['name'] : "Novo Animal"; ?>
                     </h5>
                 </div>
 
                 <form action="action_animal" method="POST" enctype="multipart/form-data">
                     <div class="modal-body">
                         <?php if ($aniEdit): ?>
-                            <input type="hidden" name="id_animal" value="<?php echo $aniEdit['id']; ?>">
+                            <input type="hidden" name="id_animal" value="<?= $aniEdit['id']; ?>">
                         <?php endif; ?>
 
                         <div class="mb-3">
                             <label class="form-label fw-bold">Nome do Animal</label>
                             <input type="text" name="nome_animal" class="form-control" placeholder="Ex: Boby"
-                                value="<?php echo $aniEdit ? $aniEdit['name'] : ''; ?>" required>
+                                value="<?= $aniEdit ? $aniEdit['name'] : ''; ?>" required>
                         </div>
 
                         <div class="mb-3">
@@ -41,7 +45,7 @@ $lista = $config->query("SELECT * FROM animals ORDER BY id ASC");
                                 <option value="">Selecione uma Espécie</option>
 
                                 <?php
-                                $executar = $config->query("SELECT id, name FROM species");
+                                $executar = $conn->query("SELECT id, name FROM species");
 
                                 while ($row = $executar->fetch_assoc()) {
                                     echo "<option value='" . $row['id'] . "'>" . $row['name'] . "</option>";
@@ -51,16 +55,14 @@ $lista = $config->query("SELECT * FROM animals ORDER BY id ASC");
                         </div>
 
                         <div class="mb-3">
-                            <label>Escolha a Raça:</label>
-                            <select name="breed_id" class="form-select"
-                                value="" required>
+                            <label class="form-label fw-bold">Escolha a Raça:</label>
+                            <select name="breed_id" class="form-select" required>
                                 <option value="">Selecione uma Raça</option>
                                 <?php   
-                                $raca = $config->query("SELECT id, name FROM breeds");
+                                $raca = $conn->query("SELECT id, name FROM breeds");
 
-                                while ($rac = $raca->fetch_assoc()) {
-                                    $selec = ($animalParaEditar && $animalParaEditar['breed_id'] == $rac['id']) ? 'selected' : '';
-                                    echo "<option value='" . $rac['id'] . "' $selec>" . $rac['name'] . "</option>";
+                                while ($rac = $raca->fetch_assoc()) { 
+                                    echo "<option value='" . $rac['id'] . "'>" . $rac['name'] . "</option>";
                                 }
                                 ?>
                             </select>
@@ -69,39 +71,39 @@ $lista = $config->query("SELECT * FROM animals ORDER BY id ASC");
                         <div class="mb-3">
                             <label class="form-label fw-bold">Data de Nascimento</label>
                             <input type="date" name="data_nascimento" class="form-control" 
-                                value="<?php echo $aniEdit ? $aniEdit['birth_date'] : ''; ?>" required>
+                                value="<?= $aniEdit ? $aniEdit['birth_date'] : ''; ?>" required>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label fw-bold">Fotografia</label>
-                            <input type="file" name="image" class="form-control" accept="image/*" <?php echo $aniEdit ? '' : 'required'; ?>>
+                            <input type="file" name="image" class="form-control" accept="image/*" <?= $aniEdit ? '' : 'required'; ?>>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label fw-bold">Género</label>
                             <div class="form-check">
                                 <input type="radio" name="gender" value="Macho" class="form-check-input" 
-                                    <?php echo ($aniEdit && $aniEdit['gender'] === 'Macho') ? 'checked' : ''; ?> required>
+                                    <?= ($aniEdit && $aniEdit['gender'] === 'Macho') ? 'checked' : ''; ?> required>
                                 <label class="form-check-label">Macho</label>
                             </div>
                             <div class="form-check">
                                 <input type="radio" name="gender" value="Fêmea" class="form-check-input" 
-                                    <?php echo ($aniEdit && $aniEdit['gender'] === 'Fêmea') ? 'checked' : ''; ?> required>
+                                    <?= ($aniEdit && $aniEdit['gender'] === 'Fêmea') ? 'checked' : ''; ?> required>
                                 <label class="form-check-label">Fêmea</label>
                             </div>
                         </div>
 
                         <div class="mb-3">
                             <label class="form-label fw-bold">Descrição</label>
-                            <textarea name="description" class="form-control"><?php echo $aniEdit ? $aniEdit['description'] : ''; ?></textarea>
+                            <textarea name="description" class="form-control"><?= $aniEdit ? $aniEdit['description'] : ''; ?></textarea>
                         </div>
                     </div>
 
                     <div class="modal-footer bg-light">
-                        <a href="animalList" class="btn btn-secondary">Cancelar</a>
-                        <button type="submit" name="<?php echo $aniEdit ? 'btnEditar' : 'btnCriar'; ?>"
+                        <a href="animalList.php" class="btn btn-secondary">Cancelar</a>
+                        <button type="submit" name="<?= $aniEdit ? 'btnEditar' : 'btnCriar'; ?>"
                             class="btn btn-primary px-4">
-                            <?php echo $aniEdit ? 'Guardar Alterações' : 'Adicionar Animal'; ?>
+                            <?= $aniEdit ? 'Guardar Alterações' : 'Adicionar Animal'; ?>
                         </button>
                     </div>
                 </form>
@@ -124,24 +126,24 @@ $lista = $config->query("SELECT * FROM animals ORDER BY id ASC");
             </tr>
         </thead>
         <tbody>
-            <?php while ($linha = $lista->fetch_assoc()): ?>
+            <?php foreach($group as $item): ?>
                 <tr>
-                    <td><?php echo $linha['id']; ?></td>
-                    <td><?php echo $linha['name']; ?></td>
-                    <td><?php echo $linha['breed_id']; ?></td>
-                    <td><?php echo $linha['birth_date']; ?></td>
-                    <td><?php echo $linha['gender']; ?></td>
-                    <td><?php echo $linha['description']; ?></td>
-                    <td><?php echo $linha['status']; ?></td>
+                    <td><?= $item['id']; ?></td>
+                    <td><?= $item['name']; ?></td>
+                    <td><?= $item['breed_id']; ?></td>
+                    <td><?= $item['birth_date']; ?></td>
+                    <td><?= $item['gender']; ?></td>
+                    <td><?= $item['description']; ?></td>
+                    <td><?= $item['status']; ?></td>
 
                     <td>
-                        <a href="action_animal?btnEditar=<?php echo $linha['id']; ?>"><i
+                        <a href="action_animal.php?btnEditar=<?= $item['id']; ?>"><i
                                 class="fa-solid fa-pen-to-square"></i></a>
-                        <a href="action_animal?btnEliminar=<?php echo $linha['id']; ?>"
+                        <a href="action_animal.php?btnEliminar=<?= $item['id']; ?>"
                             onclick="return confirm('Apagar este adotante?')"><i class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
-            <?php endwhile; ?>
+            <?php endforeach; ?>
         </tbody>
     </table>
 
