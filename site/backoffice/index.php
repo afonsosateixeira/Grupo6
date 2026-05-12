@@ -37,17 +37,17 @@
 	switch ($route) {
 		case 'adoptionProcess':
 			$metaTitle = '';
-			$metaDescription = 'Guia passo a passo para adoção responsável';
+			$metaDescription = '';
 			break;
 
 		case 'animalList':
 			$metaTitle = '';
-			$metaDescription = 'Guia passo a passo para adoção responsável';
+			$metaDescription = '';
 			break;
 
 		case 'dashboard':
 			$metaTitle = '';
-			$metaDescription = 'Guia passo a passo para adoção responsável';
+			$metaDescription = 'Dashboard da Poppy and Max';
 			break;
 
 		default:
@@ -64,6 +64,14 @@
 		<?php
 			$backOffice = true;
 			require_once "../components/head.php";
+
+			if($route == 'animalList'):
+		?>
+				<link rel="stylesheet" href="//cdn.datatables.net/2.3.8/css/dataTables.dataTables.min.css">
+				<script src="https://code.jquery.com/jquery-4.0.0.min.js" defer></script>
+				<script src="https://cdn.datatables.net/2.3.8/js/dataTables.min.js" defer></script>
+		<?php
+			endif;
 		?>
 		<link rel="stylesheet" href="<?= $basePath ?>/assets/css/sidebar.css">
 	</head>

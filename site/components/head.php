@@ -31,8 +31,8 @@
 <link rel="stylesheet" href="<?= $basePath ?>/assets/css/styles.css">
 
 <?php
-	# Obtem o estilo para a searchbar se for animalCatalog
-	if($route == 'animalCatalog')
+	# Obtem o estilo para a searchbar para páginas que necessitam desta
+	if($route == 'animalCatalog' || ($backOffice && $route == 'animalList'))
 		echo '<link rel="stylesheet" href="assets/css/searchbar.css">';
 ?>
 
@@ -41,14 +41,22 @@
 <script src="<?= $basePath ?>/assets/js/scripts.js" defer></script>
 
 <?php
-	# Verifica se exite um estilo específico da página e utiliza se existir
-	if(file_exists(__DIR__."/../assets/css/".$route.".css"))
-		echo '<link rel="stylesheet" href="'.$basePath.'/assets/css/'.$route.'.css">';
-
-	# Verifica se exite um script específico da página e utiliza se existir
-	if(file_exists(__DIR__."/../assets/js/".$route.".js"))
-		echo '<script src="'.$basePath.'/assets/js/'.$route.'.js" defer></script>';
-
-	# Após localizar todos os ficheiros corretamente reverte a variável, tenho de verificar se é necessário
-	if($backOffice)
+	# Após localizar todos os ficheiros corretamente reverte a variável, tenho de verificar se é necessário. Aproveitamos para verificar os ficheiros de backoffice ou frontoffice respetivamente
+	if($backOffice){
 		$basePath = $origin;
+		# Verifica se exite um estilo específico da página e utiliza se existir
+		if(file_exists(__DIR__."/../backoffice/assets/css/".$route.".css"))
+			echo '<link rel="stylesheet" href="'.$basePath.'/assets/css/'.$route.'.css">';
+
+		# Verifica se exite um script específico da página e utiliza se existir
+		if(file_exists(__DIR__."/../backoffice/assets/js/".$route.".js"))
+			echo '<script src="'.$basePath.'/assets/js/'.$route.'.js" defer></script>';
+	} else {
+		# Verifica se exite um estilo específico da página e utiliza se existir
+		if(file_exists(__DIR__."/../assets/css/".$route.".css"))
+			echo '<link rel="stylesheet" href="'.$basePath.'/assets/css/'.$route.'.css">';
+
+		# Verifica se exite um script específico da página e utiliza se existir
+		if(file_exists(__DIR__."/../assets/js/".$route.".js"))
+			echo '<script src="'.$basePath.'/assets/js/'.$route.'.js" defer></script>';
+	}
