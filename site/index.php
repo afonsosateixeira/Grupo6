@@ -42,6 +42,14 @@
 			break;
 
 		case 'animalDetails':
+			require_once 'components/helpers.php';
+
+			$id = $_GET['id'] ?? null;
+			if(!$id || !is_numeric($id)){
+				header(("location:animalCatalog"));
+        		exit();
+			}
+
 			$metaTitle = 'Detalhes'; #No caso de preferires podes tentar utilizar uma variável e pesquisar a base de dados para introduzir o nome do animal específico.
 			$metaDescription = 'Todas as informações do animal';
 			break;
@@ -228,7 +236,7 @@
 						break;
 
 					case 'animal_care':
-						require_once 'animal_care.php';
+						require_once 'animal_care.html';
 						break;
 
 					case 'animalCatalog':
@@ -263,7 +271,7 @@
 						break;
 
 					case 'index':
-						require_once 'home.php';
+						require_once 'home.html';
 						break;
 
 					case 'login':

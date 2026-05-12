@@ -17,6 +17,7 @@
 			<label class="form-label" for="phone">Telemóvel</label>
 			<input type="text" name="number" id="phone" class="form-control" placeholder="+351 999999999">
 		</div>
+		<!-- Maybe add a button as an option to add more stuff such as birthday/etc-->
 		<button type="submit" class="btn btn-primary w-100">Criar conta</button>
 		<?= $response ?>
 	</form>

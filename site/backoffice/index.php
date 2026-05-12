@@ -57,6 +57,7 @@
 			break;
 	}
 ?>
+
 <!DOCTYPE html>
 <html lang="pt">
 	<head>
@@ -64,10 +65,10 @@
 			$backOffice = true;
 			require_once "../components/head.php";
 		?>
-		<link rel="stylesheet" href="../assets/css/sidebar.css">
+		<link rel="stylesheet" href="<?= $basePath ?>/assets/css/sidebar.css">
 	</head>
 	<body>
-		<?php require_once("../components/sidebar.php");?>
+		<?php require_once 'components/sidebar.php'; ?>
 		<main>
 			<?php
 				switch ($route) {
@@ -86,12 +87,7 @@
 						break;
 
 					default:
-						?>
-						<section class="container my-5">
-							<h1>404</h1>
-							<p>Página não encontrada.</p>
-						</section>
-			<?php
+						require_once '../404.html';
 						break;
 				}
 			?>

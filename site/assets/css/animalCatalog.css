@@ -1,29 +1,20 @@
-/*CARDS*/
-.container-cards {
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-  gap: 20px;
-  padding: 20px;
-}
-
 .card {
-  max-width: 400px;
+  max-width: 300px;
+  width: 100%;
   max-height: 250px;
-  border: 5px solid #000000;
-  border-radius: 15px;
+  border: 5px solid;
+  border-radius: 50px;
+  overflow: hidden;
 }
 
 .card-image img {
   width: 300px;
-  height: 150px;
+  height: 160px;
   object-fit: cover;
-  border-top-left-radius: 10px;
-  border-top-right-radius: 10px;
 }
 
 .card-info {
-  padding: 15px;
+  padding: 10px;
   text-align: center;
 }
 

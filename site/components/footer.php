@@ -34,7 +34,7 @@
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Top Doadores</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Nossos parceiros</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Marcação de consultas</a></li>
-              <li class="nav-item mb-2"><a href="animal_care" class="nav-link p-0">Cuidados de saúde</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/animal_care" class="nav-link p-0">Cuidados de saúde</a></li>
             </ul>
           </div>
           <div class="col-6 col-md-3 mb-3">
@@ -53,7 +53,7 @@
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/privacy" class="nav-link p-0">Política de Privacidade</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/accessibility" class="nav-link p-0">Política de Acessibilidade</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Lítigios de consumo</a></li>
-              <li class="nav-item mb-2"><a href="termos" class="nav-link p-0">Termos e condições</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/termos" class="nav-link p-0">Termos e condições</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">FAQ</a></li>
             </ul>
           </div>

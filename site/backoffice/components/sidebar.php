@@ -1,7 +1,6 @@
 <div class="d-flex flex-column flex-shrink-0 p-3 text-white bg-dark sidebar-pam"
     style="width: 280px; height: 100vh; position: fixed; left: 0; top: 0; z-index: 1050; box-shadow: 4px 0 10px rgba(0,0,0,0.1);">
-
-    <a href="#" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
+    <a href="<?= $basePath ?>/index" class="d-flex align-items-center mb-3 mb-md-0 me-md-auto text-white text-decoration-none">
         <i class="fa-solid fa-paw me-2 fs-4"></i>
         <span class="fs-4 fw-bold">PAM</span>
     </a>
@@ -14,7 +13,6 @@
                 <span><i class="fa-solid fa-dog me-2"></i> Gestão de Animais</span>
                 <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
             </a>
-
             <div class="collapse show" id="menuAnimais">
                 <ul class="nav flex-column submenu mt-1">
                     <li><a href="<?= $basePath ?>/animalList" class="nav-link">Lista Animais</a></li>
@@ -24,6 +22,7 @@
         </li>
     </ul>
     <hr>
+
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
