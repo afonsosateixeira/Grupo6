@@ -1,0 +1,14 @@
+# Desativa o redirecionamento normal do Apache
+Options -MultiViews
+# Ativa o redirecionamento que estamos a usar neste ficheiro
+RewriteEngine On
+
+# Se for um ficheiro real...
+RewriteCond %{REQUEST_FILENAME} -f
+# ... mas apenas nesta pasta, redireciona para index.php
+RewriteRule ^[^/]+$ index.php [L,QSA]
+
+# Se não for um ficheiro real...
+RewriteCond %{REQUEST_FILENAME} !-f
+# ... redireciona para index.php
+RewriteRule ^ index.php [L,QSA]

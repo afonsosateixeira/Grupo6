@@ -1,31 +1,13 @@
 <?php
- require_once("../config.php");
-	$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-	$basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
-
-	if ($basePath !== '' && $basePath !== '/' && str_starts_with($path, $basePath))
-		$path = substr($path, strlen($basePath));
-
-	$route = trim($path, '/');
-
-	if ($route === '')
-		$route = 'index';
-
-	if (str_contains($route, '.'))
-		$route = pathinfo($route, PATHINFO_FILENAME);
+	# A primeira vez que o código corre declara variáveis com o título e a descrição da página
+	if(!$rerun):
+		$metaTitle = '';
+		$metaDescription = 'Dashboard da Poppy and Max';
+	# Na segunda vez que o código corre mostra o conteúdo todo da página
+	else:
 ?>
-<!DOCTYPE html>
-<html lang="pt">
-<head>
-    <?php
-        $metaTitle = "";
-        $metaDescription = "";
-        $backOffice = true;
-        require_once "../components/head.php";
-    ?>
-    <link rel="stylesheet" href="../assets/css/sidebar.css">
-</head>
-<body>
-    <?php require_once("../components/sidebar.html");?>
-</body>
-</html>
+		<section>
+			Dashboard example
+		</section>
+<?php
+	endif;

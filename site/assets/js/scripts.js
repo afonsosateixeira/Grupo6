@@ -1,3 +1,4 @@
+/* Might need changes
 const currentPage = window.location.pathname.split("/").pop();
 
 document.querySelectorAll(".nav-link, .footer-link").forEach(link => {
@@ -6,3 +7,4 @@ document.querySelectorAll(".nav-link, .footer-link").forEach(link => {
 		link.setAttribute("aria-current", "page");
 	}
 });
+*/

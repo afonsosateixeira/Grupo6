@@ -5,6 +5,10 @@
   --secondary-light: #fbba50;
 }
 
+html{
+  scroll-behavior: smooth;
+}
+
 html,
 body {
   height: 100%;
@@ -13,10 +17,41 @@ body {
 body {
   display: flex;
   flex-direction: column;
-  margin: 0 auto;
   font-family: "Poppins", sans-serif;
   font-size: 20px;
   background-color: #f1f1f1;
+}
+
+.custom-blue{
+  color: var(--primary);
+}
+
+.custom-bg-blue{
+  background-color: var(--primary);
+}
+
+.custom-light-blue{
+  color: var(--primary-light);
+}
+
+.custom-bg-light-blue{
+  background-color: var(--primary-light);
+}
+
+.custom-orange{
+  color: var(--secondary);
+}
+
+.custom-bg-orange{
+  background-color: var(--secondary);
+}
+
+.custom-light-orange{
+  color: var(--secondary-light);
+}
+
+.custom-bg-light-orange{
+  background-color: var(--secondary-light);
 }
 
 /*NAVBAR*/

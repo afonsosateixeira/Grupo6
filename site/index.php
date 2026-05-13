@@ -1,184 +1,40 @@
 <?php
-	$path = parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH);
-	$basePath = rtrim(str_replace('\\', '/', dirname($_SERVER['SCRIPT_NAME'])), '/');
+	# Inicia a sessão e faz ligação à base de dados, este documento também chama o config.php que inicia variáveis gerais como as que identificam as páginas que existem no site
+	require_once 'db.php';
 
-	if ($basePath !== '' && $basePath !== '/' && str_starts_with($path, $basePath))
-		$path = substr($path, strlen($basePath));
+	# Vai buscar as variáveis que identificam a página atual, faz logout, faz redirect se necessário(por exemplo um formulário precisa de login, fazem login e automáticamente retorna à página), inicia as variáveis backOffice(identifica se a página é de Back Office) e response (guarda mensagens como por exemplo erros) e verifica se o utilizador está autenticado e se têm permissões antes de poder aceder a páginas restritas
+	require_once 'components/routing.php';
 
-	$route = trim($path, '/');
-
-	if ($route === '')
-		$route = 'index';
-
-	if (str_contains($route, '.'))
-		$route = pathinfo($route, PATHINFO_FILENAME);
-
-	switch ($route) {
-		case 'index':
-			$metaTitle = '';
-			$metaDescription = 'Página inicial da Poppy and Max';
-			break;
-
-		case 'cookies':
-			$metaTitle = 'Política de Cookies';
-			$metaDescription = 'Política de Cookies de Poppy and Max';
-			break;
-
-		case 'accessibility':
-			$metaTitle = 'Acessibilidade';
-			$metaDescription = 'Informação sobre acessibilidade';
-			break;
-
-		case 'animalCatalog':
-			$metaTitle = 'Catálogo de Animais';
-			$metaDescription = 'Animais disponíveis para adoção';
-			break;
-
-		case 'adoptionGuide':
-			$metaTitle = 'Guia de Adoção';
-			$metaDescription = 'Guia passo a passo para adoção responsável';
-			break;
-
-		case 'contactos':
-			$metaTitle = 'Contactos';
-			$metaDescription = 'Contactos da Poppy and Max';
-      break;
-
-		case 'animal_care':
-			$metaTitle = 'Cuidados animais';
-			$metaDescription = 'Informação de vacinas para saúde animal';
-      break;
-
-		case 'animalDetails':
-			$metaTitle = 'Detalhes';
-			$metaDescription = 'Todas as informações do animal';
-			break;
-
-		case 'appointment':
-			$metaTitle = 'Agendar Consulta';
-			$metaDescription = 'Agende uma consulta para o seu animal de estimação';
-			break;
-
-		case 'login':
-			$metaTitle = 'Entrar';
-			$metaDescription = 'Acesso à conta';
-			break;
-
-		case 'regist':
-			$metaTitle = 'Registar';
-			$metaDescription = 'Criar nova conta';
-			break;
-
-		case 'privacy':
-			$metaTile = 'Politicas de Privacidade';
-			$metaDescription = 'Politcas de Privacidade';
-			break;
-
-		case 'dia_voluntario':
-			$metaTitle = 'Dia no abrigo';
-			$metaDescription = 'Um dia como voluntário';
-			break;
-
-		case 'termos':
-			$metaTitle = 'Termos e condições';
-			$metaDescription = 'Termos e condições da Poppy and Max';
-			break;	
-
-		default:
-			http_response_code(404);
-			$metaTitle = 'Página não encontrada';
-			$metaDescription = 'A página que procura não existe';
-			break;
-	}
+	# Chama a página correta automáticamente, assumindo que esta está presente num array em config.php(caso contrário vai para a página 404)
+	require 'components/rerun.php';
 ?>
+
 <!DOCTYPE html>
 <html lang="pt">
 	<head>
-		<?php require_once 'components/head.php'; ?>
+		<?php
+			# Vai buscar o código todo que útilizamos para o head como para chamar o css, javascript, fontes e outras bibliotécas
+			require_once 'components/head.php';
+
+			# Obtem o estilo para a searchbar para páginas que necessitam desta
+			if($route == 'animalCatalog')
+				echo '<link rel="stylesheet" href="'.$basePath.'/assets/css/searchbar.css">';
+		?>
 	</head>
 	<body>
-		<?php require_once 'components/header.html'; ?>
+		<?php
+			# Vai buscar o nosso header/navbar
+			require_once 'components/header.php';
+		?>
 		<main>
 			<?php
-			switch ($route) {
-				case 'index':
-					?>
-					<section class="container my-5">
-						<div class="p-5 rounded-4 bg-light border">
-							<h1 class="mb-3">Poppy and Max</h1>
-							<p class="mb-4">Bem-vindo ao nosso site de adoção. Aqui pode conhecer animais disponíveis e seguir o guia de adoção.</p>
-							<div class="d-flex gap-2 flex-wrap">
-								<a href="./animalCatalog" class="btn btn-primary">Ver Catálogo</a>
-								<a href="./adoptionGuide" class="btn btn-outline-primary">Ler Guia de Adoção</a>
-							</div>
-						</div>
-					</section>
-					<?php
-					break;
-
-				case 'cookies':
-					require_once 'cookies.html';
-					break;
-
-				case 'accessibility':
-					require_once 'accessibility.html';
-					break;
-
-				case 'animalCatalog':
-					require_once 'animalCatalog.php';
-					break;
-
-				case 'adoptionGuide':
-					require_once 'adoptionGuide.html';
-					break;
-
-				case 'contactos':
-					require_once 'contactos.html';
-          break;
-
-				case 'animal_care':
-					require_once 'animal_care.php';
-          break;
-
-				case 'animalDetails':
-					require_once 'animalDetails.php';
-					break;
-
-				case 'appointment':
-					require_once 'appointment.php';
-					break;
-
-				case 'login':
-					require_once 'login.php';
-					break;
-
-				case 'regist':
-					require_once 'regist.php';
-					break;
-
-				case 'privacy':
-					require_once 'privacy.html';
-          break;
-
-				case 'dia_voluntario':
-					require_once 'dia_voluntario.html';
-					break;
-
-				case 'termos':
-					require_once 'termos.html';
-					break;
-
-				default:
-					?>
-					<section class="container my-5">
-						<h1>404</h1>
-						<p>Página não encontrada.</p>
-					</section>
-					<?php
-					break;
-			}
+				# Chama a página correta automáticamente, assumindo que esta está presente num array em config.php(caso contrário vai para a página 404)
+				require 'components/rerun.php';
 			?>
 		</main>
-		<?php require_once 'components/footer.html'; ?>
+	<?php
+		# Vai buscar o nosso footer
+		require_once 'components/footer.php';
+	?>
 	</body>
 </html>

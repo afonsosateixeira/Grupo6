@@ -3,10 +3,6 @@
   height: 300px;
 }
 
-.custom-blue {
-  color: var(--primary-light);
-}
-
 .marker-blue li::marker {
   color: var(--primary-light);
 }
@@ -21,8 +17,7 @@ h2 {
   font-weight: 700;
 }
 
-p,
-ul {
+p, ul{
   margin: 0;
 }
 
