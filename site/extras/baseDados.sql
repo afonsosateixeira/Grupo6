@@ -178,16 +178,16 @@ create table donations (
 ) engine=innodb;
 
 insert into users (full_name, email, password, phone, local, role) values
-('admin', 'admin@email.com', 'pass123', '910000001', 'porto', 'admin'),
-('maria silva', 'maria@email.com', 'pass123', '910000002', 'lisboa', 'n'),
-('joão pinto', 'joao@email.com', 'pass123', '910000003', 'braga', 'n'),
-('ana costa', 'ana@email.com', 'pass123', '910000004', 'faro', 'n'),
-('pedro santos', 'pedro@email.com', 'pass123', '910000005', 'aveiro', 'n'),
-('carla matos', 'carla@email.com', 'pass123', '910000006', 'porto', 'n'),
-('rui silva', 'rui@email.com', 'pass123', '910000007', 'coimbra', 'n'),
-('sofia bento', 'sofia@email.com', 'pass123', '910000008', 'viana', 'n'),
-('tiago ferreira', 'tiago@email.com', 'pass123', '910000009', 'lisboa', 'n'),
-('marta luz', 'marta@email.com', 'pass123', '910000010', 'braga', 'n');
+('admin', 'admin@email.com', SHA2('123', 512), '910000001', 'porto', 'admin'),
+('maria silva', 'maria@email.com', SHA2('123', 512), '910000002', 'lisboa', 'n'),
+('joão pinto', 'joao@email.com', SHA2('123', 512), '910000003', 'braga', 'n'),
+('ana costa', 'ana@email.com', SHA2('123', 512), '910000004', 'faro', 'n'),
+('pedro santos', 'pedro@email.com', SHA2('123', 512), '910000005', 'aveiro', 'n'),
+('carla matos', 'carla@email.com', SHA2('123', 512), '910000006', 'porto', 'n'),
+('rui silva', 'rui@email.com', SHA2('123', 512), '910000007', 'coimbra', 'n'),
+('sofia bento', 'sofia@email.com', SHA2('123', 512), '910000008', 'viana', 'n'),
+('tiago ferreira', 'tiago@email.com', SHA2('123', 512), '910000009', 'lisboa', 'n'),
+('marta luz', 'marta@email.com', SHA2('123', 512), '910000010', 'braga', 'n');
 
 insert into species (name) values 
 ('Cão'), ('Gato'), ('Coelho'), ('Pássaro'), ('Hamster'), 

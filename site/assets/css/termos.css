@@ -10,11 +10,11 @@
 }
 
 h2 {
-  color: var(--blue-color);
+  color: var(--primary);
 }
 
 .dot-orange li::marker {
-  color: var(--orange-color);
+  color: var(--secondary);
 }
 
 @media(max-width: 426px) {
