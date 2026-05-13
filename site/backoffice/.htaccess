@@ -3,11 +3,12 @@ Options -MultiViews
 # Ativa o redirecionamento que estamos a usar neste ficheiro
 RewriteEngine On
 
-# Talvez mudar para redirecionar os ficheiros da pasta e criar uma pasta para funções (action_)
+# Se for um ficheiro real...
+RewriteCond %{REQUEST_FILENAME} -f
+# ... mas apenas nesta pasta, redireciona para index.php
+RewriteRule ^[^/]+$ index.php [L,QSA]
 
-# Tudo o que não seja um ficheiro real
+# Se não for um ficheiro real...
 RewriteCond %{REQUEST_FILENAME} !-f
-# E tudo o que não seja uma pata real
-RewriteCond %{REQUEST_FILENAME} !-d
-# Será redirecionado para dashboard.php
+# ... redireciona para index.php
 RewriteRule ^ index.php [L,QSA]

@@ -1,57 +1,71 @@
 ### 2025178491_AfonsoTeixeira:
 - accessibility.html
-- /backoffice/action_animal.php
 - adoptionGuide.html
-- adoptionGuide.css
-- /backoffice/adoptionProcess.php
+- 	adoptionGuide.css
 - animalCatalog.php
-- animalCatalog.css
+- 	animalCatalog.css
 - animalDetails.php
-- animalDetails.css
+- 	animalDetails.css
+
+- /components/helpers.php
+- /components/searchbar.php
+- 	searchbar.css
+
+- /backoffice/adoptionProcess.php
 - /backoffice/animalList.php
-- /backoffice/animalList.css
-- /backoffice/animalList.js
-- helpers.php
-- searchbar.css
+- 	/backoffice/animalList.css
+- 	/backoffice/animalList.js
+- 	/backoffice/pt_PT.json
+
+- /backoffice/components/action_animal.php
 
 ### 2025182402_DiogoAzevedo:
 - dia_voluntario.html
-- dia_voluntario.css
-- dia_voluntario.js
+- 	dia_voluntario.css
+- 	dia_voluntario.js
 
 ### 2025115671_FranciscoMartins:
 - animal_care.php
-- animal_care.css
+- 	animal_care.css
 - appointment.php
-- appointment.css
+- 	appointment.css
 - termos.html
-- termos.css
+- 	termos.css
 
 ### 2025163132_GonçaloEstrelado:
 - contactos.html
-- contactos.css
+- 	contactos.css
 
 ### 2025140801_HugoGiroto:
 - privacy.html
 
 ### 2016112775_rubenreis:
 - cookies.html
-- cookies.css
+- 	cookies.css
 
 ### Grupo:
-- /backoffice/.htaccess
+- 	styles.css
+- 	scripts.js
 - .htaccess
 - 404.html
-- bd.php
 - config.php
-- /backoffice/dashboard.php
+- db.php
 - forbidden.php
 - home.php
-- /backoffice/index.php
+- 	home.css
 - index.php
-- index.css
 - login.php
 - regist.php
-- scripts.js
-- sidebar.css
-- styles.css
+
+- /components/footer.php
+- /components/head.php
+- /components/header.php
+- /components/rerun.php
+- /components/routing.php
+
+- /backoffice/.htaccess
+- /backoffice/dashboard.php
+- /backoffice/index.php
+
+- /backoffice/components/sidebar.php
+- 	/backoffice/sidebar.css

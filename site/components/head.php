@@ -9,9 +9,8 @@
 	# Verifica se a página atual é de backoffice para indicar as localizações de ficheiros corretas
 	if(!empty($backOffice)){
 		$origin = $basePath;
-		$basePath= $basePath.'../';
-	} else
-		$backOffice = false;
+		$basePath= $basePath.'/..';
+	}
 ?>
 
 <!-- Verifica o tipo de carácters, adiciona o titulo e a descrição(que dependem da página atual), adapta o tamanho da página ao ecrã e adiciona o icon da página -->
@@ -30,12 +29,6 @@
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" integrity="sha384-sRIl4kxILFvY47J16cr9ZwB07vP4J8+LH7qKQnuqkuIAvNWLzeN8tE5YBujZqJLB" crossorigin="anonymous">
 <link rel="stylesheet" href="<?= $basePath ?>/assets/css/styles.css">
 
-<?php
-	# Obtem o estilo para a searchbar para páginas que necessitam desta
-	if($route == 'animalCatalog' || ($backOffice && $route == 'animalList'))
-		echo '<link rel="stylesheet" href="assets/css/searchbar.css">';
-?>
-
 <!-- Obtem os scripts gerais -->
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js" integrity="sha384-FKyoEForCGlyvwx9Hj09JcYn3nv7wiPVlz7YYwJrWVcXK/BmnVDxM+D2scQbITxI" crossorigin="anonymous" defer></script>
 <script src="<?= $basePath ?>/assets/js/scripts.js" defer></script>
@@ -44,6 +37,13 @@
 	# Após localizar todos os ficheiros corretamente reverte a variável, tenho de verificar se é necessário. Aproveitamos para verificar os ficheiros de backoffice ou frontoffice respetivamente
 	if($backOffice){
 		$basePath = $origin;
+		# Obtem bibliotecas para datatables e o estilo da sidebar
+?>
+	<script src="https://code.jquery.com/jquery-4.0.0.min.js" defer></script>
+
+	<link rel="stylesheet" href="//cdn.datatables.net/2.3.8/css/dataTables.dataTables.min.css">
+	<script src="https://cdn.datatables.net/2.3.8/js/dataTables.min.js" defer></script>
+<?php
 		# Verifica se exite um estilo específico da página e utiliza se existir
 		if(file_exists(__DIR__."/../backoffice/assets/css/".$route.".css"))
 			echo '<link rel="stylesheet" href="'.$basePath.'/assets/css/'.$route.'.css">';

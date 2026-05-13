@@ -2,102 +2,39 @@
 	# Inicia a sessão e faz ligação à base de dados 
 	require_once '../db.php';
 
-	# Vai buscar a última parte do url(a página atual)
-	$path = rtrim(parse_url($_SERVER['REQUEST_URI'], PHP_URL_PATH), '/') . '/';
-	$path = basename($path);
-	$path = pathinfo($path, PATHINFO_FILENAME);
+	# Chama funções
+	require_once("../components/helpers.php");
 
-	#Verifica se a página atual devia ficar como index ou como identificado anteriormente
-	$route = ($path === 'backoffice' || $path === 'index') ? 'dashboard' : $path;
+	# Declara uma variável para indicar que as páginas são de back office
+	$backOffice = true;
 
-	# No caso de ser necessário usar uma mensagem
-	$response = $_GET['response'] ?? '';
+	# Vai buscar as variáveis que identificam a página atual, faz logout, faz redirect se necessário(por exemplo um formulário precisa de login, fazem login e automáticamente retorna à página), inicia as variáveis backOffice(identifica se a página é de Back Office) e response (guarda mensagens como por exemplo erros) e verifica se o utilizador está autenticado e se têm permissões antes de poder aceder a páginas restritas
+	require_once '../components/routing.php';
 
-	if(empty($_SESSION['auth'])){
-		header('Location: ../forbidden?response=401');
-		exit();
-	} else {
-		$stmt = $conn->prepare('SELECT email, role FROM users WHERE email = ?');
-		$stmt->bind_param('s', $_SESSION['email']);
-		$stmt->execute();
-		$res = $stmt->get_result();
-
-		if($row = $res->fetch_assoc()){
-			if($row['role'] != 'admin'){
-				header('Location: ../forbidden?response=403');
-				exit();
-			}
-		} else {
-			session_destroy();
-			header('Location: ../forbidden?response=401');
-			exit();
-		}
-	}
-
-	switch ($route) {
-		case 'adoptionProcess':
-			$metaTitle = '';
-			$metaDescription = '';
-			break;
-
-		case 'animalList':
-			$metaTitle = '';
-			$metaDescription = '';
-			break;
-
-		case 'dashboard':
-			$metaTitle = '';
-			$metaDescription = 'Dashboard da Poppy and Max';
-			break;
-
-		default:
-			http_response_code(404);
-			$metaTitle = 'Página não encontrada';
-			$metaDescription = 'A página que procura não existe';
-			break;
-	}
+	# Chama a página correta automáticamente, assumindo que esta está presente num array em config.php(caso contrário vai para a página 404)
+	require '../components/rerun.php';
 ?>
 
 <!DOCTYPE html>
 <html lang="pt">
 	<head>
 		<?php
-			$backOffice = true;
+			# Vai buscar o código todo que útilizamos para o head como para chamar o css, javascript, fontes e outras bibliotécas
 			require_once "../components/head.php";
+		?>
 
-			if($route == 'animalList'):
-		?>
-				<link rel="stylesheet" href="//cdn.datatables.net/2.3.8/css/dataTables.dataTables.min.css">
-				<script src="https://code.jquery.com/jquery-4.0.0.min.js" defer></script>
-				<script src="https://cdn.datatables.net/2.3.8/js/dataTables.min.js" defer></script>
-		<?php
-			endif;
-		?>
+		<!-- Chama o estilo da sidebar -->
 		<link rel="stylesheet" href="<?= $basePath ?>/assets/css/sidebar.css">
 	</head>
 	<body>
-		<?php require_once 'components/sidebar.php'; ?>
+		<?php
+			# Vai buscar a sidebar do back office
+			require_once 'components/sidebar.php';
+		?>
 		<main>
 			<?php
-				switch ($route) {
-					case 'adoptionProcess':
-						require_once 'adoptionProcess.php';
-						break;
-
-					
-					case 'animalList':
-						require_once 'animalList.php'; 
-						break;
-
-					
-					case 'dashboard':
-						require_once 'dashboard.php';
-						break;
-
-					default:
-						require_once '../404.html';
-						break;
-				}
+				# Chama a página correta automáticamente, assumindo que esta está presente num array em config.php(caso contrário vai para a página 404)
+				require '../components/rerun.php';
 			?>
 		</main>
 	</body>

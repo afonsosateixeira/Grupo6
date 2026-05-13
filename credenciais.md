@@ -1,6 +1,6 @@
 ### Admin
-- Email: 
-- Password: 
+- Email: admin@email.com
+- Password: 123
 
 ### Funcionário
 - Email: 
@@ -11,5 +11,5 @@
 - Password: 
 
 ### Usuário
-- Email: 
-- Password: 
+- Email: marta@email.com
+- Password: 123

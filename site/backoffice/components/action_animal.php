@@ -1,6 +1,6 @@
 <?php
-    require_once '../db.php';
-    $caminhoPasta = "../assets/img/animals/";
+    require_once '../../db.php';
+    $caminhoPasta = "../../assets/img/animals/";
 
     /* criar e guardar */
 
@@ -28,7 +28,7 @@
                     $nomeArquivo = $_FILES['image']['name'];
 
                     if (!move_uploaded_file($_FILES['image']['tmp_name'], $caminhoPasta . $nomeArquivo)) {
-                        header("Location: animalList?status=erro_imagem");
+                        header("Location: ../animalList?status=erro_imagem");
                         exit();
                     }
                 }
@@ -36,7 +36,7 @@
                 $sql = "INSERT INTO animals (name, specie_id, breed_id, birth_date, gender, size, description, image) 
                         VALUES ('$nome_seguro', $specieID, $breed_seguro, $data_segura, '$genero_seguro', '$porte_seguro', '$descricao_segura', '$nomeArquivo')";
                 $conn->query($sql);
-                header("Location: animalList?status=criado");
+                header("Location: ../animalList?status=criado");
                 exit(); 
         }
 
@@ -64,7 +64,7 @@
             $sql .= " WHERE id = $id";
             
             $conn->query($sql);
-            header("Location: animalList?status=editado");
+            header("Location: ../animalList?status=editado");
             exit();
         }
     }
@@ -75,16 +75,16 @@
     if (isset($_GET['btnEliminar'])) {
         $id = (int)$_GET['btnEliminar'];
         $conn->query("DELETE FROM animals WHERE id = $id");
-        header("Location: animalList?status=apagado");
+        header("Location: ../animalList?status=apagado");
         exit();
     }
 
     // EDITAR
     if (isset($_GET['btnEditar'])) {
         $id = (int)$_GET['btnEditar'];
-        header("Location: animalList?btnEditar=$id");
+        header("Location: ../animalList?btnEditar=$id");
         exit();
     }
 
-    header("Location: animalList");
+    header("Location: ../animalList");
     exit();

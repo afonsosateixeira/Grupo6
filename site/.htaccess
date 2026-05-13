@@ -1,4 +1,4 @@
-# Desativa o redirecionamento normal do Apache (ex: privacy iria abrir privacy.html, nós vamos fazer com que privacy abra index.php que vai mostrar o conteúdo de privacy.html)
+# Desativa o redirecionamento normal do Apache (ex: privacy iria abrir privacy.html, nós vamos fazer com que privacy abra index.php e esta vai mostrar o conteúdo de privacy.html)
 Options -MultiViews
 # Ativa o redirecionamento que estamos a usar neste ficheiro
 RewriteEngine On
@@ -6,12 +6,12 @@ RewriteEngine On
 # Não redireciona nada dentro de /backoffice/, pois essa pasta vai ter outro redirecionamento dentro dela
 RewriteRule ^backoffice/ - [L]
 
-# Se for um ficheiro real
+# Se for um ficheiro real...
 RewriteCond %{REQUEST_FILENAME} -f
-# Mas apenas nesta pasta, redireciona para index.php
+# ... mas apenas nesta pasta, redireciona para index.php
 RewriteRule ^[^/]+$ index.php [L,QSA]
 
-# Se não for um ficheiro real
+# Se não for um ficheiro real...
 RewriteCond %{REQUEST_FILENAME} !-f
-# Redireciona para index.php
+# ... redireciona para index.php
 RewriteRule ^ index.php [L,QSA]
