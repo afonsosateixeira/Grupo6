@@ -7,10 +7,7 @@
 		$route = 404;
 
 	# Chama a página correspondente
-	if($backOffice && $route == 404)
-		require '../'.$route.'.php';
-	else
-		require $route.'.php';
+	require $route.'.php';
 
 	# Mete a variável como verdadeira de forma a correr a segunda parte do código quando chamar a página a segunda vez
 	$rerun = true;
