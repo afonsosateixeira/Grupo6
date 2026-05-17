@@ -129,6 +129,7 @@ create table volunteer_profiles (
     user_id int not null,
 	phone VARCHAR(20) NOT NULL,
 	city VARCHAR(100) NOT NULL,
+    status enum('Pendente', 'Rejeitado', 'Aceitado') default 'Pendente' Not null,
     constraint pk_volunteer_profiles primary key (id),
     constraint fk_volunteer_users foreign key (user_id) references users(id)
 ) engine=innodb;

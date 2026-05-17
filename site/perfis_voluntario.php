@@ -89,7 +89,8 @@
         <button class="botao_submeter">Torna-te voluntário</button>
       </form>
     <?php
-    endif; // Fecha o check da sessão
-    endif;   // Fecha o check do $rerun
+    endif; // 1. Fecha o: if ($perfil_existente) ... else
+    endif;   // 2. Fecha o: if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true) ... else
+    endif;     // 3. Fecha o: if (!$rerun) ... else
     ?>
   </div>
