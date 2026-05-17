@@ -24,7 +24,8 @@
             'login',
             'privacy',
             'regist',
-            'termos'
+            'termos',
+            'perfis_voluntario'
         ],
 
         # Páginas de Back Office

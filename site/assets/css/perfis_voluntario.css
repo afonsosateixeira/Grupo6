@@ -1,0 +1,96 @@
+:root {
+  --primary: #08284b;
+  --primary-light: #135eb1;
+  --secondary: #ffa500;
+  --secondary-light: #fbba50;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  display: flex;
+  flex-direction: column;
+  font-family: "Poppins", sans-serif;
+  font-size: 20px;
+  background-color: #f1f1f1;
+}
+
+.botao_submeter {
+  background: var(--secondary);
+  border-radius: 25px;
+  border: solid 0;
+  padding: 5px;
+}
+
+form {
+  background: var(--primary);
+  margin-top: 10px;
+  padding-bottom: 10px;
+  text-align: center;
+  border-radius: 25px;
+  width: 300px;
+  margin-left: auto;
+  margin-right: auto;
+  color: white;
+}
+
+.campo {
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.form-control {
+  height: 25px;
+  border-radius: 25px;
+  max-width: 60%;
+  margin: auto;
+}
+
+.form-control:focus {
+  border-color: black;
+  box-shadow: none;
+}
+
+.dia_semana p {
+  margin-bottom: 10px;
+}
+
+.horario p {
+  margin-bottom: 10px;
+}
+
+.botao_tornate{
+  background: var(--secondary);
+  border-radius: 25px;
+  border: solid 0;
+  padding: 5px;
+}
+
+.botao_login{
+  background: var(--secondary);
+  border-radius: 25px;
+  border: solid 0;
+  padding: 5px;
+}
+
+.botao_regist{
+  background: var(--primary);
+  border-radius: 25px;
+  border: solid 0;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  padding-left: 10px;
+  padding-right: 10px;
+  color: white;
+}
+
+a {
+  text-decoration: none;
+}

@@ -127,9 +127,8 @@ drop table if exists volunteer_profiles;
 create table volunteer_profiles (
     id int auto_increment,
     user_id int not null,
-    skills text,
-    availability varchar(100),
-    join_date date default (current_date),
+	phone VARCHAR(20) NOT NULL,
+	city VARCHAR(100) NOT NULL,
     constraint pk_volunteer_profiles primary key (id),
     constraint fk_volunteer_users foreign key (user_id) references users(id)
 ) engine=innodb;
@@ -138,10 +137,9 @@ drop table if exists volunteer_shifts;
 create table volunteer_shifts (
     id int auto_increment,
     volunteer_id int not null,
-    task_description text not null,
-    shift_date date not null,
-    start_date time not null,
-    end_time time not null,
+	day_week VARCHAR(20) NOT NULL,
+	start_time TIME NOT NULL,
+	end_time TIME NOT NULL,
     constraint pk_volunteer_shifts primary key (id),
     constraint fk_shifts_volunteer foreign key (volunteer_id) references volunteer_profiles(id)
 ) engine=innodb;
