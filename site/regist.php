@@ -37,10 +37,15 @@
 				$response = '<p class="fw-bold mt-2 mb-0">Preencha todos os campos de registo!</p>';
 		}
 
-		# Verifica se o utilizador já está autenticádo, se sim redireciona para a página inicial
+		# Verifica se o utilizador já está autenticádo, se sim redireciona para a página inicial, dando prioridáde se tiver página de redirecionamento
 		if(!empty($_SESSION['auth'])){
-			header('Location: ./');
-			exit();
+			if(!empty($_GET['redirect'])){
+				header('Location: ./'.$_GET['redirect']);
+				exit();
+			} else {
+				header('Location: ./');
+				exit();
+			}
 		}
 
 		$metaTitle = 'Registar';
@@ -49,7 +54,7 @@
 ?>
 		<section class="container my-5" style="max-width: 620px;">
 			<h1 class="mb-4">Registar</h1>
-			<form method="POST" class="border rounded-3 p-4 bg-light">
+			<form method="POST" action="<?= (!empty($_GET['redirect'])) ? '?redirect='.$_GET['redirect'] : '' ?>" class="border rounded-3 p-4 bg-light">
 				<div class="mb-3">
 					<label class="form-label" for="name">Nome</label>
 					<input type="text" name="name" id="name" class="form-control" placeholder="Nome completo">

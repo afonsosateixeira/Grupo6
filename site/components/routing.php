@@ -46,11 +46,5 @@
 		exit();
 	}
 
-	# Se entrares numa página usando um get redirect(útil para formulários que necessitam de sessão iniciada) automáticamente voltas á página
-	if(!empty($_GET['redirect'])){
-		header('Location: ./'.$_GET['redirect']);
-		exit();
-	}
-
 	# No caso de ser necessário usar uma mensagem
 	$response = $_GET['response'] ?? '';

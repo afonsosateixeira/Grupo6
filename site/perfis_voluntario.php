@@ -15,10 +15,10 @@
       <div class="text-center my-5">
         <p>Cria ou inicia sessão para aceder ao formulário.</p>
         <div class="mt-4">
-        <a href="login.php">
+        <a href="login.php?redirect=perfis_voluntario">
         <button class="botao_login">Login</button>
         </a>
-        <a href="regist.php">
+        <a href="regist.php?redirect=perfis_voluntario">
         <button class="botao_regist">Registrar</button>
         </a>
         </div>
