@@ -33,7 +33,7 @@
             <ul class="nav flex-column">
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Top Doadores</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Nossos parceiros</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Marcação de consultas</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/appointment" class="nav-link p-0">Marcação de consultas</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/animal_care" class="nav-link p-0">Cuidados de saúde</a></li>
             </ul>
           </div>
