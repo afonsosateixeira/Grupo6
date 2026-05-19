@@ -178,10 +178,10 @@ create table donations (
 insert into users (full_name, email, password, phone, local, role) values
 ('admin', 'admin@email.com', SHA2('123', 512), '910000001', 'porto', 'admin'),
 ('maria silva', 'maria@email.com', SHA2('123', 512), '910000002' , 'lisboa', 'n'),
-('joão rosa', 'joao@email.com', SHA2('123', 512), '910000003', 'braga', 'n'),
+('joão lopes', 'joao@email.com', SHA2('123', 512), '910000003', 'braga', 'n'),
 ('ana costa', 'ana@email.com', SHA2('123', 512), '910000004', 'faro', 'n'),
 ('pedro santos', 'pedro@email.com', SHA2('123', 512), '910000005', 'aveiro', 'n'),
-('carla matos', 'carla@email.com', SHA2('123', 512), '910000006', 'porto', 'n'),
+('maria matos', 'carla@email.com', SHA2('123', 512), '910000006', 'porto', 'n'),
 ('rui silva', 'rui@email.com', SHA2('123', 512), '910000007', 'coimbra', 'n'),
 ('sofia bento', 'sofia@email.com', SHA2('123', 512), '910000008', 'viana', 'n'),
 ('tiago ferreira', 'tiago@email.com', SHA2('123', 512), '910000009', 'lisboa', 'n'),
@@ -419,7 +419,7 @@ JOIN users u ON vp.user_id = u.id;
 drop view if exists vw_volunteer_full_schedule;
 CREATE VIEW vw_volunteer_full_schedule AS
 SELECT 
-u.full_name AS volunteer_name,vp.phone,vp.city,vs.day_week,vs.start_time,vs.end_time,vp.id AS volunteer_profile_id,vs.id
+vs.id AS shift_id, u.full_name AS volunteer_name,vp.phone,vp.city,vs.day_week,vs.start_time,vs.end_time,vp.id AS volunteer_profile_id,vs.id
 FROM volunteer_shifts vs
 JOIN volunteer_profiles vp ON vs.volunteer_id = vp.id
 JOIN users u ON vp.user_id = u.id;
