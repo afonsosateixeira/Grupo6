@@ -1,0 +1,16 @@
+:root {
+  --primary: #08284b;
+  --primary-light: #135eb1;
+  --secondary: #ffa500;
+  --secondary-light: #fbba50;
+}
+
+.card-title{
+    font-weight: bold;
+}
+
+.card{
+    background: var(--primary);
+    color: white;
+    border-radius: 15px;
+}

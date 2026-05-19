@@ -32,6 +32,7 @@
         1 => [
             'adoptionProcess',
             'animalList',
-            'dashboard'
+            'dashboard',
+            'listagemvoluntarios'
         ]
     ]);
