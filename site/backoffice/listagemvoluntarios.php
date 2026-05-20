@@ -6,7 +6,8 @@
         $sql = "SELECT * FROM vw_volunteer_full_schedule";
         $lista = $conn->query($sql);
 ?>
-        <table class="table">
+        <h1 class="fw-bold fs-2">Lista de Voluntários</h1>
+        <table class="table" id="volunteerTable">
             <thead>
                 <tr>
                     <th scope="col">ID</th>
