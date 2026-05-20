@@ -128,9 +128,8 @@ drop table if exists volunteer_profiles;
 create table volunteer_profiles (
     id int auto_increment,
     user_id int not null,
-    skills text,
-    availability varchar(100),
-    join_date date default (current_date),
+	phone VARCHAR(20) NOT NULL,
+	city VARCHAR(100) NOT NULL,
     constraint pk_volunteer_profiles primary key (id),
     constraint fk_volunteer_users foreign key (user_id) references users(id)
 ) engine=innodb;
@@ -139,10 +138,9 @@ drop table if exists volunteer_shifts;
 create table volunteer_shifts (
     id int auto_increment,
     volunteer_id int not null,
-    task_description text not null,
-    shift_date date not null,
-    start_date time not null,
-    end_time time not null,
+	day_week VARCHAR(20) NOT NULL,
+	start_time TIME NOT NULL,
+	end_time TIME NOT NULL,
     constraint pk_volunteer_shifts primary key (id),
     constraint fk_shifts_volunteer foreign key (volunteer_id) references volunteer_profiles(id)
 ) engine=innodb;
@@ -181,10 +179,10 @@ create table donations (
 insert into users (full_name, email, password, phone, local, role) values
 ('admin', 'admin@email.com', SHA2('123', 512), '910000001', 'porto', 'admin'),
 ('maria silva', 'maria@email.com', SHA2('123', 512), '910000002', 'lisboa', 'n'),
-('joão pinto', 'joao@email.com', SHA2('123', 512), '910000003', 'braga', 'n'),
+('joão lopes', 'joao@email.com', SHA2('123', 512), '910000003', 'braga', 'n'),
 ('ana costa', 'ana@email.com', SHA2('123', 512), '910000004', 'faro', 'n'),
 ('pedro santos', 'pedro@email.com', SHA2('123', 512), '910000005', 'aveiro', 'n'),
-('carla matos', 'carla@email.com', SHA2('123', 512), '910000006', 'porto', 'n'),
+('maria matos', 'carla@email.com', SHA2('123', 512), '910000006', 'porto', 'n'),
 ('rui silva', 'rui@email.com', SHA2('123', 512), '910000007', 'coimbra', 'n'),
 ('sofia bento', 'sofia@email.com', SHA2('123', 512), '910000008', 'viana', 'n'),
 ('tiago ferreira', 'tiago@email.com', SHA2('123', 512), '910000009', 'lisboa', 'n'),
@@ -269,24 +267,27 @@ insert into events_registrations (user_id, event_id, status) values
 (2, 6, 'pendente'), (4, 8, 'confirmado'), (6, 8, 'confirmado'),
 (7, 10, 'confirmado');
 
-insert into volunteer_profiles (user_id, skills, availability) values 
-(3, 'limpeza, passeio', 'fins de semana'), (5, 'treino canino', 'terças e quintas'),
-(8, 'administrativo', 'segunda a sexta'), (1, 'primeiros socorros', 'noites'),
-(2, 'fotografia', 'sábados'), (4, 'redes sociais', 'remoto'),
-(6, 'condução', 'flexível'), (7, 'tosquia', 'domingos'),
-(9, 'organização eventos', 'fins de semana'), (10, 'manutenção', 'manhãs');
+insert into volunteer_profiles (user_id, phone, city) values 
+(2, '921383900', 'Lisboa'),
+(3, '913746362', 'Lisboa'),
+(4, '913745462', 'Braga'),
+(5, '913336362', 'Leiria'),
+(6, '914346362', 'Aveiro'),
+(7, '913216362', 'Porto'),
+(8, '913709362', 'Coimbra'),
+(9, '913745562', 'Leiria'),
+(10, '913776362', 'Viseu');
 
-insert into volunteer_shifts (volunteer_id, task_description, shift_date, start_date, end_time) values 
-(1, 'limpeza canis', '2026-04-10', '09:00', '12:00'),
-(2, 'aula de obediência', '2026-04-10', '14:00', '16:00'),
-(3, 'atendimento público', '2026-04-11', '10:00', '13:00'),
-(4, 'passeio de cães', '2026-12-12', '15:00', '18:00'),
-(5, 'sessão fotos', '2026-04-13', '09:00', '11:00'),
-(6, 'gestão fb', '2026-04-14', '14:00', '15:00'),
-(7, 'transporte vet', '2026-08-15', '08:00', '10:00'),
-(8, 'apoio banhos', '2026-04-16', '10:00', '13:00'),
-(9, 'planeamento feira', '2026-04-17', '18:00', '20:00'),
-(10, 'reparação vedações', '2026-06-18', '09:00', '13:00');
+insert into volunteer_shifts (volunteer_id, day_week, start_time, end_time) values 
+(1, 'Quarta-feira', '13:00:00', '17:00:00'),
+(2, 'Terça-feira', '08:30:00', '15:00:00'),
+(3, 'Segunda-feira', '15:00:00', '17:00:00'),
+(4, 'Quarta-feira', '13:00:00', '17:00:00'),
+(5, 'Quinta-feira', '15:00:00', '17:00:00'),
+(6, 'Segunda-feira', '10:30:00', '17:00:00'),
+(7, 'Sexta-feira', '10:30:00', '17:00:00'),
+(8, 'Segunda-feira', '08:30:00', '10:30:00'),
+(9, 'Domingo', '10:30:00', '15:00:00');
 
 insert into lost_animals (user_id, animal_name, last_seen_date, contact_phone) values 
 (2, 'bolinha', '2026-04-01', '910000002'), (4, 'pipas', '2026-04-02', '910000004'),
@@ -408,21 +409,20 @@ from events e
 left join events_registrations er on e.id = er.event_id
 group by e.id, e.name, e.event_date;
 
-drop view if exists vw_volunteer_skills_matrix;
-create view vw_volunteer_skills_matrix as
-select u.full_name, u.phone, u.local, vp.skills, vp.availability,
-       datediff(current_date, vp.join_date) as days_as_volunteer
-from volunteer_profiles vp
-join users u on vp.user_id = u.id
-order by days_as_volunteer desc;
+DROP VIEW IF EXISTS vw_volunteer_simple_schedule;
+CREATE VIEW vw_volunteer_simple_schedule AS
+SELECT u.full_name AS volunteer_name,vs.day_week,vs.start_time,vs.end_time
+FROM volunteer_shifts vs
+JOIN volunteer_profiles vp ON vs.volunteer_id = vp.id
+JOIN users u ON vp.user_id = u.id;
 
-drop view if exists vw_daily_shifts_schedule;
-create view vw_daily_shifts_schedule as
-select vs.shift_date, vs.start_date as start_time, vs.end_time, vs.task_description, u.full_name as volunteer
-from volunteer_shifts vs
-join volunteer_profiles vp on vs.volunteer_id = vp.id
-join users u on vp.user_id = u.id
-order by vs.shift_date desc, vs.start_date asc;
+drop view if exists vw_volunteer_full_schedule;
+CREATE VIEW vw_volunteer_full_schedule AS
+SELECT 
+vs.id AS shift_id, u.full_name AS volunteer_name,vp.phone,vp.city,vs.day_week,vs.start_time,vs.end_time,vp.id AS volunteer_profile_id,vs.id
+FROM volunteer_shifts vs
+JOIN volunteer_profiles vp ON vs.volunteer_id = vp.id
+JOIN users u ON vp.user_id = u.id;
 
 drop view if exists vw_lost_pets_radar;
 create view vw_lost_pets_radar as

@@ -19,11 +19,15 @@
 						$_SESSION['email'] = $row['email'];
 
 						# Guarda o nome com apenas o primeiro e último nomes, se este existir, ou apenas o primeiro nome
-						$name = preg_split('/\s+/', trim($row['full_name']));
-						if(count($name) == 1)
+						$name = preg_split('/\s+/', htmlspecialchars(trim($row['full_name'])));
+						$name[0] = mb_convert_case($name[0], MB_CASE_TITLE, 'UTF-8');
+						if(count($name) === 1)
 							$name = $name[0];
-						else
-							$name = $name[0].' '.$name[count($name) -1];
+						else{
+							$name[1] = mb_convert_case(end($name), MB_CASE_UPPER, 'UTF-8');
+							$name = $name[0].' '.$name[1];
+						}
+
 						$_SESSION['user'] = $name;
 					} else
 						$response = '<p class="fw-bold mt-2 mb-0">Password incorreta!</p>';
@@ -33,10 +37,15 @@
 				$response = '<p class="fw-bold mt-2 mb-0">Preencha todos os campos para entrar!</p>';
 		}
 
-		# Verifica se o utilizador já está autenticádo, se sim redireciona para a página inicial
+		# Verifica se o utilizador já está autenticádo, se sim redireciona para a página inicial, dando prioridáde se tiver página de redirecionamento
 		if(!empty($_SESSION['auth'])){
-			header('Location: ./');
-			exit();
+			if(!empty($_GET['redirect'])){
+				header('Location: ./'.$_GET['redirect']);
+				exit();
+			} else {
+				header('Location: ./');
+				exit();
+			}
 		}
 
 		$metaTitle = 'Iniciar Sessão';
@@ -45,7 +54,7 @@
 ?>
 		<section class="container my-5" style="max-width: 520px;">
 			<h1 class="mb-4">Entrar</h1>
-			<form method="POST" class="border rounded-3 p-4 bg-light">
+			<form method="POST" action="<?= (!empty($_GET['redirect'])) ? '?redirect='.$_GET['redirect'] : '' ?>" class="border rounded-3 p-4 bg-light">
 				<div class="mb-3">
 					<label class="form-label" for="email">Email</label>
 					<input type="email" name="email" id="email" class="form-control" placeholder="email@exemplo.com">

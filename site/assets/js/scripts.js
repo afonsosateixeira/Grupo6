@@ -1,4 +1,4 @@
-/* Might need changes
+/* Not currently in use
 const currentPage = window.location.pathname.split("/").pop();
 
 document.querySelectorAll(".nav-link, .footer-link").forEach(link => {

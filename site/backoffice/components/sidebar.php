@@ -6,38 +6,77 @@
     </a>
     <hr>
 
-    <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
+    <ul class="nav nav-pills flex-column flex-grow-1">
+        <li class="nav-item mb-4">
             <a href="#" class="nav-link text-white d-flex justify-content-between align-items-center"
-                data-bs-toggle="collapse" data-bs-target="#menuAnimais" aria-expanded="true">
+                data-bs-toggle="collapse" data-bs-target="#menuPessoal" aria-expanded="true">
+                <span><i class="fa-solid fa-users me-2"></i>Gestão Pessoal</span>
+                <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
+            </a>
+            <div class="collapse show" id="menuPessoal">
+                <ul class="nav flex-column submenu mt-1">
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item mb-4">
+            <a href="#" class="nav-link text-white d-flex justify-content-between align-items-center collapsed"
+                data-bs-toggle="collapse" data-bs-target="#menuAnimais" aria-expanded="false">
                 <span><i class="fa-solid fa-dog me-2"></i> Gestão de Animais</span>
                 <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
             </a>
-            <div class="collapse show" id="menuAnimais">
+            <div class="collapse" id="menuAnimais">
                 <ul class="nav flex-column submenu mt-1">
                     <li><a href="<?= $basePath ?>/animalList" class="nav-link">Lista Animais</a></li>
                     <li><a href="<?= $basePath ?>/adoptionProcess" class="nav-link">Processo Adoção</a></li>
                     <li><a href="<?= $basePath ?>/vetList" class="nav-link">Gestão de Veterinários - medicina</a></li>
                     <li><a href="<?= $basePath ?>/appointmentList" class="nav-link">Gestão de consultas - medicina</a></li>
+                    <li><a href="<?= $basePath ?>/listagemvoluntarios" class="nav-link">Listagem Voluntários</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item mb-4">
+            <a href="#" class="nav-link text-white d-flex justify-content-between align-items-center collapsed"
+                data-bs-toggle="collapse" data-bs-target="#menuSaudeFinanca" aria-expanded="false">
+                <span><i class="fa-solid fa-briefcase-medical me-2"></i>Gestão de Saúde e Finanças</span>
+                <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
+            </a>
+            <div class="collapse" id="menuSaudeFinanca">
+                <ul class="nav flex-column submenu mt-1">
+                    <li><a href="<?= $basePath ?>/donationList" class="nav-link">Lista de Doações</a></li>
+                </ul>
+            </div>
+        </li>
+
+        <li class="nav-item mb-4">
+            <a href="#" class="nav-link text-white d-flex justify-content-between align-items-center collapsed"
+                data-bs-toggle="collapse" data-bs-target="#menuOperacoes" aria-expanded="false">
+                <span><i class="fa-solid fa-wrench me-2"></i>Gestão de Operações</span>
+                <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
+            </a>
+            <div class="collapse show" id="menuOperacoes">
+                <ul class="nav flex-column submenu mt-1">
                 </ul>
             </div>
         </li>
     </ul>
+
     <hr>
 
     <div class="dropdown">
         <a href="#" class="d-flex align-items-center text-white text-decoration-none dropdown-toggle"
             id="dropdownUser1" data-bs-toggle="dropdown" aria-expanded="false">
-            <img src="" alt="" width="32" height="32" class="rounded-circle me-2">
-            <strong>Afonso</strong>
+            <img src="<?= $basePath ?>/assets/img/default_user.png" alt="Foto do Utilizador" width="32" height="32" class="rounded-circle me-2">
+            <strong><?= $_SESSION['user'] ?></strong>
         </a>
         <ul class="dropdown-menu dropdown-menu-dark text-small shadow" aria-labelledby="dropdownUser1">
-            <li><a class="dropdown-item" href="#">Definições</a></li>
+            <!-- <li><a class="dropdown-item" href="#">Definições</a></li>
             <li><a class="dropdown-item" href="#">Perfil</a></li>
             <li>
             <hr class="dropdown-divider">
-            </li>
-            <li><a class="dropdown-item" href="<?= $basePath ?>/../logout">Sair</a></li>
+            </li> -->
+            <li><a class="dropdown-item text-white" href="<?= $basePath ?>/../logout">Sair</a></li>
         </ul>
     </div>
 </div>

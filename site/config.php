@@ -19,9 +19,11 @@
             'contactos',
             'cookies',
             'dia_voluntario',
+            'donations',
             'forbidden',
             'home',
             'login',
+            'perfis_voluntario',
             'privacy',
             'regist',
             'termos',
@@ -34,7 +36,8 @@
             'animalList',
             'dashboard',
             'appointmentList',
-            'vetList'
-
+            'vetList',
+            'donationList',
+            'listagemvoluntarios'
         ]
     ]);
