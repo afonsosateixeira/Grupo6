@@ -177,7 +177,7 @@ create table donations (
 
 insert into users (full_name, email, password, phone, local, role) values
 ('admin', 'admin@email.com', SHA2('123', 512), '910000001', 'porto', 'admin'),
-('maria silva', 'maria@email.com', SHA2('123', 512), '910000002' , 'lisboa', 'n'),
+('maria silva', 'maria@email.com', SHA2('123', 512), '910000002', 'lisboa', 'n'),
 ('joão lopes', 'joao@email.com', SHA2('123', 512), '910000003', 'braga', 'n'),
 ('ana costa', 'ana@email.com', SHA2('123', 512), '910000004', 'faro', 'n'),
 ('pedro santos', 'pedro@email.com', SHA2('123', 512), '910000005', 'aveiro', 'n'),

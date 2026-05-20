@@ -19,11 +19,15 @@
 						$_SESSION['email'] = $row['email'];
 
 						# Guarda o nome com apenas o primeiro e último nomes, se este existir, ou apenas o primeiro nome
-						$name = preg_split('/\s+/', trim($row['full_name']));
-						if(count($name) == 1)
+						$name = preg_split('/\s+/', htmlspecialchars(trim($row['full_name'])));
+						$name[0] = mb_convert_case($name[0], MB_CASE_TITLE, 'UTF-8');
+						if(count($name) === 1)
 							$name = $name[0];
-						else
-							$name = $name[0].' '.$name[count($name) -1];
+						else{
+							$name[1] = mb_convert_case(end($name), MB_CASE_UPPER, 'UTF-8');
+							$name = $name[0].' '.$name[1];
+						}
+
 						$_SESSION['user'] = $name;
 					} else
 						$response = '<p class="fw-bold mt-2 mb-0">Password incorreta!</p>';

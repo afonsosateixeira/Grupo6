@@ -19,14 +19,14 @@
             'contactos',
             'cookies',
             'dia_voluntario',
+            'donations',
             'forbidden',
             'home',
             'login',
+            'perfis_voluntario',
             'privacy',
             'regist',
-            'termos',
-            'perfis_voluntario',
-            'donations'
+            'termos'
         ],
 
         # Páginas de Back Office
@@ -34,7 +34,7 @@
             'adoptionProcess',
             'animalList',
             'dashboard',
-            'listagemvoluntarios',
-            'donationList'
+            'donationList',
+            'listagemvoluntarios'
         ]
     ]);
