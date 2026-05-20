@@ -9,6 +9,7 @@
 <section class="ban">
     <h2> <strong>A nossa equipa veterinária</strong></h2>
 </section>
+
 <section class="mb-3">
         <div class="container"> 
             <div class="row g-4 d-flex justify-content-center">
@@ -30,7 +31,6 @@
                 <?php endif; ?>
             </div>
         </div>
-    
 </section>
-
-<?php endif;?>
+<?php
+    endif;

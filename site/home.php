@@ -36,6 +36,7 @@
                         <p class="pt-2 pb-3">Mike</p>
                     </div>
                 </div>
+
                 <div>
                     <p class="fs-6 mx-auto custom-w-1">Adotar é um ato de amor mas também de responsabilidade. Antes de levar um amigo para casa confira o nosso Guia de Adoção responsável para garantir que você e o seu animal sejam felizes para sempre.</p>
                     <a href="adoptionGuide" class="btn custom-bg-orange text-white rounded-pill mt-2">Guia de Adoção</a>

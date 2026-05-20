@@ -35,12 +35,12 @@
         1 => [
             'adoptionProcess',
             'animalList',
-            'dashboard',
-            'missing_animals',
-            'user_list'
             'appointmentList',
-            'vetList',
+            'dashboard',
             'donationList',
-            'listagemvoluntarios'
+            'listagemvoluntarios',
+            'missing_animals',
+            'user_list',
+            'vetList'
         ]
     ]);
