@@ -1,0 +1,29 @@
+.background {
+    background-color: #505050;
+}
+
+.btn-custom {
+    background-color: #08284B;
+    color: white;
+}
+
+.btn-group-custom {
+    background-color: #FFA500;
+    color: black;
+}
+
+.btn-custom:hover, 
+.btn-custom:focus, 
+.btn-custom:active {
+    background-color: #FFA500
+  }
+
+.card-custom {
+    background-color: #FFA500;
+    color: black;
+}
+
+.card-custom:hover {
+    transform: scale(1.1);
+    transition: transform 0.5s ease;
+}

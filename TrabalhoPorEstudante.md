@@ -1,6 +1,6 @@
 ### 2025178491_AfonsoTeixeira:
-- accessibility.html
-- adoptionGuide.html
+- accessibility.php
+- adoptionGuide.php
 - 	adoptionGuide.css
 - animalCatalog.php
 - 	animalCatalog.css
@@ -8,6 +8,7 @@
 - 	animalDetails.css
 
 - /components/helpers.php
+- /components/pagination.php
 - /components/searchbar.php
 - 	searchbar.css
 
@@ -18,9 +19,12 @@
 - 	/backoffice/pt_PT.json
 
 - /backoffice/components/action_animal.php
+- /backoffice/components/action_adoption.php
+- /backoffice/components/modal_animal.php
+
 
 ### 2025182402_DiogoAzevedo:
-- dia_voluntario.html
+- dia_voluntario.php
 - 	dia_voluntario.css
 - 	dia_voluntario.js
 
@@ -29,25 +33,25 @@
 - 	animal_care.css
 - appointment.php
 - 	appointment.css
-- termos.html
+- termos.php
 - 	termos.css
 
 ### 2025163132_GonçaloEstrelado:
-- contactos.html
+- contactos.php
 - 	contactos.css
 
 ### 2025140801_HugoGiroto:
-- privacy.html
+- privacy.php
 
 ### 2016112775_rubenreis:
-- cookies.html
+- cookies.php
 - 	cookies.css
 
 ### Grupo:
 - 	styles.css
 - 	scripts.js
 - .htaccess
-- 404.html
+- 404.php
 - config.php
 - db.php
 - forbidden.php

@@ -8,15 +8,13 @@
             exit();
         }
 
-        $metaTitle = 'Detalhes'; #No caso de preferires podes tentar utilizar uma variável e pesquisar a base de dados para introduzir o nome do animal específico.
+        $metaTitle = "Detalhes" ;
         $metaDescription = 'Todas as informações do animal';
     else:
         $stmt= $conn->prepare("SELECT a.*, b.name AS breed_name , s.name AS specie_name from animals a LEFT JOIN breeds b ON a.breed_id= b.id LEFT JOIN species s ON a.specie_id= s.id where a.id= ?");
         $stmt->bind_param("i", $id);
         $stmt->execute();
-
-        $res= $stmt->get_result();
-        $animal = $res->fetch_assoc();
+        $animal= $stmt->get_result()->fetch_assoc();
 ?>
         <section class="container m-3">
             <a href="animalCatalog" class="btn btn-secondary w-5"><i class="fa-solid fa-angle-left"></i></a>
@@ -28,7 +26,7 @@
                     <?php
                         $caminhoImagem=!empty($animal['image']) ? "assets/img/animals/". $animal['image'] : "assets/img/defaultAnimals.png";
                     ?>
-                    <img class="photo img-fluid" src="<?=$caminhoImagem?>" alt="Foto de <?= htmlspecialchars($animal['name']) ?> ">
+                    <img class="photo img-fluid" src="<?= htmlspecialchars($caminhoImagem)?>" alt="Foto de <?= htmlspecialchars($animal['name']) ?> ">
                 </div>
 
                 <div class="col-12 col-md-6 d-flex flex-column justify-content-center ">
