@@ -22,13 +22,15 @@ body{
 	opacity: 50%;
 }
 
-.ban button{
-	position: absolute;
-	top: 260px;
-	left: 55px;
-	border-radius: 15px;
-	height: 40px;
+
+.ban button {
+    position: absolute;
+    top: 269px;
+    left: 55px;
+    border-radius: 15px;
+    height: 50px;
 }
+
 
 h2{
 	font-size: 28px;
@@ -44,6 +46,94 @@ h2{
 
 
 .card img{
-	width: 300px;
+	width: 100%;
 	height: 150px;
+}
+
+.animal{
+	width: 100%;
+	height: 100px;
+}
+
+.btn-check {
+    display: none;
+}
+
+.time-label {
+    padding: 10px 20px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.animal-label {
+    padding: 10px 20px;
+    border: 2px solid #ccc;
+    cursor: pointer;
+    border-radius: 5px;
+    display: inline-block;
+}
+
+.btn-check:checked + .time-label {
+    background-color: var(--secondary-light); 
+    color: white;
+    border-color:var(--secondary);
+}
+
+.btn-check:checked + .animal-label {
+    background-color: var(--secondary-light); 
+    border-color:var(--secondary);
+}
+
+@media(max-width: 1025px) { 
+	.ban div {
+			width: 560px;
+			top: 120px;
+	}
+}
+
+@media(max-width: 769px) { 
+	.ban div {
+			width: 325px;
+			top: 80px;
+	}
+	.ban h2{
+		font-size: 22px;
+	}
+}
+
+
+@media(max-width: 426px) { 
+    .ban {
+        background: url(../img/appointment_banner_mobile.png) var(--primary) top / 100vw 500px no-repeat;
+        height: 500px;
+    }
+	.ban div {
+        width: 340px;
+        top: 236px;
+        left: 29px;
+    }
+    .ban button {
+        top: 409px;
+        left: 125px;
+    }
+
+}
+@media(max-width: 376px) { 
+    .ban button {
+        left: 97px;
+    }
+}
+
+@media(max-width: 321px) { 
+    .ban div {
+        width: 280px;
+        top: 237px;
+        left: 29px;
+    }
+	.ban button {
+        top: 409px;
+        left: 70px;
+    }
 }

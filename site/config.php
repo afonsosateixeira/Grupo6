@@ -19,13 +19,16 @@
             'contactos',
             'cookies',
             'dia_voluntario',
+            'donations',
             'forbidden',
             'home',
             'login',
             'missing_animals',
+            'perfis_voluntario',
             'privacy',
             'regist',
-            'termos'
+            'termos',
+            'vetProfile'
         ],
 
         # Páginas de Back Office
@@ -35,5 +38,9 @@
             'dashboard',
             'missing_animals',
             'user_list'
+            'appointmentList',
+            'vetList',
+            'donationList',
+            'listagemvoluntarios'
         ]
     ]);

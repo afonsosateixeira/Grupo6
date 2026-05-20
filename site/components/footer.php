@@ -3,23 +3,23 @@
 <footer class="footer-adocao border-top">
   <div class="container">
     <div class="row py-5">
-      <div class="col-12 col-md-3 mb-4 mb-md-0 text-center text-md-start">
+      <div class="col-12 col-lg-3 mb-4 mb-lg-0 text-center text-lg-start">
         <a class="footer-brand" href="<?= $basePath ?>/">
           <img src="<?= $basePath ?>/assets/img/footer.png" alt="Logo PAM" style="max-width: 200px; max-height: 50px;" />
         </a>
         <p class="mt-2" style="font-size: 0.8rem">Encontra o teu melhor amigo hoje.</p>
       </div>
 
-      <div class="col-12 col-md-9">
+      <div class="col-12 col-lg-9">
         <div class="row">
-          <div class="col-6 col-md-2 mb-3">
+          <div class="col-6 col-lg-2 mb-3">
             <h5>Adoção</h5>
             <ul class="nav flex-column">
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/animalCatalog" class="nav-link p-0">Catálogo de Animais</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/adoptionGuide" class="nav-link p-0">Guia de adoção</a></li>
             </ul>
           </div>
-          <div class="col-6 col-md-3 mb-3">
+          <div class="col-6 col-lg-3 mb-3">
             <h5>Comunidade e Eventos</h5>
             <ul class="nav flex-column">
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Calendário de Eventos</a></li>
@@ -28,25 +28,26 @@
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Encontrei um animal e agora?</a></li>
             </ul>
           </div>
-          <div class="col-6 col-md-2 mb-3">
+          <div class="col-6 col-lg-2 mb-3">
             <h5>Apoio e saúde</h5>
             <ul class="nav flex-column">
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Top Doadores</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/donations" class="nav-link p-0">Doações</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Nossos parceiros</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Marcação de consultas</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/appointment" class="nav-link p-0">Marcação de consultas</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/animal_care" class="nav-link p-0">Cuidados de saúde</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/vetProfile" class="nav-link p-0">Perfil do Veterinário</a></li>
             </ul>
           </div>
-          <div class="col-6 col-md-3 mb-3">
+          <div class="col-6 col-lg-2 mb-3">
             <h5>Institucional</h5>
             <ul class="nav flex-column">
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/dia_voluntario" class="nav-link p-0">Um dia no abrigo</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Perfil de voluntário</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/perfis_voluntario" class="nav-link p-0">Perfil de voluntário</a></li>
               <li class="nav-item mb-2"><a href="./contactos" class="nav-link p-0">Contactos</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Sobre nós</a></li>
             </ul>
           </div>
-          <div class="col-6 col-md-2 mb-3">
+          <div class="col-6 col-lg-2 mb-3">
             <h5>Links Rápidos</h5>
             <ul class="nav flex-column">
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/cookies" class="nav-link p-0">Política de cookies</a></li>

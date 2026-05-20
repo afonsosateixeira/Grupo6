@@ -187,3 +187,4 @@
 		</section>
 <?php
     endif;
+?>
