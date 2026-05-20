@@ -155,6 +155,7 @@ create table lost_animals (
     contact_phone varchar(20) not null,
     location varchar(255) not null,
     photo varchar(255),
+    found enum('Yes', 'No') default 'No' not null,
     constraint pk_lost_animals primary key (id),
     constraint fk_lost_animals_users foreign key (user_id) references users(id)
 ) engine=innodb;
@@ -428,7 +429,7 @@ order by vs.shift_date desc, vs.start_date asc;
 drop view if exists vw_lost_pets_radar;
 create view vw_lost_pets_radar as
 select la.id as id, la.animal_name as animal, u.full_name as reporter, la.contact_phone as contact, la.last_seen_date as since, la.photo as photo, la.location as location,
-       datediff(current_date, la.last_seen_date) as days_missing
+       datediff(current_date, la.last_seen_date) as days_missing, la.found as found
 from lost_animals la
 join users u on la.user_id = u.id
 order by la.id asc;

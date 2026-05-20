@@ -41,7 +41,7 @@
               <li>
                 <hr class="dropdown-divider" />
               </li>
-              <li><a class="dropdown-item" href="#">Animais desaparecidos</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/missing_animals">Animais desaparecidos</a></li>
               <li><a class="dropdown-item" href="#">Encontrei um animal e agora?</a></li>
             </ul>
           </li>

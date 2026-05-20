@@ -64,9 +64,9 @@
                                 <td><?= htmlspecialchars($row['full_name']) ?></td>
                                 <td><?= htmlspecialchars($row['email']) ?></td>
                                 <td><?= htmlspecialchars($row['phone']) ?></td>
-                                <td><?= !empty($row['local']) ? htmlspecialchars($row['local']) : '' ?></td>
-                                <td><?= !empty($row['street']) ? htmlspecialchars($row['street']) : '' ?></td>
-                                <td><?= !empty($row['cp']) ? htmlspecialchars($row['cp']) : '' ?></td>
+                                <td><?= htmlspecialchars($row['local']) ?></td>
+                                <td><?= htmlspecialchars($row['street']) ?></td>
+                                <td><?= htmlspecialchars($row['cp']) ?></td>
                                 <td><?= ($row['role'] == 'admin') ? 'Sim' : 'Não' ?></td>
                                 <td class="d-flex gap-2 justify-content-center">
                                     <a href="<?= $basePath ?>/components/action_edit.php?id=<?= $row['id'] ?>&edit=true" class="btn btn-primary">Editar</a>

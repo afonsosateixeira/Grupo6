@@ -24,7 +24,7 @@
             <ul class="nav flex-column">
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Calendário de Eventos</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Eventos Passados</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Animais desaparecidos</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/missing_animals" class="nav-link p-0">Animais desaparecidos</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Encontrei um animal e agora?</a></li>
             </ul>
           </div>

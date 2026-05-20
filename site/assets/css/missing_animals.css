@@ -1,0 +1,12 @@
+#banner {
+  background: linear-gradient(to right, var(--primary), var(--primary-light));
+  height: 300px;
+}
+
+.marker-blue li::marker {
+  color: var(--primary-light);
+}
+
+h1 {
+  font-size: 60px;
+}

@@ -22,6 +22,7 @@
             'forbidden',
             'home',
             'login',
+            'missing_animals',
             'privacy',
             'regist',
             'termos'

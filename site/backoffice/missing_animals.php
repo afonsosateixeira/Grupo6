@@ -8,6 +8,9 @@
         $idMax = $idMin + ($perPage - 1);
         $currentPage = $idMax / $perPage;
 
+        $order = $_GET['order'] ?? 'id';
+        $direction = $_GET['direction'] ?? 'ASC';
+
         if(!empty($_GET['delete']) && !empty($_GET['id'])){
             $id = $_GET['id'];
 
@@ -30,7 +33,7 @@
         $maxPage = $row['pages'];
         $resPages->free();
 
-        $stmt = $conn->prepare("SELECT * FROM vw_lost_pets_radar WHERE id BETWEEN ? AND ?");
+        $stmt = $conn->prepare("SELECT * FROM vw_lost_pets_radar ORDER BY $order $direction LIMIT ? OFFSET ?");
         $stmt->bind_param('ii', $idMin, $idMax);
         $stmt->execute();
         $res = $stmt->get_result();
