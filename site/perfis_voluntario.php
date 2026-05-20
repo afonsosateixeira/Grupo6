@@ -1,4 +1,3 @@
-  <div class="container">
 <?php
     if (!$rerun):
       $metaTitle = 'Perfis de voluntarios';
@@ -7,10 +6,11 @@
       $sql = "SELECT * FROM vw_volunteer_simple_schedule";
       $lista = $conn->query($sql);
     ?>
+      <div class="container">
       <div class="text-center my-5">
         <h1>Perfil dos voluntários</h1>
       </div>
-        <div class="cartas">
+        <div class="cartas justify-content-center">
 <?php
     while($voluntario = $lista->fetch_assoc()):
 ?>
@@ -28,7 +28,7 @@
   endwhile;
 ?>
     </div>
+  </div>
 <?php
   endif;
 ?>
-  </div>

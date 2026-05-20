@@ -15,6 +15,7 @@
             </a>
             <div class="collapse show" id="menuPessoal">
                 <ul class="nav flex-column submenu mt-1">
+                    <li><a href="<?= $basePath ?>/listagemvoluntarios" class="nav-link">Listagem Voluntários</a></li>
                 </ul>
             </div>
         </li>
@@ -29,9 +30,6 @@
                 <ul class="nav flex-column submenu mt-1">
                     <li><a href="<?= $basePath ?>/animalList" class="nav-link">Lista Animais</a></li>
                     <li><a href="<?= $basePath ?>/adoptionProcess" class="nav-link">Processo Adoção</a></li>
-                    <li><a href="<?= $basePath ?>/vetList" class="nav-link">Gestão de Veterinários - medicina</a></li>
-                    <li><a href="<?= $basePath ?>/appointmentList" class="nav-link">Gestão de consultas - medicina</a></li>
-                    <li><a href="<?= $basePath ?>/listagemvoluntarios" class="nav-link">Listagem Voluntários</a></li>
                 </ul>
             </div>
         </li>
@@ -44,6 +42,8 @@
             </a>
             <div class="collapse" id="menuSaudeFinanca">
                 <ul class="nav flex-column submenu mt-1">
+                    <li><a href="<?= $basePath ?>/appointmentList" class="nav-link">Gestão de Consultas</a></li>
+                    <li><a href="<?= $basePath ?>/vetList" class="nav-link">Gestão de Veterinários</a></li>
                     <li><a href="<?= $basePath ?>/donationList" class="nav-link">Lista de Doações</a></li>
                 </ul>
             </div>
