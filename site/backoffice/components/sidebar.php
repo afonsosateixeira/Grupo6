@@ -17,6 +17,8 @@
                 <ul class="nav flex-column submenu mt-1">
                     <li><a href="<?= $basePath ?>/animalList" class="nav-link">Lista Animais</a></li>
                     <li><a href="<?= $basePath ?>/adoptionProcess" class="nav-link">Processo Adoção</a></li>
+                    <li><a href="<?= $basePath ?>/vetList" class="nav-link">Gestão de Veterinários - medicina</a></li>
+                    <li><a href="<?= $basePath ?>/appointmentList" class="nav-link">Gestão de consultas - medicina</a></li>
                 </ul>
             </div>
         </li>

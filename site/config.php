@@ -24,13 +24,17 @@
             'login',
             'privacy',
             'regist',
-            'termos'
+            'termos',
+            'vetProfile'
         ],
 
         # Páginas de Back Office
         1 => [
             'adoptionProcess',
             'animalList',
-            'dashboard'
+            'dashboard',
+            'appointmentList',
+            'vetList'
+
         ]
     ]);

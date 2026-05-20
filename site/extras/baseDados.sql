@@ -69,6 +69,7 @@ drop table if exists veterinarians;
 create table veterinarians (
     id int auto_increment,
     name varchar(150) not null,
+    photo varchar(255),
     license_number varchar(50) not null,
     specialty varchar(100),
     phone varchar(20) not null,
@@ -220,29 +221,28 @@ insert into adoption_processes (user_id, animal_id, status, notes) values
 (6, 9, 'pendente', 'primeiro animal'),
 (7, 10, 'pendente', 'interessado em tartarugas');
 
-insert into veterinarians (name, license_number, specialty, phone) values 
-('dr. silva', 'vet001', 'cirurgia', '220000001'),
-('dra. ana', 'vet002', 'clínica geral', '220000002'),
-('dr. mendes', 'vet003', 'exóticos', '220000003'),
-('dra. beatriz', 'vet004', 'dermatologia', '220000004'),
-('dr. carlos', 'vet005', 'ortopedia', '220000005'),
-('dra. diana', 'vet006', 'oftalmologia', '220000006'),
-('dr. eusebio', 'vet007', 'cardiologia', '220000007'),
-('dra. fernanda', 'vet008', 'comportamento', '220000008'),
-('dr. gabriel', 'vet009', 'clínica geral', '220000009'),
-('dra. helena', 'vet010', 'neurologia', '220000010');
-
+insert into veterinarians (name, photo, license_number, specialty, phone) values 
+('dr. silva', 'vet1.jpg', 'vet001', 'cirurgia', '220000001'),
+('dra. ana', 'vet2.jpg', 'vet002', 'clínica geral', '220000002'),
+('dr. mendes', 'vet3.jpg', 'vet003', 'exóticos', '220000003'),
+('dra. beatriz', 'vet4.jpg', 'vet004', 'dermatologia', '220000004'),
+('dr. carlos', 'vet5.jpg', 'vet005', 'ortopedia', '220000005'),
+('dra. diana', 'vet6.jpg', 'vet006', 'oftalmologia', '22₀₀₀₀₀₀₆'),
+('dr. eusebio', 'vet7.jpg', 'vet007', 'cardiologia', '220000007'),
+('dra. fernanda', 'vet8.jpg', 'vet008', 'comportamento', '220000008'),
+('dr. gabriel', 'vet9.jpg', 'vet009', 'clínica geral', '220000009'),
+('dra. helena', 'vet10.jpg', 'vet010', 'neurologia', '220000010');
 insert into appointments (animal_id, vet_id, appointment_date, reason, status) values 
-(1, 1, '2026-04-10 10:00', 'check-up', 'concluida'),
-(2, 2, '2026-04-11 11:30', 'vacinação', 'concluida'),
-(3, 1, '2026-04-12 09:00', 'ferimento', 'cancelada'),
-(4, 3, '2026-04-13 15:00', 'desparasitação', 'agendada'),
-(5, 4, '2026-04-14 16:00', 'alergia', 'agendada'),
-(6, 2, '2026-07-15 10:30', 'revisão', 'agendada'),
-(7, 1, '2026-05-16 14:00', 'esterilização', 'agendada'),
-(8, 3, '2026-09-17 09:30', 'unhas', 'agendada'),
-(9, 5, '2026-06-18 11:00', 'coxeio', 'agendada'),
-(10, 6, '2026-05-19 12:00', 'olhos', 'agendada');
+(1, 1,  '2026-04-10 10:00', 'check-up', 'concluida'),
+(2, 2,  '2026-04-11 11:30', 'vacinação', 'concluida'),
+(3, 1,  '2026-04-12 09:00', 'ferimento', 'cancelada'),
+(4, 3,  '2026-04-13 15:00', 'desparasitação', 'agendada'),
+(5, 4,  '2026-04-14 16:00', 'alergia', 'agendada'),
+(6, 2,  '2026-07-15 10:30', 'revisão', 'agendada'),
+(7, 1,  '2026-05-16 14:00', 'esterilização', 'agendada'),
+(8, 3,  '2026-09-17 09:30', 'unhas', 'agendada'),
+(9, 5,  '2026-06-18 11:00', 'coxeio', 'agendada'),
+(10, 6,  '2026-05-19 12:00', 'olhos', 'agendada');
 
 insert into medical_history (appointment_id, diagnosis, weight) values 
 (1, 'saudável', 30.5), (2, 'vacinas em dia', 4.2),

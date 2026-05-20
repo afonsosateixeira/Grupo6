@@ -35,6 +35,7 @@
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Nossos parceiros</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/appointment" class="nav-link p-0">Marcação de consultas</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/animal_care" class="nav-link p-0">Cuidados de saúde</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/vetProfile" class="nav-link p-0">Perfil do Veterinário</a></li>
             </ul>
           </div>
           <div class="col-6 col-md-3 mb-3">

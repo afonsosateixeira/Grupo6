@@ -58,6 +58,7 @@
               </li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/appointment">Marcação de consultas</a></li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/animal_care">Cuidados de saúde</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/vetProfile">Perfil do Veterinário</a></li>
             </ul>
           </li>
 

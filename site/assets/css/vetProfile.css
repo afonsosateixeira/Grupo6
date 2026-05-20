@@ -1,0 +1,11 @@
+.ban {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100px;
+}
+
+.img-vet {
+    width: 150px;
+    height: 150px;
+}
