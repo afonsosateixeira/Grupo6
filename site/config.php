@@ -23,6 +23,7 @@
             'forbidden',
             'home',
             'login',
+            'missing_animals',
             'perfis_voluntario',
             'privacy',
             'regist',
@@ -35,6 +36,8 @@
             'adoptionProcess',
             'animalList',
             'dashboard',
+            'missing_animals',
+            'user_list'
             'appointmentList',
             'vetList',
             'donationList',
