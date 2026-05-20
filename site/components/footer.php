@@ -33,8 +33,9 @@
             <ul class="nav flex-column">
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/donations" class="nav-link p-0">Doações</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Nossos parceiros</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Marcação de consultas</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/appointment" class="nav-link p-0">Marcação de consultas</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/animal_care" class="nav-link p-0">Cuidados de saúde</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/vetProfile" class="nav-link p-0">Perfil do Veterinário</a></li>
             </ul>
           </div>
           <div class="col-6 col-lg-2 mb-3">

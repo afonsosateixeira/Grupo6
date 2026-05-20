@@ -26,7 +26,8 @@
             'perfis_voluntario',
             'privacy',
             'regist',
-            'termos'
+            'termos',
+            'vetProfile'
         ],
 
         # Páginas de Back Office
@@ -34,6 +35,8 @@
             'adoptionProcess',
             'animalList',
             'dashboard',
+            'appointmentList',
+            'vetList',
             'donationList',
             'listagemvoluntarios'
         ]
