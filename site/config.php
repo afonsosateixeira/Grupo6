@@ -24,13 +24,15 @@
             'login',
             'privacy',
             'regist',
-            'termos'
+            'termos',
+            'donations'
         ],
 
         # Páginas de Back Office
         1 => [
             'adoptionProcess',
             'animalList',
+            'donationList',
             'dashboard'
         ]
     ]);
