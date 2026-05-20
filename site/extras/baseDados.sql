@@ -153,6 +153,7 @@ create table lost_animals (
     animal_name varchar(100) not null,
     last_seen_date date not null,
     contact_phone varchar(20) not null,
+    location varchar(255) not null,
     photo varchar(255),
     constraint pk_lost_animals primary key (id),
     constraint fk_lost_animals_users foreign key (user_id) references users(id)
@@ -288,12 +289,12 @@ insert into volunteer_shifts (volunteer_id, task_description, shift_date, start_
 (9, 'planeamento feira', '2026-04-17', '18:00', '20:00'),
 (10, 'reparação vedações', '2026-06-18', '09:00', '13:00');
 
-insert into lost_animals (user_id, animal_name, last_seen_date, contact_phone) values 
-(2, 'bolinha', '2026-04-01', '910000002'), (4, 'pipas', '2026-04-02', '910000004'),
-(6, 'rex', '2026-04-03', '910000006'), (7, 'fifi', '2026-04-04', '910000007'),
-(9, 'lulu', '2026-04-05', '910000009'), (10, 'pantufa', '2026-04-06', '910000010'),
-(1, 'kiko', '2026-04-07', '910000002'), (3, 'mimi', '2026-04-08', '910000004'),
-(5, 'toby', '2026-04-09', '910000006'), (8, 'nini', '2026-04-10', '910000007');
+insert into lost_animals (user_id, animal_name, last_seen_date, contact_phone, location) values 
+(2, 'bolinha', '2026-04-01', '910000002', 'Leiria'), (4, 'pipas', '2026-04-02', '910000004', 'Leiria'),
+(6, 'rex', '2026-04-03', '910000006', 'Leiria'), (7, 'fifi', '2026-04-04', '910000007', 'Leiria'),
+(9, 'lulu', '2026-04-05', '910000009', 'Leiria'), (10, 'pantufa', '2026-04-06', '910000010', 'Leiria'),
+(1, 'kiko', '2026-04-07', '910000002', 'Leiria'), (3, 'mimi', '2026-04-08', '910000004', 'Leiria'),
+(5, 'toby', '2026-04-09', '910000006', 'Leiria'), (8, 'nini', '2026-04-10', '910000007', 'Leiria');
 
 insert into partners (company_name, contact_person, phone) values 
 ('petshop alegria', 'sr. joaquim', '221111111'),
@@ -426,11 +427,11 @@ order by vs.shift_date desc, vs.start_date asc;
 
 drop view if exists vw_lost_pets_radar;
 create view vw_lost_pets_radar as
-select la.animal_name, u.full_name as reporter_name, la.contact_phone, la.last_seen_date,
+select la.id as id, la.animal_name as animal, u.full_name as reporter, la.contact_phone as contact, la.last_seen_date as since, la.photo as photo, la.location as location,
        datediff(current_date, la.last_seen_date) as days_missing
 from lost_animals la
 join users u on la.user_id = u.id
-order by days_missing asc;
+order by la.id asc;
 
 drop view if exists vw_corporate_partners_directory;
 create view vw_corporate_partners_directory as

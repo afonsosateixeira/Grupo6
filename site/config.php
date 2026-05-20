@@ -31,6 +31,8 @@
         1 => [
             'adoptionProcess',
             'animalList',
-            'dashboard'
+            'dashboard',
+            'missing_animals',
+            'user_list'
         ]
     ]);

@@ -15,6 +15,8 @@
             </a>
             <div class="collapse show" id="menuAnimais">
                 <ul class="nav flex-column submenu mt-1">
+                    <li><a href="<?= $basePath ?>/missing_animals" class="nav-link">Animais Perdidos</a></li>
+                    <li><a href="<?= $basePath ?>/user_list" class="nav-link">Lista de Utilizadores</a></li>
                     <li><a href="<?= $basePath ?>/animalList" class="nav-link">Lista Animais</a></li>
                     <li><a href="<?= $basePath ?>/adoptionProcess" class="nav-link">Processo Adoção</a></li>
                 </ul>
