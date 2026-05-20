@@ -51,7 +51,7 @@
               Apoio e saúde
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Top Doadores</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/donations">Doações</a></li>
               <li><a class="dropdown-item" href="#">Nossos Parceiros</a></li>
               <li>
                 <hr class="dropdown-divider" />
