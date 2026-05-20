@@ -36,8 +36,8 @@
               Comunidade e Eventos
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Calendário de Enventos</a></li>
-              <li><a class="dropdown-item" href="#">Eventos Passados</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/events">Calendário de Eventos</a></li>
+              <li><a class="dropdown-item" href="">Eventos Passados</a></li>
               <li>
                 <hr class="dropdown-divider" />
               </li>

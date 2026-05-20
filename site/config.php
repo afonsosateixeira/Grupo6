@@ -19,6 +19,7 @@
             'contactos',
             'cookies',
             'dia_voluntario',
+            'events',
             'forbidden',
             'home',
             'login',
@@ -31,6 +32,7 @@
         1 => [
             'adoptionProcess',
             'animalList',
+            'eventsList',
             'dashboard'
         ]
     ]);

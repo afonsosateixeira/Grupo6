@@ -20,6 +20,18 @@
                 </ul>
             </div>
         </li>
+        <li class="nav-item mt-2">
+            <a href="#" class="nav-link text-white d-flex justify-content-between align-items-center"
+                data-bs-toggle="collapse" data-bs-target="#menuEventos" aria-expanded="true">
+                <span><i class="fa-solid fa-calendar-days me-2"></i> Gestão de Eventos</span>
+                <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
+            </a>
+            <div class="collapse show" id="menuEventos">
+                <ul class="nav flex-column submenu mt-1">
+                    <li><a href="<?= $basePath ?>/eventsList" class="nav-link">Lista de Eventos</a></li>
+                </ul>
+            </div>
+        </li>
     </ul>
     <hr>
 
