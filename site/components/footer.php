@@ -22,7 +22,7 @@
           <div class="col-6 col-lg-3 mb-3">
             <h5>Comunidade e Eventos</h5>
             <ul class="nav flex-column">
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Calendário de Eventos</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/events" class="nav-link p-0">Calendário de Eventos</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Eventos Passados</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/missing_animals" class="nav-link p-0">Animais Desaparecidos</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Encontrei um animal e agora?</a></li>

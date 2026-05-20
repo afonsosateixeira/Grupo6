@@ -106,10 +106,15 @@ create table events (
     id int auto_increment,
     name varchar(100) not null,
     event_date datetime not null,
+    end_date datetime,
     location varchar(150) not null,
     description text,
-    event_type varchar(50) not null,
-    constraint pk_events primary key (id)
+    event_type enum('Cãominhada', 'Feira de Adoção', 'Workshop', 'Campanha Solidária', 'Sessão de Treino', 'Palestra', 'Visita Escolar', 'Angariação de Fundos') not null,
+    status enum('scheduled', 'cancelled', 'postponed', 'completed') not null default 'scheduled',
+    capacity int,
+    organizer_id int,
+    constraint pk_events primary key (id),
+    constraint fk_events_organizer foreign key (organizer_id) references users(id)
 ) engine=innodb;
 
 drop table if exists events_registrations;
@@ -251,17 +256,17 @@ insert into medical_history (appointment_id, diagnosis, weight) values
 (7, 'bom estado geral', 30.4), (8, 'sem parasitas', 4.2),
 (9, 'musculatura forte', 30.7), (10, 'pelagem brilhante', 4.4);
 
-insert into events (name, event_date, location, event_type) values 
-('feira de adoção', '2026-05-01 10:00', 'parque da cidade', 'feira'),
-('recolha de ração', '2026-07-15 09:00', 'supermercado x', 'recolha'),
-('workshop treino', '2026-06-01 15:00', 'sede associação', 'educação'),
-('caminhada cãopanheira', '2026-08-20 08:30', 'avenida central', 'convívio'),
-('jantar solidário', '2026-07-10 20:00', 'restaurante y', 'angariação'),
-('banho e tosquia solidário', '2026-07-25 10:00', 'sede', 'serviço'),
-('visita escola a', '2026-09-05 14:00', 'escola básica 1', 'educação'),
-('mega feira verão', '2026-08-20 10:00', 'praça principal', 'feira'),
-('peddy paper animal', '2026-09-05 09:30', 'mata nacional', 'convívio'),
-('venda de natal', '2026-12-01 10:00', 'sede', 'feira');
+insert into events (name, event_date, end_date, location, description, event_type, status, capacity, organizer_id) values
+('Rota Canina Norte', '2026-06-15 09:00', '2026-06-15 12:00', 'Parque Oriental', 'Caminhada de socialização para cães e tutores', 'Cãominhada', 'scheduled', 80, 1),
+('Feira de Adoção Primavera', '2026-06-29 10:00', '2026-06-29 17:00', 'Marginal Atlantica', 'Feira para adoção de cães e gatos', 'Feira de Adoção', 'scheduled', 70, 3),
+('Workshop Primeiros Socorros', '2026-07-06 15:00', '2026-07-06 17:00', 'Jardim das Oliveiras', 'Aprenda técnicas básicas de primeiros socorros para animais', 'Workshop', 'scheduled', 60, 5),
+('Campanha Solidária de Ração', '2026-07-20 09:30', '2026-07-20 12:30', 'Parque da Serra', 'Recolha de alimentos para animais carenciados', 'Campanha Solidária', 'scheduled', 50, 3),
+('Volta Peluda Comunitaria', '2026-08-03 08:45', '2026-08-03 11:15', 'Zona Ribeirinha', 'Circuito de consciencialização publica', 'Cãominhada', 'scheduled', 90, 1),
+('Sessão de Treino Básico', '2026-08-17 09:15', '2026-08-17 12:15', 'Avenida do Mar', 'Sessão de treino para cães adotados', 'Sessão de Treino', 'scheduled', 75, 5),
+('Visita Escolar Animal', '2026-09-07 14:00', '2026-09-07 16:30', 'Complexo Escolar Sul', 'Atividade educativa para escolas', 'Visita Escolar', 'scheduled', 45, 3),
+('Caminhada Sunset Pets', '2026-09-21 18:00', '2026-09-21 20:00', 'Passeio da Cidade', 'Encontro ao fim da tarde com animais do abrigo', 'Cãominhada', 'scheduled', 65, 1),
+('Palestra Bem-estar Animal', '2026-10-05 09:00', '2026-10-05 12:00', 'Ecopista Norte', 'Palestra sobre cuidados e bem-estar animal', 'Palestra', 'scheduled', 120, 5),
+('Angariação de Fundos Final', '2026-10-19 10:00', '2026-10-19 13:00', 'Parque Municipal', 'Evento para angariação de fundos para o abrigo', 'Angariação de Fundos', 'scheduled', 100, 3);
 
 insert into events_registrations (user_id, event_id, status) values 
 (2, 1, 'confirmado'), (4, 1, 'confirmado'), (6, 2, 'confirmado'),
@@ -393,23 +398,31 @@ order by a.name asc, app.appointment_date desc;
 
 drop view if exists vw_events_timeline;
 create view vw_events_timeline as
-select name as event_name, event_type, event_date, location,
+select e.name as event_name, e.event_type, e.event_date, e.end_date, e.location,
+       e.status, e.capacity, ifnull(u.full_name, 'Sem organizador') as organizer,
        case 
-           when event_date < current_date then 'Concluído' 
-           when date(event_date) = current_date then 'A decorrer hoje'
+           when e.event_date < current_date then 'Concluido' 
+           when date(e.event_date) = current_date then 'A decorrer hoje'
            else 'Próximo' 
-       end as event_status
-from events
-order by event_date asc;
+       end as timeline_status
+from events e
+left join users u on e.organizer_id = u.id
+order by e.event_date asc;
 
 drop view if exists vw_event_capacity_planning;
 create view vw_event_capacity_planning as
-select e.name as event_name, e.event_date,
+select e.name as event_name, e.event_date, e.event_type, e.status as event_status,
+       e.capacity,
        count(er.id) as total_registrations,
-       sum(case when er.status = 'confirmado' then 1 else 0 end) as confirmed_attendees
+       sum(case when er.status = 'confirmado' then 1 else 0 end) as confirmed_attendees,
+       sum(case when er.status = 'pendente' then 1 else 0 end) as pending_attendees,
+       case
+           when e.capacity is null then null
+           else e.capacity - count(case when er.status in ('confirmado', 'pendente') then 1 end)
+       end as slots_remaining
 from events e
 left join events_registrations er on e.id = er.event_id
-group by e.id, e.name, e.event_date;
+group by e.id, e.name, e.event_date, e.event_type, e.status, e.capacity;
 
 DROP VIEW IF EXISTS vw_volunteer_simple_schedule;
 CREATE VIEW vw_volunteer_simple_schedule AS
