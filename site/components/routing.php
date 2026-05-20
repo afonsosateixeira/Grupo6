@@ -37,7 +37,7 @@
 	if($backOffice)
 		$route = ($path === 'backoffice' || $path === 'index') ? 'dashboard' : $path;
 	else
-		$route = ($path === 'site' || $path === '') ? 'home' : $path;
+		$route = ($path === 'site' || $path === '' || $path === 'index') ? 'home' : $path;
 
 	# Destroi a sessão e redireciona para o login no caso de fazer logout
 	if($route == 'logout') {

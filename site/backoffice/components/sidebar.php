@@ -6,8 +6,8 @@
     </a>
     <hr>
 
-    <ul class="nav nav-pills flex-column mb-auto">
-        <li class="nav-item">
+    <ul class="nav nav-pills flex-column flex-grow-1">
+        <li class="nav-item mb-4">
             <a href="#" class="nav-link text-white d-flex justify-content-between align-items-center"
                 data-bs-toggle="collapse" data-bs-target="#menuAnimais" aria-expanded="true">
                 <span><i class="fa-solid fa-dog me-2"></i> Gestão de Animais</span>
@@ -21,7 +21,42 @@
                 </ul>
             </div>
         </li>
+        <li class="nav-item mb-4">
+            <a href="#" class="nav-link text-white d-flex justify-content-between align-items-center"
+                data-bs-toggle="collapse" data-bs-target="#menuSaudeFinanca" aria-expanded="true">
+                <span><i class="fa-solid fa-briefcase-medical me-2"></i>Gestão de Saúde e Finanças</span>
+                <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
+            </a>
+            <div class="collapse show" id="menuSaudeFinanca">
+                <ul class="nav flex-column submenu mt-1">
+                    <li><a href="<?= $basePath ?>/donationList" class="nav-link">Lista de Doações</a></li>
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item mb-4">
+            <a href="#" class="nav-link text-white d-flex justify-content-between align-items-center"
+                data-bs-toggle="collapse" data-bs-target="#menuOperacoes" aria-expanded="true">
+                <span><i class="fa-solid fa-wrench me-2"></i>Gestão de Operações</span>
+                <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
+            </a>
+            <div class="collapse show" id="menuOperacoes">
+                <ul class="nav flex-column submenu mt-1">
+                </ul>
+            </div>
+        </li>
+        <li class="nav-item mb-4">
+            <a href="#" class="nav-link text-white d-flex justify-content-between align-items-center"
+                data-bs-toggle="collapse" data-bs-target="#menuPessoal" aria-expanded="true">
+                <span><i class="fa-solid fa-users me-2"></i>Gestão Pessoal</span>
+                <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
+            </a>
+            <div class="collapse show" id="menuPessoal">
+                <ul class="nav flex-column submenu mt-1">
+                </ul>
+            </div>
+        </li>
     </ul>
+
     <hr>
 
     <div class="dropdown">

@@ -25,7 +25,8 @@
             'privacy',
             'regist',
             'termos',
-            'perfis_voluntario'
+            'perfis_voluntario',
+            'donations'
         ],
 
         # Páginas de Back Office
@@ -33,6 +34,7 @@
             'adoptionProcess',
             'animalList',
             'dashboard',
-            'listagemvoluntarios'
+            'listagemvoluntarios',
+            'donationList'
         ]
     ]);
