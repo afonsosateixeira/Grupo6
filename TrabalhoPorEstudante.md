@@ -1,6 +1,6 @@
 ### 2025178491_AfonsoTeixeira:
-- accessibility.html
-- adoptionGuide.html
+- accessibility.php
+- adoptionGuide.php
 - 	adoptionGuide.css
 - animalCatalog.php
 - 	animalCatalog.css
@@ -8,6 +8,7 @@
 - 	animalDetails.css
 
 - /components/helpers.php
+- /components/pagination.php
 - /components/searchbar.php
 - 	searchbar.css
 
@@ -18,6 +19,9 @@
 - 	/backoffice/pt_PT.json
 
 - /backoffice/components/action_animal.php
+- /backoffice/components/action_adoption.php
+- /backoffice/components/modal_animal.php
+
 
 ### 2025182402_DiogoAzevedo:
 - dia_voluntario.html
