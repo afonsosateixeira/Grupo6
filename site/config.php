@@ -25,6 +25,7 @@
             'privacy',
             'regist',
             'termos',
+            'perfis_voluntario',
             'donations'
         ],
 
@@ -32,7 +33,8 @@
         1 => [
             'adoptionProcess',
             'animalList',
-            'donationList',
-            'dashboard'
+            'dashboard',
+            'listagemvoluntarios',
+            'donationList'
         ]
     ]);

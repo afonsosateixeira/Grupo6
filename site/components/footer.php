@@ -41,7 +41,7 @@
             <h5>Institucional</h5>
             <ul class="nav flex-column">
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/dia_voluntario" class="nav-link p-0">Um dia no abrigo</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Perfil de voluntário</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/perfis_voluntario" class="nav-link p-0">Perfil de voluntário</a></li>
               <li class="nav-item mb-2"><a href="./contactos" class="nav-link p-0">Contactos</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Sobre nós</a></li>
             </ul>

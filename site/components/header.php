@@ -67,7 +67,7 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="<?= $basePath ?>/dia_voluntario">Um dia no abrigo</a></li>
-              <li><a class="dropdown-item" href="#">Perfil de voluntário</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/perfis_voluntario">Perfil de voluntário</a></li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/contactos">Contactos</a></li>
             </ul>
           </li>
