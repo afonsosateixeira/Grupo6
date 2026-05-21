@@ -15,7 +15,8 @@
             </a>
             <div class="collapse show" id="menuPessoal">
                 <ul class="nav flex-column submenu mt-1">
-                    <li><a href="<?= $basePath ?>/listagemvoluntarios" class="nav-link">Listagem Voluntários</a></li>
+                    <li><a href="<?= $basePath ?>/user_list" class="nav-link">Utilizadores</a></li>
+                    <li><a href="<?= $basePath ?>/listagemvoluntarios" class="nav-link">Voluntários</a></li>
                 </ul>
             </div>
         </li>
@@ -29,24 +30,11 @@
             <div class="collapse" id="menuAnimais">
                 <ul class="nav flex-column submenu mt-1">
                     <li><a href="<?= $basePath ?>/missing_animals" class="nav-link">Animais Perdidos</a></li>
-                    <li><a href="<?= $basePath ?>/user_list" class="nav-link">Lista de Utilizadores</a></li>
-                    <li><a href="<?= $basePath ?>/animalList" class="nav-link">Lista Animais</a></li>
+                    <li><a href="<?= $basePath ?>/animalList" class="nav-link">Animais</a></li>
                     <li><a href="<?= $basePath ?>/adoptionProcess" class="nav-link">Processo Adoção</a></li>
                 </ul>
             </div>
         </li>
-        <li class="nav-item mt-2">
-            <a href="#" class="nav-link text-white d-flex justify-content-between align-items-center"
-                data-bs-toggle="collapse" data-bs-target="#menuEventos" aria-expanded="true">
-                <span><i class="fa-solid fa-calendar-days me-2"></i> Gestão de Eventos</span>
-                <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
-            </a>
-            <div class="collapse show" id="menuEventos">
-                <ul class="nav flex-column submenu mt-1">
-                    <li><a href="<?= $basePath ?>/eventsList" class="nav-link">Lista de Eventos</a></li>
-              </ul>
-      </div>
-      </li>
 
         <li class="nav-item mb-4">
             <a href="#" class="nav-link text-white d-flex justify-content-between align-items-center collapsed"
@@ -56,21 +44,22 @@
             </a>
             <div class="collapse" id="menuSaudeFinanca">
                 <ul class="nav flex-column submenu mt-1">
-                    <li><a href="<?= $basePath ?>/appointmentList" class="nav-link">Gestão de Consultas</a></li>
-                    <li><a href="<?= $basePath ?>/vetList" class="nav-link">Gestão de Veterinários</a></li>
-                    <li><a href="<?= $basePath ?>/donationList" class="nav-link">Lista de Doações</a></li>
+                    <li><a href="<?= $basePath ?>/appointmentList" class="nav-link">Consultas</a></li>
+                    <li><a href="<?= $basePath ?>/vetList" class="nav-link">Veterinários</a></li>
+                    <li><a href="<?= $basePath ?>/donationList" class="nav-link">Doações</a></li>
                 </ul>
             </div>
         </li>
 
         <li class="nav-item mb-4">
             <a href="#" class="nav-link text-white d-flex justify-content-between align-items-center collapsed"
-                data-bs-toggle="collapse" data-bs-target="#menuOperacoes" aria-expanded="false">
-                <span><i class="fa-solid fa-wrench me-2"></i>Gestão de Operações</span>
+                data-bs-toggle="collapse" data-bs-target="#menuEventos" aria-expanded="false">
+                <span><i class="fa-solid fa-calendar-days me-2"></i> Gestão de Eventos</span>
                 <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
             </a>
-            <div class="collapse show" id="menuOperacoes">
+            <div class="collapse" id="menuEventos">
                 <ul class="nav flex-column submenu mt-1">
+                    <li><a href="<?= $basePath ?>/eventsList" class="nav-link">Eventos</a></li>
                 </ul>
             </div>
         </li>

@@ -31,13 +31,13 @@
                 <?php
                     while($row = $res->fetch_assoc()):
                 ?>
-                    <div class="card bg-body-secondary col-auto text-center py-3">
+                    <div class="card bg-body-secondary col-auto text-center py-3 align-items-center">
                         <h3 class="fw-bold <?= ($row['found'] == 'Yes') ? 'custom-blue' : 'text-danger' ?>"><?= ($row['found'] == 'Yes') ? 'Encontrado' : 'Perdido' ?></h3>
-                        <img src="" class="card-img" alt="Foto do <?= $row['animal'] ?>">
+                        <img src="assets/img/lost/<?= !empty($row['photo']) ? htmlspecialchars($row['photo']) : 'default_lost.png' ?>" class="card-img" alt="Foto do <?= htmlspecialchars($row['animal']) ?>">
                         <div class="card-body pb-0">
-                            <p class="text-primary fw-semibold"><?= $row['animal'] ?></p>
+                            <p class="text-primary fw-bold"><?= htmlspecialchars($row['animal']) ?></p>
                             <p><span class="fw-bold">Desde: </span><?= $row['since'] ?></p>
-                            <p class="mb-0"><span class="fw-bold">Onde: </span><?= $row['location'] ?></p>
+                            <p class="mb-0"><span class="fw-bold">Onde: </span><?= htmlspecialchars($row['location']) ?></p>
                         </div>
                     </div>
                 <?php
@@ -48,13 +48,13 @@
                 if($maxPage>1){
             ?>
                     <div class="d-flex gap-2 justify-content-end align-items-center">
-                        <a href="?id_min=1" class="btn <?= ($currentPage == 1) ? 'btn-primary disabled' : '' ?>"><<</a>
+                        <a href="?id_min=0" class="btn <?= ($currentPage == 1) ? 'disabled' : '' ?>"><<</a>
                         <?php
-                            if($currentPage > 2){
+                            if($currentPage > 1){
                         ?>
                                 <a href="?id_min=<?= $idMin - $perPage ?>"
                                 class="btn">
-                                    <
+                                    <?= $currentPage -1 ?>
                                 </a>
                         <?php
                             }
@@ -63,18 +63,18 @@
                         <a href="?id_min=<?= $idMin ?>" class="btn btn-primary disabled"><?= $currentPage ?></a>
 
                         <?php
-                            if($currentPage < $maxPage -1){
+                            if($currentPage < $maxPage){
                         ?>
                                 <a href="?id_min=<?= $idMin + $perPage ?>"
                                 class="btn">
-                                    >
+                                    <?= $currentPage +1 ?>
                                 </a>
                         <?php
                             }
                         ?>
 
                         <a href="?id_min=<?= $idMin + $perPage * ($maxPage - $currentPage) ?>"
-                        class="btn <?= ($currentPage == $maxPage) ? 'btn-primary disabled' : '' ?>">
+                        class="btn <?= ($currentPage == $maxPage) ? 'disabled' : '' ?>">
                             >>
                         </a>
                 <?php

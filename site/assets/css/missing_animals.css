@@ -3,8 +3,9 @@
   height: 300px;
 }
 
-.marker-blue li::marker {
-  color: var(--primary-light);
+div.card img{
+  width: 125px;
+  height: 125px;
 }
 
 h1 {

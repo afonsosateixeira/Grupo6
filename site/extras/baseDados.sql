@@ -296,12 +296,12 @@ insert into volunteer_shifts (volunteer_id, day_week, start_time, end_time) valu
 (8, 'Segunda-feira', '08:30:00', '10:30:00'),
 (9, 'Domingo', '10:30:00', '15:00:00');
 
-insert into lost_animals (user_id, animal_name, last_seen_date, contact_phone, location) values 
-(2, 'bolinha', '2026-04-01', '910000002', 'Leiria'), (4, 'pipas', '2026-04-02', '910000004', 'Leiria'),
-(6, 'rex', '2026-04-03', '910000006', 'Leiria'), (7, 'fifi', '2026-04-04', '910000007', 'Leiria'),
-(9, 'lulu', '2026-04-05', '910000009', 'Leiria'), (10, 'pantufa', '2026-04-06', '910000010', 'Leiria'),
-(1, 'kiko', '2026-04-07', '910000002', 'Leiria'), (3, 'mimi', '2026-04-08', '910000004', 'Leiria'),
-(5, 'toby', '2026-04-09', '910000006', 'Leiria'), (8, 'nini', '2026-04-10', '910000007', 'Leiria');
+insert into lost_animals (user_id, animal_name, last_seen_date, contact_phone, location, photo) values 
+(2, 'bolinha', '2026-04-01', '910000002', 'Leiria', 'bolinha_3.webp'), (4, 'pipas', '2026-04-02', '910000004', 'Leiria', null),
+(6, 'rex', '2026-04-03', '910000006', 'Leiria', null), (7, 'fifi', '2026-04-04', '910000007', 'Leiria', null),
+(9, 'lulu', '2026-04-05', '910000009', 'Leiria', null), (10, 'pantufa', '2026-04-06', '910000010', 'Leiria', null),
+(1, 'kiko', '2026-04-07', '910000002', 'Leiria', null), (3, 'mimi', '2026-04-08', '910000004', 'Leiria', null),
+(5, 'toby', '2026-04-09', '910000006', 'Leiria', null), (8, 'nini', '2026-04-10', '910000007', 'Leiria', null);
 
 insert into partners (company_name, contact_person, phone) values 
 ('petshop alegria', 'sr. joaquim', '221111111'),
