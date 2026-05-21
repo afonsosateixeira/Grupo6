@@ -19,18 +19,30 @@
             'contactos',
             'cookies',
             'dia_voluntario',
+            'donations',
+                      'events',
             'forbidden',
             'home',
             'login',
+            'missing_animals',
+            'perfis_voluntario',
             'privacy',
             'regist',
-            'termos'
+            'termos',
+            'vetProfile'
         ],
 
         # Páginas de Back Office
         1 => [
             'adoptionProcess',
             'animalList',
-            'dashboard'
+            'appointmentList',
+            'dashboard',
+            'donationList',
+            'eventsList',
+            'listagemvoluntarios',
+            'missing_animals',
+            'user_list',
+            'vetList'
         ]
     ]);

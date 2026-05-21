@@ -10,8 +10,8 @@
                     <h1 class="fs-3 fw-bold text-white">Onde novos começos ganham patas e corações</h1>
                     <p class="mt-2 mb-4 fw-semibold text-white">Conectando corações e promovendo o bem-estar animal através da adoção responsável e apoio comunitário</p>
                     <div class="d-flex column-gap-4">
-                        <a href="#" class="btn custom-bg-orange text-white">Quero Adotar</a>
-                        <a href="#" class="btn custom-bg-white rounded-pill text-black">Torna-te num voluntário</a>
+                        <a href="animalCatalog" class="btn custom-bg-orange text-white">Quero Adotar</a>
+                        <a href="perfis_voluntario" class="btn custom-bg-white rounded-pill text-black">Torna-te num voluntário</a>
                     </div>
                 </div>
             </div>
@@ -36,6 +36,7 @@
                         <p class="pt-2 pb-3">Mike</p>
                     </div>
                 </div>
+
                 <div>
                     <p class="fs-6 mx-auto custom-w-1">Adotar é um ato de amor mas também de responsabilidade. Antes de levar um amigo para casa confira o nosso Guia de Adoção responsável para garantir que você e o seu animal sejam felizes para sempre.</p>
                     <a href="adoptionGuide" class="btn custom-bg-orange text-white rounded-pill mt-2">Guia de Adoção</a>
@@ -50,7 +51,7 @@
                             <h3 class="custom-blue fw-semibold fs-5">Prevenir é o maior ato de cuidado</h3>
                             <img src="assets/img/home_animal_care.png" alt="Icon Cuidados Animais">
                             <p class="fs-6">Não espere por sinais de dor</p>
-                            <a href="#" class="btn custom-btn custom-bg-orange text-white rounded-3 mt-2">Agendar Check-up</a>
+                            <a href="appointment" class="btn custom-btn custom-bg-orange text-white rounded-3 mt-2">Agendar Check-up</a>
                         </div>
                     </div>
 
@@ -59,7 +60,7 @@
                             <h3 class="custom-blue fw-semibold fs-5">Mural de Desaparecidos</h3>
                             <img src="assets/img/home_lost_animals.png" alt="Icon Animais Desaparecidos">
                             <p class="fs-6">Viu por aí este animal?</p>
-                            <a href="#" class="btn custom-btn custom-bg-orange text-white mt-2">Reunir famílias</a>
+                            <a href="missing_animals" class="btn custom-btn custom-bg-orange text-white mt-2">Reunir famílias</a>
                         </div>
                     </div>
                 </div>

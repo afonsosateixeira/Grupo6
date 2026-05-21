@@ -7,7 +7,7 @@
 	else:
 ?>
 		<section>
-			Dashboard example
+			<h1>Dashboard</h1>
 		</section>
 <?php
 	endif;

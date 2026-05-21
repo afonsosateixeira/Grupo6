@@ -36,12 +36,12 @@
               Comunidade e Eventos
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Calendário de Enventos</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/events">Calendário de Eventos</a></li>
               <li><a class="dropdown-item" href="#">Eventos Passados</a></li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
-              <li><a class="dropdown-item" href="#">Animais desaparecidos</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/missing_animals">Animais Desaparecidos</a></li>
               <li><a class="dropdown-item" href="#">Encontrei um animal e agora?</a></li>
             </ul>
           </li>
@@ -51,13 +51,13 @@
               Apoio e saúde
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Top Doadores</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/donations">Doações</a></li>
               <li><a class="dropdown-item" href="#">Nossos Parceiros</a></li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
-              <li><a class="dropdown-item" href="<?= $basePath ?>/appointment">Marcação de consultas</a></li>
-              <li><a class="dropdown-item" href="<?= $basePath ?>/animal_care">Cuidados de saúde</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/animal_care">Cuidados de Saúde</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/appointment">Marcação de Consultas</a></li>
             </ul>
           </li>
 
@@ -66,9 +66,11 @@
               Institucional
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="<?= $basePath ?>/dia_voluntario">Um dia no abrigo</a></li>
-              <li><a class="dropdown-item" href="#">Perfil de voluntário</a></li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/contactos">Contactos</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/dia_voluntario">Um dia no Abrigo</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/vetProfile">Perfil do Veterinário</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/perfis_voluntario">Perfil de Voluntário</a></li>
+              <li><a class="dropdown-item" href="#">Sobre Nós</a></li>
             </ul>
           </li>
         </ul>

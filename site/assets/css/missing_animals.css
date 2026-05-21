@@ -1,0 +1,19 @@
+#banner {
+  background: linear-gradient(to right, var(--primary), var(--primary-light));
+  height: 300px;
+}
+
+div.card img{
+  width: 125px;
+  height: 125px;
+}
+
+h1{
+  font-size: 60px;
+}
+
+@media(max-width: 600px){
+  h1{
+    font-size: 36px;
+  }
+}

@@ -37,18 +37,12 @@
 	if($backOffice)
 		$route = ($path === 'backoffice' || $path === 'index') ? 'dashboard' : $path;
 	else
-		$route = ($path === 'site' || $path === '') ? 'home' : $path;
+		$route = ($path === 'site' || $path === '' || $path === 'index') ? 'home' : $path;
 
 	# Destroi a sessão e redireciona para o login no caso de fazer logout
 	if($route == 'logout') {
 		session_destroy();
 		header('Location: '.($backOffice ? '.' : '').'./login');
-		exit();
-	}
-
-	# Se entrares numa página usando um get redirect(útil para formulários que necessitam de sessão iniciada) automáticamente voltas á página
-	if(!empty($_GET['redirect'])){
-		header('Location: ./'.$_GET['redirect']);
 		exit();
 	}
 

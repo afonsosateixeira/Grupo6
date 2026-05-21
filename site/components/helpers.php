@@ -1,14 +1,17 @@
 <?php
-function mostrarValor($valor){
-    return !empty($valor)? htmlspecialchars($valor) : "<span style='color:#888; font-style:italic; font-size:0.9em;'>Desconhecido</span>";
+function mostrarValor($valor)
+{
+    return !empty($valor) ? htmlspecialchars($valor) : "<span style='color:#888; font-style:italic; font-size:0.9em;'>Desconhecido</span>";
 }
 
-function mostrarValor2($valor){
-    return !empty($valor)? htmlspecialchars($valor) : "<span style='color:#888; opacity:0.5;'>&mdash;</span>";
+function mostrarValor2($valor)
+{
+    return !empty($valor) ? htmlspecialchars($valor) : "<span style='color:#888; opacity:0.5;'>&mdash;</span>";
 }
 
-function corStatus($status){
-    switch($status){
+function corStatus($status)
+{
+    switch ($status) {
         case 'Disponível':
             return '#2eaf55';
         case 'Em processo':
@@ -18,8 +21,9 @@ function corStatus($status){
     }
 }
 
-function mostrarIdade($data){
-    if(empty($data)){
+function mostrarIdade($data, $mostrarData = true)
+{
+    if (empty($data)) {
         return "<span style='color:#888; font-style:italic; font-size:0.9em;'>Desconhecido</span>";
     }
 
@@ -29,20 +33,34 @@ function mostrarIdade($data){
     $dataForm = $dataNasc->format('d/m/Y');
     $diferenca = $hoje->diff($dataNasc);
 
-    $ano= $diferenca->y;
-    $mes= $diferenca->m;
+    $ano = $diferenca->y;
+    $mes = $diferenca->m;
 
-    $mes == 1? $mes = $mes. " mês" : $mes = $mes. " meses";
-    $ano == 1? $ano = $ano. " ano" : $ano = $ano. " anos";
+    $mes == 1 ? $mes = $mes . " mês" : $mes = $mes . " meses";
+    $ano == 1 ? $ano = $ano . " ano" : $ano = $ano . " anos";
 
-    if($ano>1){
-        $idade = $ano." e ". $mes;
-    } else if($ano<0 || $mes>0){
-        $idade= $mes;
-    }else{
-        $idade ="Recém nascido";
+    if ($mostrarData) {
+        if ($ano > 1) {
+            $idade = $ano . " e " . $mes;
+        } else if ($ano < 0 || $mes > 0) {
+            $idade = $mes;
+        } else {
+            $idade = "Recém nascido";
+        }
+        return $dataForm . " <span style='color:#666; font-size:0.9em;'>(" . $idade . ") </span>";
+
+    } else {
+        if ($ano > 1) {
+            $idade = $ano;
+        } else if ($ano < 0 || $mes > 0) {
+            $idade = $mes;
+        } else {
+            $idade = "Recém nascido";
+        }
+        return $idade;
     }
-
-    return $dataForm . " <span style='color:#666; font-size:0.9em;'>(" . $idade. ") </span>";
 }
-?>
+
+
+
+

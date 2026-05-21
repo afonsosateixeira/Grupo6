@@ -69,6 +69,7 @@ drop table if exists veterinarians;
 create table veterinarians (
     id int auto_increment,
     name varchar(150) not null,
+    photo varchar(255),
     license_number varchar(50) not null,
     specialty varchar(100),
     phone varchar(20) not null,
@@ -105,10 +106,15 @@ create table events (
     id int auto_increment,
     name varchar(100) not null,
     event_date datetime not null,
+    end_date datetime,
     location varchar(150) not null,
     description text,
-    event_type varchar(50) not null,
-    constraint pk_events primary key (id)
+    event_type enum('Cãominhada', 'Feira de Adoção', 'Workshop', 'Campanha Solidária', 'Sessão de Treino', 'Palestra', 'Visita Escolar', 'Angariação de Fundos') not null,
+    status enum('scheduled', 'cancelled', 'postponed', 'completed') not null default 'scheduled',
+    capacity int,
+    organizer_id int,
+    constraint pk_events primary key (id),
+    constraint fk_events_organizer foreign key (organizer_id) references users(id)
 ) engine=innodb;
 
 drop table if exists events_registrations;
@@ -127,9 +133,8 @@ drop table if exists volunteer_profiles;
 create table volunteer_profiles (
     id int auto_increment,
     user_id int not null,
-    skills text,
-    availability varchar(100),
-    join_date date default (current_date),
+	phone VARCHAR(20) NOT NULL,
+	city VARCHAR(100) NOT NULL,
     constraint pk_volunteer_profiles primary key (id),
     constraint fk_volunteer_users foreign key (user_id) references users(id)
 ) engine=innodb;
@@ -138,10 +143,9 @@ drop table if exists volunteer_shifts;
 create table volunteer_shifts (
     id int auto_increment,
     volunteer_id int not null,
-    task_description text not null,
-    shift_date date not null,
-    start_date time not null,
-    end_time time not null,
+	day_week VARCHAR(20) NOT NULL,
+	start_time TIME NOT NULL,
+	end_time TIME NOT NULL,
     constraint pk_volunteer_shifts primary key (id),
     constraint fk_shifts_volunteer foreign key (volunteer_id) references volunteer_profiles(id)
 ) engine=innodb;
@@ -153,7 +157,9 @@ create table lost_animals (
     animal_name varchar(100) not null,
     last_seen_date date not null,
     contact_phone varchar(20) not null,
+    location varchar(255) not null,
     photo varchar(255),
+    found enum('Yes', 'No') default 'No' not null,
     constraint pk_lost_animals primary key (id),
     constraint fk_lost_animals_users foreign key (user_id) references users(id)
 ) engine=innodb;
@@ -180,10 +186,10 @@ create table donations (
 insert into users (full_name, email, password, phone, local, role) values
 ('admin', 'admin@email.com', SHA2('123', 512), '910000001', 'porto', 'admin'),
 ('maria silva', 'maria@email.com', SHA2('123', 512), '910000002', 'lisboa', 'n'),
-('joão pinto', 'joao@email.com', SHA2('123', 512), '910000003', 'braga', 'n'),
+('joão lopes', 'joao@email.com', SHA2('123', 512), '910000003', 'braga', 'n'),
 ('ana costa', 'ana@email.com', SHA2('123', 512), '910000004', 'faro', 'n'),
 ('pedro santos', 'pedro@email.com', SHA2('123', 512), '910000005', 'aveiro', 'n'),
-('carla matos', 'carla@email.com', SHA2('123', 512), '910000006', 'porto', 'n'),
+('maria matos', 'carla@email.com', SHA2('123', 512), '910000006', 'porto', 'n'),
 ('rui silva', 'rui@email.com', SHA2('123', 512), '910000007', 'coimbra', 'n'),
 ('sofia bento', 'sofia@email.com', SHA2('123', 512), '910000008', 'viana', 'n'),
 ('tiago ferreira', 'tiago@email.com', SHA2('123', 512), '910000009', 'lisboa', 'n'),
@@ -220,18 +226,17 @@ insert into adoption_processes (user_id, animal_id, status, notes) values
 (6, 9, 'pendente', 'primeiro animal'),
 (7, 10, 'pendente', 'interessado em tartarugas');
 
-insert into veterinarians (name, license_number, specialty, phone) values 
-('dr. silva', 'vet001', 'cirurgia', '220000001'),
-('dra. ana', 'vet002', 'clínica geral', '220000002'),
-('dr. mendes', 'vet003', 'exóticos', '220000003'),
-('dra. beatriz', 'vet004', 'dermatologia', '220000004'),
-('dr. carlos', 'vet005', 'ortopedia', '220000005'),
-('dra. diana', 'vet006', 'oftalmologia', '220000006'),
-('dr. eusebio', 'vet007', 'cardiologia', '220000007'),
-('dra. fernanda', 'vet008', 'comportamento', '220000008'),
-('dr. gabriel', 'vet009', 'clínica geral', '220000009'),
-('dra. helena', 'vet010', 'neurologia', '220000010');
-
+insert into veterinarians (name, photo, license_number, specialty, phone) values 
+('dr. silva', 'vet1.jpg', 'vet001', 'cirurgia', '220000001'),
+('dra. ana', 'vet2.jpg', 'vet002', 'clínica geral', '220000002'),
+('dr. mendes', 'vet3.jpg', 'vet003', 'exóticos', '220000003'),
+('dra. beatriz', 'vet4.jpg', 'vet004', 'dermatologia', '220000004'),
+('dr. carlos', 'vet5.jpg', 'vet005', 'ortopedia', '220000005'),
+('dra. diana', 'vet6.jpg', 'vet006', 'oftalmologia', '220000006'),
+('dr. eusebio', 'vet7.jpg', 'vet007', 'cardiologia', '220000007'),
+('dra. fernanda', 'vet8.jpg', 'vet008', 'comportamento', '220000008'),
+('dr. gabriel', 'vet9.jpg', 'vet009', 'clínica geral', '220000009'),
+('dra. helena', 'vet10.jpg', 'vet010', 'neurologia', '220000010');
 insert into appointments (animal_id, vet_id, appointment_date, reason, status) values 
 (1, 1, '2026-04-10 10:00', 'check-up', 'concluida'),
 (2, 2, '2026-04-11 11:30', 'vacinação', 'concluida'),
@@ -251,17 +256,17 @@ insert into medical_history (appointment_id, diagnosis, weight) values
 (7, 'bom estado geral', 30.4), (8, 'sem parasitas', 4.2),
 (9, 'musculatura forte', 30.7), (10, 'pelagem brilhante', 4.4);
 
-insert into events (name, event_date, location, event_type) values 
-('feira de adoção', '2026-05-01 10:00', 'parque da cidade', 'feira'),
-('recolha de ração', '2026-07-15 09:00', 'supermercado x', 'recolha'),
-('workshop treino', '2026-06-01 15:00', 'sede associação', 'educação'),
-('caminhada cãopanheira', '2026-08-20 08:30', 'avenida central', 'convívio'),
-('jantar solidário', '2026-07-10 20:00', 'restaurante y', 'angariação'),
-('banho e tosquia solidário', '2026-07-25 10:00', 'sede', 'serviço'),
-('visita escola a', '2026-09-05 14:00', 'escola básica 1', 'educação'),
-('mega feira verão', '2026-08-20 10:00', 'praça principal', 'feira'),
-('peddy paper animal', '2026-09-05 09:30', 'mata nacional', 'convívio'),
-('venda de natal', '2026-12-01 10:00', 'sede', 'feira');
+insert into events (name, event_date, end_date, location, description, event_type, status, capacity, organizer_id) values
+('Rota Canina Norte', '2026-06-15 09:00', '2026-06-15 12:00', 'Parque Oriental', 'Caminhada de socialização para cães e tutores', 'Cãominhada', 'scheduled', 80, 1),
+('Feira de Adoção Primavera', '2026-06-29 10:00', '2026-06-29 17:00', 'Marginal Atlantica', 'Feira para adoção de cães e gatos', 'Feira de Adoção', 'scheduled', 70, 3),
+('Workshop Primeiros Socorros', '2026-07-06 15:00', '2026-07-06 17:00', 'Jardim das Oliveiras', 'Aprenda técnicas básicas de primeiros socorros para animais', 'Workshop', 'scheduled', 60, 5),
+('Campanha Solidária de Ração', '2026-07-20 09:30', '2026-07-20 12:30', 'Parque da Serra', 'Recolha de alimentos para animais carenciados', 'Campanha Solidária', 'scheduled', 50, 3),
+('Volta Peluda Comunitaria', '2026-08-03 08:45', '2026-08-03 11:15', 'Zona Ribeirinha', 'Circuito de consciencialização publica', 'Cãominhada', 'scheduled', 90, 1),
+('Sessão de Treino Básico', '2026-08-17 09:15', '2026-08-17 12:15', 'Avenida do Mar', 'Sessão de treino para cães adotados', 'Sessão de Treino', 'scheduled', 75, 5),
+('Visita Escolar Animal', '2026-09-07 14:00', '2026-09-07 16:30', 'Complexo Escolar Sul', 'Atividade educativa para escolas', 'Visita Escolar', 'scheduled', 45, 3),
+('Caminhada Sunset Pets', '2026-09-21 18:00', '2026-09-21 20:00', 'Passeio da Cidade', 'Encontro ao fim da tarde com animais do abrigo', 'Cãominhada', 'scheduled', 65, 1),
+('Palestra Bem-estar Animal', '2026-10-05 09:00', '2026-10-05 12:00', 'Ecopista Norte', 'Palestra sobre cuidados e bem-estar animal', 'Palestra', 'scheduled', 120, 5),
+('Angariação de Fundos Final', '2026-10-19 10:00', '2026-10-19 13:00', 'Parque Municipal', 'Evento para angariação de fundos para o abrigo', 'Angariação de Fundos', 'scheduled', 100, 3);
 
 insert into events_registrations (user_id, event_id, status) values 
 (2, 1, 'confirmado'), (4, 1, 'confirmado'), (6, 2, 'confirmado'),
@@ -269,31 +274,34 @@ insert into events_registrations (user_id, event_id, status) values
 (2, 6, 'pendente'), (4, 8, 'confirmado'), (6, 8, 'confirmado'),
 (7, 10, 'confirmado');
 
-insert into volunteer_profiles (user_id, skills, availability) values 
-(3, 'limpeza, passeio', 'fins de semana'), (5, 'treino canino', 'terças e quintas'),
-(8, 'administrativo', 'segunda a sexta'), (1, 'primeiros socorros', 'noites'),
-(2, 'fotografia', 'sábados'), (4, 'redes sociais', 'remoto'),
-(6, 'condução', 'flexível'), (7, 'tosquia', 'domingos'),
-(9, 'organização eventos', 'fins de semana'), (10, 'manutenção', 'manhãs');
+insert into volunteer_profiles (user_id, phone, city) values 
+(2, '921383900', 'Lisboa'),
+(3, '913746362', 'Lisboa'),
+(4, '913745462', 'Braga'),
+(5, '913336362', 'Leiria'),
+(6, '914346362', 'Aveiro'),
+(7, '913216362', 'Porto'),
+(8, '913709362', 'Coimbra'),
+(9, '913745562', 'Leiria'),
+(10, '913776362', 'Viseu');
 
-insert into volunteer_shifts (volunteer_id, task_description, shift_date, start_date, end_time) values 
-(1, 'limpeza canis', '2026-04-10', '09:00', '12:00'),
-(2, 'aula de obediência', '2026-04-10', '14:00', '16:00'),
-(3, 'atendimento público', '2026-04-11', '10:00', '13:00'),
-(4, 'passeio de cães', '2026-12-12', '15:00', '18:00'),
-(5, 'sessão fotos', '2026-04-13', '09:00', '11:00'),
-(6, 'gestão fb', '2026-04-14', '14:00', '15:00'),
-(7, 'transporte vet', '2026-08-15', '08:00', '10:00'),
-(8, 'apoio banhos', '2026-04-16', '10:00', '13:00'),
-(9, 'planeamento feira', '2026-04-17', '18:00', '20:00'),
-(10, 'reparação vedações', '2026-06-18', '09:00', '13:00');
+insert into volunteer_shifts (volunteer_id, day_week, start_time, end_time) values 
+(1, 'Quarta-feira', '13:00:00', '17:00:00'),
+(2, 'Terça-feira', '08:30:00', '15:00:00'),
+(3, 'Segunda-feira', '15:00:00', '17:00:00'),
+(4, 'Quarta-feira', '13:00:00', '17:00:00'),
+(5, 'Quinta-feira', '15:00:00', '17:00:00'),
+(6, 'Segunda-feira', '10:30:00', '17:00:00'),
+(7, 'Sexta-feira', '10:30:00', '17:00:00'),
+(8, 'Segunda-feira', '08:30:00', '10:30:00'),
+(9, 'Domingo', '10:30:00', '15:00:00');
 
-insert into lost_animals (user_id, animal_name, last_seen_date, contact_phone) values 
-(2, 'bolinha', '2026-04-01', '910000002'), (4, 'pipas', '2026-04-02', '910000004'),
-(6, 'rex', '2026-04-03', '910000006'), (7, 'fifi', '2026-04-04', '910000007'),
-(9, 'lulu', '2026-04-05', '910000009'), (10, 'pantufa', '2026-04-06', '910000010'),
-(1, 'kiko', '2026-04-07', '910000002'), (3, 'mimi', '2026-04-08', '910000004'),
-(5, 'toby', '2026-04-09', '910000006'), (8, 'nini', '2026-04-10', '910000007');
+insert into lost_animals (user_id, animal_name, last_seen_date, contact_phone, location, photo) values 
+(2, 'bolinha', '2026-04-01', '910000002', 'Leiria', 'bolinha_3.webp'), (4, 'pipas', '2026-04-02', '910000004', 'Leiria', null),
+(6, 'rex', '2026-04-03', '910000006', 'Leiria', null), (7, 'fifi', '2026-04-04', '910000007', 'Leiria', null),
+(9, 'lulu', '2026-04-05', '910000009', 'Leiria', null), (10, 'pantufa', '2026-04-06', '910000010', 'Leiria', null),
+(1, 'kiko', '2026-04-07', '910000002', 'Leiria', null), (3, 'mimi', '2026-04-08', '910000004', 'Leiria', null),
+(5, 'toby', '2026-04-09', '910000006', 'Leiria', null), (8, 'nini', '2026-04-10', '910000007', 'Leiria', null);
 
 insert into partners (company_name, contact_person, phone) values 
 ('petshop alegria', 'sr. joaquim', '221111111'),
@@ -390,47 +398,54 @@ order by a.name asc, app.appointment_date desc;
 
 drop view if exists vw_events_timeline;
 create view vw_events_timeline as
-select name as event_name, event_type, event_date, location,
+select e.name as event_name, e.event_type, e.event_date, e.end_date, e.location,
+       e.status, e.capacity, ifnull(u.full_name, 'Sem organizador') as organizer,
        case 
-           when event_date < current_date then 'Concluído' 
-           when date(event_date) = current_date then 'A decorrer hoje'
+           when e.event_date < current_date then 'Concluido' 
+           when date(e.event_date) = current_date then 'A decorrer hoje'
            else 'Próximo' 
-       end as event_status
-from events
-order by event_date asc;
+       end as timeline_status
+from events e
+left join users u on e.organizer_id = u.id
+order by e.event_date asc;
 
 drop view if exists vw_event_capacity_planning;
 create view vw_event_capacity_planning as
-select e.name as event_name, e.event_date,
+select e.name as event_name, e.event_date, e.event_type, e.status as event_status,
+       e.capacity,
        count(er.id) as total_registrations,
-       sum(case when er.status = 'confirmado' then 1 else 0 end) as confirmed_attendees
+       sum(case when er.status = 'confirmado' then 1 else 0 end) as confirmed_attendees,
+       sum(case when er.status = 'pendente' then 1 else 0 end) as pending_attendees,
+       case
+           when e.capacity is null then null
+           else e.capacity - count(case when er.status in ('confirmado', 'pendente') then 1 end)
+       end as slots_remaining
 from events e
 left join events_registrations er on e.id = er.event_id
-group by e.id, e.name, e.event_date;
+group by e.id, e.name, e.event_date, e.event_type, e.status, e.capacity;
 
-drop view if exists vw_volunteer_skills_matrix;
-create view vw_volunteer_skills_matrix as
-select u.full_name, u.phone, u.local, vp.skills, vp.availability,
-       datediff(current_date, vp.join_date) as days_as_volunteer
-from volunteer_profiles vp
-join users u on vp.user_id = u.id
-order by days_as_volunteer desc;
+DROP VIEW IF EXISTS vw_volunteer_simple_schedule;
+CREATE VIEW vw_volunteer_simple_schedule AS
+SELECT u.full_name AS volunteer_name,vs.day_week,vs.start_time,vs.end_time
+FROM volunteer_shifts vs
+JOIN volunteer_profiles vp ON vs.volunteer_id = vp.id
+JOIN users u ON vp.user_id = u.id;
 
-drop view if exists vw_daily_shifts_schedule;
-create view vw_daily_shifts_schedule as
-select vs.shift_date, vs.start_date as start_time, vs.end_time, vs.task_description, u.full_name as volunteer
-from volunteer_shifts vs
-join volunteer_profiles vp on vs.volunteer_id = vp.id
-join users u on vp.user_id = u.id
-order by vs.shift_date desc, vs.start_date asc;
+drop view if exists vw_volunteer_full_schedule;
+CREATE VIEW vw_volunteer_full_schedule AS
+SELECT 
+vs.id AS shift_id, u.full_name AS volunteer_name,vp.phone,vp.city,vs.day_week,vs.start_time,vs.end_time,vp.id AS volunteer_profile_id,vs.id
+FROM volunteer_shifts vs
+JOIN volunteer_profiles vp ON vs.volunteer_id = vp.id
+JOIN users u ON vp.user_id = u.id;
 
 drop view if exists vw_lost_pets_radar;
 create view vw_lost_pets_radar as
-select la.animal_name, u.full_name as reporter_name, la.contact_phone, la.last_seen_date,
-       datediff(current_date, la.last_seen_date) as days_missing
+select la.id as id, la.animal_name as animal, u.full_name as reporter, la.contact_phone as contact, la.last_seen_date as since, la.photo as photo, la.location as location,
+       datediff(current_date, la.last_seen_date) as days_missing, la.found as found
 from lost_animals la
 join users u on la.user_id = u.id
-order by days_missing asc;
+order by la.id asc;
 
 drop view if exists vw_corporate_partners_directory;
 create view vw_corporate_partners_directory as
