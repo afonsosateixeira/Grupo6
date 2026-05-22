@@ -6,22 +6,18 @@
 
         $sql = "SELECT * FROM donations ORDER BY donation_date DESC";
         $result = $conn->query($sql);
-        
-        $conn->close();
 ?>
-    <section class="container-fluid py-4">
-        <div class="d-flex justify-content-between ">
-            <h1>Histórico de Doações Recebidas</h1>
-        </div>
-
+    <section class="ms-2">
+        <h1 class="fw-bold custom-blue mt-2 mb-4">Gestão de Doações</h1>
         <div class="table-responsive">
-            <table class="table table-hover table-striped" id="donationTable">
+            <table class="table table-striped table-hover" id="donationTable">
                 <thead>
                     <tr>
                         <th>ID</th>
                         <th>Valor</th>
                         <th>Data</th>
                         <th>Método de Pagamento</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -38,9 +34,12 @@
                                     <?= date('d/m/Y', strtotime($donation['donation_date'])) ?>
                                 </td>
                                 <td class="text-dark fw-bold"> <?= htmlspecialchars($donation['payment_method']) ?></td>
+                                <td>
+                                    <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href=""><i style="color: #dc3545;" class="fa-solid fa-trash"></i></a>
+                                </td>
                             </tr>
                         <?php endforeach; ?>
-                        </tr>
                     <?php endif; ?>
                 </tbody>
             </table>

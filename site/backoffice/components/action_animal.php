@@ -3,7 +3,8 @@
     $caminhoPasta = "../../assets/img/animals/";
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-
+        
+        $id = (int)$_POST['id_animal'];
         $nome = trim($_POST['nome_animal'] ?? '');
         $specieID = (int)($_POST['specie_id'] ?? 0);
         $breed = !empty($_POST['breed_id']) ? (int)$_POST['breed_id'] : null;
@@ -34,9 +35,7 @@
         }
 
         # Processo de edição do animal
-        if (isset($_POST['btnEditar'])) {
-            $id = (int)$_POST['id_animal'];
-            
+        if (isset($_POST['btnEditar'])) {            
             $nomeArquivo = null;
 
             if (!empty($_FILES['image']['name'])) {

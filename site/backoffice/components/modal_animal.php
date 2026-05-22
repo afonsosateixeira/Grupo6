@@ -1,4 +1,4 @@
-<div class="modal fade" id="formModal">
+<div class="modal fade" id="formModalanimal">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
 

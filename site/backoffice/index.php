@@ -4,6 +4,7 @@
 
 	# Chama funções
 	require_once("../components/helpers.php");
+	require_once("components/alerts.php");
 
 	# Declara uma variável para indicar que as páginas são de back office
 	$backOffice = true;

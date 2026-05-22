@@ -22,17 +22,17 @@
 ?>
 		<section class="ms-2">
             <h1 class="fw-bold custom-blue mt-2 mb-4">Gestão de Animais Perdidos</h1>
-			<table class="table table-striped table-hover text-center align-middle" id="missingAnimals">
+			<table class="table table-striped table-hover" id="missingAnimals">
                 <thead>
                     <tr>
-                        <th scope="col" class="text-center">Id</th>
-                        <th scope="col" class="text-center">Foto</th>
-                        <th scope="col" class="text-center">Nome do animal</th>
-                        <th scope="col" class="text-center">Utilizador</th>
-                        <th scope="col" class="text-center">Contacto</th>
-                        <th scope="col" class="text-center">Desde</th>
-                        <th scope="col" class="text-center">Onde</th>
-                        <th scope="col" class="text-center">Ação</th>
+                        <th>ID</th>
+                        <th>Foto</th>
+                        <th>Nome do animal</th>
+                        <th>Utilizador</th>
+                        <th>Contacto</th>
+                        <th>Desde</th>
+                        <th>Onde</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -48,9 +48,11 @@
                                 <td><?= htmlspecialchars($row['since']) ?></td>
                                 <td><?= htmlspecialchars($row['location']) ?></td>
                                 <td>
-                                    <a href="<?= $basePath ?>/edit_lost?id=<?= $row['id'] ?>&edit=true" class="btn btn-primary">Editar</a>
-                                    <a href="?id=<?= $row['id'] ?>&delete=true" class="btn btn-danger" onclick="return confirm('Têm a certeza que quer eliminar este processo?')">Eliminar</a>
-                                </td>
+                                    <a href="<?= $basePath ?>/edit_lost?id=<?= $row['id'] ?>&edit=true"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="?id=<?= $row['id'] ?>&delete=true" onclick="return confirm('Têm a certeza que quer eliminar este processo?')"><i style="color: #dc3545;" class="fa-solid fa-trash"></i></a>
+                        <a href=""</a>
+                        <a href=""></a>
+                    </td>
                             </tr>
                     <?php
                         endforeach;

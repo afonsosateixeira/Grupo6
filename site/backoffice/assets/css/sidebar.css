@@ -12,3 +12,12 @@ body {
 .submenu .nav-link:hover {
   color: #ffffff !important;
 }
+
+.sidebar-pam .nav-link .fa-chevron-down {
+        transition: transform 0.3s ease;
+    }
+    
+    /* Quando o botão não tem a classe 'collapsed' (ou seja, está aberto), roda a seta */
+    .sidebar-pam .nav-link:not(.collapsed) .fa-chevron-down {
+        transform: rotate(180deg);
+    }

@@ -72,7 +72,7 @@ else:
 
                                 <a href="components/action_adoption.php?action=mudar_status&id=<?= $item['id']?>&status=Rejeitado"><i style="color: #dc3545;" class="fa-solid fa-xmark"></i></a>
 
-                                <a href="components/action_adoption.php?editar=<?= $item['id']?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                <a href="?editar=<?= $item['id']?>"><i class="fa-solid fa-pen-to-square"></i></a>
 
                                 <a onclick="return confirm('Tem certeza que deseja eliminar este processo?');" href="components/action_adoption.php?action=eliminar&id=<?= $item['id']?>"><i style="color: #dc3545;" class="fa-solid fa-trash"></i></a>
 
@@ -92,8 +92,8 @@ else:
         <?php
     }
     ?>
-    <div class="container">
-        <h1 class="fw-bold fs-2">Lista de Adoções</h1>
+    <section class="ms-2">
+        <h1 class="fw-bold custom-blue mt-2 mb-4">Gestão de Processos de Adoção</h1>
         <div class="d-flex justify-content-end gap-2 mb-3">
             <a href="adoptionProcess?add" class="btn btn-success">+ Criar</a>
         </div>
@@ -105,14 +105,6 @@ else:
             desenharcards("Rejeitado", $rejeitado, "bg-danger");
             ?>
         </div>
-    </div>
-    <script>
-            window.onload = function () {
-                <?php if ($adoptEdit || isset($_GET['add'])): ?>
-                    var meuModal = new bootstrap.Modal(document.getElementById('formModal'));
-                    meuModal.show();
-                <?php endif; ?>
-            };
-        </script>
+    </section>
     <?php
 endif;

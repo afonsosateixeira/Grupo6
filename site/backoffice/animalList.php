@@ -18,14 +18,15 @@
         }
 ?>
 
-        <h1 class="fw-bold fs-2">Lista de Animais</h1>
+    <section class="ms-2">
+        <h1 class="fw-bold custom-blue mt-2 mb-4">Gestão de Animais</h1>
         <div class="d-flex justify-content-end gap-2 mb-3">
             <a href="animalList?add" class="btn btn-success">+ Criar</a>
         </div>
 
         <?php include 'components/modal_animal.php'; ?>
 
-        <table class="table striped" id="animalTable">
+        <table class="table striped table-hover" id="animalTable">
             <thead>
                 <tr>
                     <th>ID</th>
@@ -57,7 +58,7 @@
                         <td style="text-wrap: pretty"><?= $item['description']; ?></td>
                         <td class="fw-bold" style="color:<?= corStatus($item['status'])?>;"><?= $item['status']; ?></td>
                         <td>
-                            <a href="animalList.php?editar=<?= $item['id']; ?>"><i
+                            <a href="?editar=<?= $item['id']; ?>"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
                             <a href="components/action_animal.php?action=eliminar&id=<?= $item['id']; ?>"
                                 onclick="return confirm('Apagar este adotante?')"><i style="color: #dc3545;" class="fa-solid fa-trash"></i></a>
@@ -69,7 +70,7 @@
         <script>
             window.onload = function () {
                 <?php if ($aniEdit || isset($_GET['add'])): ?>
-                    var meuModal = new bootstrap.Modal(document.getElementById('formModal'));
+                    var meuModal = new bootstrap.Modal(document.getElementById('formModalanimal'));
                     meuModal.show();
                 <?php endif; ?>
             };
