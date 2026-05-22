@@ -11,16 +11,17 @@
     $conection = $conn->query($dados);
         
 ?>       
-    <section>
-        <table class="table table-striped mt-3" id="appointmentsTable">
+    <section class="ms-2">
+        <h1 class="fw-bold custom-blue mt-2 mb-4">Gestão de Consultas</h1>
+        <table class="table table-striped table-hover" id="appointmentsTable">
             <thead>
                 <tr>
-                    <th scope="col">ID</th>
-                    <th scope="col">Veterinário</th>
-                    <th scope="col">Tipo de consulta</th>
-                    <th scope="col">Data da consulta</th>
-                    <th scope="col">Status</th>
-                    <th scope="col">Ações</th>
+                    <th>ID</th>
+                    <th>Veterinário</th>
+                    <th>Tipo de consulta</th>
+                    <th>Data da consulta</th>
+                    <th>Status</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -32,8 +33,8 @@
                     <td><?= htmlspecialchars($variaveis['appointment_date']) ?></td>
                     <td><?= htmlspecialchars($variaveis['status']) ?></td>
                     <td>
-                        <button class="btn btn-primary">Editar</button>
-                        <button class="btn btn-danger">Excluir</button>
+                        <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href=""><i style="color: #dc3545;" class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php endforeach; ?>

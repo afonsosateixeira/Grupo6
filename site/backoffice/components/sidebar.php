@@ -8,12 +8,12 @@
 
     <ul class="nav nav-pills flex-column flex-grow-1">
         <li class="nav-item mb-4">
-            <a href="#" class="nav-link text-white d-flex justify-content-between align-items-center"
+            <a href="#" class="nav-link text-white d-flex justify-content-between align-items-center collapsed"
                 data-bs-toggle="collapse" data-bs-target="#menuPessoal" aria-expanded="true">
                 <span><i class="fa-solid fa-users me-2"></i>Gestão Pessoal</span>
                 <i class="fa-solid fa-chevron-down" style="font-size: 0.7rem;"></i>
             </a>
-            <div class="collapse show" id="menuPessoal">
+            <div class="collapse" id="menuPessoal">
                 <ul class="nav flex-column submenu mt-1">
                     <li><a href="<?= $basePath ?>/user_list" class="nav-link">Utilizadores</a></li>
                     <li><a href="<?= $basePath ?>/listagemvoluntarios" class="nav-link">Voluntários</a></li>

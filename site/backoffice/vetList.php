@@ -10,16 +10,17 @@
     
     $conection = $conn->query($dados);        
 ?>       
-    <section>
-        <table class="table table-striped mt-3" id="vetsTable">
+    <section class="ms-2">
+        <h1 class="fw-bold custom-blue mt-2 mb-4">Gestão de Veterinários</h1>
+        <table class="table table-striped table-hover" id="vetsTable">
             <thead>
                 <tr>
-                    <th scope="col">Id</th>
-                    <th scope="col">Nome</th>
-                    <th scope="col">Foto</th>
-                    <th scope="col">Especialidade</th>
-                    <th scope="col">Telefone</th>
-                    <th scope="col">Ações</th>
+                    <th>ID</th>
+                    <th>Nome</th>
+                    <th>Foto</th>
+                    <th>Especialidade</th>
+                    <th>Telefone</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -36,8 +37,8 @@
                     <td><?= htmlspecialchars($item['specialty']) ?></td>
                     <td><?= htmlspecialchars($item['phone']) ?></td>
                     <td>
-                        <button class="btn btn-primary">Editar</button>
-                        <button class="btn btn-danger">Excluir</button>
+                        <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+                        <a href=""><i style="color: #dc3545;" class="fa-solid fa-trash"></i></a>
                     </td>
                 </tr>
                 <?php endforeach; ?>
