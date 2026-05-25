@@ -133,8 +133,6 @@ drop table if exists volunteer_profiles;
 create table volunteer_profiles (
     id int auto_increment,
     user_id int not null,
-	phone VARCHAR(20) NOT NULL,
-	city VARCHAR(100) NOT NULL,
     constraint pk_volunteer_profiles primary key (id),
     constraint fk_volunteer_users foreign key (user_id) references users(id)
 ) engine=innodb;
@@ -274,16 +272,16 @@ insert into events_registrations (user_id, event_id, status) values
 (2, 6, 'pendente'), (4, 8, 'confirmado'), (6, 8, 'confirmado'),
 (7, 10, 'confirmado');
 
-insert into volunteer_profiles (user_id, phone, city) values 
-(2, '921383900', 'Lisboa'),
-(3, '913746362', 'Lisboa'),
-(4, '913745462', 'Braga'),
-(5, '913336362', 'Leiria'),
-(6, '914346362', 'Aveiro'),
-(7, '913216362', 'Porto'),
-(8, '913709362', 'Coimbra'),
-(9, '913745562', 'Leiria'),
-(10, '913776362', 'Viseu');
+insert into volunteer_profiles (user_id) values 
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8),
+(9),
+(10);
 
 insert into volunteer_shifts (volunteer_id, day_week, start_time, end_time) values 
 (1, 'Quarta-feira', '13:00:00', '17:00:00'),
@@ -425,16 +423,15 @@ left join events_registrations er on e.id = er.event_id
 group by e.id, e.name, e.event_date, e.event_type, e.status, e.capacity;
 
 DROP VIEW IF EXISTS vw_volunteer_simple_schedule;
-CREATE VIEW vw_volunteer_simple_schedule AS
-SELECT u.full_name AS volunteer_name,vs.day_week,vs.start_time,vs.end_time
+CREATE OR REPLACE VIEW vw_volunteer_simple_schedule AS
+SELECT vs.id AS shift_id, u.full_name AS volunteer_name, vs.day_week, vs.start_time, vs.end_time
 FROM volunteer_shifts vs
 JOIN volunteer_profiles vp ON vs.volunteer_id = vp.id
 JOIN users u ON vp.user_id = u.id;
 
 drop view if exists vw_volunteer_full_schedule;
-CREATE VIEW vw_volunteer_full_schedule AS
-SELECT 
-vs.id AS shift_id, u.full_name AS volunteer_name,vp.phone,vp.city,vs.day_week,vs.start_time,vs.end_time,vp.id AS volunteer_profile_id,vs.id
+CREATE OR REPLACE VIEW vw_volunteer_full_schedule AS
+SELECT vs.id AS shift_id, u.full_name AS volunteer_name,u.phone AS phone, u.local AS city,vs.day_week, vs.start_time, vs.end_time
 FROM volunteer_shifts vs
 JOIN volunteer_profiles vp ON vs.volunteer_id = vp.id
 JOIN users u ON vp.user_id = u.id;
