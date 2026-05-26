@@ -1,20 +1,16 @@
 <?php
     if(!$rerun):
-        require_once 'components/helpers.php';
-
+        
         $id = $_GET['id'] ?? null;
         if(!$id || !is_numeric($id)){
-            header(("location:animalCatalog"));
-            exit();
+            redirect(("animalCatalog"));
         }
 
         $metaTitle = "Detalhes" ;
         $metaDescription = 'Todas as informações do animal';
     else:
-        $stmt= $conn->prepare("SELECT a.*, b.name AS breed_name , s.name AS specie_name from animals a LEFT JOIN breeds b ON a.breed_id= b.id LEFT JOIN species s ON a.specie_id= s.id where a.id= ?");
-        $stmt->bind_param("i", $id);
-        $stmt->execute();
-        $animal= $stmt->get_result()->fetch_assoc();
+        $sql= "SELECT a.*, b.name AS breed_name , s.name AS specie_name from animals a LEFT JOIN breeds b ON a.breed_id= b.id LEFT JOIN species s ON a.specie_id= s.id where a.id= ?";
+        $animal= prepareQuery($conn, $sql, 'i', $id)->get_result()->fetch_assoc();
 ?>
         <section class="container m-3">
             <a href="animalCatalog" class="btn btn-secondary w-5"><i class="fa-solid fa-angle-left"></i></a>
@@ -42,7 +38,7 @@
                             echo htmlspecialchars($animal['description']);
                         }?>
                     </p>
-                    <button class="btn-adopt w-50" onclick="abrirModalInteresse(<?= $animal['id']; ?>)">Adotar</button>
+                   <?php include 'components/btn_adopt.php';?>
                 </div>
             </div>
         </section>

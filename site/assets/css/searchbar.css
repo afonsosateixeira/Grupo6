@@ -9,8 +9,8 @@
 .search1{
     color: #888888;
     position: absolute;
-    left: 10px;
-    top: 50%;
+    left: 16px;
+    top: 38%;
     transform: translateY(-50%);
     width: 6px;
 }
@@ -19,7 +19,7 @@
     color: #888888;
     position: absolute;
     right: 25px;
-    top: 50%;
+    top: 39%;
     transform: translateY(-50%);
     width: 6px;
 }

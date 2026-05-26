@@ -1,62 +1,56 @@
 <?php
     require_once '../../db.php';
+    require_once '../../components/helpers.php';
+    if (session_status() === PHP_SESSION_NONE) session_start();
+    $action = $_GET['action'] ?? '';
 
-    if($_SERVER['REQUEST_METHOD'] === 'POST'){
-
+    #POST
+    if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $id = (int)($_POST['id_adoption'] ?? 0);
-        $user= (int)($_POST['user_id'] ?? 0);
-        $animal= (int)($_POST['animal_id'] ?? 0);
-        $note =  trim($_POST['notes'] ?? '');
+        $user = (int)($_POST['user_id'] ?? 0);
+        $animal = (int)($_POST['animal_id'] ?? 0);
+        $note = trim($_POST['notes'] ?? '');
 
-        if(isset($_POST['btnCriar'])){
-            $stmt=$conn->prepare('INSERT INTO adoption_processes (user_id, animal_id, notes) VALUES (?, ?, ?)');
-            $stmt->bind_param('iis', $user, $animal, $note);
-            $stmt->execute();
-
-            header("location: ../adoptionProcess?status=criado");
-            exit();
+        if (isset($_POST['btnCriar'])) {
+            prepareQuery($conn, 'INSERT INTO adoption_processes (user_id, animal_id, notes, status) VALUES (?, ?, ?, "Pendente")', 'iis', $user, $animal, $note);
+            redirect("../adoptionProcess?status=criado");
         }
-        
-        if(isset($_POST['btnEditar'])){
-            $stmt= $conn->prepare('UPDATE adoption_processes SET user_id =?, animal_id=?, notes=? WHERE id=?');
-            $stmt->bind_param("iisi", $user, $animal, $note, $id);
-            $stmt->execute();
-
-            header("location: ../adoptionProcess?status=editado");
-            exit();
+        if (isset($_POST['btnEditar'])) {
+            prepareQuery($conn, 'UPDATE adoption_processes SET user_id=?, animal_id=?, notes=? WHERE id=?', 'iisi', $user, $animal, $note, $id);
+            redirect("../adoptionProcess?status=editado");
         }
     }
 
+    #GET
+    if ($action === 'adotar' && !empty($_GET['id_animal']) && !empty($_SESSION['id_user'])) {    
+        $animal_id = (int)$_GET['id_animal'];
+        prepareQuery($conn, 'INSERT INTO adoption_processes(user_id, animal_id, status) VALUES(?, ?, "Pendente")', 'ii', $_SESSION['id_user'], $animal_id);
+        prepareQuery($conn, "UPDATE animals SET status='Em processo' WHERE id=?", 'i', $animal_id);
+        redirect("../../animalDetails?id=$animal_id&status=iniciado");
+    }
 
-    if(isset($_GET['action']) && isset($_GET['id'])){
-        $action= $_GET['action'];
-        $id= intval($_GET['id']);
+    if (!empty($_GET['id']) && in_array($action, ['cancelar_processo', 'eliminar', 'mudar_status'])) {    
+        $id = (int)$_GET['id'];
+        $animal_id = prepareQuery($conn, 'SELECT animal_id FROM adoption_processes WHERE id=?', 'i', $id)->get_result()->fetch_assoc()['animal_id'] ?? 0;
         
-        # Processo de mudança de status do processo de adoção
-        if($action === 'mudar_status' && isset($_GET['status'])){
-            $status= $_GET['status'];
+        if ($animal_id > 0) {
+            
+            if ($action === 'mudar_status' && isset($_GET['status'])) {
+                $st = $_GET['status'];
+                $mapa = ['Aprovado' => 'Adotado', 'Pendente' => 'Em processo', 'Rejeitado' => 'Disponível'];
 
-            if(in_array($status, ['Pendente', 'Aprovado', 'Rejeitado'])){
-                $stmt= $conn->prepare("UPDATE adoption_processes SET status= ? WHERE id=?");
-                $stmt->bind_param("si", $status, $id);
-                $stmt->execute();
+                if (isset($mapa[$st])) {
+                    prepareQuery($conn, "UPDATE adoption_processes SET status=? WHERE id=?", 'si', $st, $id);
+                    prepareQuery($conn, "UPDATE animals SET status=? WHERE id=?", 'si', $mapa[$st], $animal_id);
+                }
+                redirect("../adoptionProcess?status=status_alterado");
+            } else {
+                prepareQuery($conn, "DELETE FROM adoption_processes WHERE id=?", 'i', $id);
+                prepareQuery($conn, "UPDATE animals SET status='Disponível' WHERE id=?", 'i', $animal_id);
+
+                redirect($action === 'cancelar_processo' ? "../../animalDetails?id=$animal_id&status=cancelado" : "../adoptionProcess?status=eliminado");
             }
-
-            header("location: ../adoptionProcess?status=status_alterado");
-            exit();
-        }
-
-        # Processo de eliminação do processo de adoção
-        if($action === "eliminar"){
-            $stmt= $conn->prepare("DELETE FROM adoption_processes WHERE id= ?");
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
-
-            header("location: ../adoptionProcess?status=apagado");
-            exit();
         }
     }
-
-    header("Location: ../adoptionProcess.php");
-    exit();
+    redirect("../adoptionProcess.php");
 ?>

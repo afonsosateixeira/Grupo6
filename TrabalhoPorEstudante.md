@@ -7,12 +7,15 @@
 - animalDetails.php
 - 	animalDetails.css
 
+- /components/btn_adopt.php
+- /components/alerts.php
 - /components/helpers.php
 - /components/pagination.php
 - /components/searchbar.php
 - 	searchbar.css
 
 - /backoffice/adoptionProcess.php
+- 	/backoffice/adoptionProcess.js
 - /backoffice/animalList.php
 - 	/backoffice/animalList.css
 - 	/backoffice/animalList.js

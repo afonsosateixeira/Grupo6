@@ -7,7 +7,7 @@
 
 			# Verifica se falta algum campo ser preenchido mandando um aviso se faltar, caso todos estiverem preenchidos verifica se existe algum resultado de um utilizador com o email inserido
 			if(!empty($email) && !empty($pass)){
-				$stmt = $conn->prepare('SELECT full_name, email, password FROM users WHERE email = ?');
+				$stmt = $conn->prepare('SELECT id, full_name, email, password FROM users WHERE email = ?');
 				$stmt->bind_param('s', $email);
 				$stmt->execute();
 				$res = $stmt->get_result();
@@ -17,6 +17,7 @@
 					if($row['password'] === $pass){
 						$_SESSION['auth'] = true;
 						$_SESSION['email'] = $row['email'];
+						$_SESSION['id_user'] = $row['id'];
 
 						# Guarda o nome com apenas o primeiro e último nomes, se este existir, ou apenas o primeiro nome
 						$name = preg_split('/\s+/', htmlspecialchars(trim($row['full_name'])));
