@@ -62,68 +62,74 @@
             <div class="container text-center my-5">
                 <p class="fs-5">Cria ou inicia sessão para aceder ao formulário.</p>
                 <div class="mt-4">
-                    <a href="login.php?redirect=perfis_voluntario">
-                        <button class="botao_login btn btn-outline-primary mx-1">Login</button>
-                    </a>
                     <a href="regist.php?redirect=perfis_voluntario">
-                        <button class="botao_regist btn btn-primary mx-1">Registrar</button>
+                        <button class="botao_regist">Registrar</button>
+                    </a>
+                    <a href="login.php?redirect=perfis_voluntario">
+                        <button class="botao_login">Login</button>
                     </a>
                 </div>
-            </div>
 
     <?php
         // Se ESTÁ logado -> Mostra o formulário
         else:
     ?>
             <div class="container">
-                <form action="" method="POST" class="p-4 bg-light rounded shadow-sm my-4">
-                    <div class="mb-3">
-                        <label for="localidade" class="form-label text-start d-block">Localidade</label>
-                        <input type="text" class="form-control" id="localidade" name="localidade" required placeholder="Ex: Leiria">
-                    </div>
+ <form action="" method="POST">
+        <div class="campo">
+          <div class="mb-3">
+            <label for="localidade" class="form-label">Localidade</label>
+            <input type="text" class="form-control" id="localidade" name="localidade" required>
+          </div>
+        </div>
 
-                    <div class="mb-3">
-                        <label for="diasdasemana" class="form-label text-start d-block">Dia da semana</label>
-                        <select name="diasdasemana" id="diasdasemana" class="form-select" required>
-                            <option value="">Selecione uma opção</option>
-                            <option value="Segunda-feira">Segunda-feira</option>
-                            <option value="Terça-feira">Terça-feira</option>
-                            <option value="Quarta-feira">Quarta-feira</option>
-                            <option value="Quinta-feira">Quinta-feira</option>
-                            <option value="Sexta-feira">Sexta-feira</option>
-                            <option value="Sábado">Sábado</option>
-                            <option value="Domingo">Domingo</option>
-                        </select>
-                    </div>
+        <div class="mb-3">
+          <div class="dia_semana">
+            <p>Dia da semana</p>
+            <select name="diasdasemana" id="diasdasemana" required>
+              <option>Selecione uma opção</option>
+              <option value="Segunda-feira">Segunda-feira</option>
+              <option value="Terça-feira">Terça-feira</option>
+              <option value="Quarta-feira">Quarta-feira</option>
+              <option value="Quinta-feira">Quinta-feira</option>
+              <option value="Sexta-feira">Sexta-feira</option>
+              <option value="Sábado">Sabado</option>
+              <option value="Domingo">Domingo</option>
+            </select>
+          </div>
+        </div>
 
-                    <div class="mb-3">
-                        <label for="hora_inicio" class="form-label text-start d-block">Horário início</label>
-                        <select name="hora_inicio" id="hora_inicio" class="form-select" required>
-                            <option value="">Selecione uma opção</option>
-                            <option value="08:30:00">08:30</option>
-                            <option value="10:30:00">10:30</option>
-                            <option value="11:00:00">11:00</option>
-                            <option value="13:00:00">13:00</option>
-                            <option value="15:00:00">15:00</option>
-                            <option value="17:00:00">17:00</option>
-                        </select>
-                    </div>
+        <div class="mb-3">
+          <div class="horario">
+            <p>Horário inicio</p>
+            <select name="hora_inicio" id="hora_inicio" required>
+              <option>Selecione uma opção</option>
+              <option value="08:30:00">08:30</option>
+              <option value="10:30:00">10:30</option>
+              <option value="11:00:00">11:00</option>
+              <option value="13:00:00">13:00</option>
+              <option value="15:00:00">15:00</option>
+              <option value="17:00:00">17:00</option>
+            </select>
+          </div>
+        </div>
 
-                    <div class="mb-3">
-                        <label for="hora_fim" class="form-label text-start d-block">Horário fim</label>
-                        <select name="hora_fim" id="hora_fim" class="form-select" required>
-                            <option value="">Selecione uma opção</option>
-                            <option value="08:30:00">08:30</option>
-                            <option value="10:30:00">10:30</option>
-                            <option value="11:00:00">11:00</option>
-                            <option value="13:00:00">13:00</option>
-                            <option value="15:00:00">15:00</option>
-                            <option value="17:00:00">17:00</option>
-                        </select>
-                    </div>
-
-                    <button type="submit" name="btn_submeter" class="botao_submeter w-100 py-2 mt-2">Torna-te voluntário</button>
-                </form>
+        <div class="mb-3">
+          <div class="horario">
+            <p>Horário fim</p>
+            <select name="hora_fim" id="hora_fim" required>
+              <option>Selecione uma opção</option>
+              <option value="08:30:00">08:30</option>
+              <option value="10:30:00">10:30</option>
+              <option value="11:00:00">11:00</option>
+              <option value="13:00:00">13:00</option>
+              <option value="15:00:00">15:00</option>
+              <option value="17:00:00">17:00</option>
+            </select>
+          </div>
+        </div>
+        <button type="submit" name="btn_submeter" class="botao_tornate">Torna-te voluntário</button>
+      </form>
             </div>
     <?php
         endif;
