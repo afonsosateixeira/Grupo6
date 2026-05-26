@@ -2,20 +2,15 @@
     if (!$rerun):
         $metaTitle = 'Perfis de voluntarios';
         $metaDescription = 'Regista-te para seres voluntário';
-
-    // ====================================================================
-    // 2. PROCESSAMENTO DE DADOS (Executa em silêncio antes do HTML)
-    // ====================================================================
     else:
         if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['btn_submeter'])) {
             
-            // Recupera o user_id se faltar na sessão
             if (!isset($_SESSION['user_id']) && isset($_SESSION['email'])) {
                 $sql_id = "SELECT id FROM users WHERE email = '" . $_SESSION['email'] . "'";
                 $res_id = $conn->query($sql_id);
                 if ($res_id->num_rows > 0) {
-                    $linha_id = $res_id->fetch_assoc();
-                    $_SESSION['user_id'] = $linha_id['id'];
+                    $registo_id = $res_id->fetch_assoc();
+                    $_SESSION['user_id'] = $registo_id['id'];
                 }
             }
 
@@ -26,11 +21,9 @@
                 $hora_inicio = $_POST['hora_inicio'];
                 $hora_fim    = $_POST['hora_fim'];
 
-                // I. Atualiza a localidade
                 $sql_update_user = "UPDATE users SET local = '$localidade' WHERE id = $user_id";
                 $conn->query($sql_update_user);
 
-                // II. Verifica ou cria perfil
                 $sql_check_profile = "SELECT id FROM volunteer_profiles WHERE user_id = $user_id";
                 $res_profile = $conn->query($sql_check_profile);
                 
@@ -43,7 +36,6 @@
                     $volunteer_id = $profile_data['id'];
                 }
 
-                // III. Insere o turno
                 $sql_shift = "INSERT INTO volunteer_shifts (volunteer_id, day_week, start_time, end_time) 
                               VALUES ($volunteer_id, '$dia_semana', '$hora_inicio', '$hora_fim')";
                 
@@ -53,10 +45,6 @@
     ?>
         <div class="container">
             <?php
-
-
-        
-        // Se NÃO está logado -> Mostra a mensagem de aviso controlada
         if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true):
     ?>
             <div class="container text-center my-5">
@@ -71,7 +59,6 @@
                 </div>
 
     <?php
-        // Se ESTÁ logado -> Mostra o formulário
         else:
     ?>
             <div class="container">
