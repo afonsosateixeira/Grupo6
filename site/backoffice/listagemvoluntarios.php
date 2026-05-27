@@ -16,6 +16,7 @@
                     <th>Telemóvel</th>
                     <th>Localidade</th>
                     <th>Horário</th>
+                    <th>Status</th>
                     <th>Ações</th>
                 </tr>
             </thead>
@@ -30,6 +31,9 @@
                             <?= htmlspecialchars($voluntario['day_week']) ?> – 
                             <?= date('H:i', strtotime($voluntario['start_time'])) ?> até 
                             <?= date('H:i', strtotime($voluntario['end_time'])) ?>
+                        </td>
+                        <td>
+                         <a href=""><i class="fa fa-check-square" aria-hidden="true"></i></a>   
                         </td>
                         <td>
                         <a href=""><i class="fa-solid fa-pen-to-square"></i></a>

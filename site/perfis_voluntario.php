@@ -16,13 +16,23 @@
 
             if (isset($_SESSION['user_id'])) {
                 $user_id     = $_SESSION['user_id'];
-                $localidade  = $_POST['localidade'];
+                $localidade  = trim($_POST['localidade'] ?? '');
                 $dia_semana  = $_POST['diasdasemana'];
                 $hora_inicio = $_POST['hora_inicio'];
                 $hora_fim    = $_POST['hora_fim'];
 
-                $sql_update_user = "UPDATE users SET local = '$localidade' WHERE id = $user_id";
-                $conn->query($sql_update_user);
+                $sql_user_local = "SELECT local FROM users WHERE id = $user_id";
+                $res_user_local = $conn->query($sql_user_local);
+                $current_local = '';
+                if ($res_user_local && $res_user_local->num_rows > 0) {
+                    $row_user_local = $res_user_local->fetch_assoc();
+                    $current_local = $row_user_local['local'];
+                }
+
+                if (empty($current_local) && $localidade !== '') {
+                    $sql_update_user = "UPDATE users SET local = '$localidade' WHERE id = $user_id";
+                    $conn->query($sql_update_user);
+                }
 
                 $sql_check_profile = "SELECT id FROM volunteer_profiles WHERE user_id = $user_id";
                 $res_profile = $conn->query($sql_check_profile);
@@ -36,9 +46,7 @@
                     $volunteer_id = $profile_data['id'];
                 }
 
-                $sql_shift = "INSERT INTO volunteer_shifts (volunteer_id, day_week, start_time, end_time) 
-                              VALUES ($volunteer_id, '$dia_semana', '$hora_inicio', '$hora_fim')";
-                
+                $sql_shift = "INSERT INTO volunteer_shifts (volunteer_id, day_week, start_time, end_time) VALUES ($volunteer_id, '$dia_semana', '$hora_inicio', '$hora_fim')";
                 $gravado_com_sucesso = $conn->query($sql_shift);
             }
         }
@@ -47,6 +55,7 @@
             <?php
         if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true):
     ?>
+
             <div class="container text-center my-5">
                 <p class="fs-5">Cria ou inicia sessão para aceder ao formulário.</p>
                 <div class="mt-4">
@@ -63,12 +72,27 @@
     ?>
             <div class="container">
  <form action="" method="POST">
+        <?php
+            $showLocalInput = true;
+            if (isset($_SESSION['user_id'])) {
+                $sql_user_local = "SELECT local FROM users WHERE id = " . $_SESSION['user_id'];
+                $res_user_local = $conn->query($sql_user_local);
+                if ($res_user_local && $res_user_local->num_rows > 0) {
+                    $current_local = $res_user_local->fetch_assoc()['local'];
+                    if (!empty($current_local)) {
+                        $showLocalInput = false;
+                    }
+                }
+            }
+        ?>
+        <?php if ($showLocalInput): ?>
         <div class="campo">
           <div class="mb-3">
             <label for="localidade" class="form-label">Localidade</label>
             <input type="text" class="form-control" id="localidade" name="localidade" required>
           </div>
         </div>
+        <?php endif; ?>
 
         <div class="mb-3">
           <div class="dia_semana">
@@ -128,8 +152,11 @@
                 echo "<div class='alert alert-danger text-center my-3'>Erro ao guardar dados.</div>";
             }
 
-            // Listagem das cartas
-            $sql = "SELECT * FROM vw_volunteer_simple_schedule";
+            // Listagem das cartas com várias datas por voluntário usando a view original e apenas voluntários aceites
+            $sql = "SELECT volunteer_name, GROUP_CONCAT(CONCAT(day_week, ' ', DATE_FORMAT(start_time, '%H:%i'), ' até ', DATE_FORMAT(end_time, '%H:%i')) ORDER BY shift_id SEPARATOR '||') AS schedule
+                    FROM vw_volunteer_simple_schedule
+                    WHERE status = 'Aceite'
+                    GROUP BY volunteer_name";
             $lista = $conn->query($sql);
             ?>
             <div class="text-center my-5">
@@ -141,10 +168,10 @@
                     <div class="card" style="width: 18rem">
                         <div class="card-body text-center">
                             <h3 class="card-title"><?= htmlspecialchars($voluntario['volunteer_name']) ?></h3>
-                            <p class="card-text text-start"><strong>Horário:</strong><br>
-                                <?= htmlspecialchars($voluntario['day_week']) ?> – 
-                                <?= date('H:i', strtotime($voluntario['start_time'])) ?> até 
-                                <?= date('H:i', strtotime($voluntario['end_time'])) ?>
+                            <p class="card-text text-start"><strong>Horários:</strong><br>
+                                <?php foreach(explode('||', $voluntario['schedule']) as $shift): ?>
+                                    <?= htmlspecialchars($shift) ?><br>
+                                <?php endforeach; ?>
                             </p>
                         </div>
                     </div>
