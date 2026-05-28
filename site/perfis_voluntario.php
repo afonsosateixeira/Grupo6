@@ -152,7 +152,6 @@
                 echo "<div class='alert alert-danger text-center my-3'>Erro ao guardar dados.</div>";
             }
 
-            // Listagem das cartas com várias datas por voluntário usando a view original e apenas voluntários aceites
             $sql = "SELECT volunteer_name, GROUP_CONCAT(CONCAT(day_week, ' ', DATE_FORMAT(start_time, '%H:%i'), ' até ', DATE_FORMAT(end_time, '%H:%i')) ORDER BY shift_id SEPARATOR '||') AS schedule
                     FROM vw_volunteer_simple_schedule
                     WHERE status = 'Aceite'

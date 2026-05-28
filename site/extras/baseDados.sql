@@ -139,14 +139,15 @@ create table volunteer_profiles (
 
 drop table if exists volunteer_shifts;
 create table volunteer_shifts (
-    id int auto_increment,
-    volunteer_id int not null,
-	day_week VARCHAR(20) NOT NULL,
-	start_time TIME NOT NULL,
-	end_time TIME NOT NULL,
-    constraint pk_volunteer_shifts primary key (id),
-    constraint fk_shifts_volunteer foreign key (volunteer_id) references volunteer_profiles(id)
-) engine=innodb;
+    id INT AUTO_INCREMENT,
+    volunteer_id INT NOT NULL,
+    day_week VARCHAR(20) NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    status ENUM('Aceite', 'Rejeitado', 'Pendente') NOT NULL DEFAULT 'Pendente', -- O teu ENUM com default Pendente
+    CONSTRAINT pk_volunteer_shifts PRIMARY KEY (id),
+    CONSTRAINT fk_shifts_volunteer FOREIGN KEY (volunteer_id) REFERENCES volunteer_profiles(id)
+) ENGINE=INNODB;
 
 drop table if exists lost_animals;
 create table lost_animals (
@@ -191,7 +192,8 @@ insert into users (full_name, email, password, phone, local, role) values
 ('rui silva', 'rui@email.com', SHA2('123', 512), '910000007', 'coimbra', 'n'),
 ('sofia bento', 'sofia@email.com', SHA2('123', 512), '910000008', 'viana', 'n'),
 ('tiago ferreira', 'tiago@email.com', SHA2('123', 512), '910000009', 'lisboa', 'n'),
-('marta luz', 'marta@email.com', SHA2('123', 512), '910000010', 'braga', 'n');
+('marta luz', 'marta@email.com', SHA2('123', 512), '910000010', 'braga', 'n'),
+('Rita luz', 'rita@email.com', SHA2('123', 512), '91000003310', 'setubal', 'n');
 
 insert into species (name) values 
 ('Cão'), ('Gato'), ('Coelho'), ('Pássaro'), ('Hamster'), 
@@ -424,14 +426,29 @@ group by e.id, e.name, e.event_date, e.event_type, e.status, e.capacity;
 
 DROP VIEW IF EXISTS vw_volunteer_simple_schedule;
 CREATE OR REPLACE VIEW vw_volunteer_simple_schedule AS
-SELECT vs.id AS shift_id, u.full_name AS volunteer_name, vs.day_week, vs.start_time, vs.end_time
+SELECT 
+    vs.id AS shift_id, 
+    u.full_name AS volunteer_name, 
+    vs.day_week, 
+    vs.start_time, 
+    vs.end_time,
+    vs.status AS status
 FROM volunteer_shifts vs
 JOIN volunteer_profiles vp ON vs.volunteer_id = vp.id
 JOIN users u ON vp.user_id = u.id;
 
-drop view if exists vw_volunteer_full_schedule;
+
+DROP VIEW IF EXISTS vw_volunteer_full_schedule;
 CREATE OR REPLACE VIEW vw_volunteer_full_schedule AS
-SELECT vs.id AS shift_id, u.full_name AS volunteer_name,u.phone AS phone, u.local AS city,vs.day_week, vs.start_time, vs.end_time
+SELECT 
+    vs.id AS shift_id, 
+    u.full_name AS volunteer_name,
+    u.phone AS phone, 
+    u.local AS city,
+    vs.day_week, 
+    vs.start_time, 
+    vs.end_time,
+    vs.status AS status
 FROM volunteer_shifts vs
 JOIN volunteer_profiles vp ON vs.volunteer_id = vp.id
 JOIN users u ON vp.user_id = u.id;
