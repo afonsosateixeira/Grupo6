@@ -16,10 +16,9 @@
         $stmt = $conn->prepare("SELECT * FROM vw_lost_pets_radar ORDER BY id ASC LIMIT ? OFFSET ?");
         $stmt->bind_param('ii', $perPage, $idMin);
         $stmt->execute();
-        $res = $stmt->get_result();
+        $resA = $stmt->get_result();
 
         $stmt->close();
-        $conn->close();
 	else:
 ?>
 		<section id="banner" class="d-flex justify-content-center align-items-center">
@@ -29,7 +28,7 @@
         <section class="container my-5 px-4">
             <div class="row gap-3 justify-content-center">
                 <?php
-                    while($row = $res->fetch_assoc()):
+                    while($row = $resA->fetch_assoc()):
                 ?>
                     <div class="card bg-body-secondary col-auto text-center py-3 align-items-center">
                         <h3 class="fw-bold <?= ($row['found'] == 'Yes') ? 'custom-blue' : 'text-danger' ?>"><?= ($row['found'] == 'Yes') ? 'Encontrado' : 'Perdido' ?></h3>
