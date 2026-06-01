@@ -3,12 +3,27 @@
         $metaTitle = 'Listagem Voluntários';
         $metaDescription = 'Listar Voluntários';
     else:
-        // ====================================================================
-        // 2. PROCESSAMENTO DO FORMULÁRIO DE ADICIONAR VOLUNTÁRIO
-        // ====================================================================
+        $responseError = null;
+        $responseSuccess = null;
+        $volunteerEdit = null;
+        $editMode = false;
+
+        if (isset($_GET['editar']) && is_numeric($_GET['editar'])) {
+            $editId = (int) $_GET['editar'];
+            $stmt = $conn->prepare('SELECT vs.id AS shift_id, vs.day_week, vs.start_time, vs.end_time, vs.status, u.id AS user_id, u.full_name AS volunteer_name, u.email, u.phone, u.local AS city FROM volunteer_shifts vs JOIN volunteer_profiles vp ON vs.volunteer_id = vp.id JOIN users u ON vp.user_id = u.id WHERE vs.id = ?');
+            $stmt->bind_param('i', $editId);
+            $stmt->execute();
+            $volunteerEdit = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+            if ($volunteerEdit) {
+                $editMode = true;
+            }
+        }
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             if (isset($_POST['action']) && $_POST['action'] === 'add_volunteer') {
                 $email = strtolower(trim($_POST['email']));
+                $localidade = trim($_POST['localidade'] ?? '');
                 $day_week = trim($_POST['day_week']);
                 $start_time = trim($_POST['start_time']);
                 $end_time = trim($_POST['end_time']);
@@ -22,7 +37,12 @@
                 if ($user_result && $user_result->num_rows > 0) {
                     $user = $user_result->fetch_assoc();
                     $user_id = $user['id'];
-
+                    if ($localidade !== '') {
+                        $stmt_local = $conn->prepare('UPDATE users SET local = ? WHERE id = ?');
+                        $stmt_local->bind_param('si', $localidade, $user_id);
+                        $stmt_local->execute();
+                        $stmt_local->close();
+                    }
                     $stmt = $conn->prepare('SELECT id FROM volunteer_profiles WHERE user_id = ?');
                     $stmt->bind_param('i', $user_id);
                     $stmt->execute();
@@ -43,20 +63,17 @@
                     $stmt = $conn->prepare('INSERT INTO volunteer_shifts(volunteer_id, day_week, start_time, end_time) VALUES(?, ?, ?, ?)');
                     $stmt->bind_param('isss', $volunteer_id, $day_week, $start_time, $end_time);
                     if ($stmt->execute()) {
-                        $response = '<div class="alert alert-success mt-3">Voluntário adicionado com sucesso!</div>';
+                        $responseSuccess = '<div class="alert alert-success mt-3">Voluntário adicionado com sucesso!</div>';
                     } else {
-                        $response = '<div class="alert alert-danger mt-3">Erro ao adicionar turno!</div>';
+                        $responseError = '<div class="alert alert-danger mt-3">Erro ao adicionar turno!</div>';
                     }
                     $stmt->close();
                 } else {
-                    $response = '<div class="alert alert-danger mt-3">Email não encontrado. Utilize um email existente.</div>';
+                    $responseError = '<div class="alert alert-danger mt-3">Email não encontrado. Utilize um email existente.</div>';
                 }
             }
         }
 
-        // ====================================================================
-        // 3. PROCESSAMENTO DA ALTERAÇÃO DE STATUS / APAGAR VOLUNTÁRIO
-        // ====================================================================
         if (isset($_GET['action']) && isset($_GET['id'])) {
             $id_turno = intval($_GET['id']);
             $acao = $_GET['action'];
@@ -94,63 +111,18 @@
             }
         }
 
-        // ====================================================================
-        // 4. CONSULTA DOS DADOS PARA A TABELA
-        // ====================================================================
         $sql = "SELECT * FROM vw_volunteer_full_schedule";
         $lista = $conn->query($sql);
 ?>
     <section class="ms-2">
         <h1 class="fw-bold custom-blue mt-2 mb-4">Gestão de Voluntários</h1>
         <div class="d-flex justify-content-end gap-2 mb-3">
-            <a href="listagemvoluntarios?add" class="btn btn-success">+ Criar</a>
+            <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModalVoluntario">+ Criar</button>
         </div>
-        
+
+        <?= isset($responseSuccess) ? $responseSuccess : '' ?>
+
         <?php include 'components/modal_voluntario.php'; ?>
-
-        <div class="card mb-4">
-            <div class="card-header bg-primary text-white">
-                <h5 class="mb-0">Adicionar Novo Voluntário</h5>
-            </div>
-            <div class="card-body">
-                <form method="POST" id="volunteerForm">
-                    <input type="hidden" name="action" value="add_volunteer">
-
-                    <div class="mb-3">
-                        <label class="form-label" for="email">Email *</label>
-                        <input type="email" name="email" id="email" class="form-control" placeholder="email@exemplo.com" required>
-                    </div>
-
-                    <h6 class="text-info mb-3 mt-4">Horário de Voluntariado</h6>
-                    <div class="row">
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label" for="day_week">Dia da Semana *</label>
-                            <select name="day_week" id="day_week" class="form-control" required>
-                                <option value="">Selecione um dia</option>
-                                <option value="Segunda">Segunda</option>
-                                <option value="Terça">Terça</option>
-                                <option value="Quarta">Quarta</option>
-                                <option value="Quinta">Quinta</option>
-                                <option value="Sexta">Sexta</option>
-                                <option value="Sábado">Sábado</option>
-                                <option value="Domingo">Domingo</option>
-                            </select>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label" for="start_time">Hora de Início *</label>
-                            <input type="time" name="start_time" id="start_time" class="form-control" required>
-                        </div>
-                        <div class="col-md-4 mb-3">
-                            <label class="form-label" for="end_time">Hora de Fim *</label>
-                            <input type="time" name="end_time" id="end_time" class="form-control" required>
-                        </div>
-                    </div>
-
-                    <button type="submit" class="btn btn-primary w-100">Adicionar Voluntário</button>
-                    <?= isset($response) ? $response : '' ?>
-                </form>
-            </div>
-        </div>
 
         <table class="table table-striped table-hover" id="volunteerTable">
             <thead>
@@ -196,7 +168,7 @@
                             <?php endif; ?>
                         </td>
                         <td>
-                            <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="?editar=<?= $voluntario['shift_id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
                             <a href="?action=apagar&id=<?= $voluntario['shift_id'] ?>"
                                 onclick="return confirm('Tem a certeza que quer apagar este voluntário??')">
                                 <i style="color: #dc3545;" class="fa-solid fa-trash"></i>
@@ -206,6 +178,14 @@
                 <?php endwhile; ?>
             </tbody>
         </table>
+        <script>
+            window.onload = function () {
+                <?php if (isset($responseError) || (isset($editMode) && $editMode)): ?>
+                    var meuModal = new bootstrap.Modal(document.getElementById('formModalVoluntario'));
+                    meuModal.show();
+                <?php endif; ?>
+            };
+        </script>
     </section>
 <?php
     endif;
