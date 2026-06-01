@@ -52,10 +52,12 @@
         }
     ?>
         <div class="container">
+            <div class="text-center my-5">
+                <h2>Perfil dos voluntários</h2>
+            </div>
             <?php
         if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true):
     ?>
-
             <div class="container text-center my-5">
                 <p class="fs-5">Cria ou inicia sessão para aceder ao formulário.</p>
                 <div class="mt-4">
@@ -110,42 +112,25 @@
           </div>
         </div>
 
-        <div class="mb-3">
           <div class="horario">
-            <p>Horário inicio</p>
-            <select name="hora_inicio" id="hora_inicio" required>
-              <option>Selecione uma opção</option>
-              <option value="08:30:00">08:30</option>
-              <option value="10:30:00">10:30</option>
-              <option value="11:00:00">11:00</option>
-              <option value="13:00:00">13:00</option>
-              <option value="15:00:00">15:00</option>
-              <option value="17:00:00">17:00</option>
-            </select>
+            <div class="mb-3">
+                <label class="form-label" for="hora_inicio">Hora Início</label>
+                <input type="time" name="hora_inicio" id="hora_inicio" class="form-control" required>
+            </div>
           </div>
-        </div>
 
-        <div class="mb-3">
+
           <div class="horario">
-            <p>Horário fim</p>
-            <select name="hora_fim" id="hora_fim" required>
-              <option>Selecione uma opção</option>
-              <option value="08:30:00">08:30</option>
-              <option value="10:30:00">10:30</option>
-              <option value="11:00:00">11:00</option>
-              <option value="13:00:00">13:00</option>
-              <option value="15:00:00">15:00</option>
-              <option value="17:00:00">17:00</option>
-            </select>
+            <div class="mb-3">
+                <label class="form-label" for="hora_fim">Hora Fim</label>
+                <input type="time" name="hora_fim" id="hora_fim" class="form-control" required>
+            </div>
           </div>
-        </div>
         <button type="submit" name="btn_submeter" class="botao_tornate">Torna-te voluntário</button>
       </form>
             </div>
     <?php
         endif;
-
-
             if (isset($gravado_com_sucesso) && $gravado_com_sucesso) {
                 echo "<div class='alert alert-success text-center my-3'>Inscrição gravada com sucesso!</div>";
             } elseif (isset($gravado_com_sucesso) && !$gravado_com_sucesso) {
@@ -158,11 +143,8 @@
                     GROUP BY volunteer_name";
             $lista = $conn->query($sql);
             ?>
-            <div class="text-center my-5">
-                <h2>Perfil dos voluntários</h2>
-            </div>
             
-            <div class="cartas d-flex flex-wrap justify-content-center gap-3 mb-5">
+            <div class="cartas d-flex flex-wrap justify-content-center gap-3 mb-5 mt-5">
                 <?php while($voluntario = $lista->fetch_assoc()): ?>
                     <div class="card" style="width: 18rem">
                         <div class="card-body text-center">

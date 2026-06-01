@@ -1,7 +1,4 @@
 <?php
-    // ====================================================================
-    // 1. CONFIGURAÇÃO DAS METATAGS
-    // ====================================================================
     if(!$rerun):
         $metaTitle = 'Listagem Voluntários';
         $metaDescription = 'Listar Voluntários';
@@ -105,6 +102,11 @@
 ?>
     <section class="ms-2">
         <h1 class="fw-bold custom-blue mt-2 mb-4">Gestão de Voluntários</h1>
+        <div class="d-flex justify-content-end gap-2 mb-3">
+            <a href="listagemvoluntarios?add" class="btn btn-success">+ Criar</a>
+        </div>
+        
+        <?php include 'components/modal_voluntario.php'; ?>
 
         <div class="card mb-4">
             <div class="card-header bg-primary text-white">
@@ -195,7 +197,8 @@
                         </td>
                         <td>
                             <a href=""><i class="fa-solid fa-pen-to-square"></i></a>
-                            <a href="?action=apagar&id=<?= $voluntario['shift_id'] ?>">
+                            <a href="?action=apagar&id=<?= $voluntario['shift_id'] ?>"
+                                onclick="return confirm('Tem a certeza que quer apagar este voluntário??')">
                                 <i style="color: #dc3545;" class="fa-solid fa-trash"></i>
                             </a>
                         </td>
