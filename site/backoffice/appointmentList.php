@@ -23,7 +23,7 @@
 ?>
     <section class="ms-2">
         <h1 class="fw-bold custom-blue mt-2 mb-4">Gestão de Consultas</h1>
-        <div>
+        <div class="d-flex justify-content-end">
             <a href="appointmentList?add" class="btn btn-success">+ Criar</a>
         </div>
         <?php include 'components/modal_appointments.php'; ?>

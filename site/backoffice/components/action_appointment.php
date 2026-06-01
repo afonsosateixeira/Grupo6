@@ -15,9 +15,7 @@
         $status = trim($_POST['status'] ?? '');
 
         
-        if (isset($_POST['btnCriar'])) {
-            $nomeArquivo = "";
-
+        if (isset($_POST['btnCriar'])) {            
                 $stmt=$conn->prepare("INSERT INTO appointments (animal, name_animal, age_animal, breed_animal, vet_id, appointment_date, status) 
                         VALUES (?, ?, ?, ?, ?, ?, ?)");
                 $stmt->bind_param("ssissss", $animal, $name_animal, $age_animal, $breed_animal, $vet_id, $appointment_date, $status);
@@ -56,4 +54,3 @@
 
     header("Location: ../appointmentList");
     exit();
-

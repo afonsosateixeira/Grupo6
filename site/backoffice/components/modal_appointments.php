@@ -27,7 +27,7 @@
                                 <label class="form-label fw-bold">Escolha a Espécies:</label>
                                 <select name="animal" id="select-especie" class="form-select" required>
                                     <option value="">Selecione qual é o Espécies</option>
-                                    <option value="Cão" <?= ($appointmentEdit && $appointmentEdit['animal'] == 'cao') ? 'selected' : ''; ?>>Cão</option>
+                                    <option value="Cão" <?= ($appointmentEdit && $appointmentEdit['animal'] == 'cão') ? 'selected' : ''; ?>>Cão</option>
                                     <option value="Gato" <?= ($appointmentEdit && $appointmentEdit['animal'] == 'gato') ? 'selected' : ''; ?>>Gato</option>
                                     <option value="Outro" <?= ($appointmentEdit && $appointmentEdit['animal'] == 'outro') ? 'selected' : ''; ?>>Outro</option>
                                 </select>

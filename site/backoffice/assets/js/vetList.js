@@ -4,5 +4,5 @@ let table= new DataTable('#vetsTable', {
     },
     pageLength: 10,
     lengthMenu: [5, 10, 25, 50],
-    columns: [null, null, { orderable: false }, null, null, { orderable: false }]
+    columns: [null, null, { orderable: false }, null, { orderable: false }]
 });

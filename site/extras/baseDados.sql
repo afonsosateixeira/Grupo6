@@ -71,7 +71,6 @@ create table veterinarians (
     name varchar(150) not null,
     photo varchar(255),
     license_number varchar(50) not null,
-    specialty varchar(100),
     phone varchar(20) not null,
     constraint pk_veterinarians primary key (id)
 ) engine=innodb;
@@ -227,17 +226,18 @@ insert into adoption_processes (user_id, animal_id, status, notes) values
 (6, 9, 'pendente', 'primeiro animal'),
 (7, 10, 'pendente', 'interessado em tartarugas');
 
-insert into veterinarians (name, photo, license_number, specialty, phone) values 
-('dr. silva', 'vet1.jpg', 'vet001', 'cirurgia', '220000001'),
-('dra. ana', 'vet2.jpg', 'vet002', 'clínica geral', '220000002'),
-('dr. mendes', 'vet3.jpg', 'vet003', 'exóticos', '220000003'),
-('dra. beatriz', 'vet4.jpg', 'vet004', 'dermatologia', '220000004'),
-('dr. carlos', 'vet5.jpg', 'vet005', 'ortopedia', '220000005'),
-('dra. diana', 'vet6.jpg', 'vet006', 'oftalmologia', '220000006'),
-('dr. eusebio', 'vet7.jpg', 'vet007', 'cardiologia', '220000007'),
-('dra. fernanda', 'vet8.jpg', 'vet008', 'comportamento', '220000008'),
-('dr. gabriel', 'vet9.jpg', 'vet009', 'clínica geral', '220000009'),
-('dra. helena', 'vet10.jpg', 'vet010', 'neurologia', '220000010');
+insert into veterinarians (name, photo, phone) values 
+('dr. silva', 'vet1.jpg', '220000001'),
+('dra. ana', 'vet2.jpg', '220000002'),
+('dr. mendes', 'vet3.jpg', '220000003'),
+('dra. beatriz', 'vet4.jpg','220000004'),
+('dr. carlos', 'vet5.jpg', '220000005'),
+('dra. diana', 'vet6.jpg', '220000006'),
+('dr. eusebio', 'vet7.jpg', '220000007'),
+('dra. fernanda', 'vet8.jpg', '220000008'),
+('dr. gabriel', 'vet9.jpg', '220000009'),
+('dra. helena', 'vet10.jpg', '220000010');
+
 insert into appointments (name_animal, age_animal, breed_animal, vet_id, appointment_date, status) values 
 ('Lucky', 12, 'yorkshire', 1, '2026-04-10 10:00', 'concluida'),
 ('Dinky', 11, 'yorkshire', 2, '2026-04-11 11:30', 'concluida'),
@@ -371,12 +371,12 @@ order by waiting_days desc;
 
 drop view if exists vw_vet_workload_analysis;
 create view vw_vet_workload_analysis as
-select v.name, v.specialty, v.phone,
+select v.name, v.phone,
        count(app.id) as total_appointments,
        sum(case when app.status = 'agendada' then 1 else 0 end) as upcoming_appointments
 from veterinarians v
 left join appointments app on v.id = app.vet_id
-group by v.id, v.name, v.specialty, v.phone;
+group by v.id, v.name, v.phone;
 
 drop view if exists vw_upcoming_appointments_agenda;
 create view vw_upcoming_appointments_agenda as
