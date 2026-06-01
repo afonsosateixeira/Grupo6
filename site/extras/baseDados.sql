@@ -79,13 +79,14 @@ create table veterinarians (
 drop table if exists appointments;
 create table appointments (
     id int auto_increment,
-    animal_id int not null,
-    vet_id int not null,
+    animal enum('cão', 'gato', 'outro') not null,
+    name_animal VARCHAR(255) not null,
+    age_animal int not null,
+    breed_animal VARCHAR(255) not null,
+    vet_id int,
     appointment_date datetime not null,
-    reason varchar(255) not null,
     status enum('agendada', 'concluida', 'cancelada') not null,
     constraint pk_appointments primary key (id),
-    constraint fk_appointments_animals foreign key (animal_id) references animals(id),
     constraint fk_appointments_vets foreign key (vet_id) references veterinarians(id)
 ) engine=innodb;
 
@@ -237,17 +238,17 @@ insert into veterinarians (name, photo, license_number, specialty, phone) values
 ('dra. fernanda', 'vet8.jpg', 'vet008', 'comportamento', '220000008'),
 ('dr. gabriel', 'vet9.jpg', 'vet009', 'clínica geral', '220000009'),
 ('dra. helena', 'vet10.jpg', 'vet010', 'neurologia', '220000010');
-insert into appointments (animal_id, vet_id, appointment_date, reason, status) values 
-(1, 1, '2026-04-10 10:00', 'check-up', 'concluida'),
-(2, 2, '2026-04-11 11:30', 'vacinação', 'concluida'),
-(3, 1, '2026-04-12 09:00', 'ferimento', 'cancelada'),
-(4, 3, '2026-04-13 15:00', 'desparasitação', 'agendada'),
-(5, 4, '2026-04-14 16:00', 'alergia', 'agendada'),
-(6, 2, '2026-07-15 10:30', 'revisão', 'agendada'),
-(7, 1, '2026-05-16 14:00', 'esterilização', 'agendada'),
-(8, 3, '2026-09-17 09:30', 'unhas', 'agendada'),
-(9, 5, '2026-06-18 11:00', 'coxeio', 'agendada'),
-(10, 6, '2026-05-19 12:00', 'olhos', 'agendada');
+insert into appointments (name_animal, age_animal, breed_animal, vet_id, appointment_date, status) values 
+('Lucky', 12, 'yorkshire', 1, '2026-04-10 10:00', 'concluida'),
+('Dinky', 11, 'yorkshire', 2, '2026-04-11 11:30', 'concluida'),
+('Fox', 12, 'Pastor Alemão', 1, '2026-04-12 09:00', 'agendada'),
+('Max', 4, 'Golden Retriever', 3, '2026-04-13 15:00', 'cancelada'),
+('Bob', 6, 'Labrador Retriever', 4, '2026-04-14 16:00', 'agendada'),
+('Safira', 10, 'Husky', 2, '2026-07-15 10:30', 'agendada'),
+('Luna', 5, 'Beagle', 1, '2026-05-16 14:00', 'agendada'),
+('Rocky', 8, 'Rottweiler', 3, '2026-09-17 09:30', 'agendada'),
+('Simba', 5, 'Border Collie', 5, '2026-06-18 11:00', 'agendada'),
+('Mia', 11, 'São Bernardo', 6, '2026-05-19 12:00', 'agendada');
 
 insert into medical_history (appointment_id, diagnosis, weight) values 
 (1, 'saudável', 30.5), (2, 'vacinas em dia', 4.2),
@@ -379,22 +380,20 @@ group by v.id, v.name, v.specialty, v.phone;
 
 drop view if exists vw_upcoming_appointments_agenda;
 create view vw_upcoming_appointments_agenda as
-select app.appointment_date, v.name as vet_name, a.name as animal_name, a.status as animal_status, app.reason
-from appointments app
-join veterinarians v on app.vet_id = v.id
-join animals a on app.animal_id = a.id
-where app.status = 'agendada' and app.appointment_date >= current_date
-order by app.appointment_date asc;
+select a.appointment_date, v.name as vet_name, a.name_animal as animal_name, a.status as animal_status
+from appointments a
+join veterinarians v on a.vet_id = v.id
+where a.status = 'agendada' and a.appointment_date >= current_date
+order by a.appointment_date asc;
 
 drop view if exists vw_animal_health_records;
 create view vw_animal_health_records as
-select a.name as animal_name, app.appointment_date, v.name as vet_name,
+select app.name_animal as animal_name, app.appointment_date, v.name as vet_name,
        mh.diagnosis, mh.weight, mh.medications, mh.treatment
 from medical_history mh
 join appointments app on mh.appointment_id = app.id
-join animals a on app.animal_id = a.id
 join veterinarians v on app.vet_id = v.id
-order by a.name asc, app.appointment_date desc;
+order by app.name_animal asc, app.appointment_date desc;
 
 drop view if exists vw_events_timeline;
 create view vw_events_timeline as
