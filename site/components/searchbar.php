@@ -5,14 +5,12 @@
     }
 
     if( !empty($search)){
-        $stmt = $conn->prepare("SELECT * FROM animals WHERE name LIKE '$search%' OR id LIKE '%$search%' ORDER BY id ASC");
-        $stmt->execute();
-        $res = $stmt->get_result();
+        $searchNome= $search . '%';
+        $searchId= '%' . $search . '%';
+        
+        $group= prepareQuery($conn, 'SELECT * FROM animals WHERE name LIKE ? OR id LIKE ? ORDER BY id ASC','ss', $searchNome, $searchId )->get_result();
     }
 
-    if(empty($search)){
-        $search ="";
-    }
 ?>
 
 <div class="position-relative">

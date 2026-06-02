@@ -1,5 +1,6 @@
 <?php
     require_once '../../db.php';
+    require_once '../../components/helpers.php';
     $caminhoPasta = "../../assets/img/animals/";
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
@@ -21,17 +22,12 @@
                     $nomeArquivo = $_FILES['image']['name'];
 
                     if (!move_uploaded_file($_FILES['image']['tmp_name'], $caminhoPasta . $nomeArquivo)) {
-                        header("Location: ../animalList?status=erro_imagem");
-                        exit();
+                        redirect("../animalList?status=erro_imagem");
                     }
                 }
-
-                $stmt=$conn->prepare("INSERT INTO animals (name, specie_id, breed_id, gender, size, image, birth_date, description) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("siisssss",$nome, $specieID, $breed, $genero, $porte, $nomeArquivo, $data, $descricao );
-                $stmt->execute();
-                header("Location: ../animalList?status=criado");
-                exit(); 
+                prepareQuery($conn, "INSERT INTO animals (name, specie_id, breed_id, gender, size, image, birth_date, description) 
+                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)", 'siisssss', $nome, $specieID, $breed, $genero, $porte, $nomeArquivo, $data, $descricao);
+                redirect("../animalList?status=criado");
         }
 
         # Processo de edição do animal
@@ -42,13 +38,8 @@
                 $nomeArquivo = $_FILES['image']['name'];
                 move_uploaded_file($_FILES['image']['tmp_name'], $caminhoPasta . $nomeArquivo);
             }
-            
-            $stmt = $conn->prepare("UPDATE animals SET name=?, specie_id=?, breed_id=?, gender=?, size=?, image=COALESCE(?, image), birth_date=?, description=? WHERE id=?");
-            
-            $stmt->bind_param("siisssssi", $nome, $specieID, $breed, $genero, $porte, $nomeArquivo, $data, $descricao, $id);
-            $stmt->execute();
-            header("Location: ../animalList?status=editado");
-            exit();
+            prepareQuery($conn, "UPDATE animals SET name=?, specie_id=?, breed_id=?, gender=?, size=?, image=COALESCE(?, image), birth_date=?, description=? WHERE id=?", 'siisssssi', $nome, $specieID, $breed, $genero, $porte, $nomeArquivo, $data, $descricao, $id);
+            redirect("../animalList?status=editado");
         }
     }
 
@@ -58,15 +49,8 @@
 
         # Processo de eliminação do animal
         if($action === 'eliminar'){
-            $stmt= $conn->prepare("DELETE FROM animals WHERE id = ?");
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
-
-            header("Location: ../animalList?status=apagado");
-            exit();
+            prepareQuery($conn, "DELETE FROM animals WHERE id = ?", 'i', $id);
+            redirect("../animalList?status=eliminado");
         }
     }
-
-    header("Location: ../animalList");
-    exit();
-
+    redirect("../animalList");

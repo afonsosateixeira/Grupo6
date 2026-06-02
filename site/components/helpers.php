@@ -1,4 +1,14 @@
 <?php
+ function redirect($url) { 
+        header("Location: $url"); 
+        exit(); 
+}
+function prepareQuery($conn, $query, $types, ...$params) {
+        $stmt = $conn->prepare($query); 
+        $stmt->bind_param($types, ...$params); 
+        $stmt->execute(); 
+        return $stmt; 
+}
 function mostrarValor($valor)
 {
     return !empty($valor) ? htmlspecialchars($valor) : "<span style='color:#888; font-style:italic; font-size:0.9em;'>Desconhecido</span>";

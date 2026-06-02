@@ -70,7 +70,6 @@ create table veterinarians (
     id int auto_increment,
     name varchar(150) not null,
     photo varchar(255),
-    license_number varchar(50) not null,
     phone varchar(20) not null,
     constraint pk_veterinarians primary key (id)
 ) engine=innodb;
@@ -192,39 +191,62 @@ insert into users (full_name, email, password, phone, local, role) values
 ('rui silva', 'rui@email.com', SHA2('123', 512), '910000007', 'coimbra', 'n'),
 ('sofia bento', 'sofia@email.com', SHA2('123', 512), '910000008', 'viana', 'n'),
 ('tiago ferreira', 'tiago@email.com', SHA2('123', 512), '910000009', 'lisboa', 'n'),
-('marta luz', 'marta@email.com', SHA2('123', 512), '910000010', 'braga', 'n'),
-('Rita luz', 'rita@email.com', SHA2('123', 512), '91000003310', 'setubal', 'n');
+('marta luz', 'marta@email.com', SHA2('123', 512), '910000010', 'braga', 'n');
 
-insert into species (name) values 
+INSERT INTO species (name) VALUES 
 ('Cão'), ('Gato'), ('Coelho'), ('Pássaro'), ('Hamster'), 
 ('Réptil'), ('Peixe'), ('Furão'), ('Porquinho da Índia'), ('Tartaruga');
 
-insert into breeds (specie_id, name) values 
-(1, 'Labrador'), (1, 'Poodle'), (2, 'Siamês'), (2, 'Persa'), (3, 'Anão holandês'), (5, 'Sírio'), (6, 'Iguana-verde'), (8, 'Standard'), (9, 'Abissínio'), (10, 'Jabuti-piranga');
+INSERT INTO breeds (specie_id, name) VALUES 
+(1, 'Labrador'), (1, 'Poodle'), (2, 'Siamês'), (2, 'Persa'), (3, 'Anão holandês'), 
+(5, 'Sírio'), (6, 'Iguana-verde'), (8, 'Standard'), (9, 'Abissínio'), (10, 'Jabuti-piranga'),
+(1, 'Golden Retriever'), (1, 'Bulldog Francês'), (1, 'Beagle'), (1, 'Pastor Alemão'), 
+(1, 'Bichon Frisé'), (1, 'Boxer'), (1, 'Rottweiler'), (1, 'Dálmata'),
+(2, 'Maine Coon'), (2, 'Sphynx');
 
-insert into animals (name, specie_id, breed_id, gender, size, image, birth_date, status) values 
-('Max', 1, 1, 'Macho', 'Grande', 'animal1.jpg', '2019-01-03', 'Disponível'),
+INSERT INTO animals (name, specie_id, breed_id, gender, size, image, birth_date, status) VALUES 
+('Max', 1, 1, 'Macho', 'Grande', 'animal1.jpg', '2019-01-03', 'Adotado'),
 ('Poppy', 1, 2, 'Fêmea', 'Médio', 'animal2.jpg', '2019-02-20', 'Adotado'),
 ('Thor', 2, 3, 'Macho', 'Pequeno', 'animal3.jpg', '2023-03-26', 'Em processo'),
-('Belota', 2, 4, 'Fêmea', 'Pequeno', 'animal4.jpg', '2022-04-30', 'Disponível'),      
-('Lia', 3, 5, 'Fêmea', 'Pequeno', 'animal5.jpg', '2024-05-11', 'Disponível'),
-('Spike', 6, 7, 'Macho', 'Pequeno', 'animal6.jpg', '2022-06-24', 'Disponível'),
-('Fifi', 5, 6, 'Fêmea', 'Pequeno', 'animal7.jpg', '2025-07-01', 'Disponível'),
-('Mel', 8, 8, 'Fêmea', 'Pequeno', 'animal8.jpg', '2021-08-13', 'Disponível'),
-('Fred', 9, 9, 'Macho', 'Pequeno', 'animal9.jpg', '2023-09-02', 'Disponível'),
-('Tico', 10, 10, 'Macho', 'Médio', 'animal10.jpg', '2018-10-09', 'Disponível');
+('Belota', 2, 4, 'Fêmea', 'Pequeno', 'animal4.jpg', '2022-04-30', 'Em processo'),       
+('Lia', 3, 5, 'Fêmea', 'Pequeno', 'animal5.jpg', '2024-05-11', 'Em processo'),
+('Spike', 6, 7, 'Macho', 'Pequeno', 'animal6.jpg', '2022-06-24', 'Em processo'),
+('Fifi', 5, 6, 'Fêmea', 'Pequeno', 'animal7.jpg', '2023-07-01', 'Em processo'),
+('Mel', 8, 8, 'Fêmea', 'Pequeno', 'animal8.jpg', '2021-08-13', 'Em processo'),
+('Fred', 9, 9, 'Macho', 'Pequeno', 'animal9.jpg', '2023-09-02', 'Em processo'),
+('Tico', 10, 10, 'Macho', 'Médio', 'animal10.jpg', '2018-10-09', 'Em processo'),
+('Rex', 1, 11, 'Macho', 'Grande', 'animal11.jpg', '2020-05-12', 'Disponível'),
+('Boby', 1, 12, 'Macho', 'Pequeno', 'animal12.jpg', '2021-11-03', 'Disponível'),
+('Luna', 1, 13, 'Fêmea', 'Médio', 'animal13.jpg', '2022-02-15', 'Disponível'),
+('Zeus', 1, 14, 'Macho', 'Grande', 'animal14.jpg', '2019-08-22', 'Disponível'),
+('Bella', 1, 15, 'Fêmea', 'Pequeno', 'animal15.jpg', '2023-01-10', 'Disponível'),
+('Rocky', 1, 16, 'Macho', 'Grande', 'animal16.jpg', '2020-12-05', 'Disponível'),
+('Kira', 1, 17, 'Fêmea', 'Grande', 'animal17.jpg', '2021-04-18', 'Disponível'),
+('Pongo', 1, 18, 'Macho', 'Grande', 'animal18.jpg', '2022-07-30', 'Disponível'),
+('Snoopy', 1, 13, 'Macho', 'Médio', 'animal19.jpg', '2021-09-14', 'Disponível'),
+('Mia', 1, 11, 'Fêmea', 'Grande', 'animal20.jpg', '2023-03-08', 'Disponível'),
+('Duke', 1, 14, 'Macho', 'Grande', 'animal21.jpg', '2018-05-25', 'Disponível'),
+('Lola', 1, 12, 'Fêmea', 'Pequeno', 'animal22.jpg', '2022-10-11', 'Disponível'),
+('Buster', 1, 16, 'Macho', 'Grande', 'animal23.jpg', '2019-11-20', 'Disponível'),
+('Daisy', 1, 15, 'Fêmea', 'Pequeno', 'animal24.jpg', '2020-03-17', 'Disponível'),
+('Charlie', 1, 1, 'Macho', 'Grande', 'animal25.jpg', '2021-06-29', 'Disponível'),
+('Nina', 1, 2, 'Fêmea', 'Médio', 'animal26.jpg', '2023-08-04', 'Disponível'),
+('Simba', 2, 19, 'Macho', 'Médio', 'animal27.jpg', '2020-04-12', 'Disponível'),
+('Nala', 2, 20, 'Fêmea', 'Médio', 'animal28.jpg', '2021-01-25', 'Disponível'),
+('Garfield', 2, 3, 'Macho', 'Médio', 'animal29.jpg', '2019-07-08', 'Disponível'),
+('Mimi', 2, 4, 'Fêmea', 'Pequeno', 'animal30.jpg', '2022-05-19', 'Disponível');
 
-insert into adoption_processes (user_id, animal_id, status, notes) values 
-(2, 1, 'pendente', 'casa com jardim'),
-(4, 2, 'aprovado', 'experiência anterior'),
-(6, 3, 'pendente', 'apartamento'),
-(7, 7, 'aprovado', 'tem outro gato'),
-(9, 4, 'rejeitado', 'sem condições'),
-(10, 8, 'pendente', 'família ativa'),
-(2, 5, 'pendente', 'segunda adoção'),
-(4, 6, 'pendente', 'visita agendada'),
-(6, 9, 'pendente', 'primeiro animal'),
-(7, 10, 'pendente', 'interessado em tartarugas');
+INSERT INTO adoption_processes (user_id, animal_id, status, notes, start_date, end_date) VALUES 
+(2, 1, 'Aprovado', 'casa com jardim', '2026-05-01 10:30:00', '2026-05-15 14:00:00'), 
+(4, 2, 'Aprovado', 'experiência anterior', '2026-05-20 09:15:00', '2026-05-26 11:30:00'), 
+(6, 3, 'Pendente', 'apartamento', '2026-05-22 15:45:00', NULL),
+(7, 4, 'Pendente', 'tem outro gato', '2026-05-23 09:10:00', NULL),
+(9, 5, 'Pendente', 'aguarda visita de avaliação', '2026-05-24 14:20:00', NULL),
+(10, 6, 'Pendente', 'família ativa', '2026-05-25 11:05:00', NULL),
+(2, 7, 'Pendente', 'segunda adoção', '2026-05-26 16:30:00', NULL),
+(4, 8, 'Pendente', 'visita agendada', '2026-05-27 10:15:00', NULL),
+(6, 9, 'Pendente', 'primeiro animal', '2026-05-27 18:00:00', NULL),
+(7, 10, 'Pendente', 'interessado em tartarugas', '2026-05-28 09:00:00', NULL);
 
 insert into veterinarians (name, photo, phone) values 
 ('dr. silva', 'vet1.jpg', '220000001'),
