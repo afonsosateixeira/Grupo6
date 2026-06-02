@@ -46,6 +46,7 @@
                 <ul class="nav flex-column submenu mt-1">
                     <li><a href="<?= $basePath ?>/appointmentList" class="nav-link">Consultas</a></li>
                     <li><a href="<?= $basePath ?>/vetList" class="nav-link">Veterinários</a></li>
+                    <li><a href="<?= $basePath ?>/medicalHistory" class="nav-link">Histórico Médico</a></li>
                     <li><a href="<?= $basePath ?>/donationList" class="nav-link">Doações</a></li>
                 </ul>
             </div>

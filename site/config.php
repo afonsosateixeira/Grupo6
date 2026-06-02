@@ -42,6 +42,7 @@
             'eventsList',
             'listagemvoluntarios',
             'missing_animals',
+            'medicalHistory',
             'user_list',
             'vetList'
         ]

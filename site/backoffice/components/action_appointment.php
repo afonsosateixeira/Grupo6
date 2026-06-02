@@ -3,7 +3,7 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
-        $id = (int)$_POST['id_appointment'] ?? null;
+        $id = $_POST['id_appointment'];
         $animal = trim($_POST['animal'] ?? '');
         $name_animal = trim($_POST['name_animal'] ?? '');
         $age_animal = (int)($_POST['age_animal'] ?? 0);
