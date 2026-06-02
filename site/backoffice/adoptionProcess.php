@@ -7,6 +7,7 @@ else:
             INNER JOIN users u ON ap.user_id = u.id 
             INNER JOIN animals a ON ap.animal_id = a.id 
             INNER JOIN species s on a.specie_id = s.id 
+            WHERE end_date IS NULL OR end_date >= NOW()- interval 5 day
             ORDER BY ap.id ASC";
     $group = $conn->query($sql);
 
@@ -43,7 +44,8 @@ else:
 
                         <div>
                             <p class="mb-1 fw-bold"><i class="fa-solid fa-user me-2 text-secondary"></i><?= htmlspecialchars($item['full_name']) ?></p>
-                            <p class="mb-1 small"><i class="fa-solid fa-calendar-day me-2 text-secondary"></i><?= date('d/m/Y', strtotime($item['start_date'])) ?></p>
+                            <p class="mb-1 small"><?= $item['status'] === 'Pendente'? 'Início|' : 'Fim|' ?> 
+                            <?= $item['status'] === 'Pendente'? date('d/m/Y H:i', strtotime($item['start_date'])) : date('d/m/Y H:i', strtotime($item['end_date'])) ?></p>
                             <?php if (!empty($item['notes'])): ?>
                                 <p class="mb-1 small text-muted fst-italic"><i class="fa-solid fa-comment me-2"></i><?= htmlspecialchars($item['notes']) ?></p>
                             <?php endif; ?>

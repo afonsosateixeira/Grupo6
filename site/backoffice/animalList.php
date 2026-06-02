@@ -43,7 +43,7 @@
                         <td><?= mostrarValor2($item['breed_name']); ?></td>
                         <td><?= mostrarIdade($item['birth_date']); ?></td>
                         <td><?= mostrarValor2($item['size']); ?></td>
-                        <td style="text-wrap: pretty"><?= htmlspecialchars($item['description']); ?></td>
+                        <td style="text-wrap: pretty"><?=$item['description']; ?></td>
                         <td class="fw-bold" style="color:<?= corStatus($item['status'])?>;"><?= $item['status']; ?></td>
                         <td>
                             <a href="?editar=<?= $item['id']; ?>"><i class="fa-solid fa-pen-to-square"></i></a>

@@ -8,7 +8,7 @@
         $searchNome= $search . '%';
         $searchId= '%' . $search . '%';
         
-        $res= prepareQuery($conn, 'SELECT * FROM animals WHERE name LIKE ? OR id LIKE ? ORDER BY id ASC','si', $searchNome, $searchId )->get_result();
+        $group= prepareQuery($conn, 'SELECT * FROM animals WHERE name LIKE ? OR id LIKE ? ORDER BY id ASC','ss', $searchNome, $searchId )->get_result();
     }
 
 ?>

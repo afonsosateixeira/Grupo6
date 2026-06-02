@@ -42,6 +42,12 @@
                 if (isset($mapa[$st])) {
                     prepareQuery($conn, "UPDATE adoption_processes SET status=? WHERE id=?", 'si', $st, $id);
                     prepareQuery($conn, "UPDATE animals SET status=? WHERE id=?", 'si', $mapa[$st], $animal_id);
+
+                    if($st === 'Pendente'){
+                        prepareQuery($conn, 'UPDATE adoption_processes SET end_date=NULL WHERE id= ?', 'i', $id);
+                    }else{
+                        prepareQuery($conn, 'UPDATE adoption_processes SET end_date=NOW() WHERE id= ?', 'i', $id);
+                    }
                 }
                 redirect("../adoptionProcess?status=status_alterado");
             } else {
@@ -53,4 +59,13 @@
         }
     }
     redirect("../adoptionProcess.php");
+    /* todos os processos que se tornarem rejitados ou aprovados, passado 5 dias vão desaparecer da lista de processos, só que os processos rejeitados passado os 5 dias vão ser mesmo deletados da BD e os aprovados vão ser "ocultados" da lista mas vão continar na BD para pormos na tabela de animais adotados o processo dele para ser adotado.
+
+    1-se o status for rejeitado e esitver á mais de 5 dias eliminar o processo da BD
+    2-se o status for aprovado e estiver á mais de 5 dias ocultar o processo da lista de processos mas não eliminar da BD
+    */
+    
 ?>
+
+
+

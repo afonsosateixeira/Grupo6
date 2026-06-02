@@ -10,7 +10,7 @@
     color: #888888;
     position: absolute;
     left: 16px;
-    top: 38%;
+    top: 50%;
     transform: translateY(-50%);
     width: 6px;
 }
@@ -19,7 +19,7 @@
     color: #888888;
     position: absolute;
     right: 25px;
-    top: 39%;
+    top: 49%;
     transform: translateY(-50%);
     width: 6px;
 }
