@@ -71,7 +71,6 @@ create table veterinarians (
     name varchar(150) not null,
     photo varchar(255),
     license_number varchar(50) not null,
-    specialty varchar(100),
     phone varchar(20) not null,
     constraint pk_veterinarians primary key (id)
 ) engine=innodb;
@@ -79,13 +78,14 @@ create table veterinarians (
 drop table if exists appointments;
 create table appointments (
     id int auto_increment,
-    animal_id int not null,
-    vet_id int not null,
+    animal enum('cão', 'gato', 'outro') not null,
+    name_animal VARCHAR(255) not null,
+    age_animal int not null,
+    breed_animal VARCHAR(255) not null,
+    vet_id int,
     appointment_date datetime not null,
-    reason varchar(255) not null,
     status enum('agendada', 'concluida', 'cancelada') not null,
     constraint pk_appointments primary key (id),
-    constraint fk_appointments_animals foreign key (animal_id) references animals(id),
     constraint fk_appointments_vets foreign key (vet_id) references veterinarians(id)
 ) engine=innodb;
 
@@ -226,28 +226,29 @@ insert into adoption_processes (user_id, animal_id, status, notes) values
 (6, 9, 'pendente', 'primeiro animal'),
 (7, 10, 'pendente', 'interessado em tartarugas');
 
-insert into veterinarians (name, photo, license_number, specialty, phone) values 
-('dr. silva', 'vet1.jpg', 'vet001', 'cirurgia', '220000001'),
-('dra. ana', 'vet2.jpg', 'vet002', 'clínica geral', '220000002'),
-('dr. mendes', 'vet3.jpg', 'vet003', 'exóticos', '220000003'),
-('dra. beatriz', 'vet4.jpg', 'vet004', 'dermatologia', '220000004'),
-('dr. carlos', 'vet5.jpg', 'vet005', 'ortopedia', '220000005'),
-('dra. diana', 'vet6.jpg', 'vet006', 'oftalmologia', '220000006'),
-('dr. eusebio', 'vet7.jpg', 'vet007', 'cardiologia', '220000007'),
-('dra. fernanda', 'vet8.jpg', 'vet008', 'comportamento', '220000008'),
-('dr. gabriel', 'vet9.jpg', 'vet009', 'clínica geral', '220000009'),
-('dra. helena', 'vet10.jpg', 'vet010', 'neurologia', '220000010');
-insert into appointments (animal_id, vet_id, appointment_date, reason, status) values 
-(1, 1, '2026-04-10 10:00', 'check-up', 'concluida'),
-(2, 2, '2026-04-11 11:30', 'vacinação', 'concluida'),
-(3, 1, '2026-04-12 09:00', 'ferimento', 'cancelada'),
-(4, 3, '2026-04-13 15:00', 'desparasitação', 'agendada'),
-(5, 4, '2026-04-14 16:00', 'alergia', 'agendada'),
-(6, 2, '2026-07-15 10:30', 'revisão', 'agendada'),
-(7, 1, '2026-05-16 14:00', 'esterilização', 'agendada'),
-(8, 3, '2026-09-17 09:30', 'unhas', 'agendada'),
-(9, 5, '2026-06-18 11:00', 'coxeio', 'agendada'),
-(10, 6, '2026-05-19 12:00', 'olhos', 'agendada');
+insert into veterinarians (name, photo, phone) values 
+('dr. silva', 'vet1.jpg', '220000001'),
+('dra. ana', 'vet2.jpg', '220000002'),
+('dr. mendes', 'vet3.jpg', '220000003'),
+('dra. beatriz', 'vet4.jpg','220000004'),
+('dr. carlos', 'vet5.jpg', '220000005'),
+('dra. diana', 'vet6.jpg', '220000006'),
+('dr. eusebio', 'vet7.jpg', '220000007'),
+('dra. fernanda', 'vet8.jpg', '220000008'),
+('dr. gabriel', 'vet9.jpg', '220000009'),
+('dra. helena', 'vet10.jpg', '220000010');
+
+insert into appointments (name_animal, age_animal, breed_animal, vet_id, appointment_date, status) values 
+('Lucky', 12, 'yorkshire', 1, '2026-04-10 10:00', 'concluida'),
+('Dinky', 11, 'yorkshire', 2, '2026-04-11 11:30', 'concluida'),
+('Fox', 12, 'Pastor Alemão', 1, '2026-04-12 09:00', 'agendada'),
+('Max', 4, 'Golden Retriever', 3, '2026-04-13 15:00', 'cancelada'),
+('Bob', 6, 'Labrador Retriever', 4, '2026-04-14 16:00', 'agendada'),
+('Safira', 10, 'Husky', 2, '2026-07-15 10:30', 'agendada'),
+('Luna', 5, 'Beagle', 1, '2026-05-16 14:00', 'agendada'),
+('Rocky', 8, 'Rottweiler', 3, '2026-09-17 09:30', 'agendada'),
+('Simba', 5, 'Border Collie', 5, '2026-06-18 11:00', 'agendada'),
+('Mia', 11, 'São Bernardo', 6, '2026-05-19 12:00', 'agendada');
 
 insert into medical_history (appointment_id, diagnosis, weight) values 
 (1, 'saudável', 30.5), (2, 'vacinas em dia', 4.2),
@@ -370,31 +371,29 @@ order by waiting_days desc;
 
 drop view if exists vw_vet_workload_analysis;
 create view vw_vet_workload_analysis as
-select v.name, v.specialty, v.phone,
+select v.name, v.phone,
        count(app.id) as total_appointments,
        sum(case when app.status = 'agendada' then 1 else 0 end) as upcoming_appointments
 from veterinarians v
 left join appointments app on v.id = app.vet_id
-group by v.id, v.name, v.specialty, v.phone;
+group by v.id, v.name, v.phone;
 
 drop view if exists vw_upcoming_appointments_agenda;
 create view vw_upcoming_appointments_agenda as
-select app.appointment_date, v.name as vet_name, a.name as animal_name, a.status as animal_status, app.reason
-from appointments app
-join veterinarians v on app.vet_id = v.id
-join animals a on app.animal_id = a.id
-where app.status = 'agendada' and app.appointment_date >= current_date
-order by app.appointment_date asc;
+select a.appointment_date, v.name as vet_name, a.name_animal as animal_name, a.status as animal_status
+from appointments a
+join veterinarians v on a.vet_id = v.id
+where a.status = 'agendada' and a.appointment_date >= current_date
+order by a.appointment_date asc;
 
 drop view if exists vw_animal_health_records;
 create view vw_animal_health_records as
-select a.name as animal_name, app.appointment_date, v.name as vet_name,
+select app.name_animal as animal_name, app.appointment_date, v.name as vet_name,
        mh.diagnosis, mh.weight, mh.medications, mh.treatment
 from medical_history mh
 join appointments app on mh.appointment_id = app.id
-join animals a on app.animal_id = a.id
 join veterinarians v on app.vet_id = v.id
-order by a.name asc, app.appointment_date desc;
+order by app.name_animal asc, app.appointment_date desc;
 
 drop view if exists vw_events_timeline;
 create view vw_events_timeline as
