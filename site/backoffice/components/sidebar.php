@@ -80,6 +80,7 @@
             <li>
             <hr class="dropdown-divider">
             </li> -->
+            <li><a class="dropdown-item text-white" href="<?= $basePath ?>/../">Voltar</a></li>
             <li><a class="dropdown-item text-white" href="<?= $basePath ?>/../logout">Sair</a></li>
         </ul>
     </div>

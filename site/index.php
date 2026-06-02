@@ -28,8 +28,9 @@
 	</head>
 	<body>
 		<?php
-			# Vai buscar o nosso header/navbar
-			require_once 'components/header.php';
+			# Vai buscar o nosso header/navbar excepto para login e registo
+			if($route != 'login' && $route != 'regist')
+				require_once 'components/header.php';
 		?>
 		<main>
 			<?php
@@ -38,8 +39,9 @@
 			?>
 		</main>
 	<?php
-		# Vai buscar o nosso footer
-		require_once 'components/footer.php';
+		# Vai buscar o nosso footer excepto para login e registo
+		if($route != 'login' && $route != 'regist')
+			require_once 'components/footer.php';
 	?>
 	</body>
 </html>
