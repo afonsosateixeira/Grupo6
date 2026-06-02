@@ -13,6 +13,10 @@
             $msg= 'Registo eliminado com sucesso';
             $corMsg= 'alert-danger';
         }
+        if($status == 'erro_validacao') {
+            $msg = 'Dados inválidos no formulário. Preencha todos os campos corretamente.';
+            $corMsg = 'alert-danger';
+        }
         if($status == 'erro_imagem') {
             $msg = 'Erro ao carregar a imagem. Verifique o formato e o tamanho.';
             $corMsg = 'alert-warning';
