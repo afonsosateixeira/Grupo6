@@ -3,8 +3,6 @@
         $metaTitle = 'Listagem Voluntários';
         $metaDescription = 'Listar Voluntários';
     else:
-        $responseError = null;
-        $responseSuccess = null;
         $volunteerEdit = null;
         $editMode = false;
 
@@ -20,59 +18,6 @@
             }
         }
 
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-            if (isset($_POST['action']) && $_POST['action'] === 'add_volunteer') {
-                $email = strtolower(trim($_POST['email']));
-                $localidade = trim($_POST['localidade'] ?? '');
-                $day_week = trim($_POST['day_week']);
-                $start_time = trim($_POST['start_time']);
-                $end_time = trim($_POST['end_time']);
-
-                $stmt = $conn->prepare('SELECT id FROM users WHERE LOWER(email) = LOWER(?)');
-                $stmt->bind_param('s', $email);
-                $stmt->execute();
-                $user_result = $stmt->get_result();
-                $stmt->close();
-
-                if ($user_result && $user_result->num_rows > 0) {
-                    $user = $user_result->fetch_assoc();
-                    $user_id = $user['id'];
-                    if ($localidade !== '') {
-                        $stmt_local = $conn->prepare('UPDATE users SET local = ? WHERE id = ?');
-                        $stmt_local->bind_param('si', $localidade, $user_id);
-                        $stmt_local->execute();
-                        $stmt_local->close();
-                    }
-                    $stmt = $conn->prepare('SELECT id FROM volunteer_profiles WHERE user_id = ?');
-                    $stmt->bind_param('i', $user_id);
-                    $stmt->execute();
-                    $vol_check = $stmt->get_result();
-                    $stmt->close();
-
-                    if ($vol_check && $vol_check->num_rows > 0) {
-                        $volunteer = $vol_check->fetch_assoc();
-                        $volunteer_id = $volunteer['id'];
-                    } else {
-                        $stmt = $conn->prepare('INSERT INTO volunteer_profiles(user_id) VALUES(?)');
-                        $stmt->bind_param('i', $user_id);
-                        $stmt->execute();
-                        $volunteer_id = $stmt->insert_id;
-                        $stmt->close();
-                    }
-
-                    $stmt = $conn->prepare('INSERT INTO volunteer_shifts(volunteer_id, day_week, start_time, end_time) VALUES(?, ?, ?, ?)');
-                    $stmt->bind_param('isss', $volunteer_id, $day_week, $start_time, $end_time);
-                    if ($stmt->execute()) {
-                        $responseSuccess = '<div class="alert alert-success mt-3">Voluntário adicionado com sucesso!</div>';
-                    } else {
-                        $responseError = '<div class="alert alert-danger mt-3">Erro ao adicionar turno!</div>';
-                    }
-                    $stmt->close();
-                } else {
-                    $responseError = '<div class="alert alert-danger mt-3">Email não encontrado. Utilize um email existente.</div>';
-                }
-            }
-        }
 
         if (isset($_GET['action']) && isset($_GET['id'])) {
             $id_turno = intval($_GET['id']);
@@ -95,7 +40,7 @@
                 $stmt_delete->close();
 
                 $url_limpa = strtok($_SERVER['REQUEST_URI'], '?');
-                echo '<meta http-equiv="refresh" content="0;url=' . $url_limpa . '">';
+                echo '<meta http-equiv="refresh" content="0;url=' . $url_limpa . '?status=apagado">';
                 exit();
             }
 
@@ -106,7 +51,7 @@
                 $stmt_status->close();
 
                 $url_limpa = strtok($_SERVER['REQUEST_URI'], '?');
-                echo '<meta http-equiv="refresh" content="0;url=' . $url_limpa . '">';
+                echo '<meta http-equiv="refresh" content="0;url=' . $url_limpa . '?status=status_alterado">';
                 exit();
             }
         }
@@ -119,8 +64,6 @@
         <div class="d-flex justify-content-end gap-2 mb-3">
             <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#formModalVoluntario">+ Criar</button>
         </div>
-
-        <?= isset($responseSuccess) ? $responseSuccess : '' ?>
 
         <?php include 'components/modal_voluntario.php'; ?>
 

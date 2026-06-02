@@ -12,7 +12,7 @@
                 </h5>
             </div>
 
-            <form method="POST" id="volunteerForm" action="<?= $modalMode ? 'components/action_voluntario.php' : '' ?>">
+            <form method="POST" id="volunteerForm" action="components/action_voluntario.php">
                 <div class="modal-body">
                     <input type="hidden" name="action" value="<?= $modalMode ? 'edit_volunteer' : 'add_volunteer' ?>">
                     <?php if ($modalMode): ?>
@@ -91,7 +91,6 @@
                         <?= $modalMode ? 'Guardar Alterações' : 'Adicionar Voluntário' ?>
                     </button>
                 </div>
-                <?= isset($responseError) ? $responseError : '' ?>
             </form>
         </div>
     </div>
