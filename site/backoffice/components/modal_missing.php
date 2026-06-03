@@ -57,7 +57,7 @@
 
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="formLocation" class="form-label fw-bold">Visto em</label>
+                                <label for="formLocation" class="form-label fw-bold">Perdido em</label>
                                 <input id="formLocation" type="text" name="local" class="form-control" placeholder="Ex: Lisboa"
                                     value="<?= $edit ? $edit['location'] : ''; ?>" required maxlength="255">
                             </div>

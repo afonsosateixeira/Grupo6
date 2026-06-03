@@ -40,7 +40,7 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label fw-bold">Nome do Evento</label>
-                                        <input type="text" name="name" class="form-control" value="<?= $eventEdit ? htmlspecialchars($eventEdit['name']) : ''; ?>" required minlength="3" maxlength="100" pattern=".*\\S.*">
+                                        <input type="text" name="name" class="form-control" value="<?= $eventEdit ? htmlspecialchars($eventEdit['name']) : ''; ?>" required minlength="3" maxlength="100" pattern=".*\S.*">
                                         <div class="invalid-feedback">Introduza um nome valido (3 a 100 caracteres).</div>
                                     </div>
 
@@ -58,7 +58,7 @@
 
                                     <div class="mb-3">
                                         <label class="form-label fw-bold">Local</label>
-                                        <input type="text" name="location" class="form-control" value="<?= $eventEdit ? htmlspecialchars($eventEdit['location']) : ''; ?>" required minlength="2" maxlength="150" pattern=".*\\S.*">
+                                        <input type="text" name="location" class="form-control" value="<?= $eventEdit ? htmlspecialchars($eventEdit['location']) : ''; ?>" required minlength="2" maxlength="150" pattern=".*\S.*">
                                         <div class="invalid-feedback">Introduza um local valido (2 a 150 caracteres).</div>
                                     </div>
                                 </div>

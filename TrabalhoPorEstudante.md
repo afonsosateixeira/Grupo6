@@ -1,11 +1,14 @@
 ## 2025178491_AfonsoTeixeira:
-- accessibility.php
-- adoptionGuide.php
-- 	adoptionGuide.css
-- animalCatalog.php
-- 	animalCatalog.css
-- animalDetails.php
-- 	animalDetails.css
+### Root
+```
+├──accessibility.php
+├──adoptionGuide.php
+│    └──adoptionGuide.css
+├──animalCatalog.php
+│    └──animalCatalog.css
+└──animalDetails.php
+    └──animalDetails.css
+```
 
 - /components/btn_adopt.php
 - /components/alerts.php
