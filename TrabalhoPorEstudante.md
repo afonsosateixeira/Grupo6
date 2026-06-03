@@ -1,33 +1,35 @@
 ## 2025178491_AfonsoTeixeira:
-### Root
 ```
+root/
 ├──accessibility.php
 ├──adoptionGuide.php
 │    └──adoptionGuide.css
 ├──animalCatalog.php
 │    └──animalCatalog.css
-└──animalDetails.php
-    └──animalDetails.css
+├──animalDetails.php
+│    └──animalDetails.css
+│
+├──components/
+│    ├──alerts.php
+│    ├──btn_adopt.php
+│    ├──helpers.php
+│    ├──pagination.php
+│    └──searchbar.php
+│        └──searchbar.php
+│
+└──backoffice/
+    ├──adoptionProcess.php
+    │    └──adoptionProcess.js
+    ├──animalList.php
+    │    ├──animalList.css
+    │    └──animalList.js
+    │
+    └──components/
+        ├──action_adoption.php
+        ├──action_animal.php
+        ├──modal_adoption.php
+        └──modal_animal.php
 ```
-
-- /components/btn_adopt.php
-- /components/alerts.php
-- /components/helpers.php
-- /components/pagination.php
-- /components/searchbar.php
-- 	searchbar.css
-
-- /backoffice/adoptionProcess.php
-- 	/backoffice/adoptionProcess.js
-- /backoffice/animalList.php
-- 	/backoffice/animalList.css
-- 	/backoffice/animalList.js
-- 	/backoffice/pt_PT.json
-
-- /backoffice/components/action_adoption.php
-- /backoffice/components/action_animal.php
-- /backoffice/components/modal_adoption.php
-- /backoffice/components/modal_animal.php
 
 ## 2025182402_DiogoAzevedo:
 - dia_voluntario.php
