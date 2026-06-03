@@ -2,21 +2,30 @@
     background-color: #505050;
 }
 
-.btn-custom {
-    background-color: #08284B;
-    color: white;
+.btn-custom-con, .btn-custom-trans, .btn-custom-mbway {
+    background-color: #08284B !important;
+    color: white !important;
+    border-color: #08284B !important;
+    opacity: 1 !important;
 }
 
-.btn-group-custom {
-    background-color: #FFA500;
-    color: black;
+.btn-custom-con:hover, .btn-custom-con:focus, .btn-custom-con:active,
+.btn-custom-mbway:hover, .btn-custom-mbway:focus, .btn-custom-mbway:active,
+.btn-custom-trans:hover, .btn-custom-trans:focus, .btn-custom-trans:active {
+    background-color: #FFA500 !important;
+    border-color: #FFA500 !important;
+    color: black !important;
+    opacity: 1 !important;
 }
 
-.btn-custom:hover, 
-.btn-custom:focus, 
-.btn-custom:active {
-    background-color: #FFA500
-  }
+.btn-check:checked + .btn-custom-mbway,
+.btn-check:checked + .btn-custom-trans {
+    background-color: #FFA500 !important;
+    border-color: #FFA500 !important;
+    color: black !important;
+    opacity: 1 !important;
+    
+}
 
 .card-custom {
     background-color: #FFA500;

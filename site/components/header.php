@@ -36,7 +36,7 @@
               Comunidade e Eventos
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="<?= $basePath ?>/events"">Calendário de Eventos</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/events">Calendário de Eventos</a></li>
               <li><a class="dropdown-item" href="#">Eventos Passados</a></li>
               <li>
                 <hr class="dropdown-divider" />
@@ -74,8 +74,36 @@
             </ul>
           </li>
         </ul>
-        <a href="<?= $basePath ?>/regist"><button class="btn-login" type="button">Registar</button></a>
-        <a href="<?= $basePath ?>/login"><button class="btn-login btn-regist" type="button">Entrar</button></a>
+        <?php
+          if(empty($_SESSION['auth'])):
+        ?>
+            <div>
+              <a href="<?= $basePath ?>/regist"><button class="btn-login" type="button">Registar</button></a>
+              <a href="<?= $basePath ?>/login"><button class="btn-login btn-regist" type="button">Entrar</button></a>
+            </div>
+        <?php
+          else:
+        ?>
+            <div class="d-flex align-items-center">
+              <p class="mb-0">Bem vinda/o, <span class="fw-bold"><?= $_SESSION['user'] ?></span></p>
+              <?php
+                $stmt = $conn->prepare('SELECT email FROM users WHERE email = ? AND role = "admin"');
+                $stmt->bind_param('s', $_SESSION['email']);
+                $stmt->execute();
+                $res = $stmt->get_result();
+
+                if($row = $res->fetch_assoc()){
+                  ?>
+                  <a href="<?= $basePath ?>/backoffice"><button class="btn-login" type="button">Dashboard</button></a>
+                  <?php
+                }
+                $stmt->close();
+              ?>
+              <a href="<?= $basePath ?>/logout"><button class="btn-login btn-logout" type="button">Sair</button></a>
+            </div>
+        <?php
+          endif;
+        ?>
       </div>
     </div>
   </nav>

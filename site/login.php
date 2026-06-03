@@ -7,7 +7,7 @@
 
 			# Verifica se falta algum campo ser preenchido mandando um aviso se faltar, caso todos estiverem preenchidos verifica se existe algum resultado de um utilizador com o email inserido
 			if(!empty($email) && !empty($pass)){
-				$stmt = $conn->prepare('SELECT full_name, email, password FROM users WHERE email = ?');
+				$stmt = $conn->prepare('SELECT id, full_name, email, password FROM users WHERE email = ?');
 				$stmt->bind_param('s', $email);
 				$stmt->execute();
 				$res = $stmt->get_result();
@@ -17,6 +17,7 @@
 					if($row['password'] === $pass){
 						$_SESSION['auth'] = true;
 						$_SESSION['email'] = $row['email'];
+						$_SESSION['id_user'] = $row['id'];
 
 						# Guarda o nome com apenas o primeiro e último nomes, se este existir, ou apenas o primeiro nome
 						$name = preg_split('/\s+/', htmlspecialchars(trim($row['full_name'])));
@@ -24,7 +25,7 @@
 						if(count($name) === 1)
 							$name = $name[0];
 						else{
-							$name[1] = mb_convert_case(end($name), MB_CASE_UPPER, 'UTF-8');
+							$name[1] = mb_convert_case(end($name), MB_CASE_TITLE, 'UTF-8');
 							$name = $name[0].' '.$name[1];
 						}
 
@@ -52,20 +53,27 @@
 		$metaDescription = 'Acesso à conta';
 	else:
 ?>
-		<section class="container my-5" style="max-width: 520px;">
-			<h1 class="mb-4">Entrar</h1>
-			<form method="POST" action="<?= (!empty($_GET['redirect'])) ? '?redirect='.$_GET['redirect'] : '' ?>" class="border rounded-3 p-4 bg-light">
-				<div class="mb-3">
-					<label class="form-label" for="email">Email</label>
-					<input type="email" name="email" id="email" class="form-control" placeholder="email@exemplo.com">
+		<section class="container d-flex align-items-center justify-content-center vh-100 vw-100">
+			<div>
+				<div class="mb-3 ms-3 me-2">
+					<a href="<?= $basePath ?>/" class="d-flex justify-content-end align-items-center">
+					    <span class="btn btn-primary">Voltar</span>
+					</a>
 				</div>
-				<div class="mb-3">
-					<label class="form-label" for="pass">Palavra-passe</label>
-					<input type="password" name="pass" id="pass" class="form-control" placeholder="********">
-				</div>
-				<button type="submit" class="btn btn-primary w-100">Entrar</button>
-				<?= $response ?>
-			</form>
+				<h1 class="mb-4"><span class="fw-semibold">Entrar</span> / <a href="<?= $basePath ?>/regist" class="">Registar</a></h1>
+				<form method="POST" action="<?= (!empty($_GET['redirect'])) ? '?redirect='.$_GET['redirect'] : '' ?>" class="border rounded-3 p-4 bg-light">
+					<div class="mb-3">
+						<label class="form-label" for="email">Email</label>
+						<input type="email" name="email" id="email" class="form-control" placeholder="email@exemplo.com">
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="pass">Palavra-passe</label>
+						<input type="password" name="pass" id="pass" class="form-control" placeholder="********">
+					</div>
+					<button type="submit" class="btn btn-primary w-100">Entrar</button>
+					<?= $response ?>
+				</form>
+			</div>
 		</section>
 <?php
     endif;

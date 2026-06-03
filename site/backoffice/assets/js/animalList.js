@@ -6,3 +6,13 @@ let table = new DataTable('#animalTable', {
     lengthMenu: [5, 10, 25, 50],   
     columns: [null,{ orderable: false,width: '100px' }, null, null, null, null,{ width: '600px' }, null, {orderable: false}] 
 });
+
+const urlParams = new URLSearchParams(window.location.search);
+    
+    if (urlParams.has('add') || urlParams.has('editar')) {
+        let modalElement = document.getElementById('formModalanimal');
+        if (modalElement) {
+            let meuModal = new bootstrap.Modal(modalElement);
+            meuModal.show();
+        }
+    }

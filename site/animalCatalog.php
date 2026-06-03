@@ -16,10 +16,7 @@
         $registros= $conn->query("SELECT COUNT(*) as ult FROM animals WHERE status='Disponível' OR status='Em processo'")->fetch_assoc()['ult'];
         $paginas= ceil($registros / $limite);
 
-        $stmt = $conn->prepare("SELECT * FROM animals WHERE status='Disponível' OR status='Em processo' ORDER BY id ASC LIMIT ? OFFSET ?");
-        $stmt->bind_param("ii", $limite, $inicio);
-        $stmt->execute();
-        $res = $stmt->get_result();
+        $group = prepareQuery($conn, "SELECT * FROM animals WHERE status='Disponível' OR status='Em processo' ORDER BY id ASC LIMIT ? OFFSET ?", 'ii', $limite, $inicio)->get_result();
 ?>
         <div class="container">
             <h1 class="text-center fw-bold mt-4 mb-4">Animais para adoção</h1>
@@ -28,12 +25,12 @@
         <div class="container d-flex justify-content-center mb-4">
           <?php include('components/searchbar.php'); ?>
         </div>
-
+        
         <div class="container mb-4">
             <div class="row g-4 justify-content-center">
                 <?php
-                    if ($res->num_rows > 0):
-                        foreach ($res as $animal):
+                    if ($group->num_rows > 0):
+                        foreach ($group as $animal):
                 ?>
                             <div class="col-12 col-md-6 col-lg-3 d-flex justify-content-center">
                                 <a href="animalDetails?id=<?= $animal['id'] ?>" class="card-link ">
@@ -47,7 +44,6 @@
                                         </div>
                                         <div class="card-info">
                                             <h3 class="fw-semibold"><?= htmlspecialchars($animal['name']) ?></h3>
-                                            <p class="fw-semibold"><?= $animal['id'] ?></p>
                                         </div>
                                     </div>
                                 </a>

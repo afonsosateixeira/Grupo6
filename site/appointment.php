@@ -8,6 +8,22 @@ else:
 	$stmt = $conn->prepare($sql);
 	$stmt->execute();
 	$res = $stmt->get_result();
+	
+	if(!empty($_POST['animal'])){
+		$animal = $_POST['animal'];
+		$name_animal = $_POST['name_animal'];
+		$age_animal = $_POST['age_animal'];
+		$breed_animal = $_POST['breed_animal'];
+		$date= $_POST['data_consulta'];
+		$time = $_POST['horary'];	
+
+		$appointment_date= $date. ' ' . $time . ':00';
+
+		$insert = "INSERT INTO appointments (animal, name_animal, age_animal, breed_animal, appointment_date) VALUES ('$animal', '$name_animal', '$age_animal', '$breed_animal', '$appointment_date')";
+		if ($conn->query($insert) === FALSE) {
+			echo "Error: " . $insert . "<br>" . $conn->error;
+		}
+	}
 ?>
 
 	<section class="ban">
@@ -105,7 +121,7 @@ else:
 						</div>
 						<div class="rounded-bottom-4 p-4">
 							<div class="row">
-								<div class="col-6"><input type="date" name="data_consulta" class="form-control"></div>
+								<div class="col-6"><p>Segunda a Sexta</p><input type="date" name="data_consulta" id="data-util" class="form-control"></div>
 								<div class="col-6">
 									<p>Horas disponivel</p>
 									<div>

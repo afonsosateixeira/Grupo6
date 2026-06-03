@@ -14,12 +14,8 @@
             $eventEdit = $res ? $res->fetch_assoc() : null;
         }
 ?>
-    <link rel="stylesheet" href="assets/css/eventList.css">
-
-        <h1 class="fw-bold fs-2">Gestao de Eventos</h1>
-        <?php if (isset($_GET['error']) && $_GET['error'] === 'validacao_evento'): ?>
-            <div class="alert alert-danger">Dados invalidos. Verifique o formulario e tente novamente.</div>
-        <?php endif; ?>
+    <section class="ms-2">
+        <h1 class="fw-bold custom-blue mt-2 mb-4">Gestão de Eventos</h1>
         <div class="d-flex justify-content-end gap-2 mb-3">
             <a href="eventsList?add" class="btn btn-success">+ Criar</a>
         </div>
@@ -125,7 +121,7 @@
             </div>
         </div>
 
-        <table class="table table-striped align-middle" id="eventTable">
+        <table class="table table-striped table-hover" id="eventTable">
             <thead class="table-light">
                 <tr>
                     <th>ID</th>
@@ -137,7 +133,7 @@
                     <th>Estado</th>
                     <th>Capacidade</th>
                     <th>Organizador</th>
-                    <th>Acoes</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -160,6 +156,7 @@
                 <?php endforeach; ?>
             </tbody>
         </table>
+    </section>
 
         <script>
             document.addEventListener('DOMContentLoaded', function () {

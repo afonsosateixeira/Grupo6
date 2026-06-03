@@ -3,10 +3,17 @@
   height: 300px;
 }
 
-.marker-blue li::marker {
-  color: var(--primary-light);
+div.card img{
+  width: 125px;
+  height: 125px;
 }
 
-h1 {
+h1{
   font-size: 60px;
+}
+
+@media(max-width: 600px){
+  h1{
+    font-size: 36px;
+  }
 }

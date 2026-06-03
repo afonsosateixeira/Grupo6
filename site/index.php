@@ -2,6 +2,11 @@
 	# Inicia a sessão e faz ligação à base de dados, este documento também chama o config.php que inicia variáveis gerais como as que identificam as páginas que existem no site
 	require_once 'db.php';
 
+	# Chama funções
+	$isFrontoffice = true;
+	require_once("components/alerts.php");
+	require_once("components/helpers.php");
+
 	# Vai buscar as variáveis que identificam a página atual, faz logout, faz redirect se necessário(por exemplo um formulário precisa de login, fazem login e automáticamente retorna à página), inicia as variáveis backOffice(identifica se a página é de Back Office) e response (guarda mensagens como por exemplo erros) e verifica se o utilizador está autenticado e se têm permissões antes de poder aceder a páginas restritas
 	require_once 'components/routing.php';
 
@@ -23,8 +28,9 @@
 	</head>
 	<body>
 		<?php
-			# Vai buscar o nosso header/navbar
-			require_once 'components/header.php';
+			# Vai buscar o nosso header/navbar excepto para login e registo
+			if($route != 'login' && $route != 'regist')
+				require_once 'components/header.php';
 		?>
 		<main>
 			<?php
@@ -33,8 +39,9 @@
 			?>
 		</main>
 	<?php
-		# Vai buscar o nosso footer
-		require_once 'components/footer.php';
+		# Vai buscar o nosso footer excepto para login e registo
+		if($route != 'login' && $route != 'regist')
+			require_once 'components/footer.php';
 	?>
 	</body>
 </html>

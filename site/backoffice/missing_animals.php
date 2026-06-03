@@ -3,14 +3,6 @@
 		$metaTitle = 'Lista de Útilizadores';
 		$metaDescription = 'Lista de Útilizadores da Poppy and Max';
 
-        $perPage = 10;
-        $idMin = $_GET['id_min'] ?? 1;
-        $idMax = $idMin + ($perPage - 1);
-        $currentPage = $idMax / $perPage;
-
-        $order = $_GET['order'] ?? 'id';
-        $direction = $_GET['direction'] ?? 'ASC';
-
         if(!empty($_GET['delete']) && !empty($_GET['id'])){
             $id = $_GET['id'];
 
@@ -18,106 +10,86 @@
             $stmt->bind_param('i', $id);
             $stmt->execute();
 
-            if($stmt->affected_rows > 0)
-                header('Location: ?id_min='.$idMin);
-            else
-                header('Location: ?response=1&id_min='.$idMin);
-
             $stmt->close();
             $conn->close();
+
+            header('Location: ./missing_animals');
             exit();
         }
 
-        $resPages = $conn->query("SELECT CEIL(COUNT(id) / $perPage) as pages FROM vw_lost_pets_radar");
-        $row = $resPages->fetch_assoc();
-        $maxPage = $row['pages'];
-        $resPages->free();
+        $query = $conn->query("SELECT * FROM vw_lost_pets_radar");
 
-        $stmt = $conn->prepare("SELECT * FROM vw_lost_pets_radar ORDER BY $order $direction LIMIT ? OFFSET ?");
-        $stmt->bind_param('ii', $idMin, $idMax);
-        $stmt->execute();
-        $res = $stmt->get_result();
-
-        $stmt->close();
-        $conn->close();
+        $edit = null;
+        if(isset($_GET['edit'])){
+            $id = $_GET['edit'];
+            $stmt = $conn->prepare("SELECT * FROM vw_lost_pets_radar");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $stmt->get_result();
+            $edit = $stmt->fetch_assoc();
+            $stmt->close();
+        };
 	else:
 ?>
 		<section class="ms-2">
             <h1 class="fw-bold custom-blue mt-2 mb-4">Gestão de Animais Perdidos</h1>
-			<table class="table table-striped table-hover text-center align-middle">
+
+            <div class="d-flex justify-content-end gap-2 mb-3">
+                <a href="?add" class="btn btn-success">+ Criar</a>
+            </div>
+
+            <?php
+                require 'components/modal_missing.php';
+            ?>
+
+			<table class="table table-striped table-hover" id="missingAnimals">
                 <thead>
                     <tr>
-                        <th>Id</th>
-                        <th>Foto do animal</th>
+                        <th>ID</th>
+                        <th>Foto</th>
                         <th>Nome do animal</th>
                         <th>Utilizador</th>
                         <th>Contacto</th>
                         <th>Desde</th>
                         <th>Onde</th>
-                        <th>Ação</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
                     <?php
-                        while($row = $res->fetch_assoc()):
+                        foreach($query as $row):
                     ?>
                             <tr>
                                 <td><?= $row['id'] ?></td>
-                                <td><?= htmlspecialchars($row['photo']) ?></td>
+                                <td><img src="../assets/img/lost/<?= !empty($row['photo']) ? htmlspecialchars($row['photo']) : 'default_lost.png' ?>" alt="Foto do <?= htmlspecialchars($row['animal']) ?>"></td>
                                 <td><?= htmlspecialchars($row['animal']) ?></td>
                                 <td><?= htmlspecialchars($row['reporter']) ?></td>
                                 <td><?= htmlspecialchars($row['contact']) ?></td>
                                 <td><?= htmlspecialchars($row['since']) ?></td>
                                 <td><?= htmlspecialchars($row['location']) ?></td>
-                                <td class="d-flex gap-2 justify-content-center">
-                                    <a href="<?= $basePath ?>/components/action_edit_lost.php?id=<?= $row['id'] ?>&edit=true" class="btn btn-primary">Editar</a>
-                                    <a href="?id=<?= $row['id'] ?>&delete=true" class="btn btn-danger" onclick="return confirm('Têm a certeza que quer eliminar este utilizador?')">Eliminar</a>
+                                <td>
+                                    <a href="?edit=<?= $row['id'] ?>"><i class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="?id=<?= $row['id'] ?>&delete=true" onclick="return confirm('Têm a certeza que quer eliminar este processo?')"><i style="color: #dc3545;" class="fa-solid fa-trash"></i></a>
                                 </td>
                             </tr>
                     <?php
-                        endwhile;
-                        $res->free();
+                        endforeach;
                     ?>
                 </tbody>
             </table>
+		</section>
+
+        <script>
+            window.onload = function(){
                 <?php
-                    if($maxPage>1){
+                    if($edit || isset($_GET['add'])){
                 ?>
-                        <div class="d-flex gap-2 justify-content-end align-items-center">
-                            <a href="?id_min=1" class="btn <?= ($currentPage == 1) ? 'btn-primary disabled' : '' ?>"><<</a>
-                            <?php
-                                if($currentPage > 2){
-                            ?>
-                                    <a href="?id_min=<?= $idMin - $perPage ?>"
-                                    class="btn">
-                                        <
-                                    </a>
-                            <?php
-                                }
-                            ?>
-
-                            <a href="?id_min=<?= $idMin ?>" class="btn btn-primary disabled"><?= $currentPage ?></a>
-
-                            <?php
-                                if($currentPage < $maxPage -1){
-                            ?>
-                                    <a href="?id_min=<?= $idMin + $perPage ?>"
-                                    class="btn">
-                                        >
-                                    </a>
-                            <?php
-                                }
-                            ?>
-
-                            <a href="?id_min=<?= $idMin + $perPage * ($maxPage - $currentPage) ?>"
-                            class="btn <?= ($currentPage == $maxPage) ? 'btn-primary disabled' : '' ?>">
-                                >>
-                            </a>
+                    var modal = new bootstrap.Modal(document.getElementById('formModal'));
+                    modal.show();
                 <?php
-                    if(!empty($response) && $response == 1) echo '</div>';
                     }
                 ?>
-            </div>
-		</section>
+            }
+        </script>
 <?php
 	endif;

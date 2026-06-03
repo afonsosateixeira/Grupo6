@@ -1,4 +1,4 @@
-<div class="modal fade" id="formModal">
+<div class="modal fade" id="formModaladopt">
     <div class="modal-dialog modal-dialog-centered modal-lg">
         <div class="modal-content">
 
@@ -16,38 +16,37 @@
                     <?php endif; ?>
 
                     <div class="row">
-                        <div class="col-md-6">
-
+                        <div class="col-12">
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Escolha o adotante:</label>
-                                <select name="specie_id" id="select-especie" class="form-select" required>
+                                <select name="user_id" id="select-user" class="form-select" required>
                                     <option value="">Selecione um adotante</option>
                                     <?php
-                                    $especie = $conn->query("SELECT id, name FROM species");
-                                    foreach ($especie as $esp) {
+                                    $user = $conn->query("SELECT id, full_name FROM users");
+                                    foreach ($user as $usr) {
                                     
-                                        $selected = ($adoptEdit && $adoptEdit['specie_id'] == $esp['id']) ? 'selected' : '';
-                                        echo "<option value='{$esp['id']}' {$selected}>{$esp['name']}</option>";
+                                        $selected = ($adoptEdit && $adoptEdit['user_id'] == $usr['id']) ? 'selected' : '';
+                                        echo "<option value='{$usr['id']}' {$selected}>{$usr['full_name']}</option>";
                                     }
                                     ?>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Escolha um animal:</label>
-                                <select name="breed_id" id="select-raca" class="form-select">
+                                <select name="animal_id" id="select-animal" class="form-select" required>
                                     <option value="">Selecione um animal</option>
                                     <?php
-                                    $raca = $conn->query("SELECT id, name FROM breeds");
-                                    foreach ($raca as $rac) {
-                                        $selected = ($adoptEdit && $adoptEdit['breed_id'] == $rac['id']) ? 'selected' : '';
-                                        echo "<option value='{$rac['id']}' {$selected}>{$rac['name']}</option>";
+                                    $animal = $conn->query("SELECT id, name FROM animals");
+                                    foreach ($animal as $ani) {
+                                        $selected = ($adoptEdit && $adoptEdit['animal_id'] == $ani['id']) ? 'selected' : '';
+                                        echo "<option value='{$ani['id']}' {$selected}>{$ani['name']}</option>";
                                     }
                                     ?>
                                 </select>
                             </div>
                             <div class="mb-3">
                                 <label class="form-label fw-bold">Notas</label>
-                                <textarea name="description" class="form-control" rows="3" maxlength="500" placeholder="Breve descrição do animal..."><?= $adoptEdit ? $adoptEdit['description'] : ''; ?></textarea>
+                                <textarea name="notes" class="form-control" rows="3" maxlength="500" placeholder="Breve descrição do animal..."><?= $adoptEdit ? htmlspecialchars($adoptEdit['notes']) : ''; ?></textarea>
                             </div>
 
                         </div>
