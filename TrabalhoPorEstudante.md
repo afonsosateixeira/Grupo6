@@ -1,4 +1,4 @@
-### 2025178491_AfonsoTeixeira:
+## 2025178491_AfonsoTeixeira:
 - accessibility.php
 - adoptionGuide.php
 - 	adoptionGuide.css
@@ -26,7 +26,7 @@
 - /backoffice/components/modal_adoption.php
 - /backoffice/components/modal_animal.php
 
-### 2025182402_DiogoAzevedo:
+## 2025182402_DiogoAzevedo:
 - dia_voluntario.php
 - 	dia_voluntario.css
 - 	dia_voluntario.js
@@ -36,7 +36,7 @@
 - backoffice/listagemvoluntarios.php
 - 	backoffice/listagemvoluntarios.js
 
-### 2025115671_FranciscoMartins:
+## 2025115671_FranciscoMartins:
 - animal_care.php
 - 	animal_care.css
 - appointment.php
@@ -53,7 +53,7 @@
 - 	backoffice/vetList.css
 - 	backoffice/vetList.js
 
-### 2025163132_GonçaloEstrelado:
+## 2025163132_GonçaloEstrelado:
 - contactos.php
 - 	contactos.css
 - events.php
@@ -63,7 +63,7 @@
 
 - /backoffice/components/action_event.php
 
-### 2025140801_HugoGiroto:
+## 2025140801_HugoGiroto:
 - donations.php
 - 	donations.css
 - privacy.php
@@ -71,7 +71,7 @@
 - backoffice/donationList.php
 - 	backoffice/donationList.js
 
-### 2016112775_rubenreis:
+## 2016112775_rubenreis:
 - cookies.php
 - 	cookies.css
 - missing_animals.php
@@ -81,7 +81,7 @@
 - 	backoffice/missing_animals.css
 - 	backoffice/missing_animals.js
 
-### Grupo:
+## Grupo:
 - 	styles.css
 - 	scripts.js
 - .htaccess

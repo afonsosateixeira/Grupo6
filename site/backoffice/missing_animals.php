@@ -22,11 +22,10 @@
         $edit = null;
         if(isset($_GET['edit'])){
             $id = $_GET['edit'];
-            $stmt = $conn->prepare("SELECT * FROM vw_lost_pets_radar");
+            $stmt = $conn->prepare("SELECT * FROM lost_animals WHERE id = ?");
             $stmt->bind_param("i", $id);
             $stmt->execute();
-            $stmt->get_result();
-            $edit = $stmt->fetch_assoc();
+            $edit = $stmt->get_result()->fetch_assoc();
             $stmt->close();
         };
 	else:

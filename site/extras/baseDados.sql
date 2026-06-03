@@ -30,7 +30,7 @@ create table breeds (
     specie_id int not null,
     name varchar(50) not null,
     constraint pk_breeds primary key (id),
-    constraint fk_breeds_species foreign key (specie_id) references species(id)
+    constraint fk_breeds_species foreign key (specie_id) references species(id) ON DELETE NO ACTION
 ) engine=innodb;
 
 drop table if exists animals;
@@ -47,8 +47,8 @@ create table animals (
     status enum('Disponível', 'Adotado', 'Em processo') not null,
     created_at timestamp default current_timestamp,
     constraint pk_animals primary key (id),
-    constraint fk_animals_breeds foreign key (breed_id) references breeds(id),
-    constraint fk_animals_species foreign key (specie_id) references species(id)
+    constraint fk_animals_breeds foreign key (breed_id) references breeds(id) ON DELETE NO ACTION,
+    constraint fk_animals_species foreign key (specie_id) references species(id) ON DELETE NO ACTION
 ) engine=innodb;
 
 drop table if exists adoption_processes;
@@ -61,8 +61,8 @@ create table adoption_processes (
     end_date timestamp null,
     notes text,
     constraint pk_adoption_processes primary key (id),
-    constraint fk_adoption_users foreign key (user_id) references users(id),
-    constraint fk_adoption_animals foreign key (animal_id) references animals(id)
+    constraint fk_adoption_users foreign key (user_id) references users(id) ON DELETE CASCADE,
+    constraint fk_adoption_animals foreign key (animal_id) references animals(id) ON DELETE CASCADE
 ) engine=innodb;
 
 drop table if exists veterinarians;
@@ -85,7 +85,7 @@ create table appointments (
     appointment_date datetime not null,
     status enum('agendada', 'concluida', 'cancelada') not null,
     constraint pk_appointments primary key (id),
-    constraint fk_appointments_vets foreign key (vet_id) references veterinarians(id)
+    constraint fk_appointments_vets foreign key (vet_id) references veterinarians(id) ON DELETE SET NULL
 ) engine=innodb;
 
 drop table if exists medical_history;
@@ -97,7 +97,7 @@ create table medical_history (
     medications text,
     treatment text,
     constraint pk_medical_history primary key (id),
-    constraint fk_medical_history_app foreign key (appointment_id) references appointments(id)
+    constraint fk_medical_history_app foreign key (appointment_id) references appointments(id) ON DELETE CASCADE
 ) engine=innodb;
 
 drop table if exists events;
@@ -113,7 +113,7 @@ create table events (
     capacity int,
     organizer_id int,
     constraint pk_events primary key (id),
-    constraint fk_events_organizer foreign key (organizer_id) references users(id)
+    constraint fk_events_organizer foreign key (organizer_id) references users(id) ON DELETE SET NULL
 ) engine=innodb;
 
 drop table if exists events_registrations;
@@ -124,8 +124,8 @@ create table events_registrations (
     registration_date timestamp default current_timestamp,
     status enum('confirmado', 'pendente') not null,
     constraint pk_events_registrations primary key (id),
-    constraint fk_events_reg_users foreign key (user_id) references users(id),
-    constraint fk_events_reg_events foreign key (event_id) references events(id)
+    constraint fk_events_reg_users foreign key (user_id) references users(id) ON DELETE CASCADE,
+    constraint fk_events_reg_events foreign key (event_id) references events(id) ON DELETE CASCADE
 ) engine=innodb;
 
 drop table if exists volunteer_profiles;
@@ -133,7 +133,7 @@ create table volunteer_profiles (
     id int auto_increment,
     user_id int not null,
     constraint pk_volunteer_profiles primary key (id),
-    constraint fk_volunteer_users foreign key (user_id) references users(id)
+    constraint fk_volunteer_users foreign key (user_id) references users(id) ON DELETE CASCADE
 ) engine=innodb;
 
 drop table if exists volunteer_shifts;
@@ -145,7 +145,7 @@ create table volunteer_shifts (
     end_time TIME NOT NULL,
     status ENUM('Aceite', 'Rejeitado', 'Pendente') NOT NULL DEFAULT 'Pendente', -- O teu ENUM com default Pendente
     CONSTRAINT pk_volunteer_shifts PRIMARY KEY (id),
-    CONSTRAINT fk_shifts_volunteer FOREIGN KEY (volunteer_id) REFERENCES volunteer_profiles(id)
+    CONSTRAINT fk_shifts_volunteer FOREIGN KEY (volunteer_id) REFERENCES volunteer_profiles(id) ON DELETE CASCADE
 ) ENGINE=INNODB;
 
 drop table if exists lost_animals;
@@ -159,7 +159,7 @@ create table lost_animals (
     photo varchar(255),
     found enum('Yes', 'No') default 'No' not null,
     constraint pk_lost_animals primary key (id),
-    constraint fk_lost_animals_users foreign key (user_id) references users(id)
+    constraint fk_lost_animals_users foreign key (user_id) references users(id) ON DELETE CASCADE
 ) engine=innodb;
 
 drop table if exists partners;

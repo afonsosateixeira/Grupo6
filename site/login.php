@@ -60,7 +60,7 @@
 					    <span class="btn btn-primary">Voltar</span>
 					</a>
 				</div>
-				<h1 class="mb-4"><span class="fw-semibold">Entrar</span> / <a href="<?= $basePath ?>/regist" class="">Registar</a></h1>
+				<h1 class="mb-4"><span class="fw-semibold">Entrar</span> / <a href="<?= $basePath ?>/regist<?= (!empty($_GET['redirect'])) ? '?redirect='.urlencode($_GET['redirect']) : '' ?>" class="">Registar</a></h1>
 				<form method="POST" action="<?= (!empty($_GET['redirect'])) ? '?redirect='.$_GET['redirect'] : '' ?>" class="border rounded-3 p-4 bg-light">
 					<div class="mb-3">
 						<label class="form-label" for="email">Email</label>

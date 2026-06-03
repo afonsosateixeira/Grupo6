@@ -24,6 +24,7 @@
 
 					$_SESSION['auth'] = true;
 					$_SESSION['email'] = $email;
+					$_SESSION['id_user'] = $conn->insert_id;
 
 					# Guarda o nome com apenas o primeiro e último nomes, se este existir, ou apenas o primeiro nome
 					$name = preg_split('/\s+/', htmlspecialchars(trim($name)));
@@ -58,15 +59,13 @@
 ?>
 		<section class="container d-flex align-items-center justify-content-center vh-100 vw-100">
 			<div>
-				<h1 class="mb-4"><span class="fw-semibold">Registar</span> / <a href="<?= $basePath ?>/login" class="">Entrar</a></h1>
+				<div class="mb-3 ms-3 me-2">
+					<a href="<?= $basePath ?>/" class="d-flex justify-content-end align-items-center">
+					    <span class="btn btn-primary">Voltar</span>
+					</a>
+				</div>
+				<h1 class="mb-4"><span class="fw-semibold">Registar</span> / <a href="<?= $basePath ?>/login<?= (!empty($_GET['redirect'])) ? '?redirect='.urlencode($_GET['redirect']) : '' ?>" class="">Entrar</a></h1>
 				<form method="POST" action="<?= (!empty($_GET['redirect'])) ? '?redirect='.$_GET['redirect'] : '' ?>" class="border rounded-3 p-4 bg-light">
-					<div class="mb-3 ms-3 me-2">
-						<a href="<?= $basePath ?>/" class="d-flex justify-content-between align-items-center">
-							<img src="<?= $basePath?>/assets/img/logo.png" alt="Logo PAM"
-					        style="max-width: 120px; max-height: 50px; transform: translateX(-13px)"/>
-						    <span class="btn btn-primary">Voltar</span>
-						</a>
-					</div>
 					<div class="mb-3">
 						<label class="form-label" for="name">Nome</label>
 						<input type="text" name="name" id="name" class="form-control" placeholder="Nome completo">

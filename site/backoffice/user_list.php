@@ -21,10 +21,29 @@
         }
 
         $query = $conn->query("SELECT * FROM users");
+
+        $edit = null;
+        if(isset($_GET['edit'])){
+            $id = $_GET['edit'];
+            $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $edit = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+        };
 	else:
 ?>
 		<section class="ms-2">
             <h1 class="fw-bold custom-blue mt-2 mb-4">Gestão de Utilizadores</h1>
+
+            <div class="d-flex justify-content-end gap-2 mb-3">
+                <a href="?add" class="btn btn-success">+ Criar</a>
+            </div>
+
+            <?php
+                require 'components/modal_users.php';
+            ?>
+
 			<table class="table table-striped table-hover" id="userList">
                 <thead>
                     <tr>
@@ -53,7 +72,7 @@
                                 <td><?= !empty($row['cp']) ? htmlspecialchars($row['cp']) : '' ?></td>
                                 <td><?= ($row['role'] == 'admin') ? 'Sim' : 'Não' ?></td>
                                 <td>
-                                    <a href="<?= $basePath ?>/components/action_edit.php?id=<?= $row['id'] ?>&edit=true"><i
+                                    <a href="?edit=<?= $row['id'] ?>"><i
                                     class="fa-solid fa-pen-to-square"></i></a>
                                     <a href="?id=<?= $row['id'] ?>&delete=true"  onclick="return confirm('Têm a certeza que quer eliminar este utilizador?')"><i style="color: #dc3545;" class="fa-solid fa-trash"></i></a>
                                 </td>
@@ -71,5 +90,18 @@
                     : ''
                 ?>
 		</section>
+
+        <script>
+            window.onload = function(){
+                <?php
+                    if($edit || isset($_GET['add'])){
+                ?>
+                    var modal = new bootstrap.Modal(document.getElementById('formModal'));
+                    modal.show();
+                <?php
+                    }
+                ?>
+            }
+        </script>
 <?php
 	endif;

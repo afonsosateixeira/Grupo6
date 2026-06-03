@@ -1,68 +1,64 @@
 <?php
     require_once '../../db.php';
-    $caminhoPasta = "../../assets/img/animals/";
+    $folder = "../../assets/img/lost/";
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        
-        $id = (int)$_POST['id_animal'];
-        $nome = trim($_POST['nome_animal'] ?? '');
-        $specieID = (int)($_POST['specie_id'] ?? 0);
-        $breed = !empty($_POST['breed_id']) ? (int)$_POST['breed_id'] : null;
-        $genero = trim($_POST['gender'] ?? '');
-        $porte = trim($_POST['size'] ?? '');
-        $data = !empty($_POST['data_nascimento']) ? $_POST['data_nascimento'] : null;
-        $descricao = trim($_POST['description'] ?? '');   
+        $actionId = $_POST['id'] ?? null;
+        $actionUserId = $_POST['user_id'] ?? null;
+        $actionName = trim($_POST['name'] ?? null);
+        $actionSeen = trim($_POST['seen'] ?? null);
+        $actionPhone = trim($_POST['phone'] ?? null);
+        $actionLocal = trim($_POST['local'] ?? null);
+        $actionFound = trim($_POST['found'] ?? 'No');
 
-        # Processo de criação do animal
         if (isset($_POST['btnCriar'])) {
-            $nomeArquivo = "";
-
-                if(!empty($_FILES['image']['name'])){
-                    $nomeArquivo = $_FILES['image']['name'];
-
-                    if (!move_uploaded_file($_FILES['image']['tmp_name'], $caminhoPasta . $nomeArquivo)) {
-                        header("Location: ../missing_animals?status=erro_imagem");
-                        exit();
-                    }
-                }
-
-                $stmt=$conn->prepare("INSERT INTO animals (name, specie_id, breed_id, gender, size, image, birth_date, description) 
-                        VALUES (?, ?, ?, ?, ?, ?, ?, ?)");
-                $stmt->bind_param("siisssss",$nome, $specieID, $breed, $genero, $porte, $nomeArquivo, $data, $descricao );
-                $stmt->execute();
-                header("Location: ../missing_animals?status=criado");
-                exit(); 
-        }
-
-        # Processo de edição do animal
-        if (isset($_POST['btnEditar'])) {            
-            $nomeArquivo = null;
+            $file = "";
 
             if (!empty($_FILES['image']['name'])) {
-                $nomeArquivo = $_FILES['image']['name'];
-                move_uploaded_file($_FILES['image']['tmp_name'], $caminhoPasta . $nomeArquivo);
+                $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                $file = uniqid('lost_', true) . '.' . $extension;
+
+                if (!move_uploaded_file($_FILES['image']['tmp_name'], $folder . $file)) {
+                    header("Location: ../missing_animals?status=erro_imagem");
+                    exit();
+                }
             }
-            
-            $stmt = $conn->prepare("UPDATE animals SET name=?, specie_id=?, breed_id=?, gender=?, size=?, image=COALESCE(?, image), birth_date=?, description=? WHERE id=?");
-            
-            $stmt->bind_param("siisssssi", $nome, $specieID, $breed, $genero, $porte, $nomeArquivo, $data, $descricao, $id);
-            $stmt->execute();
-            header("Location: ../missing_animals?status=editado");
+
+            if($actionUserId != null && $actionName != null && $actionSeen != null && $actionPhone != null && $actionLocal != null){
+                $stmt=$conn->prepare("INSERT INTO lost_animals (user_id, animal_name, last_seen_date, contact_phone, location, photo) VALUES (?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("isssss",$actionUserId, $actionName, $actionSeen, $actionPhone, $actionLocal, $file);
+                $stmt->execute();
+                header("Location: ../missing_animals?status=criado");
+            } else
+                header("Location: ../missing_animals?status=erro_validacao");
             exit();
         }
-    }
 
-    if(isset($_GET['action'])&& isset($_GET['id'])){
-        $action = $_GET['action'];
-        $id= intval($_GET['id']);
+        if (isset($_POST['btnEditar'])) {
+            $file = null;
 
-        # Processo de eliminação do animal
-        if($action === 'eliminar'){
-            $stmt= $conn->prepare("DELETE FROM animals WHERE id = ?");
-            $stmt->bind_param("i", $id);
-            $stmt->execute();
+            if (!empty($_FILES['image']['name'])) {
+                $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                $file = uniqid('lost_', true) . '.' . $extension;
 
-            header("Location: ../missing_animals?status=apagado");
+                if (!move_uploaded_file($_FILES['image']['tmp_name'], $folder . $file)) {
+                    header("Location: ../missing_animals?status=erro_imagem");
+                    exit();
+                }
+            }
+
+            if($actionId != null && $actionUserId != null && $actionName != null && $actionSeen != null && $actionPhone != null && $actionLocal != null){
+                if($file != null){
+                    $stmt = $conn->prepare("UPDATE lost_animals SET user_id=?, animal_name=?, last_seen_date=?, contact_phone=?, location=?, photo=?, found=? WHERE id=?");
+                    $stmt->bind_param("issssssi", $actionUserId, $actionName, $actionSeen, $actionPhone, $actionLocal, $file, $actionFound, $actionId);
+                } else {
+                    $stmt = $conn->prepare("UPDATE lost_animals SET user_id=?, animal_name=?, last_seen_date=?, contact_phone=?, location=?, found=? WHERE id=?");
+                    $stmt->bind_param("isssssi", $actionUserId, $actionName, $actionSeen, $actionPhone, $actionLocal, $actionFound, $actionId);
+                }
+                $stmt->execute();
+                header("Location: ../missing_animals?status=editado");
+            } else
+                header("Location: ../missing_animals?status=erro_validacao");
             exit();
         }
     }

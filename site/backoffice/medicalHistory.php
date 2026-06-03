@@ -19,9 +19,6 @@
 ?>       
     <section class="ms-2">
         <h1 class="fw-bold custom-blue mt-2 mb-4">Gestão de Histórico Médico</h1>
-        <div class="d-flex justify-content-end">
-            <a href="medicalHistory?add" class="btn btn-success">+ Criar</a>
-        </div>
         <?php include 'components/modal_medicalHistory.php'; ?>
         <table class="table table-striped table-hover" id="medicalHistoryTable">
             <thead>
