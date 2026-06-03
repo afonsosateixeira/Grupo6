@@ -4,5 +4,5 @@ let table = new DataTable("#userList", {
   },
   pageLength: 10,
   lengthMenu: [5, 10, 25, 50],
-  columns: [null, null, null, null, null, null, null, null, { orderable: false }],
+  columns: [null, null, null, null, null, null, null, null, { orderable: false }]
 });

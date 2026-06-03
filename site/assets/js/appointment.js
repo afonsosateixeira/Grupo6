@@ -34,3 +34,14 @@ document.addEventListener('DOMContentLoaded', function() {
     animalTypeInputs.forEach(input => input.addEventListener('change', updateSummary));
     timeInputs.forEach(input => input.addEventListener('change', updateSummary));
 });
+
+	const dateInput = document.getElementById('data-util');
+    dateInput.addEventListener('input', function() {
+        const dataSelecionada = new Date(this.value);
+        const diaDaSemana = dataSelecionada.getUTCDay();
+
+        if (diaDaSemana === 0 || diaDaSemana === 6) {
+            alert('Não trabalhamos nos fins de semana. Por favor, selecione uma data entre Segunda e Sexta-feira.');
+            this.value = '';
+        }
+    });

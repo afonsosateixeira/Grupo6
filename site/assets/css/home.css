@@ -15,6 +15,10 @@ h1, h2, h3, p{
     background-color: white;
 }
 
+.custom-bg-white:hover{
+    background-color: lightgrey;
+}
+
 .box-blue, .box-pink{
     border-radius: 20px;
     background-color: #F1F1F1;

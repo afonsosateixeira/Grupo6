@@ -21,22 +21,41 @@
         }
 
         $query = $conn->query("SELECT * FROM users");
+
+        $edit = null;
+        if(isset($_GET['edit'])){
+            $id = $_GET['edit'];
+            $stmt = $conn->prepare("SELECT * FROM users WHERE id = ?");
+            $stmt->bind_param("i", $id);
+            $stmt->execute();
+            $edit = $stmt->get_result()->fetch_assoc();
+            $stmt->close();
+        };
 	else:
 ?>
 		<section class="ms-2">
             <h1 class="fw-bold custom-blue mt-2 mb-4">Gestão de Utilizadores</h1>
-			<table class="table table-striped table-hover text-center align-middle" id="userList">
+
+            <div class="d-flex justify-content-end gap-2 mb-3">
+                <a href="?add" class="btn btn-success">+ Criar</a>
+            </div>
+
+            <?php
+                require 'components/modal_users.php';
+            ?>
+
+			<table class="table table-striped table-hover" id="userList">
                 <thead>
                     <tr>
-                        <th scope="col" class="text-center">Id</th>
-                        <th scope="col" class="text-center">Nome</th>
-                        <th scope="col" class="text-center">Email</th>
-                        <th scope="col" class="text-center">Telefone</th>
-                        <th scope="col" class="text-center">Cidade</th>
-                        <th scope="col" class="text-center">Rua</th>
-                        <th scope="col" class="text-center">Código Postal</th>
-                        <th scope="col" class="text-center">Administrador</th>
-                        <th scope="col" class="text-center">Ação</th>
+                        <th>ID</th>
+                        <th>Nome</th>
+                        <th>Email</th>
+                        <th>Telefone</th>
+                        <th>Cidade</th>
+                        <th>Rua</th>
+                        <th>Código Postal</th>
+                        <th>Administrador</th>
+                        <th>Ações</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -53,9 +72,11 @@
                                 <td><?= !empty($row['cp']) ? htmlspecialchars($row['cp']) : '' ?></td>
                                 <td><?= ($row['role'] == 'admin') ? 'Sim' : 'Não' ?></td>
                                 <td>
-                                    <a href="<?= $basePath ?>/components/action_edit.php?id=<?= $row['id'] ?>&edit=true" class="btn btn-primary">Editar</a>
-                                    <a href="?id=<?= $row['id'] ?>&delete=true" class="btn btn-danger" onclick="return confirm('Têm a certeza que quer eliminar este utilizador?')">Eliminar</a>
+                                    <a href="?edit=<?= $row['id'] ?>"><i
+                                    class="fa-solid fa-pen-to-square"></i></a>
+                                    <a href="?id=<?= $row['id'] ?>&delete=true"  onclick="return confirm('Têm a certeza que quer eliminar este utilizador?')"><i style="color: #dc3545;" class="fa-solid fa-trash"></i></a>
                                 </td>
+                                
                             </tr>
                     <?php
                         endforeach;
@@ -69,5 +90,18 @@
                     : ''
                 ?>
 		</section>
+
+        <script>
+            window.onload = function(){
+                <?php
+                    if($edit || isset($_GET['add'])){
+                ?>
+                    var modal = new bootstrap.Modal(document.getElementById('formModal'));
+                    modal.show();
+                <?php
+                    }
+                ?>
+            }
+        </script>
 <?php
 	endif;

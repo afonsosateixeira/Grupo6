@@ -4,5 +4,5 @@ let table= new DataTable('#donationTable', {
     },
     pageLength: 10,
     lengthMenu: [5, 10, 25, 50],
-    columns: [null, null, null, null]
+    columns: [null, null, null, null, { orderable: false }]
 });

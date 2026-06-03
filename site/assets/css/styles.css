@@ -102,6 +102,15 @@ body {
   box-shadow: 0 6px 15px rgba(73, 123, 173, 0.3);
 }
 
+.btn-logout {
+  background-color: #CC0000;
+  border-radius: 5px;
+}
+
+.btn-logout:hover {
+  background-color: #FF0000;
+}
+
 .dropdown-menu {
   border: none;
   box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);

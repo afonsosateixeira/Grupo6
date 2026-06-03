@@ -24,13 +24,18 @@
 
 					$_SESSION['auth'] = true;
 					$_SESSION['email'] = $email;
+					$_SESSION['id_user'] = $conn->insert_id;
 
 					# Guarda o nome com apenas o primeiro e último nomes, se este existir, ou apenas o primeiro nome
-					$name = preg_split('/\s+/', $name);
-					if(count($name) == 1)
+					$name = preg_split('/\s+/', htmlspecialchars(trim($name)));
+					$name[0] = mb_convert_case($name[0], MB_CASE_TITLE, 'UTF-8');
+					if(count($name) === 1)
 						$name = $name[0];
-					else
-						$name = $name[0].' '.$name[count($name) -1];
+					else{
+						$name[1] = mb_convert_case(end($name), MB_CASE_TITLE, 'UTF-8');
+						$name = $name[0].' '.$name[1];
+					}
+
 					$_SESSION['user'] = $name;
 				}
 			} else
@@ -52,29 +57,36 @@
 		$metaDescription = 'Crie a sua conta';
 	else:
 ?>
-		<section class="container my-5" style="max-width: 620px;">
-			<h1 class="mb-4">Registar</h1>
-			<form method="POST" action="<?= (!empty($_GET['redirect'])) ? '?redirect='.$_GET['redirect'] : '' ?>" class="border rounded-3 p-4 bg-light">
-				<div class="mb-3">
-					<label class="form-label" for="name">Nome</label>
-					<input type="text" name="name" id="name" class="form-control" placeholder="Nome completo">
+		<section class="container d-flex align-items-center justify-content-center vh-100 vw-100">
+			<div>
+				<div class="mb-3 ms-3 me-2">
+					<a href="<?= $basePath ?>/" class="d-flex justify-content-end align-items-center">
+					    <span class="btn btn-primary">Voltar</span>
+					</a>
 				</div>
-				<div class="mb-3">
-					<label class="form-label" for="email">Email</label>
-					<input type="email" name="email" id="email" class="form-control" placeholder="email@exemplo.com">
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="pass">Palavra-passe</label>
-					<input type="password" name="pass" id="pass" class="form-control" placeholder="********">
-				</div>
-				<div class="mb-3">
-					<label class="form-label" for="phone">Telemóvel</label>
-					<input type="text" name="number" id="phone" class="form-control" placeholder="+351 999999999">
-				</div>
-				<!-- Maybe add a button as an option to add more stuff such as birthday/etc-->
-				<button type="submit" class="btn btn-primary w-100">Criar conta</button>
-				<?= $response ?>
-			</form>
+				<h1 class="mb-4"><span class="fw-semibold">Registar</span> / <a href="<?= $basePath ?>/login<?= (!empty($_GET['redirect'])) ? '?redirect='.urlencode($_GET['redirect']) : '' ?>" class="">Entrar</a></h1>
+				<form method="POST" action="<?= (!empty($_GET['redirect'])) ? '?redirect='.$_GET['redirect'] : '' ?>" class="border rounded-3 p-4 bg-light">
+					<div class="mb-3">
+						<label class="form-label" for="name">Nome</label>
+						<input type="text" name="name" id="name" class="form-control" placeholder="Nome completo">
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="email">Email</label>
+						<input type="email" name="email" id="email" class="form-control" placeholder="email@exemplo.com">
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="pass">Palavra-passe</label>
+						<input type="password" name="pass" id="pass" class="form-control" placeholder="********">
+					</div>
+					<div class="mb-3">
+						<label class="form-label" for="phone">Telemóvel</label>
+						<input type="text" name="number" id="phone" class="form-control" placeholder="+351 999999999">
+					</div>
+					<!-- Maybe add a button as an option to add more stuff such as birthday/etc-->
+					<button type="submit" class="btn btn-primary w-100">Criar conta</button>
+					<?= $response ?>
+				</form>
+			</div>
 		</section>
 <?php
     endif;

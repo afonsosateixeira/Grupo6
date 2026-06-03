@@ -4,5 +4,5 @@ let table = new DataTable("#missingAnimals", {
   },
   pageLength: 10,
   lengthMenu: [5, 10, 25, 50],
-  columns: [null, { orderable: false }, null, null, null, null, null, { orderable: false }],
+  columns: [null, { orderable: false }, null, null, null, null, null, { orderable: false }]
 });

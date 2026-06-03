@@ -25,7 +25,6 @@
                     <div>                    
                     <p class="d-flex justify-content-center">Nome: <?= htmlspecialchars($item['name'])?></p>
                     </div>
-                    <p class="d-flex justify-content-center">Especialidade:  <?= htmlspecialchars($item['specialty'])?></p>
                 </div>
                 <?php endforeach; ?>
                 <?php endif; ?>

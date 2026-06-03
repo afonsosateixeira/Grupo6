@@ -41,6 +41,9 @@
 ?>
 	<script src="https://code.jquery.com/jquery-4.0.0.min.js" defer></script>
 
+	<link href="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/css/tom-select.bootstrap5.min.css" rel="stylesheet">
+	<script src="https://cdn.jsdelivr.net/npm/tom-select@2.2.2/dist/js/tom-select.complete.min.js"></script>
+
 	<link rel="stylesheet" href="//cdn.datatables.net/2.3.8/css/dataTables.dataTables.min.css">
 	<script src="https://cdn.datatables.net/2.3.8/js/dataTables.min.js" defer></script>
 <?php

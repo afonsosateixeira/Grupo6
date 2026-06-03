@@ -30,7 +30,7 @@ create table breeds (
     specie_id int not null,
     name varchar(50) not null,
     constraint pk_breeds primary key (id),
-    constraint fk_breeds_species foreign key (specie_id) references species(id)
+    constraint fk_breeds_species foreign key (specie_id) references species(id) ON DELETE NO ACTION
 ) engine=innodb;
 
 drop table if exists animals;
@@ -47,8 +47,8 @@ create table animals (
     status enum('Disponível', 'Adotado', 'Em processo') not null,
     created_at timestamp default current_timestamp,
     constraint pk_animals primary key (id),
-    constraint fk_animals_breeds foreign key (breed_id) references breeds(id),
-    constraint fk_animals_species foreign key (specie_id) references species(id)
+    constraint fk_animals_breeds foreign key (breed_id) references breeds(id) ON DELETE NO ACTION,
+    constraint fk_animals_species foreign key (specie_id) references species(id) ON DELETE NO ACTION
 ) engine=innodb;
 
 drop table if exists adoption_processes;
@@ -61,8 +61,8 @@ create table adoption_processes (
     end_date timestamp null,
     notes text,
     constraint pk_adoption_processes primary key (id),
-    constraint fk_adoption_users foreign key (user_id) references users(id),
-    constraint fk_adoption_animals foreign key (animal_id) references animals(id)
+    constraint fk_adoption_users foreign key (user_id) references users(id) ON DELETE CASCADE,
+    constraint fk_adoption_animals foreign key (animal_id) references animals(id) ON DELETE CASCADE
 ) engine=innodb;
 
 drop table if exists veterinarians;
@@ -70,8 +70,6 @@ create table veterinarians (
     id int auto_increment,
     name varchar(150) not null,
     photo varchar(255),
-    license_number varchar(50) not null,
-    specialty varchar(100),
     phone varchar(20) not null,
     constraint pk_veterinarians primary key (id)
 ) engine=innodb;
@@ -79,14 +77,15 @@ create table veterinarians (
 drop table if exists appointments;
 create table appointments (
     id int auto_increment,
-    animal_id int not null,
-    vet_id int not null,
+    animal enum('cão', 'gato', 'outro') not null,
+    name_animal VARCHAR(255) not null,
+    age_animal int not null,
+    breed_animal VARCHAR(255) not null,
+    vet_id int,
     appointment_date datetime not null,
-    reason varchar(255) not null,
     status enum('agendada', 'concluida', 'cancelada') not null,
     constraint pk_appointments primary key (id),
-    constraint fk_appointments_animals foreign key (animal_id) references animals(id),
-    constraint fk_appointments_vets foreign key (vet_id) references veterinarians(id)
+    constraint fk_appointments_vets foreign key (vet_id) references veterinarians(id) ON DELETE SET NULL
 ) engine=innodb;
 
 drop table if exists medical_history;
@@ -98,7 +97,7 @@ create table medical_history (
     medications text,
     treatment text,
     constraint pk_medical_history primary key (id),
-    constraint fk_medical_history_app foreign key (appointment_id) references appointments(id)
+    constraint fk_medical_history_app foreign key (appointment_id) references appointments(id) ON DELETE CASCADE
 ) engine=innodb;
 
 drop table if exists events;
@@ -114,7 +113,7 @@ create table events (
     capacity int,
     organizer_id int,
     constraint pk_events primary key (id),
-    constraint fk_events_organizer foreign key (organizer_id) references users(id)
+    constraint fk_events_organizer foreign key (organizer_id) references users(id) ON DELETE SET NULL
 ) engine=innodb;
 
 drop table if exists events_registrations;
@@ -125,30 +124,29 @@ create table events_registrations (
     registration_date timestamp default current_timestamp,
     status enum('confirmado', 'pendente') not null,
     constraint pk_events_registrations primary key (id),
-    constraint fk_events_reg_users foreign key (user_id) references users(id),
-    constraint fk_events_reg_events foreign key (event_id) references events(id)
+    constraint fk_events_reg_users foreign key (user_id) references users(id) ON DELETE CASCADE,
+    constraint fk_events_reg_events foreign key (event_id) references events(id) ON DELETE CASCADE
 ) engine=innodb;
 
 drop table if exists volunteer_profiles;
 create table volunteer_profiles (
     id int auto_increment,
     user_id int not null,
-	phone VARCHAR(20) NOT NULL,
-	city VARCHAR(100) NOT NULL,
     constraint pk_volunteer_profiles primary key (id),
-    constraint fk_volunteer_users foreign key (user_id) references users(id)
+    constraint fk_volunteer_users foreign key (user_id) references users(id) ON DELETE CASCADE
 ) engine=innodb;
 
 drop table if exists volunteer_shifts;
 create table volunteer_shifts (
-    id int auto_increment,
-    volunteer_id int not null,
-	day_week VARCHAR(20) NOT NULL,
-	start_time TIME NOT NULL,
-	end_time TIME NOT NULL,
-    constraint pk_volunteer_shifts primary key (id),
-    constraint fk_shifts_volunteer foreign key (volunteer_id) references volunteer_profiles(id)
-) engine=innodb;
+    id INT AUTO_INCREMENT,
+    volunteer_id INT NOT NULL,
+    day_week VARCHAR(20) NOT NULL,
+    start_time TIME NOT NULL,
+    end_time TIME NOT NULL,
+    status ENUM('Aceite', 'Rejeitado', 'Pendente') NOT NULL DEFAULT 'Pendente', -- O teu ENUM com default Pendente
+    CONSTRAINT pk_volunteer_shifts PRIMARY KEY (id),
+    CONSTRAINT fk_shifts_volunteer FOREIGN KEY (volunteer_id) REFERENCES volunteer_profiles(id) ON DELETE CASCADE
+) ENGINE=INNODB;
 
 drop table if exists lost_animals;
 create table lost_animals (
@@ -161,7 +159,7 @@ create table lost_animals (
     photo varchar(255),
     found enum('Yes', 'No') default 'No' not null,
     constraint pk_lost_animals primary key (id),
-    constraint fk_lost_animals_users foreign key (user_id) references users(id)
+    constraint fk_lost_animals_users foreign key (user_id) references users(id) ON DELETE CASCADE
 ) engine=innodb;
 
 drop table if exists partners;
@@ -195,59 +193,84 @@ insert into users (full_name, email, password, phone, local, role) values
 ('tiago ferreira', 'tiago@email.com', SHA2('123', 512), '910000009', 'lisboa', 'n'),
 ('marta luz', 'marta@email.com', SHA2('123', 512), '910000010', 'braga', 'n');
 
-insert into species (name) values 
+INSERT INTO species (name) VALUES 
 ('Cão'), ('Gato'), ('Coelho'), ('Pássaro'), ('Hamster'), 
 ('Réptil'), ('Peixe'), ('Furão'), ('Porquinho da Índia'), ('Tartaruga');
 
-insert into breeds (specie_id, name) values 
-(1, 'Labrador'), (1, 'Poodle'), (2, 'Siamês'), (2, 'Persa'), (3, 'Anão holandês'), (5, 'Sírio'), (6, 'Iguana-verde'), (8, 'Standard'), (9, 'Abissínio'), (10, 'Jabuti-piranga');
+INSERT INTO breeds (specie_id, name) VALUES 
+(1, 'Labrador'), (1, 'Poodle'), (2, 'Siamês'), (2, 'Persa'), (3, 'Anão holandês'), 
+(5, 'Sírio'), (6, 'Iguana-verde'), (8, 'Standard'), (9, 'Abissínio'), (10, 'Jabuti-piranga'),
+(1, 'Golden Retriever'), (1, 'Bulldog Francês'), (1, 'Beagle'), (1, 'Pastor Alemão'), 
+(1, 'Bichon Frisé'), (1, 'Boxer'), (1, 'Rottweiler'), (1, 'Dálmata'),
+(2, 'Maine Coon'), (2, 'Sphynx');
 
-insert into animals (name, specie_id, breed_id, gender, size, image, birth_date, status) values 
-('Max', 1, 1, 'Macho', 'Grande', 'animal1.jpg', '2019-01-03', 'Disponível'),
+INSERT INTO animals (name, specie_id, breed_id, gender, size, image, birth_date, status) VALUES 
+('Max', 1, 1, 'Macho', 'Grande', 'animal1.jpg', '2019-01-03', 'Adotado'),
 ('Poppy', 1, 2, 'Fêmea', 'Médio', 'animal2.jpg', '2019-02-20', 'Adotado'),
 ('Thor', 2, 3, 'Macho', 'Pequeno', 'animal3.jpg', '2023-03-26', 'Em processo'),
-('Belota', 2, 4, 'Fêmea', 'Pequeno', 'animal4.jpg', '2022-04-30', 'Disponível'),      
-('Lia', 3, 5, 'Fêmea', 'Pequeno', 'animal5.jpg', '2024-05-11', 'Disponível'),
-('Spike', 6, 7, 'Macho', 'Pequeno', 'animal6.jpg', '2022-06-24', 'Disponível'),
-('Fifi', 5, 6, 'Fêmea', 'Pequeno', 'animal7.jpg', '2025-07-01', 'Disponível'),
-('Mel', 8, 8, 'Fêmea', 'Pequeno', 'animal8.jpg', '2021-08-13', 'Disponível'),
-('Fred', 9, 9, 'Macho', 'Pequeno', 'animal9.jpg', '2023-09-02', 'Disponível'),
-('Tico', 10, 10, 'Macho', 'Médio', 'animal10.jpg', '2018-10-09', 'Disponível');
+('Belota', 2, 4, 'Fêmea', 'Pequeno', 'animal4.jpg', '2022-04-30', 'Em processo'),       
+('Lia', 3, 5, 'Fêmea', 'Pequeno', 'animal5.jpg', '2024-05-11', 'Em processo'),
+('Spike', 6, 7, 'Macho', 'Pequeno', 'animal6.jpg', '2022-06-24', 'Em processo'),
+('Fifi', 5, 6, 'Fêmea', 'Pequeno', 'animal7.jpg', '2023-07-01', 'Em processo'),
+('Mel', 8, 8, 'Fêmea', 'Pequeno', 'animal8.jpg', '2021-08-13', 'Em processo'),
+('Fred', 9, 9, 'Macho', 'Pequeno', 'animal9.jpg', '2023-09-02', 'Em processo'),
+('Tico', 10, 10, 'Macho', 'Médio', 'animal10.jpg', '2018-10-09', 'Em processo'),
+('Rex', 1, 11, 'Macho', 'Grande', 'animal11.jpg', '2020-05-12', 'Disponível'),
+('Boby', 1, 12, 'Macho', 'Pequeno', 'animal12.jpg', '2021-11-03', 'Disponível'),
+('Luna', 1, 13, 'Fêmea', 'Médio', 'animal13.jpg', '2022-02-15', 'Disponível'),
+('Zeus', 1, 14, 'Macho', 'Grande', 'animal14.jpg', '2019-08-22', 'Disponível'),
+('Bella', 1, 15, 'Fêmea', 'Pequeno', 'animal15.jpg', '2023-01-10', 'Disponível'),
+('Rocky', 1, 16, 'Macho', 'Grande', 'animal16.jpg', '2020-12-05', 'Disponível'),
+('Kira', 1, 17, 'Fêmea', 'Grande', 'animal17.jpg', '2021-04-18', 'Disponível'),
+('Pongo', 1, 18, 'Macho', 'Grande', 'animal18.jpg', '2022-07-30', 'Disponível'),
+('Snoopy', 1, 13, 'Macho', 'Médio', 'animal19.jpg', '2021-09-14', 'Disponível'),
+('Mia', 1, 11, 'Fêmea', 'Grande', 'animal20.jpg', '2023-03-08', 'Disponível'),
+('Duke', 1, 14, 'Macho', 'Grande', 'animal21.jpg', '2018-05-25', 'Disponível'),
+('Lola', 1, 12, 'Fêmea', 'Pequeno', 'animal22.jpg', '2022-10-11', 'Disponível'),
+('Buster', 1, 16, 'Macho', 'Grande', 'animal23.jpg', '2019-11-20', 'Disponível'),
+('Daisy', 1, 15, 'Fêmea', 'Pequeno', 'animal24.jpg', '2020-03-17', 'Disponível'),
+('Charlie', 1, 1, 'Macho', 'Grande', 'animal25.jpg', '2021-06-29', 'Disponível'),
+('Nina', 1, 2, 'Fêmea', 'Médio', 'animal26.jpg', '2023-08-04', 'Disponível'),
+('Simba', 2, 19, 'Macho', 'Médio', 'animal27.jpg', '2020-04-12', 'Disponível'),
+('Nala', 2, 20, 'Fêmea', 'Médio', 'animal28.jpg', '2021-01-25', 'Disponível'),
+('Garfield', 2, 3, 'Macho', 'Médio', 'animal29.jpg', '2019-07-08', 'Disponível'),
+('Mimi', 2, 4, 'Fêmea', 'Pequeno', 'animal30.jpg', '2022-05-19', 'Disponível');
 
-insert into adoption_processes (user_id, animal_id, status, notes) values 
-(2, 1, 'pendente', 'casa com jardim'),
-(4, 2, 'aprovado', 'experiência anterior'),
-(6, 3, 'pendente', 'apartamento'),
-(7, 7, 'aprovado', 'tem outro gato'),
-(9, 4, 'rejeitado', 'sem condições'),
-(10, 8, 'pendente', 'família ativa'),
-(2, 5, 'pendente', 'segunda adoção'),
-(4, 6, 'pendente', 'visita agendada'),
-(6, 9, 'pendente', 'primeiro animal'),
-(7, 10, 'pendente', 'interessado em tartarugas');
+INSERT INTO adoption_processes (user_id, animal_id, status, notes, start_date, end_date) VALUES 
+(2, 1, 'Aprovado', 'casa com jardim', '2026-05-01 10:30:00', '2026-05-15 14:00:00'), 
+(4, 2, 'Aprovado', 'experiência anterior', '2026-05-20 09:15:00', '2026-05-26 11:30:00'), 
+(6, 3, 'Pendente', 'apartamento', '2026-05-22 15:45:00', NULL),
+(7, 4, 'Pendente', 'tem outro gato', '2026-05-23 09:10:00', NULL),
+(9, 5, 'Pendente', 'aguarda visita de avaliação', '2026-05-24 14:20:00', NULL),
+(10, 6, 'Pendente', 'família ativa', '2026-05-25 11:05:00', NULL),
+(2, 7, 'Pendente', 'segunda adoção', '2026-05-26 16:30:00', NULL),
+(4, 8, 'Pendente', 'visita agendada', '2026-05-27 10:15:00', NULL),
+(6, 9, 'Pendente', 'primeiro animal', '2026-05-27 18:00:00', NULL),
+(7, 10, 'Pendente', 'interessado em tartarugas', '2026-05-28 09:00:00', NULL);
 
-insert into veterinarians (name, photo, license_number, specialty, phone) values 
-('dr. silva', 'vet1.jpg', 'vet001', 'cirurgia', '220000001'),
-('dra. ana', 'vet2.jpg', 'vet002', 'clínica geral', '220000002'),
-('dr. mendes', 'vet3.jpg', 'vet003', 'exóticos', '220000003'),
-('dra. beatriz', 'vet4.jpg', 'vet004', 'dermatologia', '220000004'),
-('dr. carlos', 'vet5.jpg', 'vet005', 'ortopedia', '220000005'),
-('dra. diana', 'vet6.jpg', 'vet006', 'oftalmologia', '220000006'),
-('dr. eusebio', 'vet7.jpg', 'vet007', 'cardiologia', '220000007'),
-('dra. fernanda', 'vet8.jpg', 'vet008', 'comportamento', '220000008'),
-('dr. gabriel', 'vet9.jpg', 'vet009', 'clínica geral', '220000009'),
-('dra. helena', 'vet10.jpg', 'vet010', 'neurologia', '220000010');
-insert into appointments (animal_id, vet_id, appointment_date, reason, status) values 
-(1, 1, '2026-04-10 10:00', 'check-up', 'concluida'),
-(2, 2, '2026-04-11 11:30', 'vacinação', 'concluida'),
-(3, 1, '2026-04-12 09:00', 'ferimento', 'cancelada'),
-(4, 3, '2026-04-13 15:00', 'desparasitação', 'agendada'),
-(5, 4, '2026-04-14 16:00', 'alergia', 'agendada'),
-(6, 2, '2026-07-15 10:30', 'revisão', 'agendada'),
-(7, 1, '2026-05-16 14:00', 'esterilização', 'agendada'),
-(8, 3, '2026-09-17 09:30', 'unhas', 'agendada'),
-(9, 5, '2026-06-18 11:00', 'coxeio', 'agendada'),
-(10, 6, '2026-05-19 12:00', 'olhos', 'agendada');
+insert into veterinarians (name, photo, phone) values 
+('dr. silva', 'vet1.jpg', '220000001'),
+('dra. ana', 'vet2.jpg', '220000002'),
+('dr. mendes', 'vet3.jpg', '220000003'),
+('dra. beatriz', 'vet4.jpg','220000004'),
+('dr. carlos', 'vet5.jpg', '220000005'),
+('dra. diana', 'vet6.jpg', '220000006'),
+('dr. eusebio', 'vet7.jpg', '220000007'),
+('dra. fernanda', 'vet8.jpg', '220000008'),
+('dr. gabriel', 'vet9.jpg', '220000009'),
+('dra. helena', 'vet10.jpg', '220000010');
+
+insert into appointments (name_animal, age_animal, breed_animal, vet_id, appointment_date, status) values 
+('Lucky', 12, 'yorkshire', 1, '2026-04-10 10:00', 'concluida'),
+('Dinky', 11, 'yorkshire', 2, '2026-04-11 11:30', 'concluida'),
+('Fox', 12, 'Pastor Alemão', 1, '2026-04-12 09:00', 'agendada'),
+('Max', 4, 'Golden Retriever', 3, '2026-04-13 15:00', 'cancelada'),
+('Bob', 6, 'Labrador Retriever', 4, '2026-04-14 16:00', 'agendada'),
+('Safira', 10, 'Husky', 2, '2026-07-15 10:30', 'agendada'),
+('Luna', 5, 'Beagle', 1, '2026-05-16 14:00', 'agendada'),
+('Rocky', 8, 'Rottweiler', 3, '2026-09-17 09:30', 'agendada'),
+('Simba', 5, 'Border Collie', 5, '2026-06-18 11:00', 'agendada'),
+('Mia', 11, 'São Bernardo', 6, '2026-05-19 12:00', 'agendada');
 
 insert into medical_history (appointment_id, diagnosis, weight) values 
 (1, 'saudável', 30.5), (2, 'vacinas em dia', 4.2),
@@ -274,16 +297,16 @@ insert into events_registrations (user_id, event_id, status) values
 (2, 6, 'pendente'), (4, 8, 'confirmado'), (6, 8, 'confirmado'),
 (7, 10, 'confirmado');
 
-insert into volunteer_profiles (user_id, phone, city) values 
-(2, '921383900', 'Lisboa'),
-(3, '913746362', 'Lisboa'),
-(4, '913745462', 'Braga'),
-(5, '913336362', 'Leiria'),
-(6, '914346362', 'Aveiro'),
-(7, '913216362', 'Porto'),
-(8, '913709362', 'Coimbra'),
-(9, '913745562', 'Leiria'),
-(10, '913776362', 'Viseu');
+insert into volunteer_profiles (user_id) values 
+(2),
+(3),
+(4),
+(5),
+(6),
+(7),
+(8),
+(9),
+(10);
 
 insert into volunteer_shifts (volunteer_id, day_week, start_time, end_time) values 
 (1, 'Quarta-feira', '13:00:00', '17:00:00'),
@@ -370,31 +393,29 @@ order by waiting_days desc;
 
 drop view if exists vw_vet_workload_analysis;
 create view vw_vet_workload_analysis as
-select v.name, v.specialty, v.phone,
+select v.name, v.phone,
        count(app.id) as total_appointments,
        sum(case when app.status = 'agendada' then 1 else 0 end) as upcoming_appointments
 from veterinarians v
 left join appointments app on v.id = app.vet_id
-group by v.id, v.name, v.specialty, v.phone;
+group by v.id, v.name, v.phone;
 
 drop view if exists vw_upcoming_appointments_agenda;
 create view vw_upcoming_appointments_agenda as
-select app.appointment_date, v.name as vet_name, a.name as animal_name, a.status as animal_status, app.reason
-from appointments app
-join veterinarians v on app.vet_id = v.id
-join animals a on app.animal_id = a.id
-where app.status = 'agendada' and app.appointment_date >= current_date
-order by app.appointment_date asc;
+select a.appointment_date, v.name as vet_name, a.name_animal as animal_name, a.status as animal_status
+from appointments a
+join veterinarians v on a.vet_id = v.id
+where a.status = 'agendada' and a.appointment_date >= current_date
+order by a.appointment_date asc;
 
 drop view if exists vw_animal_health_records;
 create view vw_animal_health_records as
-select a.name as animal_name, app.appointment_date, v.name as vet_name,
+select app.name_animal as animal_name, app.appointment_date, v.name as vet_name,
        mh.diagnosis, mh.weight, mh.medications, mh.treatment
 from medical_history mh
 join appointments app on mh.appointment_id = app.id
-join animals a on app.animal_id = a.id
 join veterinarians v on app.vet_id = v.id
-order by a.name asc, app.appointment_date desc;
+order by app.name_animal asc, app.appointment_date desc;
 
 drop view if exists vw_events_timeline;
 create view vw_events_timeline as
@@ -425,16 +446,30 @@ left join events_registrations er on e.id = er.event_id
 group by e.id, e.name, e.event_date, e.event_type, e.status, e.capacity;
 
 DROP VIEW IF EXISTS vw_volunteer_simple_schedule;
-CREATE VIEW vw_volunteer_simple_schedule AS
-SELECT u.full_name AS volunteer_name,vs.day_week,vs.start_time,vs.end_time
+CREATE OR REPLACE VIEW vw_volunteer_simple_schedule AS
+SELECT 
+    vs.id AS shift_id, 
+    u.full_name AS volunteer_name, 
+    vs.day_week, 
+    vs.start_time, 
+    vs.end_time,
+    vs.status AS status
 FROM volunteer_shifts vs
 JOIN volunteer_profiles vp ON vs.volunteer_id = vp.id
 JOIN users u ON vp.user_id = u.id;
 
-drop view if exists vw_volunteer_full_schedule;
-CREATE VIEW vw_volunteer_full_schedule AS
+
+DROP VIEW IF EXISTS vw_volunteer_full_schedule;
+CREATE OR REPLACE VIEW vw_volunteer_full_schedule AS
 SELECT 
-vs.id AS shift_id, u.full_name AS volunteer_name,vp.phone,vp.city,vs.day_week,vs.start_time,vs.end_time,vp.id AS volunteer_profile_id,vs.id
+    vs.id AS shift_id, 
+    u.full_name AS volunteer_name,
+    u.phone AS phone, 
+    u.local AS city,
+    vs.day_week, 
+    vs.start_time, 
+    vs.end_time,
+    vs.status AS status
 FROM volunteer_shifts vs
 JOIN volunteer_profiles vp ON vs.volunteer_id = vp.id
 JOIN users u ON vp.user_id = u.id;
