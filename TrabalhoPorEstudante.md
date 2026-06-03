@@ -15,20 +15,20 @@ root/
 │    ├──helpers.php
 │    ├──pagination.php
 │    └──searchbar.php
-│        └──searchbar.css
+│         └──searchbar.css
 │
 └──backoffice/
-    ├──adoptionProcess.php
-    │    └──adoptionProcess.js
-    ├──animalList.php
-    │    ├──animalList.css
-    │    └──animalList.js
-    │
-    └──components/
-        ├──action_adoption.php
-        ├──action_animal.php
-        ├──modal_adoption.php
-        └──modal_animal.php
+     ├──adoptionProcess.php
+     │    └──adoptionProcess.js
+     ├──animalList.php
+     │    ├──animalList.css
+     │    └──animalList.js
+     │
+     └──components/
+          ├──action_adoption.php
+          ├──action_animal.php
+          ├──modal_adoption.php
+          └──modal_animal.php
 ```
 
 ## 2025182402_DiogoAzevedo:
@@ -41,8 +41,8 @@ root/
 │    └──perfis_voluntario.css
 │
 └──backoffice/
-    └──listagemvoluntarios.php
-        └──listagemvoluntarios.js
+     └──listagemvoluntarios.php
+          └──listagemvoluntarios.js
 ```
 
 ## 2025115671_FranciscoMartins:
@@ -59,11 +59,11 @@ root/
 │    └──vetProfile.css
 │
 └──backoffice/
-    ├──appointmentList.php
-    │    └──appointmentList.js
-    └──vetList.php
-        ├──vetList.css
-        └──vetList.js
+     ├──appointmentList.php
+     │    └──appointmentList.js
+     └──vetList.php
+          ├──vetList.css
+          └──vetList.js
 ```
 
 ## 2025163132_GonçaloEstrelado:
@@ -74,11 +74,11 @@ root/
 ├──events.php
 │
 └──backoffice/
-    ├──eventsList.php
-    │    └──eventsList.js
-    │
-    └──components/
-        └──action_event.php
+     ├──eventsList.php
+     │    └──eventsList.js
+     │
+     └──components/
+          └──action_event.php
 ```
 
 ## 2025140801_HugoGiroto:
@@ -89,8 +89,8 @@ root/
 ├──privacy.php
 │
 └──backoffice/
-    └──donationList.php
-        └──donationList.js
+     └──donationList.php
+          └──donationList.js
 ```
 
 ## 2016112775_rubenreis:
@@ -102,9 +102,9 @@ root/
 │    └──missing_animals.css
 │
 └──backoffice/
-    └──missing_animals.php
-        ├──missing_animals.css
-        └──missing_animals.js
+     └──missing_animals.php
+          ├──missing_animals.css
+          └──missing_animals.js
 ```
 
 ## Grupo:
@@ -133,13 +133,13 @@ root/
 │    └──routing.php
 │
 └──backoffice/
-    ├──.htaccess
-    ├──dashboard.php
-    ├──index.php
-    ├──user_list.php
-    │    └──user_list.js
-    │
-    └──components/
-        └──sidebar.php
-            └──sidebar.css
+     ├──.htaccess
+     ├──dashboard.php
+     ├──index.php
+     ├──user_list.php
+     │    └──user_list.js
+     │
+     └──components/
+          └──sidebar.php
+               └──sidebar.css
 ```

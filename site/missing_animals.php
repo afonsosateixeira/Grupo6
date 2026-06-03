@@ -6,7 +6,32 @@
         $add = $_GET['add'] ?? '';
 
         if($_SERVER['REQUEST_METHOD'] === 'POST'){
+            $actionUserId = $_SESSION['id_user'] ?? null;
+            $actionName = trim($_POST['name'] ?? null);
+            $actionSeen = trim($_POST['seen'] ?? null);
+            $actionPhone = trim($_POST['phone'] ?? null);
+            $actionLocal = trim($_POST['local'] ?? null);
 
+            $file = "";
+
+            if (!empty($_FILES['image']['name'])) {
+                $extension = pathinfo($_FILES['image']['name'], PATHINFO_EXTENSION);
+                $file = uniqid('lost_', true) . '.' . $extension;
+
+                if (!move_uploaded_file($_FILES['image']['tmp_name'], $folder . $file)) {
+                    header("Location: ../missing_animals?status=erro_imagem");
+                    exit();
+                }
+            }
+
+            if($actionUserId != null && $actionName != null && $actionSeen != null && $actionPhone != null && $actionLocal != null){
+                $stmt=$conn->prepare("INSERT INTO lost_animals (user_id, animal_name, last_seen_date, contact_phone, location, photo) VALUES (?, ?, ?, ?, ?, ?)");
+                $stmt->bind_param("isssss",$actionUserId, $actionName, $actionSeen, $actionPhone, $actionLocal, $file);
+                $stmt->execute();
+                header("Location: ./missing_animals?status=criado");
+            } else
+                header("Location: ./missing_animals?status=erro_validacao");
+            exit();
         }
 
         $perPage = 12;
@@ -31,18 +56,61 @@
 			<h1 class="text-center text-light fw-bold px-2">Animais Desaparecidos</h1>
 		</section>
 
-        <section id="addForm" class="<?= (empty($_GET['add'])) ? 'd-none' : '' ?>">
-            <button class="btn-close" onclick="closeForm()"></button>
-            <h2>Reportar animal como desaparecido</h2>
-            <form action="" method="POST">
-                
-            </form>
-        </section>
+        <section class="container mb-5 px-4 mt-3">
+            <?php
+                if(isset($_SESSION['auth']) && $_SESSION['auth']):
+            ?>
+                    <section id="addForm" class="d-none">
+                        <div class="d-flex justify-content-between">
+                            <h2 class="custom-blue fw-bold">Reportar animal como desaparecido</h2>
+                            <button class="btn-close" onclick="toggleForm('close')"></button>
+                        </div>
+                        <form action="" method="POST" enctype="multipart/form-data">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="formName" class="form-label fw-bold">Nome do Animal Perdido</label>
+                                        <input id="formName" type="text" name="name" class="form-control" placeholder="Ex: Boby" required maxlength="100">
+                                    </div>
 
-        <section class="container mb-5 px-4">
-            <div class="d-flex justify-content-end mt-2 mb-5">
-                <a href="?add=true" class="btn btn-login">Reportar como desaparecido</a>
-            </div>
+                                    <div class="mb-3">
+                                        <label for="formSince" class="form-label fw-bold">Perdido desde</label>
+                                        <input label="formSince" type="date" name="seen" class="form-control" required max="<?= date('Y-m-d'); ?>">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="formLocation" class="form-label fw-bold">Fotografia do Animal</label>
+                                        <input id="formLocation" type="file" name="image" class="form-control" accept="image/*">
+                                    </div>
+                                </div>
+                                <div class="col-md-6">
+                                    <div class="mb-3">
+                                        <label for="formPhone" class="form-label fw-bold">Contacto</label>
+                                        <input id="formPhone" type="text" name="phone" class="form-control" placeholder="Ex: +351 900000001" required maxlength="20">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="formLocation" class="form-label fw-bold">Perdido em</label>
+                                        <input id="formLocation" type="text" name="local" class="form-control" placeholder="Ex: Lisboa" required maxlength="255">
+                                    </div>
+
+                                    <div class="mb-3">
+                                        <label for="formSubmit" class="form-label fw-bold">Submeter processo</label>
+                                        <button id="formSubmit" type="submit" class="btn btn-primary d-block w-100" onclick="">Reportar como desaparecido</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </form>
+                    </section>
+
+                    <div id="filters" class="d-flex justify-content-end mb-4">
+                        <button class="btn btn-primary" onclick="toggleForm('open')">Reportar como desaparecido</button>
+                    </div>
+
+            <?php
+                endif;
+            ?>
+
             <div class="row gap-3 justify-content-center">
                 <?php
                     while($row = $resA->fetch_assoc()):
