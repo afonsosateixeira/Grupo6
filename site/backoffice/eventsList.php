@@ -14,8 +14,12 @@
             $eventEdit = $res ? $res->fetch_assoc() : null;
         }
 ?>
+    <link rel="stylesheet" href="assets/css/eventList.css">
 
         <h1 class="fw-bold fs-2">Gestao de Eventos</h1>
+        <?php if (isset($_GET['error']) && $_GET['error'] === 'validacao_evento'): ?>
+            <div class="alert alert-danger">Dados invalidos. Verifique o formulario e tente novamente.</div>
+        <?php endif; ?>
         <div class="d-flex justify-content-end gap-2 mb-3">
             <a href="eventsList?add" class="btn btn-success">+ Criar</a>
         </div>
@@ -30,7 +34,7 @@
                         </h5>
                     </div>
 
-                    <form action="components/action_event.php" method="POST">
+                    <form action="components/action_event.php" method="POST" id="eventForm" class="needs-validation" novalidate>
                         <div class="modal-body">
                             <?php if ($eventEdit): ?>
                                 <input type="hidden" name="id_event" value="<?= (int)$eventEdit['id']; ?>">
@@ -40,22 +44,26 @@
                                 <div class="col-md-6">
                                     <div class="mb-3">
                                         <label class="form-label fw-bold">Nome do Evento</label>
-                                        <input type="text" name="name" class="form-control" value="<?= $eventEdit ? htmlspecialchars($eventEdit['name']) : ''; ?>" required maxlength="100">
+                                        <input type="text" name="name" class="form-control" value="<?= $eventEdit ? htmlspecialchars($eventEdit['name']) : ''; ?>" required minlength="3" maxlength="100" pattern=".*\\S.*">
+                                        <div class="invalid-feedback">Introduza um nome valido (3 a 100 caracteres).</div>
                                     </div>
 
                                     <div class="mb-3">
                                         <label class="form-label fw-bold">Data de Inicio</label>
                                         <input type="datetime-local" name="event_date" class="form-control" value="<?= $eventEdit && !empty($eventEdit['event_date']) ? date('Y-m-d\\TH:i', strtotime($eventEdit['event_date'])) : ''; ?>" required>
+                                        <div class="invalid-feedback">Indique uma data de inicio valida.</div>
                                     </div>
 
                                     <div class="mb-3">
                                         <label class="form-label fw-bold">Data de Fim</label>
                                         <input type="datetime-local" name="end_date" class="form-control" value="<?= $eventEdit && !empty($eventEdit['end_date']) ? date('Y-m-d\\TH:i', strtotime($eventEdit['end_date'])) : ''; ?>">
+                                        <div class="invalid-feedback">A data de fim tem de ser igual ou posterior ao inicio.</div>
                                     </div>
 
                                     <div class="mb-3">
                                         <label class="form-label fw-bold">Local</label>
-                                        <input type="text" name="location" class="form-control" value="<?= $eventEdit ? htmlspecialchars($eventEdit['location']) : ''; ?>" required maxlength="150">
+                                        <input type="text" name="location" class="form-control" value="<?= $eventEdit ? htmlspecialchars($eventEdit['location']) : ''; ?>" required minlength="2" maxlength="150" pattern=".*\\S.*">
+                                        <div class="invalid-feedback">Introduza um local valido (2 a 150 caracteres).</div>
                                     </div>
                                 </div>
 
@@ -79,7 +87,8 @@
 
                                     <div class="mb-3">
                                         <label class="form-label fw-bold">Capacidade</label>
-                                        <input type="number" name="capacity" class="form-control" min="1" value="<?= $eventEdit && !empty($eventEdit['capacity']) ? (int)$eventEdit['capacity'] : ''; ?>">
+                                        <input type="number" name="capacity" class="form-control" min="1" max="100000" step="1" value="<?= $eventEdit && !empty($eventEdit['capacity']) ? (int)$eventEdit['capacity'] : ''; ?>">
+                                        <div class="invalid-feedback">A capacidade deve ser um numero inteiro entre 1 e 100000.</div>
                                     </div>
 
                                     <div class="mb-3">
@@ -153,12 +162,34 @@
         </table>
 
         <script>
-            window.onload = function () {
+            document.addEventListener('DOMContentLoaded', function () {
                 <?php if ($eventEdit || isset($_GET['add'])): ?>
-                    var meuModal = new bootstrap.Modal(document.getElementById('formModal'));
-                    meuModal.show();
+                    new bootstrap.Modal(document.getElementById('formModal')).show();
                 <?php endif; ?>
-            };
+
+                var form = document.getElementById('eventForm');
+                if (!form) return;
+
+                var startInput = form.querySelector('[name="event_date"]');
+                var endInput = form.querySelector('[name="end_date"]');
+
+                form.addEventListener('submit', function (event) {
+                    if (startInput && endInput) {
+                        endInput.setCustomValidity('');
+                        if (startInput.value && endInput.value) {
+                            if (new Date(endInput.value) < new Date(startInput.value)) {
+                                endInput.setCustomValidity('invalido');
+                            }
+                        }
+                    }
+
+                    if (!form.checkValidity()) {
+                        event.preventDefault();
+                        event.stopPropagation();
+                    }
+                    form.classList.add('was-validated');
+                });
+            });
         </script>
 <?php
         $group->free();
