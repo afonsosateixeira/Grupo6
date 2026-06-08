@@ -53,7 +53,7 @@
     ?>
         <div class="container">
             <div class="text-center my-5">
-                <h2>Perfil dos voluntários</h2>
+                <h2><strong>Perfil dos voluntários</strong></h2>
             </div>
             <?php
         if (!isset($_SESSION['auth']) || $_SESSION['auth'] !== true):
