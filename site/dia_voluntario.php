@@ -5,7 +5,7 @@
     else:
 ?>
         <div class="container">
-            <h1 class="text-center"><b>Um dia no Poppy And Max</b></h1>
+            <h2 class="text-center"><strong>Um dia no Poppy And Max</strong></h2>
             <div class="banner">
                 <img src="assets/img/dia_voluntario_banner2.png" class="img-fluid" alt="banner">
             </div>
@@ -141,3 +141,4 @@
         </div>
 <?php
     endif;
+?>

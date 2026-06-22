@@ -29,7 +29,8 @@
             'privacy',
             'regist',
             'termos',
-            'vetProfile'
+            'vetProfile',
+            'sobrenos',
         ],
 
         # Páginas de Back Office
