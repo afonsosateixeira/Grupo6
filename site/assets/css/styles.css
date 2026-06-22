@@ -7,7 +7,7 @@
 
 html{
   scroll-behavior: smooth;
-}
+} 
 
 html,
 body {
@@ -19,6 +19,7 @@ body {
   flex-direction: column;
   font-family: "Poppins", sans-serif;
   background-color: #f1f1f1;
+  overflow-x: hidden;
 }
 
 .custom-blue{
