@@ -55,13 +55,8 @@
 ?>
 		<section class="container d-flex align-items-center justify-content-center vh-100 vw-100">
 			<div>
-				<div class="mb-3 ms-3 me-2">
-					<a href="<?= $basePath ?>/" class="d-flex justify-content-end align-items-center">
-					    <span class="btn btn-primary">Voltar</span>
-					</a>
-				</div>
-				<h1 class="mb-4"><span class="fw-semibold">Entrar</span> / <a href="<?= $basePath ?>/regist<?= (!empty($_GET['redirect'])) ? '?redirect='.urlencode($_GET['redirect']) : '' ?>" class="">Registar</a></h1>
 				<form method="POST" action="<?= (!empty($_GET['redirect'])) ? '?redirect='.$_GET['redirect'] : '' ?>" class="border rounded-3 p-4 bg-light">
+					<h1 class="mb-4 fw-semibold">Entrar</span></h1>
 					<div class="mb-3">
 						<label class="form-label" for="email">Email</label>
 						<input type="email" name="email" id="email" class="form-control" placeholder="email@exemplo.com">
@@ -72,6 +67,7 @@
 					</div>
 					<button type="submit" class="btn btn-primary w-100">Entrar</button>
 					<?= $response ?>
+					<p class="mb-0 mt-3">Não têm conta? <a href="<?= $basePath ?>/regist<?= (!empty($_GET['redirect'])) ? '?redirect='.urlencode($_GET['redirect']) : '' ?>">Registar</a></p>
 				</form>
 			</div>
 		</section>

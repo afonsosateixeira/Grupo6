@@ -9,7 +9,7 @@
                 </h5>
             </div>
 
-            <form action="components/action_missing.php" method="POST" enctype="multipart/form-data">
+            <form action="components/action_missing.php" method="POST" enctype="multipart/form-data" class="needs-validation" novalidate>
                 <div class="modal-body">
                     <?php
                         if ($edit){
@@ -22,7 +22,7 @@
                     <div class="row">
                         <div class="col-md-6">
                             <div class="mb-3">
-                                <label for="formOwner" class="form-label fw-bold">Dono do animal:</label>
+                                <label for="formOwner" class="form-label fw-bold">Dono do animal</label>
                                 <select id="formOwner" name="user_id" class="form-select" required>
                                     <option value="" disabled selected>Selecione o Dono</option>
                                     <?php
