@@ -70,7 +70,7 @@
               <li><a class="dropdown-item" href="<?= $basePath ?>/dia_voluntario">Um dia no Abrigo</a></li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/vetProfile">Perfil do Veterinário</a></li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/perfis_voluntario">Perfil de Voluntário</a></li>
-              <li><a class="dropdown-item" href="#">Sobre Nós</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/sobrenos">Sobre Nós</a></li>
             </ul>
           </li>
         </ul>

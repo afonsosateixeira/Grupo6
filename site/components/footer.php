@@ -44,7 +44,7 @@
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/dia_voluntario" class="nav-link p-0">Um dia no Abrigo</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/vetProfile" class="nav-link p-0">Perfil do Veterinário</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/perfis_voluntario" class="nav-link p-0">Perfil de Voluntário</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Sobre Nós</a></li>
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/sobrenos" class="nav-link p-0">Sobre Nós</a></li>
             </ul>
           </div>
           <div class="col-6 col-lg-2 mb-3">

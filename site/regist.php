@@ -59,13 +59,8 @@
 ?>
 		<section class="container d-flex align-items-center justify-content-center vh-100 vw-100">
 			<div>
-				<div class="mb-3 ms-3 me-2">
-					<a href="<?= $basePath ?>/" class="d-flex justify-content-end align-items-center">
-					    <span class="btn btn-primary">Voltar</span>
-					</a>
-				</div>
-				<h1 class="mb-4"><span class="fw-semibold">Registar</span> / <a href="<?= $basePath ?>/login<?= (!empty($_GET['redirect'])) ? '?redirect='.urlencode($_GET['redirect']) : '' ?>" class="">Entrar</a></h1>
 				<form method="POST" action="<?= (!empty($_GET['redirect'])) ? '?redirect='.$_GET['redirect'] : '' ?>" class="border rounded-3 p-4 bg-light">
+					<h1 class="mb-4 fw-semibold">Registar</h1>
 					<div class="mb-3">
 						<label class="form-label" for="name">Nome</label>
 						<input type="text" name="name" id="name" class="form-control" placeholder="Nome completo">
@@ -85,6 +80,7 @@
 					<!-- Maybe add a button as an option to add more stuff such as birthday/etc-->
 					<button type="submit" class="btn btn-primary w-100">Criar conta</button>
 					<?= $response ?>
+					<p class="mb-0 mt-3">Já têm conta? <a href="<?= $basePath ?>/login<?= (!empty($_GET['redirect'])) ? '?redirect='.urlencode($_GET['redirect']) : '' ?>">Entrar</a></p>
 				</form>
 			</div>
 		</section>
