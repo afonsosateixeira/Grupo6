@@ -1,7 +1,7 @@
 # Trabalho por estudante:
 
 ## Descrição:
-Para facilidade de leitura estamos a demonstrar o que cada aluno fez usando construções do estilo de árvore de ficheiros visivel no Github e editores de texto como notepad e visual studio code.
+Para facilidade de leitura estamos a demonstrar o que cada aluno fez usando o estilo de árvore de ficheiros visivel no Github, editores de texto como notepad e visual studio code.
 Em caso de ficheiros de css e javascript, estamos a identificar o ficheiro principal afetado, como por exemplo:
 ```
 site/
@@ -10,9 +10,11 @@ site/
      └──dia_voluntario.js
 ```
 
-Neste caso, embora os ficheiros dia_voluntário.css e dia_voluntário.js estejam atribuidos ao dia_voluntário estes encontram-se nas pastas de assets correspondentes, exemplo da localização real:
+Neste caso, embora os ficheiros dia_voluntário.css e dia_voluntário.js estejam atribuidos ao dia_voluntário estes encontram-se nas pastas de assets correspondentes. Exemplo da localização real:
 ```
 site/
+├──dia_voluntario.php
+│
 └──assets/
      ├──css/
      │    └──dia_voluntario.css
@@ -20,10 +22,12 @@ site/
           └──dia_voluntario.js
 ```
 
-O mesmo aplica-se em ficheiros de componentes estes vindo da pasta de origem e utilizando os assets desta. A única exceção são os ficheiros de Back Office que estão localizados nos assets do backoffice:
+A única exceção à pasta indicada acima são os assets do backoffice como exemplificado abaixo com a localização real. O mesmo aplica-se em ficheiros de componentes usando os assets da pasta origem, sendo esta "site" ou "backoffice".
 ```
 site/
 └──backoffice/
+     ├──animalList.php
+     │
      └──assets/
           ├──css/
           │    └──animalList.css
@@ -75,7 +79,12 @@ site/
 │
 └──backoffice/
      └──listagemvoluntarios.php
-          └──listagemvoluntarios.js
+     │    ├──listagemvoluntarios.css
+     │    └──listagemvoluntarios.js
+     │
+     └──components/
+          ├──action_voluntario.php
+          └──modal_voluntario.php
 ```
 
 ## 2025115671_FranciscoMartins:
@@ -94,9 +103,19 @@ site/
 └──backoffice/
      ├──appointmentList.php
      │    └──appointmentList.js
-     └──vetList.php
-          ├──vetList.css
-          └──vetList.js
+     ├──medicalHistory.php
+     │    └──medicalHistory.js
+     ├──vetList.php
+     │    ├──vetList.css
+     │    └──vetList.js
+     │
+     └──components/
+          ├──action_appointment.php
+          ├──action_medicalHistory.php
+          ├──action_vet.php
+          ├──modal_appointments.php
+          ├──modal_medicalHistory.php
+          └──modal_vet.php
 ```
 
 ## 2025163132_GonçaloEstrelado:
@@ -108,6 +127,7 @@ site/
 │
 └──backoffice/
      ├──eventsList.php
+     │    ├──eventsList.css
      │    └──eventsList.js
      │
      └──components/
@@ -136,9 +156,13 @@ site/
 │    └──missing_animals.js
 │
 └──backoffice/
-     └──missing_animals.php
-          ├──missing_animals.css
-          └──missing_animals.js
+     ├──missing_animals.php
+     │    ├──missing_animals.css
+     │    └──missing_animals.js
+     │
+     └──components/
+          ├──action_missing.php
+          └──modal_missing.php
 ```
 
 ## Grupo:
@@ -177,6 +201,8 @@ site/
      │    └──user_list.js
      │
      └──components/
+          ├──action_users.php
+          ├──modal_users.php
           └──sidebar.php (Criado por Afonso e adições do Hugo)
                └──sidebar.css
 ```
