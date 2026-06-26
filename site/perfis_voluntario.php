@@ -73,7 +73,7 @@
         else:
     ?>
             <div class="container">
- <form action="" method="POST">
+ <form action="" method="POST" enctype="multipart/form-data" class="needs-validation custom-validation" novalidate onsubmit="if(!this.checkValidity()) { event.preventDefault(); event.stopPropagation(); } this.classList.add('was-validated');">
         <?php
             $showLocalInput = true;
             if (isset($_SESSION['user_id'])) {
@@ -90,7 +90,7 @@
         <?php if ($showLocalInput): ?>
         <div class="campo">
           <div class="mb-3">
-            <label for="localidade" class="form-label">Localidade</label>
+            <label for="localidade" class="form-label">Localidade <span class="text-danger">*</span></label>
             <input type="text" class="form-control" id="localidade" name="localidade" required>
           </div>
         </div>
@@ -98,15 +98,15 @@
 
         <div class="mb-3">
           <div class="dia_semana">
-            <p>Dia da semana</p>
-            <select name="diasdasemana" id="diasdasemana" required>
-              <option>Selecione uma opção</option>
+            <label for="diasdasemana" class="form-label">Dia da semana <span class="text-danger">*</span></label>
+            <select name="diasdasemana" id="diasdasemana" class="form-select" required>
+              <option value="">Opções</option>
               <option value="Segunda-feira">Segunda-feira</option>
               <option value="Terça-feira">Terça-feira</option>
               <option value="Quarta-feira">Quarta-feira</option>
               <option value="Quinta-feira">Quinta-feira</option>
               <option value="Sexta-feira">Sexta-feira</option>
-              <option value="Sábado">Sabado</option>
+              <option value="Sábado">Sábado</option>
               <option value="Domingo">Domingo</option>
             </select>
           </div>
@@ -114,7 +114,7 @@
 
           <div class="horario">
             <div class="mb-3">
-                <label class="form-label" for="hora_inicio">Hora Início</label>
+                <label class="form-label" for="hora_inicio">Hora Início  <span class="text-danger">*</span></label>
                 <input type="time" name="hora_inicio" id="hora_inicio" class="form-control" required>
             </div>
           </div>
@@ -122,7 +122,7 @@
 
           <div class="horario">
             <div class="mb-3">
-                <label class="form-label" for="hora_fim">Hora Fim</label>
+                <label class="form-label" for="hora_fim">Hora Fim  <span class="text-danger">*</span></label>
                 <input type="time" name="hora_fim" id="hora_fim" class="form-control" required>
             </div>
           </div>

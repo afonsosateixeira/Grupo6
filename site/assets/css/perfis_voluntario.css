@@ -33,14 +33,22 @@ form {
   padding-bottom: 10px;
 }
 
-.form-control {
+.form-control{
   height: 25px;
   border-radius: 25px;
   max-width: 60%;
   margin: auto;
 }
 
-.form-control:focus {
+.form-select{
+  line-height: 16px;
+  height: 30px;
+  border-radius: 25px;
+  max-width: 60%;
+  margin: auto;
+}
+
+.form-control:focus, .form-select:focus{
   border-color: black;
   box-shadow: none;
 }
@@ -86,5 +94,20 @@ a {
     .cartas {
         display: flex;
         justify-content: center;
+    }
+
+    form {
+        width: 90%;
+        max-width: 320px;
+        margin-left: auto;
+        margin-right: auto;
+        padding-left: 15px;
+        padding-right: 15px;
+    }
+
+    .form-control,
+    .form-select {
+        max-width: 100%;
+        width: 100%;
     }
 }

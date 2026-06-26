@@ -17,6 +17,7 @@
                 <ul class="nav flex-column submenu mt-1">
                     <li><a href="<?= $basePath ?>/user_list" class="nav-link">Utilizadores</a></li>
                     <li><a href="<?= $basePath ?>/listagemvoluntarios" class="nav-link">Voluntários</a></li>
+                    <li><a href="<?= $basePath ?>/calendario_voluntarios" class="nav-link">Calendario de Voluntarios</a></li>
                 </ul>
             </div>
         </li>

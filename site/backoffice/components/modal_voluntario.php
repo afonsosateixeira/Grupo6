@@ -12,7 +12,7 @@
                 </h5>
             </div>
 
-            <form method="POST" id="volunteerForm" action="components/action_voluntario.php">
+                <form action="components/action_voluntario.php" method="POST" enctype="multipart/form-data" class="needs-validation custom-validation" novalidate onsubmit="if(!this.checkValidity()) { event.preventDefault(); event.stopPropagation(); } this.classList.add('was-validated');">
                 <div class="modal-body">
                     <input type="hidden" name="action" value="<?= $modalMode ? 'edit_volunteer' : 'add_volunteer' ?>">
                     <?php if ($modalMode): ?>
@@ -45,7 +45,7 @@
                         <label class="form-label" for="localidade">Localidade</label>
                         <input type="text" name="localidade" id="localidade" class="form-control"
                             value="<?= htmlspecialchars($volunteer['city'] ?? ($_POST['localidade'] ?? '')) ?>"
-                            placeholder="Ex: Lisboa">
+                            placeholder="Ex: Lisboa" required>
                     </div>
 
                     <?php if ($modalMode): ?>

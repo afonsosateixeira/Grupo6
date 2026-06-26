@@ -82,7 +82,7 @@
                 $stmt->close();
             }
 
-            header('Location: ../listagemvoluntarios?status=erro_imagem');
+            header('Location: ../listagemvoluntarios?status=erro_validacao');
             exit();
         }
 
