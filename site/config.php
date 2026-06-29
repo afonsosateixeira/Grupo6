@@ -45,6 +45,7 @@
             'missing_animals',
             'medicalHistory',
             'user_list',
-            'vetList'
+            'vetList',
+            'partners',
         ]
     ]);
