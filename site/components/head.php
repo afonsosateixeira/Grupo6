@@ -57,9 +57,9 @@
 	} else {
 		# Verifica se exite um estilo específico da página e utiliza se existir
 		if(file_exists(__DIR__."/../assets/css/".$route.".css"))
-			echo '<link rel="stylesheet" href="'.$basePath.'/assets/css/'.$route.'.css">';
+			echo '<link rel="stylesheet" href="'.$basePath.'/assets/css/'.$route.'.css?v='.filemtime(__DIR__."/../assets/css/".$route.".css").'">';
 
 		# Verifica se exite um script específico da página e utiliza se existir
 		if(file_exists(__DIR__."/../assets/js/".$route.".js"))
-			echo '<script src="'.$basePath.'/assets/js/'.$route.'.js" defer></script>';
+			echo '<script src="'.$basePath.'/assets/js/'.$route.'.js?v='.filemtime(__DIR__."/../assets/js/".$route.".js").'" defer></script>';
 	}
