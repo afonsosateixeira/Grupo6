@@ -15,6 +15,7 @@
           <div class="col-6 col-lg-2 mb-3">
             <h5>Adoção</h5>
             <ul class="nav flex-column">
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/missing_animals" class="nav-link p-0">Animais Desaparecidos</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/animalCatalog" class="nav-link p-0">Catálogo de Animais</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/adoptionGuide" class="nav-link p-0">Guia de Adoção</a></li>
             </ul>
@@ -24,7 +25,6 @@
             <ul class="nav flex-column">
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/events" class="nav-link p-0">Calendário de Eventos</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Eventos Passados</a></li>
-              <li class="nav-item mb-2"><a href="<?= $basePath ?>/missing_animals" class="nav-link p-0">Animais Desaparecidos</a></li>
               <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Encontrei um animal e agora?</a></li>
             </ul>
           </div>
@@ -32,7 +32,6 @@
             <h5>Apoio e saúde</h5>
             <ul class="nav flex-column">
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/donations" class="nav-link p-0">Doações</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Nossos Parceiros</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/animal_care" class="nav-link p-0">Cuidados de Saúde</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/appointment" class="nav-link p-0">Marcação de Consultas</a></li>
             </ul>
@@ -50,8 +49,6 @@
           <div class="col-6 col-lg-2 mb-3">
             <h5>Links Rápidos</h5>
             <ul class="nav flex-column">
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0">FAQ</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Lítigios de Consumo</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/accessibility" class="nav-link p-0">Política de Acessibilidade</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/cookies" class="nav-link p-0">Política de Cookies</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/privacy" class="nav-link p-0">Política de Privacidade</a></li>

@@ -26,6 +26,7 @@
               Adoção
             </a>
             <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="<?= $basePath ?>/missing_animals">Animais Desaparecidos</a></li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/animalCatalog">Catálogo de Animais</a></li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/adoptionGuide">Guia de adoção</a></li>
             </ul>
@@ -41,7 +42,6 @@
               <li>
                 <hr class="dropdown-divider" />
               </li>
-              <li><a class="dropdown-item" href="<?= $basePath ?>/missing_animals">Animais Desaparecidos</a></li>
               <li><a class="dropdown-item" href="#">Encontrei um animal e agora?</a></li>
             </ul>
           </li>
@@ -52,7 +52,6 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="<?= $basePath ?>/donations">Doações</a></li>
-              <li><a class="dropdown-item" href="#">Nossos Parceiros</a></li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
