@@ -1,6 +1,6 @@
 <?php
-    $modalMode = isset($editMode) && $editMode;
-    $volunteer = $modalMode && isset($volunteerEdit) ? $volunteerEdit : null;
+$modalMode = isset($editMode) && $editMode;
+$volunteer = $modalMode && isset($volunteerEdit) ? $volunteerEdit : null;
 ?>
 <div class="modal fade" id="formModalVoluntario">
     <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -12,7 +12,7 @@
                 </h5>
             </div>
 
-            <form method="POST" id="volunteerForm" action="components/action_voluntario.php">
+            <form action="components/action_voluntario.php" method="POST" enctype="multipart/form-data" class="needs-validation custom-validation" novalidate onsubmit="if(!this.checkValidity()) { event.preventDefault(); event.stopPropagation(); } this.classList.add('was-validated');">
                 <div class="modal-body">
                     <input type="hidden" name="action" value="<?= $modalMode ? 'edit_volunteer' : 'add_volunteer' ?>">
                     <?php if ($modalMode): ?>
@@ -22,35 +22,35 @@
 
                     <?php if ($modalMode): ?>
                         <div class="mb-3">
-                            <label class="form-label" for="full_name">Nome do Voluntário</label>
+                            <label class="form-label" for="full_name">Nome do Voluntário <span class="text-danger">*</span></label>
                             <input type="text" name="full_name" id="full_name" class="form-control"
                                 value="<?= htmlspecialchars($volunteer['volunteer_name'] ?? '') ?>" placeholder="Nome completo" required>
                         </div>
 
                         <div class="mb-3">
-                            <label class="form-label" for="phone">Telemóvel</label>
+                            <label class="form-label" for="phone">Telemóvel <span class="text-danger">*</span></label>
                             <input type="text" name="phone" id="phone" class="form-control"
                                 value="<?= htmlspecialchars($volunteer['phone'] ?? '') ?>" placeholder="Telemóvel" required>
                         </div>
                     <?php endif; ?>
 
                     <div class="mb-3">
-                        <label class="form-label" for="email">Email</label>
+                        <label class="form-label" for="email">Email <span class="text-danger">*</span></label>
                         <input type="email" name="email" id="email" class="form-control"
                             value="<?= htmlspecialchars($volunteer['email'] ?? ($_POST['email'] ?? '')) ?>"
                             placeholder="email@exemplo.com" required>
                     </div>
 
                     <div class="mb-3">
-                        <label class="form-label" for="localidade">Localidade</label>
+                        <label class="form-label" for="localidade">Localidade <span class="text-danger">*</span></label>
                         <input type="text" name="localidade" id="localidade" class="form-control"
                             value="<?= htmlspecialchars($volunteer['city'] ?? ($_POST['localidade'] ?? '')) ?>"
-                            placeholder="Ex: Lisboa">
+                            placeholder="Ex: Lisboa" required>
                     </div>
 
                     <?php if ($modalMode): ?>
                         <div class="mb-3">
-                            <label class="form-label" for="status">Status do Turno</label>
+                            <label class="form-label" for="status">Status do Turno <span class="text-danger">*</span></label>
                             <select name="status" id="status" class="form-control" required>
                                 <?php $currentStatus = $volunteer['status'] ?? 'Pendente'; ?>
                                 <option value="Pendente" <?= $currentStatus === 'Pendente' ? 'selected' : '' ?>>Pendente</option>
@@ -59,10 +59,9 @@
                             </select>
                         </div>
                     <?php else: ?>
-                        <h6 class="text-info mb-3 mt-4">Horário de Voluntariado</h6>
                         <div class="row">
                             <div class="col-md-4 mb-3">
-                                <label class="form-label" for="day_week">Dia da Semana</label>
+                                <label class="form-label" for="day_week">Dia da Semana <span class="text-danger">*</span></label>
                                 <select name="day_week" id="day_week" class="form-control" required>
                                     <option value="">Selecione um dia</option>
                                     <option value="Segunda" <?= (isset($_POST['day_week']) && $_POST['day_week'] === 'Segunda') ? 'selected' : '' ?>>Segunda</option>
@@ -75,11 +74,11 @@
                                 </select>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label class="form-label" for="start_time">Hora de Início *</label>
+                                <label class="form-label" for="start_time">Hora de Início <span class="text-danger">*</span></label>
                                 <input type="time" name="start_time" id="start_time" class="form-control" value="<?= htmlspecialchars($_POST['start_time'] ?? '') ?>" required>
                             </div>
                             <div class="col-md-4 mb-3">
-                                <label class="form-label" for="end_time">Hora de Fim *</label>
+                                <label class="form-label" for="end_time">Hora de Fim <span class="text-danger">*</span></label>
                                 <input type="time" name="end_time" id="end_time" class="form-control" value="<?= htmlspecialchars($_POST['end_time'] ?? '') ?>" required>
                             </div>
                         </div>

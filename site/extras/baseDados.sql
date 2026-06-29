@@ -182,6 +182,24 @@ create table donations (
     constraint pk_donations primary key (id)
 ) engine=innodb;
 
+drop table if exists notifications;
+create table notifications(
+    id int unsigned auto_increment,
+    user int not null,
+    type enum('adoption', 'shift') not null,
+    title varchar(255) not null,
+    status enum('read', 'not read') default 'not read' not null,
+    color enum('success', 'warning', 'danger') not null,
+    date timestamp default current_timestamp not null,
+    adoption int,
+    shift int,
+
+    constraint pk_notifications primary key(id),
+    constraint fk_notifications_user foreign key(user) references users(id) ON DELETE CASCADE,
+    constraint fk_notifications_shift foreign key(shift) references volunteer_shifts(id) ON DELETE CASCADE,
+    constraint fk_notifications_adoption foreign key(adoption) references adoption_processes(id) ON DELETE CASCADE
+) engine = innodb;
+
 insert into users (full_name, email, password, phone, local, role) values
 ('admin', 'admin@email.com', SHA2('123', 512), '910000001', 'porto', 'admin'),
 ('maria silva', 'maria@email.com', SHA2('123', 512), '910000002', 'lisboa', 'n'),

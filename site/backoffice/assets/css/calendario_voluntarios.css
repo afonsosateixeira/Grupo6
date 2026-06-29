@@ -1,0 +1,15 @@
+/* Altura mínima estrutural para os cartões e dias vazios */
+.cartao-turno, .dia-vazio {
+    min-height: 120px;
+}
+
+/* Estilos e cores do cabeçalho do dia */
+.cabecalho-dia {
+    color: #112d51; 
+    background-color: #f8f8ff;
+}
+
+/* Cores do cartão de turno */
+.cartao-turno {
+    background-color: #112d51;
+}
