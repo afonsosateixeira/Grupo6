@@ -39,15 +39,15 @@
             'adoptionProcess',
             'animalList',
             'appointmentList',
+            'calendario_voluntarios',
             'dashboard',
             'donationList',
             'eventsList',
             'listagemvoluntarios',
             'missing_animals',
             'medicalHistory',
-            'user_list',
-            'vetList',
             'partners',
-            'calendario_voluntarios'
+            'user_list',
+            'vetList'
         ]
     ]);

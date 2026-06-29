@@ -197,7 +197,9 @@ create table notifications(
     constraint pk_notifications primary key(id),
     constraint fk_notifications_user foreign key(user) references users(id) ON DELETE CASCADE,
     constraint fk_notifications_shift foreign key(shift) references volunteer_shifts(id) ON DELETE CASCADE,
-    constraint fk_notifications_adoption foreign key(adoption) references adoption_processes(id) ON DELETE CASCADE
+    constraint fk_notifications_adoption foreign key(adoption) references adoption_processes(id) ON DELETE CASCADE,
+    constraint uq_notifications_adoption unique(adoption),
+    constraint uq_notifications_shift unique(shift)
 ) engine = innodb;
 
 insert into users (full_name, email, password, phone, local, role) values

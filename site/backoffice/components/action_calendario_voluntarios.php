@@ -38,6 +38,17 @@ if ($action === 'edit_shift') {
     $stmt->close();
 
     if ($success) {
+
+        # Código adicional para a funcionalidade de notificações (Rúben)
+        $dayNotif = 'O seu turno foi alterado para '.$day_week.'-feira das '.$start_time.' às '.$end_time;
+        $shiftNotif = $shift_id;
+        $verifyId = $conn->query("SELECT vp.user_id FROM volunteer_profiles vp JOIN volunteer_shifts vs ON vp.id = vs.volunteer_id WHERE vs.id = $shift_id")->fetch_row()[0];
+        $editNotif = $conn->prepare("INSERT INTO notifications(user, type, title, color, shift) VALUES(?, 'shift', ?, 'warning', ?)
+            ON DUPLICATE KEY UPDATE title = ?, color = 'warning', status = 'not read', date = current_timestamp");
+        $editNotif->bind_param("isis", $verifyId, $dayNotif, $shiftNotif, $dayNotif);
+        $editNotif->execute();
+        $editNotif->close();
+
         header('Location: ../calendario_voluntarios?status=editado');
         exit();
     }

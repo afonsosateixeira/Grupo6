@@ -50,6 +50,21 @@ else:
             $stmt_status->execute();
             $stmt_status->close();
 
+            # Código adicional para a funcionalidade de notificações (Rúben)
+            $verify = $conn->query("SELECT day_week, start_time, end_time FROM volunteer_shifts WHERE id = $id_turno")->fetch_row();
+            $verifyDay = $verify[0];
+            $verifyStart = $verify[1];
+            $verifyEnd = $verify[2];
+            $colorNotif = ($novo_status == 'Aceite') ? 'success' : 'danger';
+            $dayNotif = 'O seu turno de '.$verifyDay.'-feira das '.$verifyStart.' às '.$verifyEnd.' ficou '.$novo_status;
+            $shiftNotif = $id_turno;
+            $verifyId = $conn->query("SELECT vp.user_id FROM volunteer_profiles vp JOIN volunteer_shifts vs ON vp.id = vs.volunteer_id WHERE vs.id = $id_turno")->fetch_row()[0];
+            $editNotif = $conn->prepare("INSERT INTO notifications(user, type, title, color, shift) VALUES(?, 'shift', ?, ?, ?)
+                ON DUPLICATE KEY UPDATE title = ?, color = ?, status = 'not read', date = current_timestamp");
+            $editNotif->bind_param("ississ", $verifyId, $dayNotif, $colorNotif, $shiftNotif, $dayNotif, $colorNotif);
+            $editNotif->execute();
+            $editNotif->close();
+
             $url_limpa = strtok($_SERVER['REQUEST_URI'], '?');
             echo '<meta http-equiv="refresh" content="0;url=' . $url_limpa . '?status=status_alterado">';
             exit();

@@ -75,6 +75,15 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $stmt = $conn->prepare('INSERT INTO volunteer_shifts(volunteer_id, day_week, start_time, end_time) VALUES(?, ?, ?, ?)');
             $stmt->bind_param('isss', $volunteer_id, $day_week, $start_time, $end_time);
             if ($stmt->execute()) {
+
+                # Código adicional para a funcionalidade de notificações (Rúben)
+                $dayNotif = 'Foi inscrito num turno de voluntariádo para '.$day_week.'-feira das '.$start_time.' às '.$end_time;
+                $shiftNotif = $stmt->insert_id;
+                $insNotif = $conn->prepare("INSERT INTO notifications(user, type, title, color, shift) VALUES(?, 'shift', ?, 'warning', ?)");
+                $insNotif->bind_param("isi", $user_id, $dayNotif, $shiftNotif);
+                $insNotif->execute();
+                $insNotif->close();
+
                 $stmt->close();
                 header('Location: ../listagemvoluntarios?status=criado');
                 exit();
@@ -113,6 +122,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             }
 
             if ($success) {
+
+                # Código adicional para a funcionalidade de notificações (Rúben)
+                $verify = $conn->query("SELECT day_week, start_time, end_time FROM volunteer_shifts WHERE id = $shift_id")->fetch_row();
+                $verifyDay = $verify[0];
+                $verifyStart = $verify[1];
+                $verifyEnd = $verify[2];
+                $colorNotif = ($status == 'Aceite') ? 'success' : (($status == 'Rejeitado') ? 'danger' : 'warning');
+                $dayNotif = 'O seu turno de '.$verifyDay.'-feira das '.$verifyStart.' às '.$verifyEnd.' ficou '.$status;
+                $shiftNotif = $shift_id;
+                $verifyId = $conn->query("SELECT vp.user_id FROM volunteer_profiles vp JOIN volunteer_shifts vs ON vp.id = vs.volunteer_id WHERE vs.id = $shift_id")->fetch_row()[0];
+                $editNotif = $conn->prepare("INSERT INTO notifications(user, type, title, color, shift) VALUES(?, 'shift', ?, ?, ?)
+                    ON DUPLICATE KEY UPDATE title = ?, color = ?, status = 'not read', date = current_timestamp");
+                $editNotif->bind_param("ississ", $verifyId, $dayNotif, $colorNotif, $shiftNotif, $dayNotif, $colorNotif);
+                $editNotif->execute();
+                $editNotif->close();
+
                 header('Location: ../listagemvoluntarios?status=editado');
                 exit();
             }

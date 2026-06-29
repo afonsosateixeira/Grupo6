@@ -11,7 +11,6 @@
             $stmt->execute();
 
             $stmt->close();
-            $conn->close();
 
             header('Location: ./missing_animals');
             exit();
