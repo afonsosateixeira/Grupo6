@@ -1,15 +1,9 @@
-### Admin
+# Authenticações para o site
+
+## Admin
 - Email: admin@email.com
 - Password: 123
 
-### Funcionário
-- Email: 
-- Password: 
-
-### Voluntário
-- Email: 
-- Password: 
-
-### Usuário
+## Utilizador
 - Email: marta@email.com
 - Password: 123

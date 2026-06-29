@@ -87,6 +87,18 @@
             <div class="d-flex align-items-center">
               <p class="mb-0">Bem vinda/o, <span class="fw-bold"><?= $_SESSION['user'] ?></span></p>
               <?php
+                $stmt = $conn->prepare("SELECT 1 from notifications where user = ? AND status = 'not read'");
+                $stmt->bind_param('i', $_SESSION['id_user']);
+                $stmt->execute();
+                $res = $stmt->get_result();
+
+                $stmt->close();
+                if($res->num_rows > 0):
+              ?>
+                  <a href="<?= $basePath ?>/notifications" ><i class="ms-1 fa fa-bell"></i></a>
+              <?php
+                endif;
+
                 $stmt = $conn->prepare('SELECT email FROM users WHERE email = ? AND role = "admin"');
                 $stmt->bind_param('s', $_SESSION['email']);
                 $stmt->execute();
