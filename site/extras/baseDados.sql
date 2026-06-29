@@ -169,6 +169,7 @@ create table partners (
     contact_person varchar(100) not null,
     phone varchar(20) not null,
     email varchar(100),
+    photo varchar(255),
     constraint pk_partners primary key (id)
 ) engine=innodb;
 
@@ -502,9 +503,15 @@ order by la.id asc;
 
 drop view if exists vw_corporate_partners_directory;
 create view vw_corporate_partners_directory as
-select company_name, contact_person, phone, ifnull(email, 'Sem Email') as email
+select
+    id,
+    company_name, 
+    contact_person, 
+    phone, 
+    ifnull(email, 'Sem Email') as email, 
+    photo
 from partners
-order by company_name asc;
+order by id asc;
 
 drop view if exists vw_monthly_donations_report;
 create view vw_monthly_donations_report as

@@ -49,6 +49,7 @@
                     <li><a href="<?= $basePath ?>/vetList" class="nav-link">Veterinários</a></li>
                     <li><a href="<?= $basePath ?>/medicalHistory" class="nav-link">Histórico Médico</a></li>
                     <li><a href="<?= $basePath ?>/donationList" class="nav-link">Doações</a></li>
+                    <li><a href="<?= $basePath ?>/partners" class="nav-link">Parceiros</a></li>
                 </ul>
             </div>
         </li>

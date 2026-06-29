@@ -47,6 +47,7 @@
             'medicalHistory',
             'user_list',
             'vetList',
+            'partners',
             'calendario_voluntarios'
         ]
     ]);
