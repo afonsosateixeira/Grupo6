@@ -154,6 +154,7 @@ site/
 ├──missing_animals.php
 │    ├──missing_animals.css
 │    └──missing_animals.js
+├──notifications.php
 │
 └──backoffice/
      ├──missing_animals.php
@@ -168,8 +169,8 @@ site/
 ## Grupo:
 ```
 site/
-├──assets/css/styles.css (Criado por Afonso)
-├──assets/js/scrits.js (Criado por Afonso e adições por Gonçalo e Rúben)
+├──assets/css/styles.css (Criado por Afonso e adições por Gonçalo e Rúben)
+├──assets/js/scrits.js (Criado por Afonso)
 │
 ├──.htaccess (Criado por Gonçalo e melhorado por Rúben)
 ├──404.php (Criado por Gonçalo)
@@ -185,7 +186,7 @@ site/
 ├──components/
 │    ├──alerts.php (Criado por Afonso e adições por Diogo)
 │    │    └──alerts.js
-│    ├──footer.php (Criado por Afonso e correção por Hugo) < confirmar
+│    ├──footer.php (Criado por Afonso e correção por Hugo)
 │    ├──head.php (Criado por Rúben e adições por Afonso)
 │    ├──header.php (Criado por Afonso e adições por Rúben)
 │    ├──helpers.php (Criado por Afonso)

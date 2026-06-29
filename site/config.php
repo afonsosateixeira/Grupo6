@@ -25,6 +25,7 @@
             'home',
             'login',
             'missing_animals',
+            'notifications',
             'perfis_voluntario',
             'privacy',
             'regist',
