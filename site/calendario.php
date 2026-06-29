@@ -3,67 +3,12 @@
         $metaTitle = 'Calendário de Eventos';
         $metaDescription = 'Calendário com os próximos eventos e galeria da comunidade Poppy and Max';
     else:
+        require_once 'helpers/eventHelpers.php';
+        
         $stmtUpcoming = $conn->prepare("SELECT id, name, event_date, location, event_type FROM events WHERE event_date >= CURDATE() AND status != 'cancelled' ORDER BY event_date ASC");
         $stmtUpcoming->execute();
         $upcomingEvents = $stmtUpcoming->get_result()->fetch_all(MYSQLI_ASSOC);
-
         $upcomingTwo = array_slice($upcomingEvents, 0, 2);
-
-        $monthFullLabels = [
-            1 => 'Janeiro',
-            2 => 'Fevereiro',
-            3 => 'Março',
-            4 => 'Abril',
-            5 => 'Maio',
-            6 => 'Junho',
-            7 => 'Julho',
-            8 => 'Agosto',
-            9 => 'Setembro',
-            10 => 'Outubro',
-            11 => 'Novembro',
-            12 => 'Dezembro',
-        ];
-
-        $monthShortLabels = [
-            '01' => 'JAN',
-            '02' => 'FEV',
-            '03' => 'MAR',
-            '04' => 'ABR',
-            '05' => 'MAI',
-            '06' => 'JUN',
-            '07' => 'JUL',
-            '08' => 'AGO',
-            '09' => 'SET',
-            '10' => 'OUT',
-            '11' => 'NOV',
-            '12' => 'DEZ',
-        ];
-
-        $eventCoverImage = function (?string $name, ?string $type): string {
-            $haystack = strtolower(trim(($type ?? '') . ' ' . ($name ?? '')));
-
-            if (str_contains($haystack, 'cãominhada') || str_contains($haystack, 'caominhada') || str_contains($haystack, 'caminhada')) {
-                return 'assets/img/home_yara.jpg';
-            }
-
-            if (str_contains($haystack, 'adoção') || str_contains($haystack, 'adocao') || str_contains($haystack, 'feira')) {
-                return 'assets/img/home_zeus.webp';
-            }
-
-            if (str_contains($haystack, 'volunt') || str_contains($haystack, 'palestra')) {
-                return 'assets/img/dia_voluntario_banner1.png';
-            }
-
-            if (str_contains($haystack, 'treino') || str_contains($haystack, 'workshop')) {
-                return 'assets/img/home_mike.avif';
-            }
-
-            if (str_contains($haystack, 'campanha') || str_contains($haystack, 'fundos')) {
-                return 'assets/img/home_lost_animals.png';
-            }
-
-            return 'assets/img/poppy_max.png';
-        };
 
         $eventDates = [];
         $allEventsByDate = [];
@@ -72,27 +17,27 @@
             $isoDate = date('Y-m-d', $ts);
             $eventDates[] = $isoDate;
             $allEventsByDate[$isoDate][] = [
-                'name'       => $ev['name'],
-                'date_label' => date('d', $ts).' '.($monthShortLabels[date('m', $ts)] ?? strtoupper(date('M', $ts))),
-                'location'   => $ev['location'],
-                'image'      => $basePath.'/'.$eventCoverImage($ev['name'], $ev['event_type']),
+                'name' => $ev['name'],
+                'date_label' => date('d', $ts).' '.(MONTH_SHORT[date('m', $ts)] ?? strtoupper(date('M', $ts))),
+                'location' => $ev['location'],
+                'image' => $basePath.'/'.getEventCoverImage($ev['name'], $ev['event_type']),
             ];
         }
         $eventDates = array_values(array_unique($eventDates));
 
-        $renderEventCard = function (?array $event, string $sizeClass, string $fallbackTitle) use ($basePath, $eventCoverImage, $monthShortLabels): void {
-            if(empty($event)){
+        $renderEventCard = function (?array $event, string $sizeClass, string $fallbackTitle) use ($basePath) {
+            if(!$event){
                 $cover = $basePath.'/assets/img/poppy_max.png';
                 $dateLabel = '-- ---';
                 $locationLabel = 'Parque Canino Leiria';
                 $titleLabel = $fallbackTitle;
             } else {
-                $timestamp = strtotime($event['event_date']);
-                $monthKey = date('m', $timestamp);
-                $dateLabel = date('d', $timestamp).' '.($monthShortLabels[$monthKey] ?? strtoupper(date('M', $timestamp)));
+                $ts = strtotime($event['event_date']);
+                $monthKey = date('m', $ts);
+                $dateLabel = date('d', $ts).' '.(MONTH_SHORT[$monthKey] ?? strtoupper(date('M', $ts)));
                 $locationLabel = $event['location'];
                 $titleLabel = $event['name'];
-                $cover = $basePath.'/'.$eventCoverImage($event['name'], $event['event_type']);
+                $cover = $basePath.'/'.getEventCoverImage($event['name'], $event['event_type']);
             }
 ?>
             <article class="cal-event-card <?= $sizeClass; ?>" style="--calendar-event-image: url('<?= $cover; ?>');">
@@ -116,7 +61,7 @@
                         <button type="button" class="cal-widget__nav" data-calendar-prev aria-label="Mês anterior">
                             <i class="fa-solid fa-chevron-left"></i>
                         </button>
-                        <h1 data-calendar-month><?= $monthFullLabels[(int)date('n')] ?? date('F'); ?></h1>
+                        <h1 data-calendar-month><?= MONTH_FULL[(int)date('n')] ?? date('F'); ?></h1>
                         <button type="button" class="cal-widget__nav" data-calendar-next aria-label="Próximo mês">
                             <i class="fa-solid fa-chevron-right"></i>
                         </button>
