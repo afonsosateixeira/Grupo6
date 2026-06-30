@@ -5,6 +5,8 @@
     else:
 ?>
         <section id="banner">
+            <iframe class="banner-video" src="https://www.youtube.com/embed/Jv7tFFW2skQ?start=59&autoplay=1&mute=1&loop=1&playlist=Jv7tFFW2skQ&controls=0&showinfo=0&rel=0" title="Banner" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
             <div class="container d-flex align-items-center h-100">
                 <div class="bannerContents">
                     <h1 class="fs-3 fw-bold text-white">Onde novos começos ganham patas e corações</h1>

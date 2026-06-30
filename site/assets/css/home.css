@@ -3,11 +3,27 @@ h1, h2, h3, p{
 }
 
 #banner{
-    background: url(../img/dia_voluntario_banner1.png) center / cover no-repeat;
+    position: relative;
     height: 400px;
+    overflow: hidden;
+}
+
+.banner-video{
+    position: absolute;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 100%;
+}
+
+#banner .container{
+    position: relative;
 }
 
 .bannerContents{
+    background-color: rgba(3, 3, 3, 0.5);
+    padding: 5px;
+    border-radius: 15px;
     width: 514px;
 }
 

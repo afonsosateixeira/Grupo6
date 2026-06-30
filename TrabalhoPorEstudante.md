@@ -146,8 +146,14 @@ site/
 ├──privacy.php
 │
 └──backoffice/
-     └──donationList.php
-          └──donationList.js
+     ├──donationList.php
+     │    └──donationList.js
+     ├──partners.php
+     │    └──partners.js
+     │
+     └──components/
+          ├──action_partners.php
+          └──modal_partners.php
 ```
 
 ## 2016112775_rubenreis:
