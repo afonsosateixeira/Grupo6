@@ -26,7 +26,6 @@
               Adoção
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="<?= $basePath ?>/missing_animals">Animais Desaparecidos</a></li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/animalCatalog">Catálogo de Animais</a></li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/adoptionGuide">Guia de adoção</a></li>
             </ul>
@@ -39,10 +38,6 @@
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="<?= $basePath ?>/calendario">Calendário de Eventos</a></li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/events">Eventos Passados</a></li>
-              <li>
-                <hr class="dropdown-divider" />
-              </li>
-              <li><a class="dropdown-item" href="#">Encontrei um animal e agora?</a></li>
             </ul>
           </li>
 
@@ -65,6 +60,7 @@
               Institucional
             </a>
             <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="<?= $basePath ?>/missing_animals">Animais Desaparecidos</a></li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/contactos">Contactos</a></li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/dia_voluntario">Um dia no Abrigo</a></li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/vetProfile">Perfil do Veterinário</a></li>

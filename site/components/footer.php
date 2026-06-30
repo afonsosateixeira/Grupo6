@@ -15,7 +15,6 @@
           <div class="col-6 col-lg-2 mb-3">
             <h5>Adoção</h5>
             <ul class="nav flex-column">
-              <li class="nav-item mb-2"><a href="<?= $basePath ?>/missing_animals" class="nav-link p-0">Animais Desaparecidos</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/animalCatalog" class="nav-link p-0">Catálogo de Animais</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/adoptionGuide" class="nav-link p-0">Guia de Adoção</a></li>
             </ul>
@@ -25,7 +24,6 @@
             <ul class="nav flex-column">
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/calendario" class="nav-link p-0">Calendário de Eventos</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/events" class="nav-link p-0">Eventos Passados</a></li>
-              <li class="nav-item mb-2"><a href="#" class="nav-link p-0">Encontrei um animal e agora?</a></li>
             </ul>
           </div>
           <div class="col-6 col-lg-2 mb-3">
@@ -39,6 +37,7 @@
           <div class="col-6 col-lg-2 mb-3">
             <h5>Institucional</h5>
             <ul class="nav flex-column">
+              <li class="nav-item mb-2"><a href="<?= $basePath ?>/missing_animals" class="nav-link p-0">Animais Desaparecidos</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/contactos" class="nav-link p-0">Contactos</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/dia_voluntario" class="nav-link p-0">Um dia no Abrigo</a></li>
               <li class="nav-item mb-2"><a href="<?= $basePath ?>/vetProfile" class="nav-link p-0">Perfil do Veterinário</a></li>
