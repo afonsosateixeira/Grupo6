@@ -11,6 +11,11 @@
         $animal = (int)($_POST['animal_id'] ?? 0);
         $note = trim($_POST['notes'] ?? '');
 
+        if ($user <= 0 || $animal <= 0 || mb_strlen($note) > 500) {
+            redirect("../adoptionProcess?status=erro_validacao");
+            exit; 
+        }
+
         if (isset($_POST['btnCriar'])) {
             prepareQuery($conn, 'INSERT INTO adoption_processes (user_id, animal_id, notes, status) VALUES (?, ?, ?, "Pendente")', 'iis', $user, $animal, $note);
             redirect("../adoptionProcess?status=criado");
@@ -58,13 +63,7 @@
             }
         }
     }
-    redirect("../adoptionProcess.php");
-    /* todos os processos que se tornarem rejitados ou aprovados, passado 5 dias vão desaparecer da lista de processos, só que os processos rejeitados passado os 5 dias vão ser mesmo deletados da BD e os aprovados vão ser "ocultados" da lista mas vão continar na BD para pormos na tabela de animais adotados o processo dele para ser adotado.
-
-    1-se o status for rejeitado e esitver á mais de 5 dias eliminar o processo da BD
-    2-se o status for aprovado e estiver á mais de 5 dias ocultar o processo da lista de processos mas não eliminar da BD
-    */
-    
+    redirect("../adoptionProcess.php"); 
 ?>
 
 

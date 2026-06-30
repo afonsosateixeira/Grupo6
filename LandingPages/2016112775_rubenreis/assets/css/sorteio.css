@@ -153,10 +153,6 @@ form::before{
     display: block;
 }
 
-.back{
-    display: none;
-}
-
 .highlight{
     color: #FFA500;
     font-weight: 700;

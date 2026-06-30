@@ -41,6 +41,7 @@
 
 	# Destroi a sessão e redireciona para o login no caso de fazer logout
 	if($route == 'logout') {
+		$_SESSION = [];
 		session_destroy();
 		header('Location: '.($backOffice ? '.' : '').'./login');
 		exit();

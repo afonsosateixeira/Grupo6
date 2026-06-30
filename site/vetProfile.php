@@ -18,7 +18,7 @@
                 <div class="card col-10 col-md-4 ms-3 me-3 text-white custom-bg-light-blue cards-vet">
                     <div class="card-image  mb-3 d-flex justify-content-center">
                             <?php
-                                $caminhoImagem=!empty($item['photo']) ? "assets/img/vet/". $item['photo'] : "assets/img/defaultVet.png";
+                                $caminhoImagem=!empty($item['photo']) ? "assets/img/vet/". $item['photo'] : "assets/img/vet/defaultVet.jpg";
                             ?>
                             <img class="photo img-fluid img-vet" src="<?=$caminhoImagem?>" alt="Foto de <?= htmlspecialchars($item['name']) ?> ">
                         </div>

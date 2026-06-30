@@ -5,6 +5,8 @@
     else:
 ?>
         <section id="banner">
+            <iframe class="banner-video" src="https://www.youtube.com/embed/Jv7tFFW2skQ?start=59&autoplay=1&mute=1&loop=1&playlist=Jv7tFFW2skQ&controls=0&showinfo=0&rel=0" title="Banner" allow="autoplay; encrypted-media" allowfullscreen></iframe>
+
             <div class="container d-flex align-items-center h-100">
                 <div class="bannerContents">
                     <h1 class="fs-3 fw-bold text-white">Onde novos começos ganham patas e corações</h1>
@@ -78,15 +80,15 @@
 
                     <div class="carousel-inner">
                         <div class="carousel-item active">
-                        <img src="assets/img/dia_voluntario_banner1.png" class="d-block w-100" alt="Caõminhada 2026">
+                        <img src="assets/img/home/banner_1.jpg" class="d-block w-100" alt="banner1">
                         </div>
 
                         <div class="carousel-item">
-                        <img src="assets/img/animal_care_cat.png" class="d-block w-100" alt="Cãominhada 2025">
+                        <img src="assets/img/home/banner_2.jpg" class="d-block w-100" alt="banner2">
                         </div>
 
                         <div class="carousel-item">
-                        <img src="assets/img/animal_care_rabies.png" class="d-block w-100" alt="Cãominhada 2024">
+                        <img src="assets/img/home/banner_3.jpg" class="d-block w-100" alt="banner3">
                         </div>
                     </div>
 
@@ -103,7 +105,22 @@
 
             <section class="pt-2 pb-5">
                 <h2 class="custom-blue text-center fw-bold fs-3">Conheça os nossos parceiros</h2>
-                <!-- Conteúdo dependente da página de parceiros-->
+                <div class="d-flex flex-row flex-wrap justify-content-center gap-4 my-4">
+                    <?php 
+                        $sql = "SELECT * FROM partners ORDER BY company_name ASC LIMIT 3";
+                        $result = $conn->query($sql);
+
+                            while ($row = $result->fetch_assoc()) {
+                    ?>
+                        <div class="card card-custom h-100 border-0">
+                            <div class="card-body text-center">
+                                <h4 class="card-title fw-bold text-dark display-6 mb-3">
+                                    <?= htmlspecialchars($row['company_name']) ?>
+                                </h4>
+                            </div>
+                        </div>
+                    <?php } ?>
+                </div>
             </section>
         </section>
 <?php
