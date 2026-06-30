@@ -18,6 +18,7 @@
             'appointment',
             'contactos',
             'cookies',
+            'calendario',
             'dia_voluntario',
             'donations',
             'events',
