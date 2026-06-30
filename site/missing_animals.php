@@ -75,7 +75,7 @@
 
                                     <div class="mb-3">
                                         <label for="formSince" class="form-label fw-bold">Perdido desde</label>
-                                        <input label="formSince" type="date" name="seen" class="form-control" required max="<?= date('Y-m-d'); ?>">
+                                        <input id="formSince" type="date" name="seen" class="form-control" required max="<?= date('Y-m-d'); ?>">
                                     </div>
 
                                     <div class="mb-3">

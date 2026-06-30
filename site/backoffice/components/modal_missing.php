@@ -44,7 +44,7 @@
 
                             <div class="mb-3">
                                 <label for="formSince" class="form-label fw-bold">Perdido desde</label>
-                                <input label="formSince" type="date" name="seen" class="form-control" 
+                                <input id="formSince" type="date" name="seen" class="form-control" 
                                     value="<?= $edit ? $edit['last_seen_date'] : ''; ?>" required max="<?= date('Y-m-d'); ?>">
                             </div>
 

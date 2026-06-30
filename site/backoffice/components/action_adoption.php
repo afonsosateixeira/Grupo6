@@ -17,7 +17,17 @@
         }
 
         if (isset($_POST['btnCriar'])) {
-            prepareQuery($conn, 'INSERT INTO adoption_processes (user_id, animal_id, notes, status) VALUES (?, ?, ?, "Pendente")', 'iis', $user, $animal, $note);
+            $stmt = prepareQuery($conn, 'INSERT INTO adoption_processes (user_id, animal_id, notes, status) VALUES (?, ?, ?, "Pendente")', 'iis', $user, $animal, $note);
+
+            # Código adicional para a funcionalidade de notificações (Rúben)
+            $verifyAdopt = $stmt->insert_id;
+            $verifyAnimal = $conn->query("SELECT name FROM animals WHERE id = $animal")->fetch_row()[0];
+            $insTitle = 'Foi inscrito para adotar '.$verifyAnimal;
+            $insNotif = $conn->prepare("INSERT INTO notifications(user, type, title, color, adoption) VALUES(?, 'adoption', ?, 'warning', ?)");
+            $insNotif->bind_param("isi", $user, $insTitle, $verifyAdopt);
+            $insNotif->execute();
+            $insNotif->close();
+
             redirect("../adoptionProcess?status=criado");
         }
         if (isset($_POST['btnEditar'])) {
@@ -53,6 +63,21 @@
                     }else{
                         prepareQuery($conn, 'UPDATE adoption_processes SET end_date=NOW() WHERE id= ?', 'i', $id);
                     }
+
+                    # Código adicional para a funcionalidade de notificações (Rúben)
+                    $verify = $conn->query("SELECT name, gender FROM animals WHERE id = $animal_id")->fetch_row();
+                    $verifyName = $verify[0];
+                    $verifyGender = ($verify[1] == 'Macho') ? 'do' : 'da';
+                    $colorNotif = ($st == 'Aprovado') ? 'success' : (($st == 'Rejeitado') ? 'danger' : 'warning');
+                    $titleNotif = 'O seu processo de adoção '.$verifyGender.' '.$verifyName.' ficou '.$st;
+                    $adoptionNotif = $id;
+                    $verifyId = $conn->query("SELECT user_id FROM adoption_processes WHERE id = $id")->fetch_row()[0];
+                    $editNotif = $conn->prepare("INSERT INTO notifications(user, type, title, color, adoption) VALUES(?, 'adoption', ?, ?, ?)
+                        ON DUPLICATE KEY UPDATE title = ?, color = ?, status = 'not read', date = current_timestamp");
+                    $editNotif->bind_param("ississ", $verifyId, $titleNotif, $colorNotif, $adoptionNotif, $titleNotif, $colorNotif);
+                    $editNotif->execute();
+                    $editNotif->close();
+
                 }
                 redirect("../adoptionProcess?status=status_alterado");
             } else {

@@ -125,9 +125,16 @@ site/
 ## 2025163132_GonçaloEstrelado:
 ```
 site/
+├──calendario.php
+│    ├──calendario.css
+│    └──calendario.js
 ├──contactos.php
 │    └──contactos.css
 ├──events.php
+│    └──events.css
+│
+├──helpers/
+│    └──eventHelpers.php
 │
 └──backoffice/
      ├──eventsList.php
