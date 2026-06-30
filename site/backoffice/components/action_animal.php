@@ -5,14 +5,19 @@
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
-        $id = (int)$_POST['id_animal'];
+        $id = (int)($_POST['id_animal'] ?? 0);
         $nome = trim($_POST['nome_animal'] ?? '');
         $specieID = (int)($_POST['specie_id'] ?? 0);
         $breed = !empty($_POST['breed_id']) ? (int)$_POST['breed_id'] : null;
         $genero = trim($_POST['gender'] ?? '');
         $porte = trim($_POST['size'] ?? '');
         $data = !empty($_POST['data_nascimento']) ? $_POST['data_nascimento'] : null;
-        $descricao = trim($_POST['description'] ?? '');   
+        $descricao = trim($_POST['description'] ?? '');  
+        
+        if (empty($nome) || $specieID <= 0 || !in_array($genero, ['Macho', 'Fêmea'])) {
+            redirect("../animalList?status=erro_validacao");
+            exit; 
+        }
 
         # Processo de criação do animal
         if (isset($_POST['btnCriar'])) {

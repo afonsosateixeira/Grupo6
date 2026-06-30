@@ -1,85 +1,105 @@
 <?php
     if(!$rerun):
-        $metaTitle = 'Eventos';
-        $metaDescription = 'Calendario de eventos da Poppy and Max';
+        $metaTitle = 'Eventos Passados';
+        $metaDescription = 'Eventos passados da Poppy and Max';
     else:
-        $stmt = $conn->prepare("SELECT id, name, event_date, end_date, location, description, event_type, status, capacity FROM events ORDER BY event_date ASC");
+        require_once 'helpers/eventHelpers.php';
+        
+        $stmt = $conn->prepare("SELECT id, name, event_date, end_date, location, description, event_type, status, capacity FROM events WHERE event_date < CURDATE() ORDER BY event_date DESC");
         $stmt->execute();
-        $events = $stmt->get_result();
+        $eventItems = $stmt->get_result()->fetch_all(MYSQLI_ASSOC);
 ?>
-        <section class="container py-5">
-            <div class="text-center mb-5">
-                <h1 class="fw-bold mb-2">Calendario de Eventos</h1>
+        <section class="events-page">
+            <div class="container events-header">
+                <div class="events-header__copy">
+                    <h1>EVENTOS PASSADOS</h1>
+                </div>
+
+                <button class="events-button events-button--desktop" type="button" data-bs-toggle="collapse" data-bs-target="#events-complete" aria-expanded="false" aria-controls="events-complete">TODOS OS EVENTOS PASSADOS</button>
+                <button class="events-button events-button--mobile" type="button" data-bs-toggle="collapse" data-bs-target="#events-complete" aria-expanded="false" aria-controls="events-complete" aria-label="Ver todos os eventos passados">
+                    <i class="fa-regular fa-calendar-days"></i>
+                </button>
             </div>
 
-            <?php if($events->num_rows === 0): ?>
-                <div class="alert alert-info text-center">Nao existem eventos disponiveis de momento.</div>
-            <?php else: ?>
-                <div class="row g-4">
-                    <?php while($event = $events->fetch_assoc()): ?>
-                        <?php
-                            $startTimestamp = strtotime($event['event_date']);
-                            $endTimestamp = strtotime($event['end_date'] ?? '') ?: null;
-                            $dateEnd = date('H:i',$endTimestamp);
-                            $statusLabel = $event['status'] === 'scheduled'
-                                ? 'Agendado'
-                                : ($event['status'] === 'completed'
-                                    ? 'Concluido'
-                                    : ($event['status'] === 'cancelled' ? 'Cancelado' : 'Adiado'));
-                            $statusClass = $event['status'] === 'scheduled'
-                                ? 'bg-success'
-                                : ($event['status'] === 'completed'
-                                    ? 'bg-secondary'
-                                    : ($event['status'] === 'cancelled' ? 'bg-danger' : 'bg-warning text-dark'));
-                        ?>
-                        <div class="col-12 col-lg-6">
-                            <article class="card h-100 border-0 shadow-sm">
-                                <div class="card-body d-flex flex-row align-items-center p-4 gap-4">
-                                    <?php
-                                        $month = strtoupper(date('M', $startTimestamp));
-                                        $day = date('d', $startTimestamp);
-                                    ?>
-                                    <div class="d-flex flex-column align-items-center me-3" style="width:110px;min-width:110px;max-width:110px;">
-                                        <span class="badge mb-2 w-100 text-center <?= $statusClass ?>">
-                                            <?= htmlspecialchars($statusLabel); ?>
-                                        </span>
-                                        <div class="d-flex flex-column align-items-center justify-content-center border rounded-3 p-2 mb-1" style="min-width:64px;background:#f5fbff;border:1.5px solid #b6d0ee;box-shadow:0 2px 8px rgba(19,94,177,0.07);">
-                                            <div class="fw-bold text-uppercase text-primary small" style="letter-spacing:1.5px;"><?= $month ?></div>
-                                            <div class="fw-bold fs-3 text-dark"><?= $day ?></div>
-                                        </div>
-                                        <div class="small text-muted text-center">
-                                            <?= date('Y', $startTimestamp) ?>
+            <div class="events-band">
+                <div class="container-xl">
+                    <?php if(empty($eventItems)): ?>
+                        <div class="events-empty">
+                            <h2>Sem eventos disponíveis</h2>
+                            <p>Regressa mais tarde para ver as próximas atividades da comunidade.</p>
+                        </div>
+                    <?php else: ?>
+                        <div class="events-grid" id="events-list">
+                            <?php foreach(array_slice($eventItems, 0, 3) as $event): ?>
+                                <?php $ts = strtotime($event['event_date']); ?>
+                                <article class="event-card" style="--event-image: url('<?= $basePath ?>/<?= getEventCoverImage($event['name'], $event['event_type']) ?>');">
+                                    <div class="event-card__overlay"></div>
+                                    <div class="event-card__content">
+                                        <h2><?= htmlspecialchars($event['name']); ?></h2>
+                                        <div class="event-card__meta">
+                                            <span>
+                                                <i class="fa-regular fa-clock"></i>
+                                                <?= date('d', $ts) . ' ' . (MONTH_SHORT[date('m', $ts)] ?? strtoupper(date('M', $ts))); ?>
+                                            </span>
+                                            <span>
+                                                <i class="fa-solid fa-location-dot"></i>
+                                                <?= htmlspecialchars($event['location']); ?>
+                                            </span>
                                         </div>
                                     </div>
-                                    <div class="flex-grow-1">
-                                        <h2 class="mb-1 fs-4 fw-bold text-dark"><?= htmlspecialchars($event['name']); ?></h2>
-                                        <p class="mb-2 text-muted small"><?= !empty($event['description']) ? htmlspecialchars($event['description']) : 'Sem descricao disponivel.'; ?></p>
-                                        <div class="mb-2">
-                                            <span class="text-uppercase small text-secondary">Início:</span>
-                                            <span class="fw-bold text-primary ms-1"><?= date('H:i', $startTimestamp); ?></span>
-                                            <?php if(!empty($dateEnd)): ?>
-                                                <span class="mx-2 text-secondary">até</span>
-                                                <span class="fw-bold text-primary ms-1"><?= $dateEnd; ?></span>
-                                            <?php endif; ?>
-                                        </div>
-                                        <div class="mb-2">
-                                            <span class="me-3"><strong>Local:</strong> <?= htmlspecialchars($event['location']); ?></span>
-                                            <?php if(!empty($event['capacity'])): ?>
-                                                <span><strong>Capacidade:</strong> <?= (int)$event['capacity']; ?> participantes</span>
-                                            <?php endif; ?>
-                                        </div>
-                                        <div class="mb-2">
-                                            <span class="me-3"><strong>Tipo:</strong> <?= htmlspecialchars($event['event_type']); ?></span>
-                                        </div>
+                                </article>
+                            <?php endforeach; ?>
+                        </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+
+            <?php if(!empty($eventItems)): ?>
+                <div class="container events-complete collapse" id="events-complete">
+                    <div class="events-complete__heading">
+                        <h2>Lista completa de eventos</h2>
+                        <p>Visão detalhada com data, hora, local, tipo, lotação e estado de cada evento.</p>
+                    </div>
+
+                    <div class="events-complete__list">
+                        <?php foreach($eventItems as $event): ?>
+                            <?php
+                                $ts = strtotime($event['event_date']);
+                                $endTs = !empty($event['end_date']) ? strtotime($event['end_date']) : null;
+                                $statusLabel = getStatusLabel($event['status']);
+                                $statusClass = getStatusClass($event['status']);
+                            ?>
+                            <article class="events-complete__item <?= $statusClass; ?>">
+                                <div class="events-complete__date">
+                                    <span class="events-complete__day"><?= date('d', $ts); ?></span>
+                                    <span class="events-complete__month"><?= MONTH_SHORT[date('m', $ts)] ?? strtoupper(date('M', $ts)); ?></span>
+                                    <span class="events-complete__year"><?= date('Y', $ts); ?></span>
+                                </div>
+
+                                <div class="events-complete__body">
+                                    <div class="events-complete__top">
+                                        <h3><?= htmlspecialchars($event['name']); ?></h3>
+                                        <span class="events-complete__status"><?= $statusLabel; ?></span>
+                                    </div>
+
+                                    <p><?= !empty($event['description']) ? htmlspecialchars($event['description']) : 'Sem descrição disponível.'; ?></p>
+
+                                    <div class="events-complete__meta">
+                                        <span><i class="fa-regular fa-calendar"></i><?= date('d/m/Y', $ts); ?></span>
+                                        <span><i class="fa-regular fa-clock"></i><?= date('H:i', $ts); ?><?php if($endTs): ?> - <?= date('H:i', $endTs); ?><?php endif; ?></span>
+                                        <span><i class="fa-solid fa-location-dot"></i><?= htmlspecialchars($event['location']); ?></span>
+                                        <span><i class="fa-solid fa-tag"></i><?= htmlspecialchars($event['event_type']); ?></span>
+                                        <?php if(!empty($event['capacity'])): ?>
+                                            <span><i class="fa-solid fa-people-group"></i><?= (int)$event['capacity']; ?> lugares</span>
+                                        <?php endif; ?>
                                     </div>
                                 </div>
                             </article>
-                        </div>
-                    <?php endwhile; ?>
+                        <?php endforeach; ?>
+                    </div>
                 </div>
             <?php endif; ?>
         </section>
 <?php
-        $events->free();
         $stmt->close();
     endif;

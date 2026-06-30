@@ -26,6 +26,7 @@
               Adoção
             </a>
             <ul class="dropdown-menu">
+              <li><a class="dropdown-item" href="<?= $basePath ?>/missing_animals">Animais Desaparecidos</a></li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/animalCatalog">Catálogo de Animais</a></li>
               <li><a class="dropdown-item" href="<?= $basePath ?>/adoptionGuide">Guia de adoção</a></li>
             </ul>
@@ -36,12 +37,11 @@
               Comunidade e Eventos
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="<?= $basePath ?>/events">Calendário de Eventos</a></li>
-              <li><a class="dropdown-item" href="#">Eventos Passados</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/calendario">Calendário de Eventos</a></li>
+              <li><a class="dropdown-item" href="<?= $basePath ?>/events">Eventos Passados</a></li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
-              <li><a class="dropdown-item" href="<?= $basePath ?>/missing_animals">Animais Desaparecidos</a></li>
               <li><a class="dropdown-item" href="#">Encontrei um animal e agora?</a></li>
             </ul>
           </li>
@@ -52,7 +52,6 @@
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="<?= $basePath ?>/donations">Doações</a></li>
-              <li><a class="dropdown-item" href="#">Nossos Parceiros</a></li>
               <li>
                 <hr class="dropdown-divider" />
               </li>
@@ -87,6 +86,18 @@
             <div class="d-flex align-items-center">
               <p class="mb-0">Bem vinda/o, <span class="fw-bold"><?= $_SESSION['user'] ?></span></p>
               <?php
+                $stmt = $conn->prepare("SELECT 1 from notifications where user = ? AND status = 'not read'");
+                $stmt->bind_param('i', $_SESSION['id_user']);
+                $stmt->execute();
+                $res = $stmt->get_result();
+
+                $stmt->close();
+                if($res->num_rows > 0):
+              ?>
+                  <a href="<?= $basePath ?>/notifications" ><i class="ms-1 fa fa-bell"></i></a>
+              <?php
+                endif;
+
                 $stmt = $conn->prepare('SELECT email FROM users WHERE email = ? AND role = "admin"');
                 $stmt->bind_param('s', $_SESSION['email']);
                 $stmt->execute();

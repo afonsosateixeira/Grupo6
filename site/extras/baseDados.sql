@@ -169,6 +169,7 @@ create table partners (
     contact_person varchar(100) not null,
     phone varchar(20) not null,
     email varchar(100),
+    photo varchar(255),
     constraint pk_partners primary key (id)
 ) engine=innodb;
 
@@ -180,6 +181,26 @@ create table donations (
     payment_method varchar(50) not null,
     constraint pk_donations primary key (id)
 ) engine=innodb;
+
+drop table if exists notifications;
+create table notifications(
+    id int unsigned auto_increment,
+    user int not null,
+    type enum('adoption', 'shift') not null,
+    title varchar(255) not null,
+    status enum('read', 'not read') default 'not read' not null,
+    color enum('success', 'warning', 'danger') not null,
+    date timestamp default current_timestamp not null,
+    adoption int,
+    shift int,
+
+    constraint pk_notifications primary key(id),
+    constraint fk_notifications_user foreign key(user) references users(id) ON DELETE CASCADE,
+    constraint fk_notifications_shift foreign key(shift) references volunteer_shifts(id) ON DELETE CASCADE,
+    constraint fk_notifications_adoption foreign key(adoption) references adoption_processes(id) ON DELETE CASCADE,
+    constraint uq_notifications_adoption unique(adoption),
+    constraint uq_notifications_shift unique(shift)
+) engine = innodb;
 
 insert into users (full_name, email, password, phone, local, role) values
 ('admin', 'admin@email.com', SHA2('123', 512), '910000001', 'porto', 'admin'),
@@ -484,9 +505,15 @@ order by la.id asc;
 
 drop view if exists vw_corporate_partners_directory;
 create view vw_corporate_partners_directory as
-select company_name, contact_person, phone, ifnull(email, 'Sem Email') as email
+select
+    id,
+    company_name, 
+    contact_person, 
+    phone, 
+    ifnull(email, 'Sem Email') as email, 
+    photo
 from partners
-order by company_name asc;
+order by id asc;
 
 drop view if exists vw_monthly_donations_report;
 create view vw_monthly_donations_report as
